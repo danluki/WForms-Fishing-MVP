@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{238518C6-80BB-4F69-B39D-32CBA398B52D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Fishing</RootNamespace>
+    <AssemblyName>Fishing</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Linq.Expressions" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\FoodButtons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodButtons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="VerticalProgressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Assembly\AddAssembly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Assembly\AddAssembly.Designer.cs">
+      <DependentUpon>AddAssembly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeepField\DeepField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DeepField\DeepField.Designer.cs">
+      <DependentUpon>DeepField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FoodShop\FoodShopForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FoodShop\FoodShopForm.Designer.cs">
+      <DependentUpon>FoodShopForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FoodInventory\FoodInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FoodInventory\FoodInventory.Designer.cs">
+      <DependentUpon>FoodInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\GUI\UI.Designer.cs">
+      <DependentUpon>UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FPond\CurrentFish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FPond\CurrentFish.Designer.cs">
+      <DependentUpon>CurrentFish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FPond\FPondForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FPond\FPondForm.Designer.cs">
+      <DependentUpon>FPondForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ItemShower\ItemShower.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ItemShower\ItemShower.Designer.cs">
+      <DependentUpon>ItemShower.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LureSelector\LureSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LureSelector\LureSelector.Designer.cs">
+      <DependentUpon>LureSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LVLS\GameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LVLS\GameForm.Designer.cs">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inventory\InventoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Inventory\InventoryForm.Designer.cs">
+      <DependentUpon>InventoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menu\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Menu\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LVLS\Ozero\Map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LVLS\Ozero\Map.Designer.cs">
+      <DependentUpon>Map.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Settings\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Settings\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Shop\Shop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Shop\Shop.Designer.cs">
+      <DependentUpon>Shop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Statistic\StatisticForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Statistic\StatisticForm.Designer.cs">
+      <DependentUpon>StatisticForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Trip\TripForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Trip\TripForm.Designer.cs">
+      <DependentUpon>TripForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resources\FoodButtons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FoodButtons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Assembly\AddAssembly.resx">
+      <DependentUpon>AddAssembly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DeepField\DeepField.resx">
+      <DependentUpon>DeepField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FoodInventory\FoodInventory.resx">
+      <DependentUpon>FoodInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FoodShop\FoodShopForm.resx">
+      <DependentUpon>FoodShopForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\GUI\UI.resx">
+      <DependentUpon>UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FPond\CurrentFish.resx">
+      <DependentUpon>CurrentFish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FPond\FPondForm.resx">
+      <DependentUpon>FPondForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ItemShower\ItemShower.resx">
+      <DependentUpon>ItemShower.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LureSelector\LureSelector.resx">
+      <DependentUpon>LureSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LVLS\GameForm.resx">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Inventory\InventoryForm.resx">
+      <DependentUpon>InventoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Menu\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LVLS\Ozero\Map.resx">
+      <DependentUpon>Map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\Settings\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Shop\Shop.resx">
+      <DependentUpon>Shop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Statistic\StatisticForm.resx">
+      <DependentUpon>StatisticForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Trip\TripForm.resx">
+      <DependentUpon>TripForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include=".editorconfig" />
+    <None Include="Properties\DataSources\Assembly.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fishing.BL\Fishing.BL.csproj">
+      <Project>{f16ab9b1-deeb-451f-b962-9bffc7b0a27b}</Project>
+      <Name>Fishing.BL</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pech_d.png" />
+    <None Include="Resources\pech_a.png" />
+    <None Include="Resources\red_d.png" />
+    <None Include="Resources\red_a.png" />
+    <None Include="Resources\sir_d.png" />
+    <None Include="Resources\sir_a.png" />
+    <None Include="Resources\ozero1f.jpg" />
+    <None Include="Resources\MesheraMap.PNG" />
+    <None Include="Resources\data_a.png" />
+    <None Include="Resources\blackkrug.png" />
+    <None Include="Resources\hleb_a.png" />
+    <None Include="Resources\hleb_d.png" />
+    <None Include="Resources\black_a.png" />
+    <None Include="Resources\black_d.png" />
+    <None Include="Resources\fishkonc_a.png" />
+    <None Include="Resources\fishkonc_d.png" />
+    <None Include="Resources\banany_a.png" />
+    <None Include="Resources\banany_d.png" />
+    <None Include="Resources\apelsin_a.png" />
+    <None Include="Resources\apelsin_d.png" />
+    <None Include="Resources\exit_a.png" />
+    <None Include="Resources\exit_d.png" />
+    <Content Include="Resources\layer.jpg" />
+    <Content Include="Resources\layer6.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0067: Ликвидировать объекты перед потерей области
+dotnet_diagnostic.IDE0067.severity = none

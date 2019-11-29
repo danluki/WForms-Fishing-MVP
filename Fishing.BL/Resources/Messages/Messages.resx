@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ARCTICCHAR_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает мелкие и средние приманки. Обитает на предпочтительно большой  глубине.</value>
+  </data>
+  <data name="ASP_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает мелкие и средние приманки.Кренки и вертушки. Обитает на предпочтительно на поверхности.</value>
+  </data>
+  <data name="BREAM_DESCRIPTION" xml:space="preserve">
+    <value>Окраска у молодых - серо-серебристая, у крупных - коричневатая с золотистым отливом. Рот полунижний, небольшой, но может сильно выдвигаться, образуя длинную трубку, направленную вниз. Позади брюшных плавников киль, не покрытый чешуей, а перед спинным плавником свободная от чешуи борозда. От синца и белоглазки отличается меньшим числом ветвистых лучей в анальном плавнике и меньшим числом позвонков. Начало спинного плавника над серединой вертикали между брюшным и анальным, анальный высокий и начинается позади конца основания спинного.
+
+Лещ живёт до 20 лет, но обычно до 12-14 лет. Может достигать длины 75-80 см. и массы 6-9 кг. Обычные размеры 25-45 см и масса 0,5-1,5 кг. В последнее время выделяют 7-8 географических групп на всём ареале вида.
+
+В низовьях Днепра, Дона, Волги и северной части Аральского моря образует две формы - жилую и полупроходную. Последняя кормится в море и на нерест идёт в низовья рек. В южной части ареала, в Средней Азии, встречается мелкая тугорослая камышовая форма. Предпочитает медленно текущие водоёмы и озёра. Ведёт стайный образ жизни.
+
+В основном питается донными беспозвоночными (личинки насекомых, моллюски, черви, ракообразные и другими). Выдвижной рот даёт возможность лещу добывать пищу из грунта до глубины 5-10 см. Крупный лещ может поедать молодь рыб.
+
+Половозрелым становится на юге в 3-4 года, на севере - в 4-5 лет. На юге нерест с конца апреля до начала июня, на севере - в мае-июне. Типичный фитофил. Нерест при температуре воды 12-14°С. Диаметр икринок - 1,0-1,5 мм. Плодовитость от 92 до 338 тыс. икринок. Икра развивается 4-6 суток.
+
+Распространён в Европе к востоку от Пиренеев и к северу от Альп в реках, озёрах и опреснённых участках Северного, Балтийского, Белого (до Печоры), Эгейского, Чёрного, Азовского, Каспийского и Аральского морей. Акклиматизирован на Урале, в бассейне Оби и Иртыша, в Байкало-Ангарском бассейне. Является одним из главных объектов пресноводного промысла. Объект искусственного разведения.</value>
+  </data>
+  <data name="BURBOT_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает мелкие и средние приманки. Обитает на предпочтительно большой  глубине. Клюёт в основном ночью, и утром.</value>
+  </data>
+  <data name="CHUB_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает мелкие и средние приманки.Кренки и вертушки. Обитает на предпочтительно на поверхности. </value>
+  </data>
+  <data name="GRAYLING_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает мелкие и средние приманки. Обитает на любой глубине.</value>
+  </data>
+  <data name="NO_BAIT_EQUIPED" xml:space="preserve">
+    <value>Не назначена наживка</value>
+  </data>
+  <data name="NO_LURE_EQUIPED" xml:space="preserve">
+    <value>Не назначена приманка</value>
+  </data>
+  <data name="PERCH_DESCRIPTION" xml:space="preserve">
+    <value>Хищиник. Предпочитает мелкие и средние приманки. Обитает на любой глубине.</value>
+  </data>
+  <data name="PIKE_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает большие и средние приманки. Обитает на любой глубине.</value>
+  </data>
+  <data name="PINKSALMON_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает большие и средние приманки. Обитает на предпочтительно большой глубине.</value>
+  </data>
+  <data name="ROACH_DESCRIPTION" xml:space="preserve">
+    <value>Плотва - стайная рыба. По характеру питания плотва - эврифаг. Взрослые особи питаются разнообразными беспозвоночными и их личинками, моллюсками, летом потребляют много нитчатых водорослей, а при обилии мальков крупная плотва питается личинками и мальками рыб.</value>
+  </data>
+  <data name="RYBETS_DESCRIPTION" xml:space="preserve">
+    <value>Форма тела удлиненная, но не слишком узкая, спинной плавник не длинный, высокий. Анальный плавник продолговатый, чешуя крупная, плотно сидящая. Голова вытянутая с большим носом и скошенным вниз выдвижным ртом, что говорит о донном питании рыбы. От головы до спинного плавника тянется лишенная чешуи бороздка, пространство от брюшного до анального плавника также лишено чешуи.
+
+Достигает максимальной длины в 60 сантиметров и веса до 3 килограмм (кроме подвида Малый Рыбец — до 19 сантиметров и до 100 грамм), обычно же, при ловле редко попадаются особи более 30 сантиметров и тяжелее 500 грамм. Половозрелости достигает в 4 года, живет до 17 лет.</value>
+  </data>
+  <data name="SALMON_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает большие и средние приманки. Обитает на предпочтительно большой глубине.</value>
+  </data>
+  <data name="SILVERCARP_DESCRIPTION" xml:space="preserve">
+    <value>Тело высокое с толстой спиной, умеренно сжатое с боков. Чешуя крупная и гладкая на ощупь. Окраска варьирует в зависимости от места обитания. Золотой карась может достигать длины тела более 50 см и массы свыше 3 кг, серебряный карась — длины 40 см и массы до 2 кг.</value>
+  </data>
+  <data name="SNAKEHEAD_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает большие и средние приманки. Обитает на маленькой глубине.</value>
+  </data>
+  <data name="TROUT_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает мелкие и средние приманки. Обитает на предпочтительно большой  глубине.</value>
+  </data>
+  <data name="WILDCARP_DESCRIPTION" xml:space="preserve">
+    <value>Рыба сазан обладает достаточно толстым, сильным, слегка удлиненным туловищем с относительно высокой спиной и чуть уплощенными боками. Сазаны растут примерно до 8 лет, затем рост рыбы приостанавливается. Средняя длина тела сазана составляет 35-55 см, средний вес сазана достигает 1-3 кг. Гигантские экземпляры свыше 1 метра в длину и массой 20-32 кг встречаются крайне редко. По документально подтвержденным данным, самый крупный сазан был пойман во Франции в январе 2010 года на озере Лак де Кертон (Lac de Curton). Вес рыбы составлял 41,6 кг. После этого, в 2013 году во Франции на озере Этан ля Сосэ (Etang La Saussaie) британский рыболов Колин Смит поймал сазана весом 45,59 кг.</value>
+  </data>
+  <data name="ZANDER_DESCRIPTION" xml:space="preserve">
+    <value>Хищник. Предпочитает мелкие и средние приманки. Обитает на предпочтительно большой  глубине.</value>
+  </data>
+</root>

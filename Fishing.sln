@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fishing.View", "Fishing\Fishing.View.csproj", "{238518C6-80BB-4F69-B39D-32CBA398B52D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fishing.BL", "Fishing.BL\Fishing.BL.csproj", "{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditor.BL", "MapEditor.BL\MapEditor.BL.csproj", "{C9940719-3138-49CF-9A1B-4D90A91AB944}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B} = {F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditor.View", "MapEditor.View\MapEditor.View.csproj", "{8DF7425F-E90F-410B-9C01-869DFF2C7128}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapEditor", "MapEditor", "{D31C3765-7DCB-4C12-9223-757111EB08AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fishing", "Fishing", "{81C88A7A-F63E-4A18-A31C-6A78A9DEAFB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{238518C6-80BB-4F69-B39D-32CBA398B52D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238518C6-80BB-4F69-B39D-32CBA398B52D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238518C6-80BB-4F69-B39D-32CBA398B52D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238518C6-80BB-4F69-B39D-32CBA398B52D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9940719-3138-49CF-9A1B-4D90A91AB944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9940719-3138-49CF-9A1B-4D90A91AB944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9940719-3138-49CF-9A1B-4D90A91AB944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9940719-3138-49CF-9A1B-4D90A91AB944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DF7425F-E90F-410B-9C01-869DFF2C7128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DF7425F-E90F-410B-9C01-869DFF2C7128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DF7425F-E90F-410B-9C01-869DFF2C7128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DF7425F-E90F-410B-9C01-869DFF2C7128}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{238518C6-80BB-4F69-B39D-32CBA398B52D} = {81C88A7A-F63E-4A18-A31C-6A78A9DEAFB3}
+		{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B} = {81C88A7A-F63E-4A18-A31C-6A78A9DEAFB3}
+		{C9940719-3138-49CF-9A1B-4D90A91AB944} = {D31C3765-7DCB-4C12-9223-757111EB08AC}
+		{8DF7425F-E90F-410B-9C01-869DFF2C7128} = {D31C3765-7DCB-4C12-9223-757111EB08AC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8AD0C4BC-B0BB-4560-9FFD-AEBC150B836A}
+	EndGlobalSection
+EndGlobal
