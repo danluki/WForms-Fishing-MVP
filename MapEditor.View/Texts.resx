@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DeepNeedToBeNumber" xml:space="preserve">
+    <value>Глубина должна быть числом!</value>
+  </data>
   <data name="EnterWaterName" xml:space="preserve">
     <value>Введите название водоёма.</value>
   </data>
+  <data name="FishesCountMustBeLessThanThousand" xml:space="preserve">
+    <value>Количество рыбы должно быть &lt;= 1000</value>
+  </data>
+  <data name="FishesCountNeedToBeNumber" xml:space="preserve">
+    <value>Количество рыбы должно быть числом!</value>
+  </data>
   <data name="HousePriceNeedToBeNumber" xml:space="preserve">
     <value>Цена за дом может состоять только из цифр.</value>
+  </data>
+  <data name="MinDeepNeedToBeLowerThanMax" xml:space="preserve">
+    <value>Минимальная глубина обитания должна быть меньше максимальной!</value>
   </data>
   <data name="MiniumLevel" xml:space="preserve">
     <value>Введите минимальный уровень для доступа.</value>

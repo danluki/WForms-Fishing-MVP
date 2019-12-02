@@ -61,6 +61,15 @@ namespace MapEditor.View {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Глубина должна быть числом!.
+        /// </summary>
+        internal static string DeepNeedToBeNumber {
+            get {
+                return ResourceManager.GetString("DeepNeedToBeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Введите название водоёма..
         /// </summary>
         internal static string EnterWaterName {
@@ -70,11 +79,38 @@ namespace MapEditor.View {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество рыбы должно быть &lt;= 1000.
+        /// </summary>
+        internal static string FishesCountMustBeLessThanThousand {
+            get {
+                return ResourceManager.GetString("FishesCountMustBeLessThanThousand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество рыбы должно быть числом!.
+        /// </summary>
+        internal static string FishesCountNeedToBeNumber {
+            get {
+                return ResourceManager.GetString("FishesCountNeedToBeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Цена за дом может состоять только из цифр..
         /// </summary>
         internal static string HousePriceNeedToBeNumber {
             get {
                 return ResourceManager.GetString("HousePriceNeedToBeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Минимальная глубина обитания должна быть меньше максимальной!.
+        /// </summary>
+        internal static string MinDeepNeedToBeLowerThanMax {
+            get {
+                return ResourceManager.GetString("MinDeepNeedToBeLowerThanMax", resourceCulture);
             }
         }
         

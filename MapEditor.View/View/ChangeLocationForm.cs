@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -63,20 +64,20 @@ namespace MapEditor.View {
             _isLeftButtonPressed = false;
             _labelsEndX = PointToClient(Cursor.Position).X;
             _labelsEndY = PointToClient(Cursor.Position).Y;
-            _labelXCount = (_labelsEndX - _labelsStartX) / 40;
-            _labelYCount = (_labelsEndY - _labelsStartY) / 23;
+            _labelXCount = (_labelsEndX - _labelsStartX) / LabelInfo.Width;
+            _labelYCount = (_labelsEndY - _labelsStartY) / LabelInfo.Height;
             _deepArray = new Label[_labelXCount, _labelYCount];
             for (var y = 0; y < _labelYCount; y++)
             {
                 for (var x = 0; x < _labelXCount; x++)
                 {
                     _deepArray[x, y] = new Label() {
-                        Left = _labelsStartX + 5 + x * 40,
-                        Top = _labelsStartY + y * 23,
-                        Height = 23,
+                        Left = _labelsStartX + 5 + x * LabelInfo.Width,
+                        Top = _labelsStartY + y * LabelInfo.Height,
+                        Height = LabelInfo.Height,
                         TextAlign = ContentAlignment.MiddleLeft,
                         ForeColor = Color.White,
-                        Width = 40,
+                        Width = LabelInfo.Width,
                         Visible = true,
                         Font = new Font("Arial", 8, FontStyle.Regular),
                         BorderStyle = BorderStyle.FixedSingle,
@@ -84,21 +85,17 @@ namespace MapEditor.View {
                     };
                     _deepArray[x, y].Click += (o, args) =>
                     {
-                        var r = new Rectangle(((Label) o).Location, new Size(40, 23));
-                        if (r.IntersectsWith(new Rectangle(PointToClient(Cursor.Position), new Size(1, 1))))
+                        var r = new Rectangle(((Label) o).Location, new Size(LabelInfo.Width, LabelInfo.Height));
+                        if (!r.IntersectsWith(new Rectangle(PointToClient(Cursor.Position), new Size(1, 1)))) return;
+                        if (setDeepButton.Checked)
                         {
-                            if (setDeepButton.Checked)
-                            {
-                                int.TryParse(deepTextBox.Text, out var res);
-                                ((Label)o).Text = res.ToString();
-                            }
-
-                            if (setSnagButton.Checked)
-                            {
-                                ((Label)o).Tag = 1;
-                                ((Label)o).BackColor = Color.Black;
-                            }
+                            int.TryParse(deepTextBox.Text, out var res);
+                            ((Label)o).Text = res.ToString();
                         }
+
+                        if (!setSnagButton.Checked) return;
+                        ((Label)o).Tag = 1;
+                        ((Label)o).BackColor = Color.Black;
                     };
                     locationImageBox.Controls.Add(_deepArray[x, y]);
                 }
@@ -168,7 +165,8 @@ namespace MapEditor.View {
             saver.Save(CurrentWater.MInfo.WaterName + "\\" + nameTextBox.Text + "\\DeepField.dat", lInfos);
             var str = _labelXCount + " " + _labelYCount + " " + _labelsStartX + " " + _labelsStartY;
             File.WriteAllText(CurrentWater.MInfo.WaterName + "\\" + nameTextBox.Text + "\\LVLInfo", str);
-            this.Close();
+            locationImageBox.BackgroundImage.Save(CurrentWater.MInfo.WaterName + "\\" + nameTextBox.Text + "\\BackImg.png", ImageFormat.Png);
+            Close();
         }
     }
 }

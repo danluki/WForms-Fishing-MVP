@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MapEditor.BL;
 
-namespace MapEditor.View {
+namespace MapEditor.View.View {
     public partial class NewMapForm : Form {
         public NewMapForm() {
             InitializeComponent();
@@ -26,7 +19,7 @@ namespace MapEditor.View {
                         {
                             CurrentWater.MInfo.WaterName = waterNameBox.Text;
                             CurrentWater.MInfo.WaterInfoString =
-                                waterNameBox.Text + " " + pricePerDayBox.Text + " " + housePriceBox.Text;
+                                $@"{waterNameBox.Text} {levelNumUpDown.Value} {pricePerDayBox.Text} {housePriceBox.Text}";
                             var waterForm = new WaterForm(waterNameBox.Text,
                                                           res,
                                                           r,

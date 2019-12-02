@@ -103,12 +103,12 @@ namespace Fishing.BL.Model.LVLS {
             for (var y = 0; y < Height; y++) {
                 for (var x = 0; x < Widgth; x++) {
                     DeepArray[x, y] = new Label {
-                        Left = DeepTiesStartX + 5 + x * 40,
-                        Top = DeepTiesStartY + y * 23,
-                        Height = 23,
+                        Left = DeepTiesStartX + 5 + x * LabelInfo.Width,
+                        Top = DeepTiesStartY + y * LabelInfo.Height,
+                        Height = LabelInfo.Height,
                         TextAlign = ContentAlignment.MiddleLeft,
                         ForeColor = Color.White,
-                        Width = 40,
+                        Width = LabelInfo.Width,
                         Visible = true,
                         Font = new Font("Arial", 8, FontStyle.Regular),
                         BorderStyle = BorderStyle.FixedSingle,

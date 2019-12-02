@@ -1,4 +1,4 @@
-﻿namespace MapEditor.View {
+﻿namespace MapEditor.View.View {
     partial class NewMapForm {
         /// <summary>
         /// Required designer variable.

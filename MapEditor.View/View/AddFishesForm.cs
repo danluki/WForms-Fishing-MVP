@@ -9,7 +9,9 @@ using MapEditor.BL;
 
 namespace MapEditor.View.View {
 
-    public partial class AddFishesForm : Form {
+    public partial class AddFishesForm : Form
+    {
+        private const int FishesMaxCount = 1000;
         private int _index;
         private readonly string _locName;
         public AddFishesForm(string locName) {
@@ -25,7 +27,7 @@ namespace MapEditor.View.View {
         }
 
         private void AddButton_Click(object sender, EventArgs e) {
-            if (_index == 1000) return;
+            if (_index == FishesMaxCount) return;
             if (int.TryParse(maxDeepText.Text, out var maxD))
             {
                 if (int.TryParse(minDeepText.Text, out var minD))
@@ -34,7 +36,7 @@ namespace MapEditor.View.View {
                     {
                         if (int.TryParse(countTextBox.Text, out var count))
                         {
-                            if (count <= 1000) //TODO Check For ComboBox
+                            if (count <= FishesMaxCount) //TODO Check For ComboBox
                             {
                                 for (var i = 0; i < int.Parse(countTextBox.Text); i++) {
                                     fishesGridView.Rows.Add();
@@ -43,7 +45,7 @@ namespace MapEditor.View.View {
                                     fishesGridView["SizeColumn", _index].Value = sizeComboBox.Text;
                                     fishesGridView["MinDeepColumn", _index].Value = minDeepText.Text;
                                     fishesGridView["MaxDeepColumn", _index].Value = maxDeepText.Text;
-                                    fishesGridView["Baitscolumn", _index].Value = sizeComboBox.SelectedValue;
+                                    fishesGridView["BaitColumn", _index].Value = sizeComboBox.SelectedValue;
                                     var sb = new StringBuilder("[");
                                     foreach (var b in baitsBox.SelectedItems) {
                                         if (!b.Equals(baitsBox.SelectedItems[baitsBox.SelectedItems.Count - 1])) {
@@ -52,34 +54,34 @@ namespace MapEditor.View.View {
                                         else {
                                             sb.Append(b);
                                         }
-                                        fishesGridView["Baitscolumn", _index].Value = sb + "]";
+                                        fishesGridView["BaitColumn", _index].Value = sb + "]";
                                     }
                                     _index++;
                                 }
-                                totalCountLabel.Text = _index + " / 1000";
+                                totalCountLabel.Text = $@"{_index} / {FishesMaxCount}";
                             }
                             else
                             {
-                                MessageBox.Show("Количество рыбы должно быть <= 1000");
+                                MessageBox.Show(Texts.FishesCountMustBeLessThanThousand);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Количество рыбы должно быть числом!");
+                            MessageBox.Show(Texts.FishesCountNeedToBeNumber);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Минимальная глубина обитания должна быть меньше максимальной!");
+                        MessageBox.Show(Texts.MinDeepNeedToBeLowerThanMax);
                     }
                 }
                 else {
-                    MessageBox.Show("Глубина должна быть числом!");
+                    MessageBox.Show(Texts.DeepNeedToBeNumber);
                 }
             }
             else
             {
-                MessageBox.Show("Глубина должна быть числом!");
+                MessageBox.Show(Texts.DeepNeedToBeNumber);
             }
         }
 
@@ -90,20 +92,20 @@ namespace MapEditor.View.View {
         }
 
         private void SaveButtonClick_Click(object sender, EventArgs e) {
-            if(_index != 1000) return;
-            for (var i = 0; i < 1000; i++)
+            if(_index != FishesMaxCount) return;
+            for (var i = 0; i < FishesMaxCount; i++)
             {
                 var name = fishesGridView["NameColumn", i].Value;
                 var size = fishesGridView["SizeColumn", i].Value;
                 var mind = fishesGridView["MinDeepColumn", i].Value;
                 var maxd = fishesGridView["MaxDeepColumn", i].Value;
-                var baits = fishesGridView["Baitscolumn", i].Value;
-                var str = name + ":" + size + " " + mind + "-" + maxd + " " + baits;
+                var baits = fishesGridView["BaitColumn", i].Value;
+                var str = $@"{name}:{size} {mind}-{maxd} {baits}";
                 Directory.CreateDirectory(CurrentWater.MInfo.WaterName);
-                Directory.CreateDirectory(CurrentWater.MInfo.WaterName + "\\" + _locName);
-                File.AppendAllText(CurrentWater.MInfo.WaterName + "\\" + _locName + "\\Fisheslist", str + "\n");
+                Directory.CreateDirectory($@"{CurrentWater.MInfo.WaterName}\{_locName}");
+                File.AppendAllText($@"{CurrentWater.MInfo.WaterName}\{_locName}\Fisheslist", str + "\n");
             }
-            this.Close();
+            Close();
         }
     }
 }

@@ -133,10 +133,10 @@
     <Compile Include="View\Menu\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\LVLS\Ozero\Map.cs">
+    <Compile Include="View\LVLS\Map.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\LVLS\Ozero\Map.Designer.cs">
+    <Compile Include="View\LVLS\Map.Designer.cs">
       <DependentUpon>Map.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -205,7 +205,7 @@
     <EmbeddedResource Include="View\Menu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\LVLS\Ozero\Map.resx">
+    <EmbeddedResource Include="View\LVLS\Map.resx">
       <DependentUpon>Map.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

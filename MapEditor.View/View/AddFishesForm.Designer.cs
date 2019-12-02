@@ -42,7 +42,7 @@
             this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MinDeepColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxDeepColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Baitscolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BaitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.fishesGridView)).BeginInit();
             this.fishSetting.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.SizeColumn,
             this.MinDeepColumn,
             this.MaxDeepColumn,
-            this.Baitscolumn});
+            this.BaitColumn});
             this.fishesGridView.Location = new System.Drawing.Point(12, 12);
             this.fishesGridView.Name = "fishesGridView";
             this.fishesGridView.Size = new System.Drawing.Size(747, 433);
@@ -228,10 +228,10 @@
             this.MaxDeepColumn.HeaderText = "Макс. Глубина";
             this.MaxDeepColumn.Name = "MaxDeepColumn";
             // 
-            // Baitscolumn
+            // BaitColumn
             // 
-            this.Baitscolumn.HeaderText = "Приманки";
-            this.Baitscolumn.Name = "Baitscolumn";
+            this.BaitColumn.HeaderText = "Приманки";
+            this.BaitColumn.Name = "BaitColumn";
             // 
             // AddFishesForm
             // 
@@ -276,6 +276,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn MinDeepColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxDeepColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Baitscolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BaitColumn;
     }
 }

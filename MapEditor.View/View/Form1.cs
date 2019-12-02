@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MapEditor.View.View;
 using Saver.BL.Controller;
 
 namespace MapEditor.View {
@@ -31,7 +32,7 @@ namespace MapEditor.View {
         {
             var saver = new SerializeDataSaver();
             File.WriteAllText(CurrentWater.MInfo.WaterName + "\\WaterInfo", CurrentWater.MInfo.WaterInfoString);
-            CurrentWater.MInfo.BackImg.Save("MapImg", ImageFormat.Png);
+            CurrentWater.MInfo.BackImg.Save(CurrentWater.MInfo.WaterName + "\\MapImg.png", ImageFormat.Png);
             saver.Save(CurrentWater.MInfo.WaterName + "\\Map.dat", CurrentWater.MInfo.Locations);
             foreach (var loc in CurrentWater.MInfo.Locations)
             {
