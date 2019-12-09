@@ -8,7 +8,10 @@ using Fishing.AbstractFish;
 using Fishing.BL.Controller;
 using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Eating;
+using Fishing.BL.Model.FeedingUp;
 using Fishing.BL.Model.Hooks;
+using Fishing.BL.Model.Items;
+using Fishing.BL.Model.SoundPlayer;
 using Fishing.BL.Model.UserEvent;
 using Fishing.BL.Resources.Images;
 
@@ -21,6 +24,7 @@ namespace Fishing.BL.Model.Game {
 
         private static Player player;
 
+        public FeedUp EquipedFeedUp { get; set; }
         public GameRoad FirstRoad { get; set; } = null;
         public GameRoad SecondRoad { get; set; } = null;
         public GameRoad ThirdRoad { get; set; } = null;
@@ -47,17 +51,13 @@ namespace Fishing.BL.Model.Game {
         public int WindingSpeed { get; set; }
         public Fish CFish { get; set; }
         public string NickName { get; set; } = "Рыболов";
-        public Netting Netting { get; set; } = new Netting();
 
         private Player() {
         }
 
-        public static Player GetPlayer() {
-            if (player == null) {
-                player = new Player();
-            }
-
-            return player;
+        public static Player GetPlayer()
+        {
+            return player ?? (player = new Player());
         }
 
         public void AddEventToHistory(BaseEvent ev) {
@@ -219,6 +219,22 @@ namespace Fishing.BL.Model.Game {
                 if (Satiety - value <= SATIETY_MIN_VALUE) {
                     Satiety -= value;
                 }
+            }
+        }
+
+        public void AddFishToPond()
+        {
+            player.Statistic.TakenFishesCount++;
+            if (!player.EquipedRoad.Fish.IsTrophy()) {
+                player.AddEventToHistory(new FishEvent(player.EquipedRoad.Fish,
+                    player.EquipedRoad.Assembly.FishBait));
+            }
+            else {
+                player.AddEventToHistory(new TrophyFishEvent(player.EquipedRoad.Fish,
+                    player.EquipedRoad.Assembly.FishBait));
+            }
+            if (player.EquipedRoad.Assembly.Road is Feeder || player.EquipedRoad.Assembly.Road is Float) {
+                ((Bait)player.EquipedRoad.Assembly.FishBait).Count -= 1;
             }
         }
 

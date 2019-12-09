@@ -8,9 +8,7 @@ namespace Fishing.BL.Model.Game {
         public int Y;
 
         public static Power SetPower(int x, int y) {
-            Power power = new Power();
-            power.X = x;
-            power.Y = y;
+            Power power = new Power {X = x, Y = y};
 
             return power;
         }

@@ -7,7 +7,7 @@ namespace Fishing.BL {
     public class LabelInfo
     {
         public const int Width = 40;
-        public const int Height = 40;
+        public const int Height = 23;
         public string Deep { get; set; }
         public int IsSnag { get; set; }
 

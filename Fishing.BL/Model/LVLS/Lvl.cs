@@ -4,6 +4,7 @@ using Fishing.BL.Model.Items;
 using Saver.BL.Controller;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,16 +23,27 @@ namespace Fishing.BL.Model.LVLS {
         public Label[,] DeepArray;
         protected List<Fish> Fishes = new List<Fish>(1000);
 
+        [SuppressMessage("ReSharper", "IdentifierTypo")]
         public (bool isFish, bool gathering) GetFish(GameRoad road) {
             try {
                 Shuffle(Fishes);
                 var randomGathering = new Random();
                 var randomFish = new Random();
                 if (road.Assembly.FishBait != null) {
-                    if (!road.IsFishAttack) {
-                        road.Fish = Fishes[randomFish.Next(1, 1000)];
-                        if (IsFishAttackPossible(road.Fish, road)) {
+                    if (!road.IsFishAttack)
+                    {
+                        road.FishesPossibleToAttack = new List<Fish>();
+                        foreach (var f in Fishes.Where(f => f.IsFishInNeededToAttackDeep(road.CurrentDeep))) {
+                            road.FishesPossibleToAttack.Add(f);
+                        }
+                        Shuffle(road.FishesPossibleToAttack);
+                        var index = randomFish.Next(1, road.FishesPossibleToAttack.Count);
+                        var fi = road.FishesPossibleToAttack.Count > 0 ? road.FishesPossibleToAttack[index] : null;
+                        if (IsFishAttackPossible(fi, road))
+                        {
+                            road.Fish = fi;
                             road.IsFishAttack = true;
+
                             var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
                             var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
 
@@ -44,9 +56,38 @@ namespace Fishing.BL.Model.LVLS {
                                     return (true, true);
                                 }
                             }
-
                             if (!(road.Assembly.Road is Feeder)) return (true, false);
                             return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
+                        }
+                        foreach (var feedup in road.CurrentFeedUp.WorkingFishes)
+                        {
+                            for (var fu = 0; fu < feedup.Value; fu++)
+                            {
+                                fi = road.FishesPossibleToAttack[index + fu];
+
+                                if (feedup.Key == fi.GetType() && fi.IsFishAttackPossible(road))
+                                {
+                                    road.Fish = fi;
+                                    road.IsFishAttack = true;
+
+                                    var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
+                                    var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
+
+                                    road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
+                                    road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
+                                    var gathering = randomGathering.Next(1, 100);
+
+                                    if (road.Assembly.Road is Spinning) {
+                                        if (gathering <= 5) {
+                                            return (true, true);
+                                        }
+                                    }
+
+                                    if (!(road.Assembly.Road is Feeder)) return (true, false);
+                                    return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
+                                }
+
+                            }
                         }
                     }
                 }

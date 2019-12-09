@@ -61,6 +61,7 @@ namespace Fishing.Presenter {
             Item.Hooks.Add(new FloatsHook("Worm_X_Strong", 7, 5000, HooksImg.Worm_X_Strong));
 
             BaseController.GetController().IntializeLures();
+            BaseController.GetController().SetFeedUps();
         }
 
         public override void Run() {

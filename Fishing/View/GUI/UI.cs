@@ -13,6 +13,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Fishing.BL.Model.LVLS;
+using Fishing.Resources;
+using Fishing.View.FeedUpView;
 
 namespace Fishing {
 
@@ -125,6 +127,42 @@ namespace Fishing {
             SounderPanel.Refresh();
         }
 
+        private void FeedUpButton_MouseEnter(object sender, EventArgs e) {
+            if (Player.GetPlayer().EquipedFeedUp == null)
+            {
+                FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_em_a");
+            }
+            else
+            {
+                FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_fu_a");
+            }
+        }
+
+        private void FeedUpButton_MouseLeave(object sender, EventArgs e) {
+            if (Player.GetPlayer().EquipedFeedUp == null) {
+                FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_em_d");
+            }
+            else {
+                FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_fu_d");
+            }
+        }
+
+        private void Buttons_MouseEnter(object sender, EventArgs e) {
+            if (sender is PictureBox picturebox)
+                picturebox.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject(picturebox.Tag + "_a");
+        }
+
+        private void Buttons_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is PictureBox picturebox)
+                picturebox.BackgroundImage = (Image) GuiButtons.ResourceManager.GetObject(picturebox.Tag + "_d");
+        }
+
+        private void FeedUpButton_Click(object sender, EventArgs e)
+        {
+            var feedUpForm = new FeedUpF();
+            feedUpForm.Show();
+        }
         public void AddEventToBox(BaseEvent ev) {
             var lvi = new ListViewItem {
                 Text = ev.Text,
@@ -174,9 +212,19 @@ namespace Fishing {
             if (reelPic != null) {
                 ReelPicture = road.Assembly.Reel.Pict;
             }
-            if (!(road.Assembly.Road is Feeder)) return;
-            if (hookPic != null) {
-                HookPicture = road.Assembly.Hook.Pict;
+            if (road.Assembly.Road is Feeder)
+            {
+                if (hookPic != null) {
+                    HookPicture = road.Assembly.Hook.Pict;
+                }
+                fBaitCountsLabel.Text = ((Bait)road.Assembly.FishBait).Count.ToString();
+            }
+            else
+            {
+                if (road.Assembly.FishBait != null)
+                {
+                    fBaitCountsLabel.Text = "1";
+                }
             }
         }
 
@@ -185,7 +233,7 @@ namespace Fishing {
         }
 
         public void Down() {
-            this.Show();
+            Show();
         }
     }
 }

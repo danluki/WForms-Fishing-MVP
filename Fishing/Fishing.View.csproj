@@ -58,6 +58,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FoodButtons.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\GuiButtons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GuiButtons.resx</DependentUpon>
+    </Compile>
     <Compile Include="VerticalProgressBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,6 +77,17 @@
     </Compile>
     <Compile Include="View\DeepField\DeepField.Designer.cs">
       <DependentUpon>DeepField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FeedUpView\FeedUpF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FeedUpView\FeedUpF.Designer.cs">
+      <DependentUpon>FeedUpF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FeedUpView\FeedUpRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedUpRes.resx</DependentUpon>
     </Compile>
     <Compile Include="View\FoodShop\FoodShopForm.cs">
       <SubType>Form</SubType>
@@ -169,11 +185,22 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FoodButtons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GuiButtons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GuiButtons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Assembly\AddAssembly.resx">
       <DependentUpon>AddAssembly.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\DeepField\DeepField.resx">
       <DependentUpon>DeepField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FeedUpView\FeedUpF.resx">
+      <DependentUpon>FeedUpF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FeedUpView\FeedUpRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeedUpRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FoodInventory\FoodInventory.resx">
       <DependentUpon>FoodInventory.cs</DependentUpon>
@@ -256,6 +283,8 @@
     <None Include="Resources\layer10.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\pack_a.png" />
+    <None Include="Resources\pack_d.png" />
     <None Include="Resources\pech_d.png" />
     <None Include="Resources\pech_a.png" />
     <None Include="Resources\red_d.png" />
@@ -264,7 +293,6 @@
     <None Include="Resources\sir_a.png" />
     <None Include="Resources\ozero1f.jpg" />
     <None Include="Resources\MesheraMap.PNG" />
-    <None Include="Resources\data_a.png" />
     <None Include="Resources\blackkrug.png" />
     <None Include="Resources\hleb_a.png" />
     <None Include="Resources\hleb_d.png" />
@@ -276,8 +304,16 @@
     <None Include="Resources\banany_d.png" />
     <None Include="Resources\apelsin_a.png" />
     <None Include="Resources\apelsin_d.png" />
-    <None Include="Resources\exit_a.png" />
+    <None Include="Resources\bucket_fu_d.png" />
+    <None Include="Resources\bucket_em_a.png" />
+    <None Include="Resources\bucket_em_d.png" />
+    <None Include="Resources\bucket_fu_a.png" />
+    <None Include="Resources\corf_d.png" />
+    <None Include="Resources\corf_a.png" />
+    <None Include="Resources\data_d.png" />
+    <None Include="Resources\data_a.png" />
     <None Include="Resources\exit_d.png" />
+    <None Include="Resources\exit_a.png" />
     <Content Include="Resources\layer.jpg" />
     <Content Include="Resources\layer6.jpg" />
   </ItemGroup>

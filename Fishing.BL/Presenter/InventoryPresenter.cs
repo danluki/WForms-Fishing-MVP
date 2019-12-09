@@ -107,7 +107,7 @@ namespace Fishing.Presenter {
                     break;
                 case Feeder _:
                     _view.Assembly_P.FishBait = _view.Bait_P;
-                    _player.BaitInv.Remove(_view.Bait_P);
+                    _view.Bait_P.Count -= 1;
 
                     _view.Assembly_P.Hook = _view.Hook_P;
                     _player.HooksInv.Remove(_view.Hook_P);

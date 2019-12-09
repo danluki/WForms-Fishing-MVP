@@ -35,12 +35,13 @@ namespace Fishing
             this.SounderUpdater = new System.Windows.Forms.Timer(this.components);
             this.eventsList = new System.Windows.Forms.ImageList(this.components);
             this.eventsView = new System.Windows.Forms.ListView();
+            this.LowerPanel = new System.Windows.Forms.Panel();
+            this.FeedUpButton = new System.Windows.Forms.PictureBox();
+            this.hookBox = new System.Windows.Forms.PictureBox();
             this.SounderPanel = new System.Windows.Forms.Panel();
             this.LureDeep = new System.Windows.Forms.Label();
             this.TextDeepLabel = new System.Windows.Forms.Label();
             this.DeepLabel = new System.Windows.Forms.Label();
-            this.LowerPanel = new System.Windows.Forms.Panel();
-            this.hookBox = new System.Windows.Forms.PictureBox();
             this.flineBox = new System.Windows.Forms.PictureBox();
             this.reelBox = new System.Windows.Forms.PictureBox();
             this.ReelBar = new System.Windows.Forms.ProgressBar();
@@ -59,9 +60,11 @@ namespace Fishing
             this.SettingLabel = new System.Windows.Forms.Label();
             this.MapLabel = new System.Windows.Forms.Label();
             this.eatingBar = new VerticalProgressBar.VerticalProgressBar();
-            this.SounderPanel.SuspendLayout();
+            this.fBaitCountsLabel = new System.Windows.Forms.Label();
             this.LowerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FeedUpButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hookBox)).BeginInit();
+            this.SounderPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flineBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reelBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roadBox)).BeginInit();
@@ -108,6 +111,57 @@ namespace Fishing
             this.eventsView.TabIndex = 23;
             this.eventsView.UseCompatibleStateImageBehavior = false;
             this.eventsView.View = System.Windows.Forms.View.SmallIcon;
+            // 
+            // LowerPanel
+            // 
+            this.LowerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LowerPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LowerPanel.BackgroundImage")));
+            this.LowerPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.LowerPanel.Controls.Add(this.fBaitCountsLabel);
+            this.LowerPanel.Controls.Add(this.FeedUpButton);
+            this.LowerPanel.Controls.Add(this.hookBox);
+            this.LowerPanel.Controls.Add(this.SounderPanel);
+            this.LowerPanel.Controls.Add(this.flineBox);
+            this.LowerPanel.Controls.Add(this.reelBox);
+            this.LowerPanel.Controls.Add(this.ReelBar);
+            this.LowerPanel.Controls.Add(this.roadBox);
+            this.LowerPanel.Controls.Add(this.eatingBar);
+            this.LowerPanel.Controls.Add(this.WiringTypeLabel);
+            this.LowerPanel.Controls.Add(this.StatsBox);
+            this.LowerPanel.Controls.Add(this.InventoryBox);
+            this.LowerPanel.Controls.Add(this.FLineBar);
+            this.LowerPanel.Controls.Add(this.BaitsPicture);
+            this.LowerPanel.Controls.Add(this.FpondBox);
+            this.LowerPanel.Location = new System.Drawing.Point(0, 815);
+            this.LowerPanel.Name = "LowerPanel";
+            this.LowerPanel.Size = new System.Drawing.Size(1023, 213);
+            this.LowerPanel.TabIndex = 20;
+            // 
+            // FeedUpButton
+            // 
+            this.FeedUpButton.BackColor = System.Drawing.Color.Transparent;
+            this.FeedUpButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FeedUpButton.BackgroundImage")));
+            this.FeedUpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.FeedUpButton.Location = new System.Drawing.Point(6, 129);
+            this.FeedUpButton.Name = "FeedUpButton";
+            this.FeedUpButton.Size = new System.Drawing.Size(83, 81);
+            this.FeedUpButton.TabIndex = 32;
+            this.FeedUpButton.TabStop = false;
+            this.FeedUpButton.Tag = "bucket";
+            this.FeedUpButton.Click += new System.EventHandler(this.FeedUpButton_Click);
+            this.FeedUpButton.MouseEnter += new System.EventHandler(this.FeedUpButton_MouseEnter);
+            this.FeedUpButton.MouseLeave += new System.EventHandler(this.FeedUpButton_MouseLeave);
+            // 
+            // hookBox
+            // 
+            this.hookBox.BackColor = System.Drawing.Color.White;
+            this.hookBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.hookBox.Location = new System.Drawing.Point(456, 129);
+            this.hookBox.Name = "hookBox";
+            this.hookBox.Size = new System.Drawing.Size(93, 75);
+            this.hookBox.TabIndex = 31;
+            this.hookBox.TabStop = false;
             // 
             // SounderPanel
             // 
@@ -156,40 +210,6 @@ namespace Fishing
             this.DeepLabel.Size = new System.Drawing.Size(19, 20);
             this.DeepLabel.TabIndex = 18;
             this.DeepLabel.Text = "0";
-            // 
-            // LowerPanel
-            // 
-            this.LowerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LowerPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LowerPanel.BackgroundImage")));
-            this.LowerPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LowerPanel.Controls.Add(this.hookBox);
-            this.LowerPanel.Controls.Add(this.SounderPanel);
-            this.LowerPanel.Controls.Add(this.flineBox);
-            this.LowerPanel.Controls.Add(this.reelBox);
-            this.LowerPanel.Controls.Add(this.ReelBar);
-            this.LowerPanel.Controls.Add(this.roadBox);
-            this.LowerPanel.Controls.Add(this.eatingBar);
-            this.LowerPanel.Controls.Add(this.WiringTypeLabel);
-            this.LowerPanel.Controls.Add(this.StatsBox);
-            this.LowerPanel.Controls.Add(this.InventoryBox);
-            this.LowerPanel.Controls.Add(this.FLineBar);
-            this.LowerPanel.Controls.Add(this.BaitsPicture);
-            this.LowerPanel.Controls.Add(this.FpondBox);
-            this.LowerPanel.Location = new System.Drawing.Point(0, 815);
-            this.LowerPanel.Name = "LowerPanel";
-            this.LowerPanel.Size = new System.Drawing.Size(1023, 213);
-            this.LowerPanel.TabIndex = 20;
-            // 
-            // hookBox
-            // 
-            this.hookBox.BackColor = System.Drawing.Color.White;
-            this.hookBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.hookBox.Location = new System.Drawing.Point(456, 129);
-            this.hookBox.Name = "hookBox";
-            this.hookBox.Size = new System.Drawing.Size(93, 75);
-            this.hookBox.TabIndex = 31;
-            this.hookBox.TabStop = false;
             // 
             // flineBox
             // 
@@ -252,7 +272,10 @@ namespace Fishing
             this.StatsBox.Size = new System.Drawing.Size(82, 91);
             this.StatsBox.TabIndex = 25;
             this.StatsBox.TabStop = false;
+            this.StatsBox.Tag = "data";
             this.StatsBox.Click += new System.EventHandler(this.StatsBox_Click);
+            this.StatsBox.MouseEnter += new System.EventHandler(this.Buttons_MouseEnter);
+            this.StatsBox.MouseLeave += new System.EventHandler(this.Buttons_MouseLeave);
             // 
             // InventoryBox
             // 
@@ -264,7 +287,10 @@ namespace Fishing
             this.InventoryBox.Size = new System.Drawing.Size(77, 99);
             this.InventoryBox.TabIndex = 25;
             this.InventoryBox.TabStop = false;
+            this.InventoryBox.Tag = "pack";
             this.InventoryBox.Click += new System.EventHandler(this.InventoryBox_Click);
+            this.InventoryBox.MouseEnter += new System.EventHandler(this.Buttons_MouseEnter);
+            this.InventoryBox.MouseLeave += new System.EventHandler(this.Buttons_MouseLeave);
             // 
             // FLineBar
             // 
@@ -282,7 +308,7 @@ namespace Fishing
             this.BaitsPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BaitsPicture.Location = new System.Drawing.Point(554, 129);
             this.BaitsPicture.Name = "BaitsPicture";
-            this.BaitsPicture.Size = new System.Drawing.Size(82, 75);
+            this.BaitsPicture.Size = new System.Drawing.Size(82, 60);
             this.BaitsPicture.TabIndex = 19;
             this.BaitsPicture.TabStop = false;
             this.BaitsPicture.Click += new System.EventHandler(this.BaitsPicture_Click);
@@ -297,7 +323,10 @@ namespace Fishing
             this.FpondBox.Size = new System.Drawing.Size(74, 91);
             this.FpondBox.TabIndex = 23;
             this.FpondBox.TabStop = false;
+            this.FpondBox.Tag = "corf";
             this.FpondBox.Click += new System.EventHandler(this.FishingPondBox_Click);
+            this.FpondBox.MouseEnter += new System.EventHandler(this.Buttons_MouseEnter);
+            this.FpondBox.MouseLeave += new System.EventHandler(this.Buttons_MouseLeave);
             // 
             // UpperPanel
             // 
@@ -386,16 +415,25 @@ namespace Fishing
             this.eatingBar.BackColor = System.Drawing.Color.Transparent;
             this.eatingBar.BorderStyle = VerticalProgressBar.BorderStyles.Classic;
             this.eatingBar.Color = System.Drawing.Color.Gold;
-            this.eatingBar.Location = new System.Drawing.Point(19, 18);
+            this.eatingBar.Location = new System.Drawing.Point(19, 17);
             this.eatingBar.Maximum = 100;
             this.eatingBar.Minimum = 0;
             this.eatingBar.Name = "eatingBar";
-            this.eatingBar.Size = new System.Drawing.Size(18, 88);
+            this.eatingBar.Size = new System.Drawing.Size(19, 88);
             this.eatingBar.Step = 10;
             this.eatingBar.Style = VerticalProgressBar.Styles.Solid;
             this.eatingBar.TabIndex = 27;
             this.eatingBar.Value = 0;
             this.eatingBar.Click += new System.EventHandler(this.EatingBar_Click);
+            // 
+            // fBaitCountsLabel
+            // 
+            this.fBaitCountsLabel.AutoSize = true;
+            this.fBaitCountsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.fBaitCountsLabel.Location = new System.Drawing.Point(601, 192);
+            this.fBaitCountsLabel.Name = "fBaitCountsLabel";
+            this.fBaitCountsLabel.Size = new System.Drawing.Size(0, 13);
+            this.fBaitCountsLabel.TabIndex = 33;
             // 
             // UI
             // 
@@ -416,11 +454,12 @@ namespace Fishing
             this.Text = " ";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.DimGray;
-            this.SounderPanel.ResumeLayout(false);
-            this.SounderPanel.PerformLayout();
             this.LowerPanel.ResumeLayout(false);
             this.LowerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FeedUpButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hookBox)).EndInit();
+            this.SounderPanel.ResumeLayout(false);
+            this.SounderPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flineBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reelBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.roadBox)).EndInit();
@@ -463,5 +502,7 @@ namespace Fishing
         private System.Windows.Forms.ListView eventsView;
         public System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.PictureBox hookBox;
+        protected internal System.Windows.Forms.PictureBox FeedUpButton;
+        private System.Windows.Forms.Label fBaitCountsLabel;
     }
 }

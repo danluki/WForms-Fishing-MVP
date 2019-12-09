@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 
 namespace Fishing.AbstractFish {
 
@@ -36,7 +37,23 @@ namespace Fishing.AbstractFish {
             this.Bitmap = bit;
             this.ActivityParts = activeParts;
         }
-
+        public bool IsFishAttackPossible(GameRoad road) {
+            try {
+                if (MinDeep > road.CurrentDeep || MaxDeep < road.CurrentDeep) return false;
+                var part = ActivityParts.First(p => p == Game.GetGame().Time.Part);
+                var l = WorkingLures.First(b => b.Name.Equals(road.Assembly.FishBait.Name));
+                var ba = l != null;
+                var pa = part != default;
+                return ba && pa;
+            }
+            catch (InvalidOperationException) {
+                return false;
+            }
+        }
+        public bool IsFishInNeededToAttackDeep(int deep)
+        {
+            return MinDeep <= deep && MaxDeep >= deep;
+        }
         public bool IsTrophy() {
             return Weight >= TrophyWeight;
         }
@@ -53,5 +70,6 @@ namespace Fishing.AbstractFish {
         public static explicit operator Fish(FishString fs) {
             return fs.GetFishByStr();
         }
+
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Remoting.Channels;
+using System.Windows.Forms;
 using Fishing.BL.Model.Game;
 
 namespace Fishing.BL.Model.Drawer {
@@ -21,6 +23,8 @@ namespace Fishing.BL.Model.Drawer {
 
         private Rectangle Netting;
         public Rectangle RTrigon;
+
+
         public void DrawPoints() {
             if (player.FirstRoad != null) {
                 sbrush.Color = player.FirstRoad == player.EquipedRoad ? Color.Red : Color.White;
@@ -40,8 +44,14 @@ namespace Fishing.BL.Model.Drawer {
             Graphics.FillEllipse(sbrush, player.ThirdRoad.CurPoint.X, player.ThirdRoad.CurPoint.Y, 4, 4);
         }
 
-        public void DrawNetting() {
-            Graphics.DrawImage(Pictures.netting, Netting);
+        public void DrawNetting() {//TODO
+            var timer = new Timer() {
+                Interval = 25
+            };
+            timer.Tick += (sender, e) => {
+                Netting.Y -= 10;
+                Graphics.DrawImage(Pictures.netting, Netting);
+            };
         }
 
         public void DrawTrigon() {

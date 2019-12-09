@@ -53,6 +53,7 @@
     <Compile Include="Model\Baits\FishBait.cs" />
     <Compile Include="Model\Drawer\Drawer.cs" />
     <Compile Include="Model\Eating\Food.cs" />
+    <Compile Include="Model\FeedingUp\FeedUp.cs" />
     <Compile Include="Model\Fishes\Asp.cs" />
     <Compile Include="Model\Fishes\Bream.cs" />
     <Compile Include="Model\Fishes\Burbot.cs" />
@@ -96,6 +97,11 @@
     <Compile Include="PicturesBoxInfo.cs" />
     <Compile Include="Presenter\FoodPresenter.cs" />
     <Compile Include="Presenter\StatisticPresenter.cs" />
+    <Compile Include="Resources\Images\FeedUps.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedUps.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Images\FishesImg.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,7 +149,6 @@
     <Compile Include="Model\Fishes\Salmon.cs" />
     <Compile Include="Model\Fishes\Trout.cs" />
     <Compile Include="Model\Game\Assembly.cs" />
-    <Compile Include="Model\Game\Netting.cs" />
     <Compile Include="Model\Game\Pictures.cs" />
     <Compile Include="Model\Game\Sounder.cs" />
     <Compile Include="Model\Game\Player.cs" />
@@ -200,6 +205,8 @@
     <None Include="Resources\apelsin.png" />
     <None Include="Resources\apelsin_a.png" />
     <None Include="Resources\apelsin_d.png" />
+    <None Include="Resources\anis.jpg" />
+    <None Include="Resources\anisa.jpg" />
     <Content Include="Resources\Atlantic.png" />
     <None Include="Resources\BaitHolder.png" />
     <None Include="Resources\banany_a.png" />
@@ -221,8 +228,13 @@
     <None Include="Resources\broken.png" />
     <Content Include="Resources\btn.png" />
     <None Include="Resources\Carp.png" />
+    <None Include="Resources\bucket_em_a.png" />
+    <None Include="Resources\bucket_em_d.png" />
+    <None Include="Resources\bucket_fu_a.png" />
+    <None Include="Resources\bucket_fu_d.png" />
     <Content Include="Resources\catfish.jpg" />
     <None Include="Resources\cheeze.png" />
+    <None Include="Resources\chesnok.jpg" />
     <Content Include="Resources\Circl-5103.png" />
     <Content Include="Resources\Circl-5113.png" />
     <Content Include="Resources\Colorado.png" />
@@ -265,6 +277,7 @@
     <None Include="Resources\ikra.png" />
     <None Include="Resources\hleb_a.png" />
     <None Include="Resources\hleb_d.png" />
+    <None Include="Resources\goroh.jpg" />
     <Content Include="Resources\Images\hleb.png" />
     <Content Include="Resources\HYDRA 1711.png" />
     <Content Include="Resources\Hydra.png" />
@@ -284,15 +297,19 @@
     <None Include="Resources\izg4h.png" />
     <None Include="Resources\izg5.png" />
     <None Include="Resources\izg5h.png" />
+    <None Include="Resources\karamel.jpg" />
     <Content Include="Resources\karass.jpg" />
     <None Include="Resources\kassa.wav" />
+    <None Include="Resources\karpkaras.jpg" />
     <Content Include="Resources\key.png" />
     <None Include="Resources\koroed.png" />
+    <None Include="Resources\konopla.jpg" />
     <Content Include="Resources\layer10.jpg" />
     <Content Include="Resources\layer2.jpg" />
     <Content Include="Resources\layer6.jpg" />
     <Content Include="Resources\lesh.jpg" />
     <Content Include="Resources\lesh.png" />
+    <None Include="Resources\leshp.jpg" />
     <Content Include="Resources\leskaobr.wav" />
     <Content Include="Resources\lvl1.jpg" />
     <None Include="Resources\lvl3.png" />
@@ -327,10 +344,12 @@
     <None Include="Resources\pech.png" />
     <Content Include="Resources\Phantom 852.jpg" />
     <Content Include="Resources\pike.jpg" />
+    <None Include="Resources\plotva.jpg" />
     <Content Include="Resources\plotva.png" />
     <Content Include="Resources\podsachik.png" />
     <Content Include="Resources\podsak.dds" />
     <Content Include="Resources\podsak.png" />
+    <None Include="Resources\podsolnuh.jpg" />
     <Content Include="Resources\Quest Fishers.png" />
     <Content Include="Resources\Quest Reel.png" />
     <Content Include="Resources\rak.jpg" />
@@ -388,6 +407,8 @@
     <None Include="Resources\Tvis-104.png" />
     <Content Include="Resources\Tvis-107.png" />
     <None Include="Resources\Tvis-119.png" />
+    <None Include="Resources\ukrop.jpg" />
+    <None Include="Resources\vanil.jpg" />
     <Content Include="Resources\Vesta 276.jpg" />
     <Content Include="Resources\Vib-6000.png" />
     <Content Include="Resources\Vib-6008.png" />
@@ -407,9 +428,14 @@
     <Content Include="Resources\zabros.wav" />
     <None Include="Resources\zhereh.png" />
     <None Include="Resources\zhivec.png" />
+    <None Include="Resources\zhmyh.jpg" />
     <Content Include="Resources\Zymix.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\FeedUps.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeedUps.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Images\FishesImg.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FishesImg.Designer.cs</LastGenOutput>

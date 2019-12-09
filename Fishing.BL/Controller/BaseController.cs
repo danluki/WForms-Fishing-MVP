@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using Fishing.AbstractFish;
 using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Eating;
+using Fishing.BL.Model.FeedingUp;
+using Fishing.BL.Model.Fishes;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Lures;
@@ -38,6 +40,95 @@ namespace Fishing.BL.Controller {
 
                 Fish.AllFishes.Add((targetObject as Fish)?.Name, Type.GetType(type.FullName));
             }
+        }
+
+        public void SetFeedUps()
+        {
+            Item.FeedUps.Add(new FeedUp("Чеснок", 100, FeedUps.chesnok, new Dictionary<Type, int>()
+            {
+                {typeof(Roach), 10},
+                {typeof(Rybets), 5},
+                {typeof(SilverCarp), 7},
+                {typeof(Tench), 3},
+                {typeof(WildCarp), 1},
+                {typeof(GoldCarp), 2},
+                {typeof(Bream), 5}
+            }));
+            Item.FeedUps.Add(new FeedUp("Карамель", 100, FeedUps.chesnok, new Dictionary<Type, int>()
+            {
+                {typeof(Roach), 2},
+                {typeof(Rybets), 2},
+                {typeof(SilverCarp), 7},
+                {typeof(Tench), 2},
+                {typeof(WildCarp), 1},
+                {typeof(GoldCarp), 4},
+                {typeof(Bream), 1}
+            }));
+            Item.FeedUps.Add(new FeedUp("Конопля", 100, FeedUps.chesnok, new Dictionary<Type, int>()
+            {
+                {typeof(Roach), 7},
+                {typeof(Rybets), 2},
+                {typeof(SilverCarp), 7},
+                {typeof(Tench), 4},
+                {typeof(WildCarp), 1},
+                {typeof(GoldCarp), 4},
+                {typeof(Bream), 8}
+            }));
+            Item.FeedUps.Add(new FeedUp("Анис", 300, FeedUps.anis, new Dictionary<Type, int>()
+            {
+                {typeof(Roach), 10},
+                {typeof(Rybets), 5},
+                {typeof(SilverCarp), 7},
+                {typeof(Tench), 3},
+                {typeof(WildCarp), 1},
+                {typeof(GoldCarp), 2},
+                {typeof(Bream), 3}
+            }));
+            Item.FeedUps.Add(new FeedUp("Горох", 800, FeedUps.goroh, new Dictionary<Type, int>()
+            {
+                {typeof(Roach), 3},
+                {typeof(Rybets), 6},
+                {typeof(SilverCarp), 3},
+                {typeof(Tench), 1},
+                {typeof(WildCarp), 1},
+                {typeof(Bream), 8},
+                {typeof(GoldCarp), 2},
+            }));
+            Item.FeedUps.Add(new FeedUp("Карп Карась", 1000, FeedUps.karpkaras, new Dictionary<Type, int>()
+            {
+                {typeof(Roach), 1},
+                {typeof(Rybets), 1},
+                {typeof(SilverCarp), 9},
+                {typeof(Tench), 8},
+                {typeof(WildCarp), 8},
+                {typeof(GoldCarp), 9},
+            }));
+            Item.FeedUps.Add(new FeedUp("Плотва", 200, FeedUps.plotva, new Dictionary<Type, int>()
+            {
+                {typeof(Roach), 9},
+                {typeof(Rybets), 1},
+                {typeof(SilverCarp), 1},
+                {typeof(Tench), 1},
+                {typeof(WildCarp), 1},
+                {typeof(Bream), 1},
+                {typeof(GoldCarp), 2},
+            }));
+            Item.FeedUps.Add(new FeedUp("Жмых", 200, FeedUps.zhmyh, new Dictionary<Type, int>()
+            {
+                {typeof(SilverCarp), 1},
+                {typeof(Tench), 3},
+                {typeof(WildCarp), 7},
+                {typeof(Bream), 3},
+                {typeof(GoldCarp), 2},
+            }));
+            Item.FeedUps.Add(new FeedUp("Лещ", 1500, FeedUps.leshp, new Dictionary<Type, int>()
+            {
+                {typeof(SilverCarp), 1},
+                {typeof(Tench), 1},
+                {typeof(WildCarp), 3},
+                {typeof(Bream), 10},
+                {typeof(GoldCarp), 2},
+            }));
         }
         public void IntializeLures()
         {

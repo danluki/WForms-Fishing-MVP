@@ -13,6 +13,8 @@ using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
 using Fishing.BL.Controller;
+using Fishing.BL.Model.Baits;
+using Fishing.BL.Model.Items;
 using Fishing.BL.Model.SoundPlayer;
 using Fishing.BL.Presenter;
 
@@ -140,18 +142,10 @@ namespace Fishing.Presenter {
                         gui.RoadBarValue = 0;
 
                         gui.CheckNeedsAndClearEventBox();
-                        _player.Netting.ShowNetting();
-                        if (!_player.EquipedRoad.Fish.IsTrophy()) {
-                            _player.AddEventToHistory(new FishEvent(_player.EquipedRoad.Fish,
-                                                                    _player.EquipedRoad.Assembly.FishBait));
-                        }
-                        else {
-                            _player.AddEventToHistory(new TrophyFishEvent(_player.EquipedRoad.Fish,
-                                                                    _player.EquipedRoad.Assembly.FishBait));
-                        }
+                        _player.AddFishToPond();
+                        _drawer.DrawNetting();
                         view.CreateCurrentFish(_player.EquipedRoad.Fish);
-                        _player.Statistic.TakenFishesCount++;
-
+                        gui.AddRoadToGUI(_player.EquipedRoad);
                     }
                     break;
 

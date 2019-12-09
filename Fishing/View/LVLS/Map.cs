@@ -62,7 +62,7 @@ namespace Fishing {
             Game.GetGame().View = new GameForm();
             var presenter = new LVLPresenter(Game.GetGame().View, UI.Gui, lvl);
             presenter.Run();
-            new DeepField(lvl).Show();
+            new DeepField(lvl);
             UI.Gui.Show();
             this.Close();
         }
