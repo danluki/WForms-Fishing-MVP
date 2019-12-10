@@ -76,10 +76,9 @@
     <Compile Include="Model\Hooks\FeederHook.cs" />
     <Compile Include="Model\Hooks\FloatsHook.cs" />
     <Compile Include="Model\FishString.cs" />
-    <Compile Include="Model\Items\Feeder.cs" />
-    <Compile Include="Model\Items\Float.cs" />
     <Compile Include="Model\Items\ItemsTypes.cs" />
-    <Compile Include="Model\Items\Spinning.cs" />
+    <Compile Include="Model\Items\Reel.cs" />
+    <Compile Include="Model\Items\RoadType.cs" />
     <Compile Include="Model\Baits\Lures\Jig.cs" />
     <Compile Include="Model\Baits\Lures\Pinwheel.cs" />
     <Compile Include="Model\LVLS\Lvl.cs" />
@@ -154,7 +153,6 @@
     <Compile Include="Model\Game\Player.cs" />
     <Compile Include="Model\Items\FLine.cs" />
     <Compile Include="Model\Items\Item.cs" />
-    <Compile Include="Model\Items\Reel.cs" />
     <Compile Include="Model\Items\Road.cs" />
     <Compile Include="Model\Baits\Lures\Shaker.cs" />
     <Compile Include="Model\Baits\Lures\Lure.cs" />

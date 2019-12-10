@@ -12,12 +12,14 @@ using Fishing.BL.Model.FeedingUp;
 using Fishing.BL.Model.Fishes;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Hooks;
+using Fishing.BL.Model.Items;
 using Fishing.BL.Model.Lures;
 using Fishing.BL.Model.UserEvent;
 using Fishing.BL.Model.Waters;
 using Fishing.BL.Resources.Images;
 using Fishing.BL.Resources.Paths;
 using Saver.BL.Controller;
+using Assembly = Fishing.BL.Model.Game.Assembly;
 
 namespace Fishing.BL.Controller {
     public class BaseController {

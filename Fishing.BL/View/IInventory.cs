@@ -2,6 +2,7 @@
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.View;
 using System;
+using Fishing.BL.Model.Items;
 
 namespace Fishing.View.Inventory {
 
@@ -41,19 +42,21 @@ namespace Fishing.View.Inventory {
 
         event EventHandler RoadButtonsClick;
 
+        event EventHandler AssemblyBoxSelectedIndexChanged;
         Road Road_P { get; set; }
         Reel Reel_P { get; set; }
         FLine FLine_P { get; set; }
         Lure Lure_P { get; set; }
         Bait Bait_P { get; set; }
         BaseHook Hook_P { get; set; }
-        Fishing.Assembly Assembly_P { get; set; }
+        BL.Model.Game.Assembly Assembly_P { get; set; }
 
         string RoadText { get; set; }
         string ReelText { get; set; }
         string FLineText { get; set; }
         string LureText { get; set; }
         string AssNumbText { get; set; }
+        string HookBoxText { get; set; }
 
         int RoadWearValue { get; set; }
         int ReelWearMax { get; set; }
@@ -61,7 +64,7 @@ namespace Fishing.View.Inventory {
 
         void AddItemToRightView(Item item);
 
-        void ShowAssembly(Fishing.Assembly ass);
+        void ShowAssembly(BL.Model.Game.Assembly ass);
 
     }
 }

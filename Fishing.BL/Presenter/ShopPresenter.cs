@@ -46,7 +46,7 @@ namespace Fishing.Presenter {
 
         private void View_RoadDoubleClick(object sender, EventArgs e) {
             if (!player.IsAbleToBuyItem(view.Road_P)) return;
-            Player.GetPlayer().RoadInv.Add(view.Road_P);
+            Player.GetPlayer().Assemblies.Add(new Assembly(view.Road_P));
             Player.GetPlayer().Money -= view.Road_P.Price;
             view.MoneyL = Player.GetPlayer().Money.ToString();
             view.LowerL = "Куплено...";

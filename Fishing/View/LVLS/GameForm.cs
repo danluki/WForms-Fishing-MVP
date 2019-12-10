@@ -21,7 +21,7 @@ namespace Fishing.View.LVLS {
         public Point CurPoint { get => PointToClient(Cursor.Position); set => throw new ArgumentException(); }
         public BasePresenter Presenter { private get; set; }
         public Image BackImage { get => BackgroundImage; set => BackgroundImage = value; }
-        public LVLPresenter LVLPresenter { private get; set; }
+        public LvlPresenter LVLPresenter { private get; set; }
 
         public event MouseEventHandler FormMouseClick;
 

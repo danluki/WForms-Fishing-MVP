@@ -1,59 +1,60 @@
-﻿using Fishing.BL.Model.Baits;
+﻿using System;
+using System.Linq;
+using System.Windows.Forms;
+using Fishing.BL.Model.Baits;
+using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
 using Fishing.BL.Model.Lures;
 using Fishing.BL.Presenter;
 using Fishing.Presenter;
 using Fishing.View.Assembly;
-using Fishing.View.Inventory;
 using Fishing.View.LureSelector;
-using System;
-using System.Windows.Forms;
-using Fishing.BL.Model.Game;
 
-namespace Fishing {
+namespace Fishing.View.Inventory {
 
-    public partial class Inventory : Form, IInventory {
-
+    public partial class Inventory : Form, IInventory
+    {
+        private Player _player = Player.GetPlayer();
         public Inventory() {
             InitializeComponent();
-            if (Player.GetPlayer().Assemblies.Count == 0) {
+            if (_player.Assemblies.Count == 0) {
                 var add = new AddAssembly();
                 add.Show();
             }
-            if (Player.GetPlayer().FirstRoad != null) {
+            if (_player.FirstRoad != null) {
                 fRoadButton.Enabled = true;
             }
-            if (Player.GetPlayer().SecondRoad != null) {
+            if (_player.SecondRoad != null) {
                 sRoadButton.Enabled = true;
             }
-            if (Player.GetPlayer().ThirdRoad != null) {
+            if (_player.ThirdRoad != null) {
                 tRoadButton.Enabled = true;
             }
-            FLineList.DataSource = Player.GetPlayer().FLineInv;
-            ReelsList.DataSource = Player.GetPlayer().ReelInv;
-            baitsBox.DataSource = Player.GetPlayer().BaitInv;
-            hooksBox.DataSource = Player.GetPlayer().HooksInv;
+            FLineList.DataSource = _player.FLineInv;
+            ReelsList.DataSource = _player.ReelInv;
+            baitsBox.DataSource = _player.BaitInv;
+            hooksBox.DataSource = _player.HooksInv;
+            assembliesBox.SetObjects(_player.Assemblies);
+            //foreach (var r in Player.GetPlayer().RoadInv) {
+            //    var lvi = new ListViewItem {
+            //        Text = r.Name
+            //    };
+            //    switch (r) {
+            //        case Spinning _:
+            //        lvi.ImageIndex = roadsList.Images.IndexOfKey("shop_but02.png");
+            //        break;
 
-            foreach (var r in Player.GetPlayer().RoadInv) {
-                var lvi = new ListViewItem {
-                    Text = r.Name
-                };
-                switch (r) {
-                    case Spinning _:
-                    lvi.ImageIndex = roadsList.Images.IndexOfKey("shop_but02.png");
-                    break;
+            //        case Float _:
+            //        lvi.ImageIndex = roadsList.Images.IndexOfKey("shop_but01.png");
+            //        break;
 
-                    case Float _:
-                    lvi.ImageIndex = roadsList.Images.IndexOfKey("shop_but01.png");
-                    break;
-
-                    case Feeder _:
-                    lvi.ImageIndex = roadsList.Images.IndexOfKey("rm_but01.png");
-                    break;
-                }
-                roadsView.Items.Add(lvi);
-            }
+            //        case Feeder _:
+            //        lvi.ImageIndex = roadsList.Images.IndexOfKey("rm_but01.png");
+            //        break;
+            //    }
+            //    assembliesBox.Items.Add(lvi);
+            //}
 
             foreach (var l in Player.GetPlayer().LureInv) {
                 var lvi = new ListViewItem {
@@ -79,13 +80,12 @@ namespace Fishing {
 
                 luresView.Items.Add(lvi);
             }
-            assembliesBox.DataSource = Player.GetPlayer().Assemblies;
         }
 
         public Road Road_P {
             get {
                 try {
-                    return Player.GetPlayer().RoadInv[roadsView.SelectedIndices[0]];
+                    return Player.GetPlayer().RoadInv[assembliesBox.SelectedIndices[0]];
                 }
                 catch (ArgumentOutOfRangeException) { }
 
@@ -134,9 +134,10 @@ namespace Fishing {
             }
         }
 
-        public Assembly Assembly_P {
+        public BL.Model.Game.Assembly Assembly_P {
             get {
-                try {
+                try
+                {
                     return Player.GetPlayer().Assemblies[assembliesBox.SelectedIndex];
                 }
                 catch (ArgumentOutOfRangeException) { }
@@ -161,7 +162,7 @@ namespace Fishing {
         public BaseHook Hook_P {
             get {
                 try {
-                    return Player.GetPlayer().HooksInv[hooksBox.SelectedIndex];
+                    return (BaseHook)_player.GetItemByName(hooksBox.SelectedItem.ToString());
                 }
                 catch (ArgumentOutOfRangeException) { }
 
@@ -179,6 +180,7 @@ namespace Fishing {
         public int RoadWearValue { get => roadWearBar.Value; set => roadWearBar.Value = value; }
         public int ReelWearMax { get => reelWearBar.Maximum; set => reelWearBar.Maximum = value; }
         public int ReelWearValue { get => reelWearBar.Value; set => reelWearBar.Value = value; }
+        public string HookBoxText { get => hooksBox.Text; set => hooksBox.Text = value; }
 
         public event EventHandler FLineSelectedIndexChanged;
 
@@ -213,13 +215,10 @@ namespace Fishing {
         public event EventHandler HookSelectedIndex;
 
         public event EventHandler RoadButtonsClick;
+        public event EventHandler AssemblyBoxSelectedIndexChanged;
 
         private void RoadButtons_Click(object sender, EventArgs e) {
             RoadButtonsClick?.Invoke(sender, e);
-        }
-
-        private void RoadsList_SelectedIndexChanged(object sender, EventArgs e) {
-            RoadSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void FLineList_SelectedIndexChanged(object sender, EventArgs e) {
@@ -236,6 +235,9 @@ namespace Fishing {
 
         private void AssembliesBox_MouseDoubleClick(object sender, MouseEventArgs e) {
             AssemblyDoubleClick?.Invoke(this, EventArgs.Empty);
+        }
+        private void assembliesBox_SelectedIndexChanged(object sender, EventArgs e) {
+            AssemblyBoxSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void LuresList_MouseDoubleClick(object sender, MouseEventArgs e) {
@@ -280,13 +282,7 @@ namespace Fishing {
             }
         }
 
-        private void RoadsView_SelectedIndexChanged(object sender, EventArgs e) {
-            RoadSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-        }
 
-        private void RoadsView_MouseDoubleClick(object sender, MouseEventArgs e) {
-            RoadDoubleClick?.Invoke(this, EventArgs.Empty);
-        }
 
         private void LuresView_SelectedIndexChanged(object sender, EventArgs e) {
             LureSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
@@ -358,34 +354,24 @@ namespace Fishing {
             }
         }
 
-        public void ShowAssembly(Assembly ass)
+        public void ShowAssembly(BL.Model.Game.Assembly ass)
         {
             if (ass == null) return;
-            try {
-                switch (ass.Road)
-                {
-                    case Spinning _:
-                        assemblyType.Text = "Спиннинг";
-                        break;
-                    case Feeder _:
-                        assemblyType.Text = "Фидер";
-                        break;
-                    case Float _:
-                        assemblyType.Text = "Поплавок";
-                        break;
-                }
-
-                RoadBox.BackgroundImage = ass.Road.Pict;
-                ReelBox.BackgroundImage = ass.Reel.Pict;
-                BaitBox.BackgroundImage = ass.FishBait.Pict;
-                FLineBox.BackgroundImage = ass.FLine.Pict;
-                RoadText = ass.Road.Name;
-                ReelText = ass.Reel.Name;
-                LureText = ass.FishBait.Name;
-                FLineText = ass.FLine.Name;
+            try
+            {
+                assemblyType.Text = ass.Road?.Type.ToString();
+                RoadBox.BackgroundImage = ass.Road?.Pict;
+                ReelBox.BackgroundImage = ass.Reel?.Pict;
+                BaitBox.BackgroundImage = ass.FishBait?.Pict;
+                FLineBox.BackgroundImage = ass.FLine?.Pict;
+                hookImageBox.BackgroundImage = ass.Hook?.Pict;
+                hookNamneBox.Text = ass.Hook?.Name;
+                RoadText = ass.Road?.Name;
+                ReelText = ass.Reel?.Name;
+                LureText = ass.FishBait?.Name;
+                FLineText = ass.FLine?.Name;
             }
             catch (ArgumentOutOfRangeException) { }
-            catch (NullReferenceException) { }
         }
 
         public void Open() {
@@ -394,6 +380,27 @@ namespace Fishing {
 
         public void Down() {
             Close();
+        }
+
+        private void assembliesBox_MouseDoubleClick_2(object sender, MouseEventArgs e) {
+            AssemblyDoubleClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void assembliesBox_SelectedIndexChanged_2(object sender, EventArgs e)
+        {
+            AssemblyBoxSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void ItemsTab_Click(object sender, EventArgs e) {
+            if (Assembly_P.Road.Type == RoadType.Spinning)
+            {
+                baitsBox.Enabled = false;
+            }
+
+            if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float)
+            {
+                luresView.Enabled = false;
+            }
         }
     }
 }

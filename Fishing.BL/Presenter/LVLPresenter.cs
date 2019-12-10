@@ -20,18 +20,17 @@ using Fishing.BL.Presenter;
 
 namespace Fishing.Presenter {
 
-    public class LVLPresenter : BasePresenter {
+    public class LvlPresenter : BasePresenter {
         private const int NoWaterArea = 570;
 
         private readonly IGameForm view;
         private readonly IGUIPresenter gui;
-
+        private readonly Drawer _drawer;
         private readonly Player _player = Player.GetPlayer();
 
         public Lvl CurLvl { get; set; }
-        private readonly Drawer _drawer;
 
-        public LVLPresenter(IGameForm view, IGUIPresenter v, Lvl curLVL) {
+        public LvlPresenter(IGameForm view, IGUIPresenter v, Lvl curLVL) {
             this.CurLvl = curLVL;
             curLVL.AddFishes();
             curLVL.SetDeep();

@@ -1,9 +1,9 @@
-﻿using Fishing.BL.Model.Baits;
+﻿using System;
+using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
-using System;
 
-namespace Fishing {
+namespace Fishing.BL.Model.Game {
 
     [Serializable]
     public class Assembly {
@@ -12,36 +12,39 @@ namespace Fishing {
         public FLine FLine { get; set; }
         public FishBait FishBait { get; set; }
         public BaseHook Hook { get; set; }
-        public string Name { get; set; }
 
         public bool IsEquiped;
 
-        public Assembly(string name, Road road, Reel reel, FLine fLine, FishBait fb) {
-            if (string.IsNullOrWhiteSpace(name)) {
-                throw new ArgumentException("message", nameof(name));
-            }
-
+        public Assembly(Road road, Reel reel, FLine fLine, FishBait fb) {
             Road = road;
             Reel = reel;
             FLine = fLine;
             FishBait = fb;
-            Name = name;
         }
 
-        public Assembly(string name) {
-            Name = name;
+        public Assembly(Road road)
+        {
+            if(road == null) return;
+            Road = road;
+            Reel = null;
+            FLine = null;
+            FishBait = null;
         }
-
         public bool IsAssemblyFull() {
             if (Road != null) {
                 if (Reel != null) {
                     if (FLine != null) {
-                        if (FishBait != null) {
-                            if (Road is Feeder && Hook != null) {
-                                return true;
-                            }
-                            if (Road is Spinning) {
-                                return true;
+                        if (FishBait != null)
+                        {
+                            switch (Road.Type)
+                            {
+                                case RoadType.Feeder when Hook != null:
+                                case RoadType.Spinning:
+                                    return true;
+                                case RoadType.Float when Hook != null:
+                                    return true;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
                             }
                         }
                     }
@@ -50,8 +53,22 @@ namespace Fishing {
             return false;
         }
 
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || this.GetType() != obj.GetType()) {
+                return false;
+            }
+            else
+            {
+                Assembly ass = (Assembly) obj;
+                return (Road == ass.Road) &&
+                       (Reel == ass.Reel) &&
+                       (FLine == ass.FLine);
+            }
+        }
+
         public override string ToString() {
-            return Name;
+            return Road.Name;
         }
     }
 }

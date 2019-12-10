@@ -6,6 +6,7 @@ using Fishing.View.Shop;
 using System;
 using System.Windows.Forms;
 using Fishing.BL.Model.Game;
+using Fishing.BL.Model.Items;
 using Fishing.BL.Presenter;
 
 namespace Fishing {

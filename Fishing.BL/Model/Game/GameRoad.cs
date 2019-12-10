@@ -24,17 +24,7 @@ namespace Fishing.BL.Model.Game {
 
         private void GatheringTimer_Tick(object sender, EventArgs e) {
             if (IsFishAttack) {
-                IsFishAttack = false;
-                Player.GetPlayer().Statistic.GatheringCount++;
-                Player.GetPlayer().AddEventToHistory(new GatheringEvent());
-                SoundsPlayer.PlayGatheringSound();
-                Image = Roads.road;
-                FLineIncValue = 0;
-                RoadIncValue = 0;
-                if (this.Assembly.Road is Feeder || this.Assembly.Road is Float)
-                {
-                    ((Bait) this.Assembly.FishBait).Count -= 1;
-                }
+                Player.GetPlayer().DoGathering(this);
             }
             gatheringTimer.Stop();
         }

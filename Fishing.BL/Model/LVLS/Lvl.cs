@@ -37,8 +37,13 @@ namespace Fishing.BL.Model.LVLS {
                             road.FishesPossibleToAttack.Add(f);
                         }
                         Shuffle(road.FishesPossibleToAttack);
-                        var index = randomFish.Next(1, road.FishesPossibleToAttack.Count);
-                        var fi = road.FishesPossibleToAttack.Count > 0 ? road.FishesPossibleToAttack[index] : null;
+                        Fish fi = null;
+                        int index = 0;
+                        if (road.FishesPossibleToAttack.Count > 0)
+                        {
+                            index = randomFish.Next(1, road.FishesPossibleToAttack.Count);
+                            fi = road.FishesPossibleToAttack[index];
+                        }
                         if (IsFishAttackPossible(fi, road))
                         {
                             road.Fish = fi;
@@ -51,12 +56,12 @@ namespace Fishing.BL.Model.LVLS {
                             road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
 
                             var gathering = randomGathering.Next(1, 100);
-                            if (road.Assembly.Road is Spinning) {
+                            if (road.Assembly.Road.Type == RoadType.Spinning) {
                                 if (gathering <= 5) {
                                     return (true, true);
                                 }
                             }
-                            if (!(road.Assembly.Road is Feeder)) return (true, false);
+                            if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
                             return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
                         }
                         foreach (var feedup in road.CurrentFeedUp.WorkingFishes)
@@ -77,13 +82,13 @@ namespace Fishing.BL.Model.LVLS {
                                     road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
                                     var gathering = randomGathering.Next(1, 100);
 
-                                    if (road.Assembly.Road is Spinning) {
+                                    if (road.Assembly.Road.Type == RoadType.Spinning) {
                                         if (gathering <= 5) {
                                             return (true, true);
                                         }
                                     }
 
-                                    if (!(road.Assembly.Road is Feeder)) return (true, false);
+                                    if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
                                     return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
                                 }
 
@@ -100,10 +105,10 @@ namespace Fishing.BL.Model.LVLS {
         public static bool IsFishAttackPossible(Fish fish, GameRoad road) {
             try {
                 if (fish.MinDeep > road.CurrentDeep || fish.MaxDeep < road.CurrentDeep) return false;
-                var part = fish.ActivityParts.First(p => p == Game.Game.GetGame().Time.Part);
+                var part = fish.ActivityParts.First(p => p.Equals(Game.Game.GetGame().Time.Part));
                 var l = fish.WorkingLures.First(b => b.Name.Equals(road.Assembly.FishBait.Name));
                 var ba = l != null;
-                var pa = part != default;
+                var pa = !part.Equals(null);
                 return ba && pa;
             }
             catch (InvalidOperationException) {

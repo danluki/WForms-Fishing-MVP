@@ -2,6 +2,7 @@
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.View;
 using System;
+using Fishing.BL.Model.Items;
 
 namespace Fishing.View.Shop {
 

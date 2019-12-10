@@ -273,6 +273,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ObjectListViewDemo\ObjectListView\ObjectListView2012.csproj">
+      <Project>{18feda0c-d147-4286-b39a-01204808106a}</Project>
+      <Name>ObjectListView2012</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fishing.BL\Fishing.BL.csproj">
       <Project>{f16ab9b1-deeb-451f-b962-9bffc7b0a27b}</Project>
       <Name>Fishing.BL</Name>
