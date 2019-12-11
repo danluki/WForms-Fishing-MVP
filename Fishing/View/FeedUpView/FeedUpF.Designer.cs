@@ -23,50 +23,28 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FeedUpF));
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FeedUpF));
             this.closeButton = new System.Windows.Forms.PictureBox();
-            this.feedupBox = new System.Windows.Forms.PictureBox();
             this.createButton = new System.Windows.Forms.Button();
             this.feedsUpBox = new System.Windows.Forms.ListBox();
             this.aromaListsBox = new System.Windows.Forms.ListBox();
             this.baitsListBox = new System.Windows.Forms.ListBox();
             this.curFeedUpAromasBox = new System.Windows.Forms.ListBox();
             this.curFeedUpBaitBox = new System.Windows.Forms.ListBox();
+            this.curFeedUpBasic = new System.Windows.Forms.ListBox();
+            this.feedUpsBox = new System.Windows.Forms.ListBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.closeButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.feedupBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // closeButton
-            // 
-            this.closeButton.BackColor = System.Drawing.Color.Transparent;
-            this.closeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("closeButton.BackgroundImage")));
-            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.closeButton.Location = new System.Drawing.Point(588, -2);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(27, 31);
-            this.closeButton.TabIndex = 0;
-            this.closeButton.TabStop = false;
-            this.closeButton.Tag = "exit";
-            this.closeButton.MouseEnter += new System.EventHandler(this.CloseButton_MouseEnter);
-            this.closeButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
-            // 
-            // feedupBox
-            // 
-            this.feedupBox.Location = new System.Drawing.Point(36, 386);
-            this.feedupBox.Name = "feedupBox";
-            this.feedupBox.Size = new System.Drawing.Size(136, 95);
-            this.feedupBox.TabIndex = 4;
-            this.feedupBox.TabStop = false;
             // 
             // label1
             // 
@@ -120,6 +98,21 @@
             label5.TabIndex = 11;
             label5.Text = "Наживка";
             // 
+            // closeButton
+            // 
+            this.closeButton.BackColor = System.Drawing.Color.Transparent;
+            this.closeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("closeButton.BackgroundImage")));
+            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.closeButton.Location = new System.Drawing.Point(588, -2);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(27, 31);
+            this.closeButton.TabIndex = 0;
+            this.closeButton.TabStop = false;
+            this.closeButton.Tag = "exit";
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.closeButton.MouseEnter += new System.EventHandler(this.CloseButton_MouseEnter);
+            this.closeButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
+            // 
             // createButton
             // 
             this.createButton.Location = new System.Drawing.Point(36, 500);
@@ -128,22 +121,25 @@
             this.createButton.TabIndex = 12;
             this.createButton.Text = "Собрать";
             this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // feedsUpBox
             // 
             this.feedsUpBox.FormattingEnabled = true;
-            this.feedsUpBox.Location = new System.Drawing.Point(36, 23);
+            this.feedsUpBox.Location = new System.Drawing.Point(36, 22);
             this.feedsUpBox.Name = "feedsUpBox";
             this.feedsUpBox.Size = new System.Drawing.Size(546, 108);
             this.feedsUpBox.TabIndex = 13;
+            this.feedsUpBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.feedsUpBox_MouseDoubleClick);
             // 
             // aromaListsBox
             // 
             this.aromaListsBox.FormattingEnabled = true;
-            this.aromaListsBox.Location = new System.Drawing.Point(36, 147);
+            this.aromaListsBox.Location = new System.Drawing.Point(36, 136);
             this.aromaListsBox.Name = "aromaListsBox";
             this.aromaListsBox.Size = new System.Drawing.Size(546, 108);
             this.aromaListsBox.TabIndex = 14;
+            this.aromaListsBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.aromaListsBox_MouseDoubleClick);
             // 
             // baitsListBox
             // 
@@ -152,6 +148,7 @@
             this.baitsListBox.Name = "baitsListBox";
             this.baitsListBox.Size = new System.Drawing.Size(546, 108);
             this.baitsListBox.TabIndex = 15;
+            this.baitsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.baitsListBox_MouseDoubleClick);
             // 
             // curFeedUpAromasBox
             // 
@@ -169,13 +166,32 @@
             this.curFeedUpBaitBox.Size = new System.Drawing.Size(132, 95);
             this.curFeedUpBaitBox.TabIndex = 17;
             // 
+            // curFeedUpBasic
+            // 
+            this.curFeedUpBasic.FormattingEnabled = true;
+            this.curFeedUpBasic.Location = new System.Drawing.Point(46, 386);
+            this.curFeedUpBasic.Name = "curFeedUpBasic";
+            this.curFeedUpBasic.Size = new System.Drawing.Size(132, 95);
+            this.curFeedUpBasic.TabIndex = 18;
+            // 
+            // feedUpsBox
+            // 
+            this.feedUpsBox.FormattingEnabled = true;
+            this.feedUpsBox.Location = new System.Drawing.Point(36, 530);
+            this.feedUpsBox.Name = "feedUpsBox";
+            this.feedUpsBox.Size = new System.Drawing.Size(546, 121);
+            this.feedUpsBox.TabIndex = 19;
+            this.feedUpsBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.feedUpsBox_MouseDoubleClick);
+            // 
             // FeedUpF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Fishing.Properties.Resources.layer10;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(617, 542);
+            this.ClientSize = new System.Drawing.Size(617, 675);
+            this.Controls.Add(this.feedUpsBox);
+            this.Controls.Add(this.curFeedUpBasic);
             this.Controls.Add(this.curFeedUpBaitBox);
             this.Controls.Add(this.curFeedUpAromasBox);
             this.Controls.Add(this.baitsListBox);
@@ -187,14 +203,14 @@
             this.Controls.Add(label3);
             this.Controls.Add(label2);
             this.Controls.Add(label1);
-            this.Controls.Add(this.feedupBox);
             this.Controls.Add(this.closeButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FeedUpF";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "";
             this.Text = "FeedUpF";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.closeButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.feedupBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,12 +219,13 @@
         #endregion
 
         private System.Windows.Forms.PictureBox closeButton;
-        private System.Windows.Forms.PictureBox feedupBox;
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.ListBox feedsUpBox;
         private System.Windows.Forms.ListBox aromaListsBox;
         private System.Windows.Forms.ListBox baitsListBox;
         private System.Windows.Forms.ListBox curFeedUpAromasBox;
         private System.Windows.Forms.ListBox curFeedUpBaitBox;
+        private System.Windows.Forms.ListBox curFeedUpBasic;
+        private System.Windows.Forms.ListBox feedUpsBox;
     }
 }

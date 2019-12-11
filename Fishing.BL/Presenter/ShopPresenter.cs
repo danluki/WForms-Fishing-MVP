@@ -18,6 +18,24 @@ namespace Fishing.Presenter {
             view.LureDoubleClick += View_LureDoubleClick;
             view.BaitDoubleClick += View_BaitDoubleClick;
             view.HookDoubleClick += View_HookDoubleClick;
+            view.AromaDoubleClick += View_AromaDoubleClick;
+            view.BasicDoubleClick += View_BasicDoubleClick;
+        }
+
+        private void View_BasicDoubleClick(object sender, EventArgs e) {
+            if (!player.IsAbleToBuyItem(view.Basic_P)) return;
+            Player.GetPlayer().BasicInventory.Add(view.Basic_P);
+            Player.GetPlayer().Money -= view.Basic_P.Price;
+            view.MoneyL = Player.GetPlayer().Money.ToString();
+            view.LowerL = "Куплено...";
+        }
+
+        private void View_AromaDoubleClick(object sender, EventArgs e) {
+            if (!player.IsAbleToBuyItem(view.Aroma_P)) return;
+            Player.GetPlayer().AromaInventory.Add(view.Aroma_P);
+            Player.GetPlayer().Money -= view.Aroma_P.Price;
+            view.MoneyL = Player.GetPlayer().Money.ToString();
+            view.LowerL = "Куплено...";
         }
 
         private void View_HookDoubleClick(object sender, EventArgs e) {

@@ -148,6 +148,10 @@ namespace Fishing.Presenter {
                     }
                     break;
 
+                    case Keys.U:
+                        _drawer.DrawFeedUpBall();
+                        break;
+
                     case Keys.T:
                     if (_player.EquipedRoad.IsFishAttack == false) {
                         MakeCast(_player.EquipedRoad.LastCastPoint);

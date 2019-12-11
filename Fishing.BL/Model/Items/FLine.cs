@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Fishing {
+namespace Fishing.BL.Model.Items {
 
     [Serializable]
     public class FLine : Item {

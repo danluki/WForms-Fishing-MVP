@@ -10,6 +10,7 @@ using Fishing.View.GUI;
 using Fishing.View.LureSelector;
 using Fishing.View.Statistic;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Fishing.BL.Model.LVLS;
@@ -29,8 +30,10 @@ namespace Fishing {
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint |
                                                                             ControlStyles.UserPaint, true);
             eatingBar.Value = Player.GetPlayer().Satiety;
+
             _presenter = new GUIPresenter(this);
-            _presenter.Run(); //Mistake
+            _presenter.Run();
+
             _sound = new SounderPresenter(this, lvl);
             _sound.Run();
 
@@ -41,25 +44,11 @@ namespace Fishing {
             Player.GetPlayer().EventHistoryUpdated += ShowLastEvent;
             Player.GetPlayer().SatietyUpdated += SatietyUpdated;
             Player.GetPlayer().Gathering += UI_Gathering;
+            Player.GetPlayer().UpdateBucketImage += UI_UpdateBucketImage;
         }
 
-        private void UI_Gathering()
-        {
-            ReelBar.Value = 0;
-            FLineBar.Value = 0;
-            BaitPicture = null;
-        }
-
-        private void SatietyUpdated(int obj) {
-            eatingBar.Increment(obj);
-        }
-
-        private void ShowLastEvent() {
-            AddEventToBox(Player.GetPlayer().EventHistory.Peek());
-        }
-
-        private void GUI_HoursInc(object sender, EventArgs e) {
-            timeLabel.Text = Game.GetGame().Time.ToString();
+        private void UI_UpdateBucketImage() {
+            FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_fu_d");
         }
 
         public Bitmap BaitPicture { get => (Bitmap)BaitsPicture.BackgroundImage; set => BaitsPicture.BackgroundImage = value; }
@@ -78,6 +67,27 @@ namespace Fishing {
         public BasePresenter Presenter { private get; set; }
 
         public event PaintEventHandler SounderPaint;
+
+        private void UI_Gathering()
+        {
+            ReelBar.Value = 0;
+            FLineBar.Value = 0;
+            fBaitCountsLabel.Text = "";
+            BaitPicture = null;
+        }
+
+        private void SatietyUpdated(int obj) {
+            eatingBar.Increment(obj);
+        }
+
+        private void ShowLastEvent() {
+            AddEventToBox(Player.GetPlayer().EventHistory.Peek());
+        }
+
+        private void GUI_HoursInc(object sender, EventArgs e) {
+            timeLabel.Text = Game.GetGame().Time.ToString();
+        }
+
 
         private void MapLabel_Click(object sender, EventArgs e) {
             Gui.Close();
@@ -206,40 +216,17 @@ namespace Fishing {
             if(road == null) return;
             if (road.Assembly.IsAssemblyFull())
             {
-                var baitPic = road.Assembly.FishBait.Pict;
-                var fLinePic = road.Assembly.FLine.Pict;
-                var roadPic = road.Assembly.Road.Pict;
-                var reelPic = road.Assembly.Reel.Pict;
-                var hookPic = road.Assembly.Hook.Pict;
-                BaitPicture = baitPic != null ? road.Assembly.FishBait.Pict : default;
-                if (baitPic != null)
-                {
-                    BaitPicture = road.Assembly.FishBait.Pict;
-                }
 
-                if (fLinePic != null)
-                {
-                    FLinePicture = road.Assembly.FLine.Pict;
-                }
+                BaitPicture = road.Assembly.FishBait?.Picture;
+                FLinePicture = road.Assembly.FLine?.Picture;
+                FLinePicture = road.Assembly.FLine?.Picture;
+                RoadPicture = road.Assembly.Road?.Picture;
+                ReelPicture = road.Assembly.Reel?.Picture;
 
-                if (roadPic != null)
+                if (road.Assembly.Road?.Type == RoadType.Feeder)
                 {
-                    RoadPicture = road.Assembly.Road.Pict;
-                }
-
-                if (reelPic != null)
-                {
-                    ReelPicture = road.Assembly.Reel.Pict;
-                }
-
-                if (road.Assembly.Road.Type == RoadType.Feeder)
-                {
-                    if (hookPic != null)
-                    {
-                        HookPicture = hookPic;
-                    }
-
-                    fBaitCountsLabel.Text = ((Bait) road.Assembly.FishBait).Count.ToString();
+                    HookPicture = road.Assembly.Hook?.Picture;
+                    fBaitCountsLabel.Text = ((Bait) road.Assembly.FishBait)?.Count.ToString();
                 }
                 else
                 {

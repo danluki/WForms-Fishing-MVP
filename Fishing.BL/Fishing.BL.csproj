@@ -53,6 +53,8 @@
     <Compile Include="Model\Baits\FishBait.cs" />
     <Compile Include="Model\Drawer\Drawer.cs" />
     <Compile Include="Model\Eating\Food.cs" />
+    <Compile Include="Model\FeedingUp\Aroma.cs" />
+    <Compile Include="Model\FeedingUp\Basic.cs" />
     <Compile Include="Model\FeedingUp\FeedUp.cs" />
     <Compile Include="Model\Fishes\Asp.cs" />
     <Compile Include="Model\Fishes\Bream.cs" />
@@ -479,6 +481,11 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\ObjectListViewDemo\ObjectListView\ObjectListView2012.csproj">
+      <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
+      <Name>ObjectListView2012</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

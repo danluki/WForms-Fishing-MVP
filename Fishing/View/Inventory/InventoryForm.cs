@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using Fishing.BL.Model.Baits;
+﻿using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
@@ -10,12 +7,15 @@ using Fishing.BL.Presenter;
 using Fishing.Presenter;
 using Fishing.View.Assembly;
 using Fishing.View.LureSelector;
+using System;
+using System.Windows.Forms;
+using Fishing.BL.View;
 
 namespace Fishing.View.Inventory {
 
-    public partial class Inventory : Form, IInventory
-    {
-        private Player _player = Player.GetPlayer();
+    public partial class Inventory : Form, IInventory {
+        private readonly Player _player = Player.GetPlayer();
+
         public Inventory() {
             InitializeComponent();
             if (_player.Assemblies.Count == 0) {
@@ -31,113 +31,28 @@ namespace Fishing.View.Inventory {
             if (_player.ThirdRoad != null) {
                 tRoadButton.Enabled = true;
             }
-            FLineList.DataSource = _player.FLineInv;
-            ReelsList.DataSource = _player.ReelInv;
-            baitsBox.DataSource = _player.BaitInv;
-            hooksBox.DataSource = _player.HooksInv;
+
             assembliesBox.SetObjects(_player.Assemblies);
-            //foreach (var r in Player.GetPlayer().RoadInv) {
-            //    var lvi = new ListViewItem {
-            //        Text = r.Name
-            //    };
-            //    switch (r) {
-            //        case Spinning _:
-            //        lvi.ImageIndex = roadsList.Images.IndexOfKey("shop_but02.png");
-            //        break;
-
-            //        case Float _:
-            //        lvi.ImageIndex = roadsList.Images.IndexOfKey("shop_but01.png");
-            //        break;
-
-            //        case Feeder _:
-            //        lvi.ImageIndex = roadsList.Images.IndexOfKey("rm_but01.png");
-            //        break;
-            //    }
-            //    assembliesBox.Items.Add(lvi);
-            //}
-
-            foreach (var l in Player.GetPlayer().LureInv) {
-                var lvi = new ListViewItem {
-                    Text = l.Name
-                };
-                switch (l) {
-                    case Shaker _:
-                    lvi.ImageIndex = lureList.Images.IndexOfKey("spoon.png");
-                    break;
-
-                    case Pinwheel _:
-                    lvi.ImageIndex = lureList.Images.IndexOfKey("vert.png");
-                    break;
-
-                    case Wobbler _:
-                    lvi.ImageIndex = lureList.Images.IndexOfKey("vob.png");
-                    break;
-
-                    case Jig _:
-                    lvi.ImageIndex = lureList.Images.IndexOfKey("vibro.png");
-                    break;
-                }
-
-                luresView.Items.Add(lvi);
-            }
+            flinesView.SetObjects(_player.FLineInv);
+            reelsView.SetObjects(_player.ReelInv);
+            luresView.SetObjects(_player.LureInv);
+            baitsView.SetObjects(_player.BaitInv);
+            hooksView.SetObjects(_player.HooksInv);
         }
 
-        public Road Road_P {
+        public Road Road_P { get; set; }
+
+        public Reel Reel_P { get; set; }
+
+        public FLine FLine_P { get; set; }
+
+        public Lure Lure_P { get; set; }
+            
+        public Item Item_P { get; set; }
+
+            public BL.Model.Game.Assembly Assembly_P {
             get {
                 try {
-                    return Player.GetPlayer().RoadInv[assembliesBox.SelectedIndices[0]];
-                }
-                catch (ArgumentOutOfRangeException) { }
-
-                return null;
-            }
-            set {
-            }
-        }
-
-        public Reel Reel_P {
-            get {
-                try {
-                    return Player.GetPlayer().ReelInv[ReelsList.SelectedIndex];
-                }
-                catch (ArgumentOutOfRangeException) { }
-
-                return null;
-            }
-            set {
-            }
-        }
-
-        public FLine FLine_P {
-            get {
-                try {
-                    return Player.GetPlayer().FLineInv[FLineList.SelectedIndex];
-                }
-                catch (ArgumentOutOfRangeException) { }
-
-                return null;
-            }
-            set {
-            }
-        }
-
-        public Lure Lure_P {
-            get {
-                try {
-                    return Player.GetPlayer().LureInv[luresView.SelectedIndices[0]];
-                }
-                catch (ArgumentOutOfRangeException) { }
-
-                return null;
-            }
-            set {
-            }
-        }
-
-        public BL.Model.Game.Assembly Assembly_P {
-            get {
-                try
-                {
                     return Player.GetPlayer().Assemblies[assembliesBox.SelectedIndex];
                 }
                 catch (ArgumentOutOfRangeException) { }
@@ -145,31 +60,11 @@ namespace Fishing.View.Inventory {
                 return null;
             }
             set { }
-        }
-
-        public Bait Bait_P {
-            get {
-                try {
-                    return Player.GetPlayer().BaitInv[baitsBox.SelectedIndex];
-                }
-                catch (ArgumentOutOfRangeException) { }
-
-                return null;
             }
-            set { }
-        }
 
-        public BaseHook Hook_P {
-            get {
-                try {
-                    return (BaseHook)_player.GetItemByName(hooksBox.SelectedItem.ToString());
-                }
-                catch (ArgumentOutOfRangeException) { }
+        public Bait Bait_P { get; set; }
 
-                return null;
-            }
-            set { }
-        }
+        public BaseHook Hook_P { get; set; }
 
         public string RoadText { get => roadTextBox.Text; set => roadTextBox.Text = value; }
         public string ReelText { get => reelTextBox.Text; set => reelTextBox.Text = value; }
@@ -180,93 +75,38 @@ namespace Fishing.View.Inventory {
         public int RoadWearValue { get => roadWearBar.Value; set => roadWearBar.Value = value; }
         public int ReelWearMax { get => reelWearBar.Maximum; set => reelWearBar.Maximum = value; }
         public int ReelWearValue { get => reelWearBar.Value; set => reelWearBar.Value = value; }
-        public string HookBoxText { get => hooksBox.Text; set => hooksBox.Text = value; }
-
-        public event EventHandler FLineSelectedIndexChanged;
-
-        public event EventHandler RoadSelectedIndexChanged;
-
-        public event EventHandler ReelSelectedIndexChanged;
-
-        public event EventHandler LureSelectedIndexChanged;
-
-        public event EventHandler FLineDoubleClick;
-
-        public event EventHandler RoadDoubleClick;
-
-        public event EventHandler ReelDoubleClick;
-
-        public event EventHandler LureDoubleClick;
+        public string HookBoxText { get => hookNameBox.Text; set => hookNameBox.Text = value; }
+        public string AssembliesViewSelectedItemText { get => assembliesBox.SelectedItem.Text; set => throw new NotImplementedException(); }
+        public string FlinesViewSelectedItemText { get => flinesView.SelectedItem?.Text; set => throw new NotImplementedException(); }
+        public string ReelsViewSelectedItemText { get => reelsView.SelectedItem?.Text; set => throw new NotImplementedException(); }
+        public string BaitsViewSelectedItemText { get => baitsView.SelectedItem?.Text; set => throw new NotImplementedException(); }
+        public string LuresViewSelectedItemText { get => luresView.SelectedItem?.Text; set => throw new NotImplementedException(); }
+        public string HooksViewSelectedItemText { get => hooksView.SelectedItem?.Text; set => throw new NotImplementedException(); }
 
         public event EventHandler CloseButtonClick;
-
-        public event EventHandler FetchButtonClick;
 
         public event EventHandler AssemblyDoubleClick;
 
         public event EventHandler MakeOutClick;
 
-        public event EventHandler BaitDoubleClick;
+        public event EventHandler ViewsDoubleClick;
 
-        public event EventHandler BaitSelectedIndexChanged;
-
-        public event EventHandler HookDoubleClick;
-
-        public event EventHandler HookSelectedIndex;
+        public event EventHandler ViewsSelectedIndexChanged;
 
         public event EventHandler RoadButtonsClick;
+
         public event EventHandler AssemblyBoxSelectedIndexChanged;
 
         private void RoadButtons_Click(object sender, EventArgs e) {
             RoadButtonsClick?.Invoke(sender, e);
         }
 
-        private void FLineList_SelectedIndexChanged(object sender, EventArgs e) {
-            FLineSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void ReelsList_SelectedIndexChanged(object sender, EventArgs e) {
-            ReelSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void LuresList_SelectedIndexChanged(object sender, EventArgs e) {
-            LureSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void AssembliesBox_MouseDoubleClick(object sender, MouseEventArgs e) {
-            AssemblyDoubleClick?.Invoke(this, EventArgs.Empty);
-        }
-        private void assembliesBox_SelectedIndexChanged(object sender, EventArgs e) {
-            AssemblyBoxSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void LuresList_MouseDoubleClick(object sender, MouseEventArgs e) {
-            LureDoubleClick?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void ReelsList_MouseDoubleClick(object sender, MouseEventArgs e) {
-            ReelDoubleClick?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void FLineList_MouseDoubleClick(object sender, MouseEventArgs e) {
-            FLineDoubleClick?.Invoke(this, EventArgs.Empty);
-        }
-
         private void CloseButton_Click(object sender, EventArgs e) {
             CloseButtonClick?.Invoke(this, EventArgs.Empty);
         }
 
-        private void FetchButton_Click(object sender, EventArgs e) {
-            FetchButtonClick?.Invoke(this, EventArgs.Empty);
-        }
-
         private void MakeOutButton_Click(object sender, EventArgs e) {
             MakeOutClick?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void AddButton_Click(object sender, EventArgs e) {
-            var addPresenter = new AssemblyPresenter(new AddAssembly());
-            addPresenter.Run();
         }
 
         private void BaitBox_Click(object sender, EventArgs e) {
@@ -281,72 +121,108 @@ namespace Fishing.View.Inventory {
                 presenter.Run();
             }
         }
-
-
-
-        private void LuresView_SelectedIndexChanged(object sender, EventArgs e) {
-            LureSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+        #region ViewsClick
+        private void reelsView_MouseDoubleClick(object sender, MouseEventArgs e) {
+            ViewsDoubleClick?.Invoke(reelsView, EventArgs.Empty);
         }
 
-        private void LuresView_MouseDoubleClick(object sender, MouseEventArgs e) {
-            LureDoubleClick?.Invoke(this, EventArgs.Empty);
+        private void reelsView_SelectedIndexChanged(object sender, EventArgs e) {
+            ViewsSelectedIndexChanged?.Invoke(reelsView, EventArgs.Empty);
         }
 
-        private void BaitsBox_SelectedIndexChanged(object sender, EventArgs e) {
-            BaitSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+        private void luresView_MouseDoubleClick_1(object sender, MouseEventArgs e) {
+            ViewsDoubleClick?.Invoke(luresView, EventArgs.Empty);
         }
 
-        private void BaitsBox_MouseDoubleClick(object sender, MouseEventArgs e) {
-            BaitDoubleClick?.Invoke(this, e);
+        private void luresView_SelectedIndexChanged_1(object sender, EventArgs e) {
+            ViewsSelectedIndexChanged?.Invoke(luresView, EventArgs.Empty);
         }
 
-        private void HooksBox_SelectedIndexChanged(object sender, EventArgs e) {
-            HookSelectedIndex?.Invoke(this, EventArgs.Empty);
+        private void baitsView_MouseDoubleClick(object sender, MouseEventArgs e) {
+            ViewsDoubleClick?.Invoke(baitsView, EventArgs.Empty);
         }
 
-        private void HooksBox_MouseDoubleClick(object sender, MouseEventArgs e) {
-            HookDoubleClick?.Invoke(this, e);
+        private void baitsView_SelectedIndexChanged(object sender, EventArgs e) {
+            ViewsSelectedIndexChanged?.Invoke(baitsView, EventArgs.Empty);
         }
 
+        private void hooksView_MouseDoubleClick(object sender, MouseEventArgs e) {
+            ViewsDoubleClick?.Invoke(hooksView, EventArgs.Empty);
+        }
+
+        private void hooksView_SelectedIndexChanged(object sender, EventArgs e) {
+            ViewsSelectedIndexChanged?.Invoke(hooksView, EventArgs.Empty);
+        }
+        private void FlinesView_SelectedIndexChanged(object sender, EventArgs e) {
+            ViewsSelectedIndexChanged?.Invoke(flinesView, EventArgs.Empty);
+        }
+
+        private void FlinesView_MouseDoubleClick(object sender, MouseEventArgs e) {
+            ViewsDoubleClick?.Invoke(flinesView, EventArgs.Empty);
+        }
+
+        private void assembliesBox_MouseDoubleClick_2(object sender, MouseEventArgs e) {
+            AssemblyDoubleClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void assembliesBox_SelectedIndexChanged_2(object sender, EventArgs e) {
+            AssemblyBoxSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
+
+        private void ItemsTab_Click(object sender, EventArgs e) {
+            if (Assembly_P != null)
+            {
+                if (Assembly_P.Road.Type == RoadType.Spinning)
+                {
+                    baitsView.Enabled = false;
+                }
+
+                if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float)
+                {
+                    luresView.Enabled = false;
+                }
+            }
+        }
         public void AddItemToRightView(Item item) {
             switch (Item.SelectItemType(item)) {
                 case Road r:
-                itemImageBox.BackgroundImage = r.Pict;
+                itemImageBox.BackgroundImage = r.Picture;
                 nameBox.Text = r.Name;
                 powerBox.Text = r.Power.ToString();
                 typeBox.Text = r.GetType().ToString();
                 break;
 
                 case Reel r:
-                itemImageBox.Image = r.Pict;
+                itemImageBox.Image = r.Picture;
                 nameBox.Text = r.Name;
                 powerBox.Text = r.Power.ToString();
                 typeBox.Text = "";
                 break;
 
                 case FLine fl:
-                itemImageBox.Image = fl.Pict;
+                itemImageBox.BackgroundImage = fl.Picture;
                 nameBox.Text = fl.Name;
                 powerBox.Text = fl.Power.ToString();
                 typeBox.Text = "";
                 break;
 
                 case Lure l:
-                itemImageBox.BackgroundImage = l.Pict;
+                itemImageBox.BackgroundImage = l.Picture;
                 nameBox.Text = l.Name;
                 powerBox.Text = "";
                 typeBox.Text = "";
                 break;
 
                 case Bait b:
-                itemImageBox.BackgroundImage = b.Pict;
+                itemImageBox.BackgroundImage = b.Picture;
                 nameBox.Text = b.Name;
                 powerBox.Text = b.Count.ToString();
                 typeBox.Text = "";
                 break;
 
                 case BaseHook bk:
-                itemImageBox.BackgroundImage = bk.Pict;
+                itemImageBox.BackgroundImage = bk.Picture;
                 nameBox.Text = bk.Name;
                 powerBox.Text = bk.GatheringChance.ToString();
                 typeBox.Text = "";
@@ -354,26 +230,26 @@ namespace Fishing.View.Inventory {
             }
         }
 
-        public void ShowAssembly(BL.Model.Game.Assembly ass)
-        {
-            if (ass == null) return;
-            try
-            {
-                assemblyType.Text = ass.Road?.Type.ToString();
-                RoadBox.BackgroundImage = ass.Road?.Pict;
-                ReelBox.BackgroundImage = ass.Reel?.Pict;
-                BaitBox.BackgroundImage = ass.FishBait?.Pict;
-                FLineBox.BackgroundImage = ass.FLine?.Pict;
-                hookImageBox.BackgroundImage = ass.Hook?.Pict;
-                hookNamneBox.Text = ass.Hook?.Name;
-                RoadText = ass.Road?.Name;
-                ReelText = ass.Reel?.Name;
-                LureText = ass.FishBait?.Name;
-                FLineText = ass.FLine?.Name;
-            }
-            catch (ArgumentOutOfRangeException) { }
-        }
+        public void ShowAssembly(BL.Model.Game.Assembly assembly) {
+            if (assembly == null) return;
+            assemblyType.Text = assembly.Road?.Type.ToString();
+            RoadText = assembly.Road?.Name;
+            ReelText = assembly.Reel?.Name;
+            LureText = assembly.FishBait?.Name;
+            FLineText = assembly.FLine?.Name;
+            hookNameBox.Text = assembly.Hook?.Name;
 
+            RoadBox.BackgroundImage = assembly.Road?.Picture;
+            ReelBox.BackgroundImage = assembly.Reel?.Picture;
+            BaitBox.BackgroundImage = assembly.FishBait?.Picture;
+            FLineBox.BackgroundImage = assembly.FLine?.Picture;
+            hookImageBox.BackgroundImage = assembly.Hook?.Picture;
+
+            if (assembly.Road != null)
+                RoadWearValue = assembly.Road.Wear;
+            if (assembly.Reel != null)
+                ReelWearValue = assembly.Reel.Wear;
+        }
         public void Open() {
             Show();
         }
@@ -382,25 +258,5 @@ namespace Fishing.View.Inventory {
             Close();
         }
 
-        private void assembliesBox_MouseDoubleClick_2(object sender, MouseEventArgs e) {
-            AssemblyDoubleClick?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void assembliesBox_SelectedIndexChanged_2(object sender, EventArgs e)
-        {
-            AssemblyBoxSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void ItemsTab_Click(object sender, EventArgs e) {
-            if (Assembly_P.Road.Type == RoadType.Spinning)
-            {
-                baitsBox.Enabled = false;
-            }
-
-            if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float)
-            {
-                luresView.Enabled = false;
-            }
-        }
     }
 }

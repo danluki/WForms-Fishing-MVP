@@ -79,6 +79,15 @@ namespace Fishing.BL.Resources.Messages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сборка не собрана!.
+        /// </summary>
+        internal static string ASSEMBLY_NOT_FULL {
+            get {
+                return ResourceManager.GetString("ASSEMBLY_NOT_FULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Окраска у молодых - серо-серебристая, у крупных - коричневатая с золотистым отливом. Рот полунижний, небольшой, но может сильно выдвигаться, образуя длинную трубку, направленную вниз. Позади брюшных плавников киль, не покрытый чешуей, а перед спинным плавником свободная от чешуи борозда. От синца и белоглазки отличается меньшим числом ветвистых лучей в анальном плавнике и меньшим числом позвонков. Начало спинного плавника над серединой вертикали между брюшным и анальным, анальный высокий и начинается позади [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string BREAM_DESCRIPTION {
@@ -115,11 +124,29 @@ namespace Fishing.BL.Resources.Messages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string gsg {
+            get {
+                return ResourceManager.GetString("gsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Не назначена наживка.
         /// </summary>
         internal static string NO_BAIT_EQUIPED {
             get {
                 return ResourceManager.GetString("NO_BAIT_EQUIPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Указанного тэга не существует..
+        /// </summary>
+        internal static string NO_CURRENTTAG_FOUND {
+            get {
+                return ResourceManager.GetString("NO_CURRENTTAG_FOUND", resourceCulture);
             }
         }
         
@@ -169,9 +196,18 @@ namespace Fishing.BL.Resources.Messages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Удочка уже экипирована..
+        /// </summary>
+        internal static string ROAD_ALREADY_EQUIPED {
+            get {
+                return ResourceManager.GetString("ROAD_ALREADY_EQUIPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Форма тела удлиненная, но не слишком узкая, спинной плавник не длинный, высокий. Анальный плавник продолговатый, чешуя крупная, плотно сидящая. Голова вытянутая с большим носом и скошенным вниз выдвижным ртом, что говорит о донном питании рыбы. От головы до спинного плавника тянется лишенная чешуи бороздка, пространство от брюшного до анального плавника также лишено чешуи.
         ///
-        ///Достигает максимальной длины в 60 сантиметров и веса до 3 килограмм (кроме подвида Малый Рыбец — до 19 сантиметров и до 100 грамм), о [остаток строки не уместился]&quot;;.
+        ///Достигает максимальной длины в 60 сантиметров и веса до 3 килограмм (кроме подвида Малый Рыбец — до 19 сантиметров и до 100 грамм), обы [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string RYBETS_DESCRIPTION {
             get {

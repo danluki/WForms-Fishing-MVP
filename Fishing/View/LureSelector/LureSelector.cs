@@ -19,7 +19,7 @@ namespace Fishing.View.LureSelector {
             lureList.DataSource = list;
         }
 
-        public Image Picture { get => lureImage.BackgroundImage; set => lureImage.BackgroundImage = FishBait.Pict; }
+        public Image Picture { get => lureImage.BackgroundImage; set => lureImage.BackgroundImage = FishBait.Picture; }
         public string DeepBoxText { get => deepBox.Text; set => deepBox.Text = value; }
         public string SizeBoxText { get => sizeBox.Text; set => sizeBox.Text = value; }
         public BasePresenter Presenter { private get; set; }

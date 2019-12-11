@@ -40,13 +40,13 @@ namespace Fishing.BL.Controller {
             foreach (var type in typelist) {
                 var targetObject = Activator.CreateInstance(Type.GetType(type.FullName), 5, 100, 1, null);
 
-                Fish.AllFishes.Add((targetObject as Fish)?.Name, Type.GetType(type.FullName));
+                Fish.AllFishes.Add((targetObject as Fish)?.Name ?? throw new InvalidOperationException(), Type.GetType(type.FullName));
             }
         }
 
         public void SetFeedUps()
         {
-            Item.FeedUps.Add(new FeedUp("Чеснок", 100, FeedUps.chesnok, new Dictionary<Type, int>()
+            Item.Aromas.Add(new Aroma("Чеснок", 100, FeedUps.chesnok, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 10},
                 {typeof(Rybets), 5},
@@ -56,7 +56,7 @@ namespace Fishing.BL.Controller {
                 {typeof(GoldCarp), 2},
                 {typeof(Bream), 5}
             }));
-            Item.FeedUps.Add(new FeedUp("Карамель", 100, FeedUps.chesnok, new Dictionary<Type, int>()
+            Item.Aromas.Add(new Aroma("Карамель", 100, FeedUps.karamel, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 2},
                 {typeof(Rybets), 2},
@@ -66,7 +66,7 @@ namespace Fishing.BL.Controller {
                 {typeof(GoldCarp), 4},
                 {typeof(Bream), 1}
             }));
-            Item.FeedUps.Add(new FeedUp("Конопля", 100, FeedUps.chesnok, new Dictionary<Type, int>()
+            Item.Aromas.Add(new Aroma("Конопля", 100, FeedUps.konopla, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 7},
                 {typeof(Rybets), 2},
@@ -76,7 +76,7 @@ namespace Fishing.BL.Controller {
                 {typeof(GoldCarp), 4},
                 {typeof(Bream), 8}
             }));
-            Item.FeedUps.Add(new FeedUp("Анис", 300, FeedUps.anis, new Dictionary<Type, int>()
+            Item.Aromas.Add(new Aroma("Анис", 300, FeedUps.anis, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 10},
                 {typeof(Rybets), 5},
@@ -86,7 +86,7 @@ namespace Fishing.BL.Controller {
                 {typeof(GoldCarp), 2},
                 {typeof(Bream), 3}
             }));
-            Item.FeedUps.Add(new FeedUp("Горох", 800, FeedUps.goroh, new Dictionary<Type, int>()
+            Item.Basics.Add(new Basic("Горох", 800, FeedUps.goroh, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 3},
                 {typeof(Rybets), 6},
@@ -96,7 +96,7 @@ namespace Fishing.BL.Controller {
                 {typeof(Bream), 8},
                 {typeof(GoldCarp), 2},
             }));
-            Item.FeedUps.Add(new FeedUp("Карп Карась", 1000, FeedUps.karpkaras, new Dictionary<Type, int>()
+            Item.Basics.Add(new Basic("Карп Карась", 1000, FeedUps.karpkaras, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 1},
                 {typeof(Rybets), 1},
@@ -105,7 +105,7 @@ namespace Fishing.BL.Controller {
                 {typeof(WildCarp), 8},
                 {typeof(GoldCarp), 9},
             }));
-            Item.FeedUps.Add(new FeedUp("Плотва", 200, FeedUps.plotva, new Dictionary<Type, int>()
+            Item.Basics.Add(new Basic("Плотва", 200, FeedUps.plotva, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 9},
                 {typeof(Rybets), 1},
@@ -115,7 +115,7 @@ namespace Fishing.BL.Controller {
                 {typeof(Bream), 1},
                 {typeof(GoldCarp), 2},
             }));
-            Item.FeedUps.Add(new FeedUp("Жмых", 200, FeedUps.zhmyh, new Dictionary<Type, int>()
+            Item.Basics.Add(new Basic("Жмых", 200, FeedUps.zhmyh, new Dictionary<Type, int>()
             {
                 {typeof(SilverCarp), 1},
                 {typeof(Tench), 3},
@@ -123,7 +123,7 @@ namespace Fishing.BL.Controller {
                 {typeof(Bream), 3},
                 {typeof(GoldCarp), 2},
             }));
-            Item.FeedUps.Add(new FeedUp("Лещ", 1500, FeedUps.leshp, new Dictionary<Type, int>()
+            Item.Basics.Add(new Basic("Лещ", 1500, FeedUps.leshp, new Dictionary<Type, int>()
             {
                 {typeof(SilverCarp), 1},
                 {typeof(Tench), 1},
@@ -182,6 +182,9 @@ namespace Fishing.BL.Controller {
             Player.GetPlayer().FoodInv = _saver.Load<BindingList<Food>>(ConfigPaths.FOODS_DIR) ?? new BindingList<Food>();
             Player.GetPlayer().BaitInv = _saver.Load<BindingList<Bait>>(ConfigPaths.BAIT_DIR) ?? new BindingList<Bait>();
             Player.GetPlayer().HooksInv = _saver.Load<BindingList<BaseHook>>(ConfigPaths.HOOKS_DIR) ?? new BindingList<BaseHook>();
+            Player.GetPlayer().AromaInventory = _saver.Load<BindingList<Aroma>>(ConfigPaths.AROMA_DIR) ?? new BindingList<Aroma>();
+            Player.GetPlayer().BasicInventory = _saver.Load<BindingList<Basic>>(ConfigPaths.BASIC_DIR) ?? new BindingList<Basic>();
+            Player.GetPlayer().FeedUpInventory = _saver.Load<BindingList<FeedUp>>(ConfigPaths.BASIC_DIR) ?? new BindingList<FeedUp>();
             Game.GetGame().Time = _saver.Load<Time>(ConfigPaths.TIME_DIR);
             var dir = new DirectoryInfo(@"C:\Users\Programmer\Desktop\MVPFishing-master\Fishing.BL\Model\Waters");
             foreach (var item in dir.GetDirectories()) {
@@ -207,7 +210,6 @@ namespace Fishing.BL.Controller {
             _saver.Save(ConfigPaths.FOODS_DIR, Player.GetPlayer().FoodInv);
             _saver.Save(ConfigPaths.SATIETY_DIR, Player.GetPlayer().Satiety.ToString());
             _saver.Save(ConfigPaths.TIME_DIR, Game.GetGame().Time);
-            MessageBox.Show(Game.GetGame().CurrentWater.Name);
             _saver.Save(ConfigPaths.WATER_DIR, Game.GetGame().CurrentWater.Name);
             _saver.Save(ConfigPaths.BAIT_DIR, Player.GetPlayer().BaitInv);
             _saver.Save(ConfigPaths.HOOKS_DIR, Player.GetPlayer().HooksInv);

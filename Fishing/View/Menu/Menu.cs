@@ -7,6 +7,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Fishing.BL.Presenter;
+using Fishing.View.Shop;
 
 namespace Fishing {
     public partial class Menu : Form, IMenu {

@@ -20,7 +20,7 @@ namespace Fishing.BL.Presenter {
         }
 
         private void View_LureListIndexChanged(object sender, EventArgs e) {
-            _view.Picture = _view.FishBait.Pict;
+            _view.Picture = _view.FishBait.Picture;
             switch (_view.FishBait)
             {
                 case Lure l:
@@ -37,7 +37,7 @@ namespace Fishing.BL.Presenter {
         private void View_LureListDoubleClick(object sender, EventArgs e) {
             try {
                 Player.GetPlayer().EquipedRoad.Assembly.FishBait = _view.FishBait;
-                _gui.BaitPicture = Player.GetPlayer().EquipedRoad.Assembly.FishBait.Pict;
+                _gui.BaitPicture = Player.GetPlayer().EquipedRoad.Assembly.FishBait.Picture;
                 _view.Down();
             }
             catch (NullReferenceException) {

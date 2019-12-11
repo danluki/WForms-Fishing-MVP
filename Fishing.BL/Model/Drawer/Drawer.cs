@@ -24,7 +24,20 @@ namespace Fishing.BL.Model.Drawer {
         private Rectangle Netting;
         public Rectangle RTrigon;
 
+        private Timer _animationTimer = new Timer()
+        {
+            Interval = 100
+        };
 
+        public void DrawFeedUpBall()
+        {
+            if (player.EquipedRoad != null)
+            {
+                sbrush.Color = Color.DarkOliveGreen;
+                Graphics.DrawEllipse(new Pen(Color.DarkOliveGreen), player.EquipedRoad.CurPoint.X, 5, 4, 4);
+                    Graphics.FillEllipse(sbrush, player.FirstRoad.CurPoint.X, 5, 4, 4);
+                }
+        }
         public void DrawPoints() {
             if (player.FirstRoad != null) {
                 sbrush.Color = player.FirstRoad == player.EquipedRoad ? Color.Red : Color.White;

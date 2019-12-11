@@ -39,9 +39,14 @@ namespace Fishing.BL.Model.Game {
         public BindingList<Food> FoodInv { get; set; }
         public BindingList<Bait> BaitInv { get; set; }
         public BindingList<BaseHook> HooksInv { get; set; }
+        public BindingList<FeedUp> FeedUpInventory { get; set; }
+        public BindingList<Aroma> AromaInventory { get; set; }
+        public BindingList<Basic> BasicInventory { get; set; }
         public Stack<BaseEvent> EventHistory { get; set; }
 
         public event Action EventHistoryUpdated;
+
+        public event Action UpdateBucketImage;
 
         public int Satiety { get; set; } = 100;
 
@@ -60,6 +65,29 @@ namespace Fishing.BL.Model.Game {
         public static Player GetPlayer()
         {
             return player ?? (player = new Player());
+        }
+
+        public FeedUp GetFeedUpByName(string name)
+        {
+            if (name == null) return null;
+            var b = FeedUpInventory.First(i => name.Equals(i.Name));
+            return b;
+        }
+        public Basic GetBasicByName(string name)
+        {
+            if (name == null) return null;
+            var b = BasicInventory.First(i => name.Equals(i.Name));
+            return b;
+        }
+        public Aroma GetAromaByName(string name) {
+            if (name == null) return null;
+            var b = AromaInventory.First(i => name.Equals(i.Name));
+            return b;
+        }
+        public Bait GetBaitByName(string name) {
+            if (name == null) return null;
+            var b = BaitInv.First(i => name.Equals(i.Name));
+            return b;
         }
         public Item GetItemByName(string name) {
             var items = new List<Item>();

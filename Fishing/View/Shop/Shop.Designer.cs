@@ -1,7 +1,4 @@
-﻿using Fishing.BL;
-using Fishing.BL.Resources.Images;
-
-namespace Fishing
+﻿namespace Fishing.View.Shop
 {
     partial class Shop
     {
@@ -53,6 +50,10 @@ namespace Fishing
             this.RoadPage = new System.Windows.Forms.TabPage();
             this.RoadsList = new System.Windows.Forms.ListBox();
             this.shopTab = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.basicsBox = new System.Windows.Forms.ListBox();
+            this.aromasBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.itemBox)).BeginInit();
             this.hooksPage.SuspendLayout();
             this.baitsPage.SuspendLayout();
@@ -61,6 +62,8 @@ namespace Fishing
             this.FLinePage.SuspendLayout();
             this.RoadPage.SuspendLayout();
             this.shopTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // itemBox
@@ -277,11 +280,59 @@ namespace Fishing
             this.shopTab.Controls.Add(this.lurePage);
             this.shopTab.Controls.Add(this.baitsPage);
             this.shopTab.Controls.Add(this.hooksPage);
+            this.shopTab.Controls.Add(this.tabPage1);
+            this.shopTab.Controls.Add(this.tabPage2);
             this.shopTab.Location = new System.Drawing.Point(53, 37);
             this.shopTab.Name = "shopTab";
             this.shopTab.SelectedIndex = 0;
             this.shopTab.Size = new System.Drawing.Size(465, 451);
             this.shopTab.TabIndex = 22;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.basicsBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(457, 425);
+            this.tabPage1.TabIndex = 7;
+            this.tabPage1.Text = "Прикормка";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.aromasBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(457, 425);
+            this.tabPage2.TabIndex = 8;
+            this.tabPage2.Text = "Ароматизаторы";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // basicsBox
+            // 
+            this.basicsBox.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold);
+            this.basicsBox.FormattingEnabled = true;
+            this.basicsBox.ItemHeight = 22;
+            this.basicsBox.Location = new System.Drawing.Point(-2, 1);
+            this.basicsBox.Name = "basicsBox";
+            this.basicsBox.Size = new System.Drawing.Size(461, 422);
+            this.basicsBox.TabIndex = 1;
+            this.basicsBox.SelectedIndexChanged += new System.EventHandler(this.basicsBox_SelectedIndexChanged);
+            this.basicsBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.basicsBox_MouseDoubleClick);
+            // 
+            // aromasBox
+            // 
+            this.aromasBox.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold);
+            this.aromasBox.FormattingEnabled = true;
+            this.aromasBox.ItemHeight = 22;
+            this.aromasBox.Location = new System.Drawing.Point(-2, 1);
+            this.aromasBox.Name = "aromasBox";
+            this.aromasBox.Size = new System.Drawing.Size(461, 422);
+            this.aromasBox.TabIndex = 2;
+            this.aromasBox.SelectedIndexChanged += new System.EventHandler(this.aromasBox_SelectedIndexChanged);
+            this.aromasBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.aromasBox_MouseDoubleClick);
             // 
             // Shop
             // 
@@ -312,6 +363,8 @@ namespace Fishing
             this.FLinePage.ResumeLayout(false);
             this.RoadPage.ResumeLayout(false);
             this.shopTab.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,5 +392,9 @@ namespace Fishing
         private System.Windows.Forms.TabPage RoadPage;
         protected internal System.Windows.Forms.ListBox RoadsList;
         private System.Windows.Forms.TabControl shopTab;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ListBox basicsBox;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ListBox aromasBox;
     }
 }

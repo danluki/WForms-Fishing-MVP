@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using Fishing.BL.Model.Items;
 
 namespace Fishing.BL.Model.Eating {
 

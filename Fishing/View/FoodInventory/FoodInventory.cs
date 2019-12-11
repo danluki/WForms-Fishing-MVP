@@ -24,7 +24,7 @@ namespace Fishing.View.FoodInventory {
         public event EventHandler ListDoubleClick;
 
         public void ShowFood(Food food) {
-            FoodBox.BackgroundImage = food.Pict;
+            FoodBox.BackgroundImage = food.Picture;
             foodProductBox.Text = "Восполняет " + food.Productivity + "%";
         }
 

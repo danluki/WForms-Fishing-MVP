@@ -1,14 +1,13 @@
-﻿using Fishing.BL.Model.Baits;
-using Fishing.BL.Model.Hooks;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.FeedingUp;
-using Fishing.BL.Model.Items;
+using Fishing.BL.Model.Hooks;
 
-namespace Fishing {
+namespace Fishing.BL.Model.Items {
 
     [Serializable]
     public abstract class Item {
@@ -19,14 +18,16 @@ namespace Fishing {
         public static BindingList<Bait> Baits = new BindingList<Bait>();
         public static BindingList<BaseHook> Hooks = new BindingList<BaseHook>();
         public static BindingList<FeedUp> FeedUps = new BindingList<FeedUp>();
+        public static BindingList<Aroma> Aromas = new BindingList<Aroma>();
+        public static BindingList<Basic> Basics = new BindingList<Basic>();
         public string Name { get; }
         public int Price { get; }
-        public Bitmap Pict { get; }
+        public Bitmap Picture { get; }
 
-        protected Item(string name, int price, Bitmap pict) {
+        protected Item(string name, int price, Bitmap picture) {
             Name = name;
             Price = price;
-            Pict = pict;
+            Picture = picture;
         }
 
         public static Item GetItemByName(string name)
@@ -38,7 +39,8 @@ namespace Fishing {
             items.AddRange(Lures);
             items.AddRange(Baits);
             items.AddRange(Hooks);
-            items.AddRange(FeedUps);
+            items.AddRange(Aromas);
+            items.AddRange(Basics);
             return items.SingleOrDefault(i => i.Name.Equals(name));
         }
         public static Item SelectItemType(Item item) {
@@ -50,6 +52,12 @@ namespace Fishing {
                     return reel;
                 case FLine line:
                     return line;
+                case BaseHook bs:
+                    return bs;
+                case Aroma ar:
+                    return ar;
+                case Basic ba:
+                    return ba;
                 default:
                     return item;
             }

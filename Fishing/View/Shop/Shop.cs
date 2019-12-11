@@ -1,15 +1,14 @@
-﻿using Fishing.BL.Model.Baits;
-using Fishing.BL.Model.Eating;
-using Fishing.BL.Model.Hooks;
-using Fishing.Presenter;
-using Fishing.View.Shop;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using Fishing.BL.Model.Baits;
+using Fishing.BL.Model.Eating;
+using Fishing.BL.Model.FeedingUp;
 using Fishing.BL.Model.Game;
+using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
 using Fishing.BL.Presenter;
 
-namespace Fishing {
+namespace Fishing.View.Shop {
     public partial class Shop : Form, IShop {
         public Shop() {
             InitializeComponent();
@@ -29,6 +28,8 @@ namespace Fishing {
                 }
             }
             hookList.DataSource = Item.Hooks;
+            basicsBox.DataSource = Item.Basics;
+            aromasBox.DataSource = Item.Aromas;
             moneyBox.Text = Player.GetPlayer().Money.ToString();
         }
 
@@ -41,6 +42,8 @@ namespace Fishing {
         public string MoneyL { get => moneyBox.Text; set => moneyBox.Text = value; }
         public string LowerL { get => label1.Text; set => label1.Text = value; }
         public BasePresenter Presenter { private get; set; }
+        public Basic Basic_P { get => (Basic)Item.GetItemByName(basicsBox.SelectedItem.ToString()); set => throw new NotImplementedException(); }
+        public Aroma Aroma_P { get => (Aroma)Item.GetItemByName(aromasBox.SelectedItem.ToString()); set => throw new NotImplementedException(); }
 
         public event EventHandler FLineDoubleClick;
 
@@ -57,6 +60,8 @@ namespace Fishing {
         public event EventHandler BaitDoubleClick;
 
         public event EventHandler HookDoubleClick;
+        public event EventHandler AromaDoubleClick;
+        public event EventHandler BasicDoubleClick;
 
         private void RoadsList_SelectedIndexChanged_1(object sender, EventArgs e) {
             AddItemToRightView(Road_P);
@@ -123,9 +128,25 @@ namespace Fishing {
 
         public void AddItemToRightView(Item i) {
             try {
+                if (Item.SelectItemType(i) is Basic) {
+                    var r = (Basic)i;
+                    itemBox.BackgroundImage = r.Picture;
+                    nameBox.Text = r.Name;
+                    powerBox.Text = " ";
+                    priceBox.Text = r.Price.ToString();
+                    label1.Text = " ";
+                }
+                if (Item.SelectItemType(i) is Aroma) {
+                    var r = (Aroma)i;
+                    itemBox.BackgroundImage = r.Picture;
+                    nameBox.Text = r.Name;
+                    powerBox.Text = " ";
+                    priceBox.Text = r.Price.ToString();
+                    label1.Text = " ";
+                }
                 if (Item.SelectItemType(i) is Road) {
                     var r = (Road)i;
-                    itemBox.BackgroundImage = r.Pict;
+                    itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Power.ToString();
                     priceBox.Text = r.Price.ToString();
@@ -133,7 +154,7 @@ namespace Fishing {
                 }
                 if (Item.SelectItemType(i) is Reel) {
                     var r = (Reel)i;
-                    itemBox.BackgroundImage = r.Pict;
+                    itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Power.ToString();
                     priceBox.Text = r.Price.ToString();
@@ -142,7 +163,7 @@ namespace Fishing {
                 }
                 if (Item.SelectItemType(i) is FLine) {
                     var r = (FLine)i;
-                    itemBox.BackgroundImage = r.Pict;
+                    itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Power.ToString();
                     priceBox.Text = r.Price.ToString();
@@ -151,7 +172,7 @@ namespace Fishing {
                 }
                 if (Item.SelectItemType(i) is Food) {
                     var r = (Food)i;
-                    itemBox.BackgroundImage = r.Pict;
+                    itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Productivity.ToString();
                     priceBox.Text = r.Price.ToString();
@@ -160,7 +181,7 @@ namespace Fishing {
                 }
                 if (Item.SelectItemType(i) is Lure) {
                     var r = (Lure)i;
-                    itemBox.BackgroundImage = r.Pict;
+                    itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.DeepType.ToString();
                     priceBox.Text = r.Price.ToString();
@@ -169,7 +190,7 @@ namespace Fishing {
                 }
                 if (Item.SelectItemType(i) is Bait) {
                     var r = (Bait)i;
-                    itemBox.BackgroundImage = r.Pict;
+                    itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = "Кол-во: 30";
                     priceBox.Text = r.Price.ToString();
@@ -180,7 +201,7 @@ namespace Fishing {
                 if (!(Item.SelectItemType(i) is BaseHook)) return;
                 {
                     var r = (BaseHook)i;
-                    itemBox.BackgroundImage = r.Pict;
+                    itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.GatheringChance.ToString();
                     priceBox.Text = r.Price.ToString();
@@ -191,5 +212,20 @@ namespace Fishing {
             catch (ArgumentOutOfRangeException) { }
         }
 
+        private void basicsBox_SelectedIndexChanged(object sender, EventArgs e) {
+            AddItemToRightView(Basic_P);
+        }
+
+        private void basicsBox_MouseDoubleClick(object sender, MouseEventArgs e) {
+            BasicDoubleClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void aromasBox_SelectedIndexChanged(object sender, EventArgs e) {
+            AddItemToRightView(Aroma_P);
+        }
+
+        private void aromasBox_MouseDoubleClick(object sender, MouseEventArgs e) {
+            AromaDoubleClick?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

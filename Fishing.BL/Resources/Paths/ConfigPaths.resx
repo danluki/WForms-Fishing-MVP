@@ -117,14 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AROMA_DIR" xml:space="preserve">
+    <value>config/aroma.dat</value>
+  </data>
   <data name="ASSEMBLIES_DIR" xml:space="preserve">
     <value>config/assemblies.dat</value>
   </data>
   <data name="BAIT_DIR" xml:space="preserve">
     <value>config/bait.dat</value>
   </data>
+  <data name="BASIC_DIR" xml:space="preserve">
+    <value>config/basic.dat</value>
+  </data>
   <data name="EVENTHSTR_DIR" xml:space="preserve">
     <value>config/history.dat</value>
+  </data>
+  <data name="FEEDUPS_DIR" xml:space="preserve">
+    <value>config/feedups.dat</value>
   </data>
   <data name="FISHLIST_DIR" xml:space="preserve">
     <value>config/fishlist.dat</value>

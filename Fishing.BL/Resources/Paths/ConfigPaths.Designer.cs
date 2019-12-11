@@ -61,6 +61,15 @@ namespace Fishing.BL.Resources.Paths {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на config/aroma.dat.
+        /// </summary>
+        internal static string AROMA_DIR {
+            get {
+                return ResourceManager.GetString("AROMA_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на config/assemblies.dat.
         /// </summary>
         internal static string ASSEMBLIES_DIR {
@@ -79,11 +88,29 @@ namespace Fishing.BL.Resources.Paths {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на config/basic.dat.
+        /// </summary>
+        internal static string BASIC_DIR {
+            get {
+                return ResourceManager.GetString("BASIC_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на config/history.dat.
         /// </summary>
         internal static string EVENTHSTR_DIR {
             get {
                 return ResourceManager.GetString("EVENTHSTR_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на config/feedups.dat.
+        /// </summary>
+        internal static string FEEDUPS_DIR {
+            get {
+                return ResourceManager.GetString("FEEDUPS_DIR", resourceCulture);
             }
         }
         

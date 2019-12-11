@@ -67,6 +67,20 @@ namespace Fishing.BL.Model.Game {
             }
         }
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = IsEquiped.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Road != null ? Road.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Reel != null ? Reel.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FLine != null ? FLine.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FishBait != null ? FishBait.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Hook != null ? Hook.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
         public override string ToString() {
             return Road.Name;
         }
