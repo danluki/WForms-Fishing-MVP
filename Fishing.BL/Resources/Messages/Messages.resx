@@ -145,6 +145,9 @@
   <data name="CHUB_DESCRIPTION" xml:space="preserve">
     <value>Хищник. Предпочитает мелкие и средние приманки.Кренки и вертушки. Обитает на предпочтительно на поверхности. </value>
   </data>
+  <data name="FIRST_UNEQUIP_ROAD" xml:space="preserve">
+    <value>Сначала уберите удочку в рюкзак!</value>
+  </data>
   <data name="GRAYLING_DESCRIPTION" xml:space="preserve">
     <value>Хищник. Предпочитает мелкие и средние приманки. Обитает на любой глубине.</value>
   </data>

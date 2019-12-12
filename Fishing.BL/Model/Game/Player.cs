@@ -36,7 +36,7 @@ namespace Fishing.BL.Model.Game {
         public BindingList<Reel> ReelInv { get; set; }
         public BindingList<FLine> FLineInv { get; set; }
         public BindingList<Lure> LureInv { get; set; }
-        public BindingList<Food> FoodInv { get; set; }
+        public BindingList<Food> FoodInv { get; set; }                                                                                                
         public BindingList<Bait> BaitInv { get; set; }
         public BindingList<BaseHook> HooksInv { get; set; }
         public BindingList<FeedUp> FeedUpInventory { get; set; }
@@ -47,6 +47,8 @@ namespace Fishing.BL.Model.Game {
         public event Action EventHistoryUpdated;
 
         public event Action UpdateBucketImage;
+
+        public event Action GiveUped;
 
         public int Satiety { get; set; } = 100;
 
@@ -62,15 +64,24 @@ namespace Fishing.BL.Model.Game {
         private Player() {
         }
 
+        public void GiveUp(GameRoad road)
+        {
+            road.CurrentFeedUp = player.EquipedFeedUp;
+            //Count -= 1
+            GiveUped?.Invoke();
+        }
         public static Player GetPlayer()
         {
             return player ?? (player = new Player());
         }
-
         public FeedUp GetFeedUpByName(string name)
         {
             if (name == null) return null;
             var b = FeedUpInventory.First(i => name.Equals(i.Name));
+            if (b != null)
+            {
+                UpdateBucketImage?.Invoke();
+            }
             return b;
         }
         public Basic GetBasicByName(string name)
@@ -234,19 +245,21 @@ namespace Fishing.BL.Model.Game {
 
         public void DoGathering(GameRoad road)
         {
+            //Do reaction in UI for Gathering TODO
             road.IsFishAttack = false;
             player.Statistic.GatheringCount++;
             player.AddEventToHistory(new GatheringEvent());
             SoundsPlayer.PlayGatheringSound();
             road.Image = Roads.road;
-            player.EquipedRoad.FLineIncValue = 0;
-            player.EquipedRoad.RoadIncValue = 0;
+            road.FLineIncValue = 0;
+            road.RoadIncValue = 0;
             if (road.Assembly.Road.Type == RoadType.Feeder || road.Assembly.Road.Type == RoadType.Float) {
                 ((Bait)road.Assembly.FishBait).Count -= 1;
-                if(((Bait)road.Assembly.FishBait).Count == 0)
+                if(((Bait)road.Assembly.FishBait)?.Count == 0)
                 {
-                    player.EquipedRoad.Assembly.FishBait = null;
+                    road.Assembly.FishBait = null;
                 }
+                road.Assembly.FishBait = null;
             }
             Gathering?.Invoke();
         }
@@ -294,6 +307,9 @@ namespace Fishing.BL.Model.Game {
             }
             if (player.EquipedRoad.Assembly.Road.Type == RoadType.Feeder || player.EquipedRoad.Assembly.Road.Type == RoadType.Float) {
                 ((Bait)player.EquipedRoad.Assembly.FishBait).Count -= 1;
+                if (((Bait)player.EquipedRoad.Assembly.FishBait).Count == 0) {
+                    player.EquipedRoad.Assembly.FishBait = null;
+                }
             }
         }
 

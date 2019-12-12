@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using Fishing.BL.Model.Game;
+using WMPLib;
 
 namespace Fishing.BL.Model.Drawer {
 
@@ -23,6 +24,15 @@ namespace Fishing.BL.Model.Drawer {
 
         private Rectangle Netting;
         public Rectangle RTrigon;
+
+        public Drawer()
+        {
+            player.GiveUped += Player_GiveUped;
+        }
+
+        private void Player_GiveUped() {
+            throw new NotImplementedException();
+        }
 
         private Timer _animationTimer = new Timer()
         {

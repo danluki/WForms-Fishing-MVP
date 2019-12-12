@@ -76,7 +76,6 @@ namespace Fishing.Presenter {
             var senderTag = (sender as ObjectListView)?.Tag.ToString();
             switch (senderTag)
             {
-
                 case "Reels":
                     _view.Reel_P= (Reel)_player.GetItemByName(_view.ReelsViewSelectedItemText);
                     _view.AddItemToRightView(_view.Reel_P);
@@ -89,7 +88,7 @@ namespace Fishing.Presenter {
                     _view.Lure_P = (Lure)_player.GetItemByName(_view.LuresViewSelectedItemText);
                 break;
                 case "Baits":
-                    _view.Bait_P = (Bait)_player.GetItemByName(_view.BaitsViewSelectedItemText);
+                    _view.Bait_P = _player.GetBaitByName(_view.BaitsViewSelectedItemText);
                 break;
                 case "Hooks":
                     _view.Hook_P = (BaseHook)_player.GetItemByName(_view.HooksViewSelectedItemText);
@@ -104,36 +103,40 @@ namespace Fishing.Presenter {
         private void View_ViewsDoubleClick(object sender, EventArgs e) {
             if (_view.Assembly_P == null) return;
             var s = (sender as ObjectListView)?.Tag.ToString();
-            switch (s) {
-
+            if (!_view.Assembly_P.IsEquiped) {
+                switch (s) {
                 case "Reels":
                     _view.Assembly_P.Reel = _view.Reel_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _player.ReelInv.Remove(_view.Reel_P);
+                _view.ShowAssembly(_view.Assembly_P);
+                _player.ReelInv.Remove(_view.Reel_P);
                 break;
                 case "Flines":
                     _view.Assembly_P.FLine = _view.FLine_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _player.FLineInv.Remove(_view.FLine_P);
+                _view.ShowAssembly(_view.Assembly_P);
+                _player.FLineInv.Remove(_view.FLine_P);
                 break;
                 case "Lures":
                     _view.Assembly_P.FishBait = _view.Lure_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _player.LureInv.Remove(_view.Lure_P);
+                _view.ShowAssembly(_view.Assembly_P);
+                _player.LureInv.Remove(_view.Lure_P);
                 break;
                 case "Baits":
                     _view.Assembly_P.FishBait = _view.Bait_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _view.Bait_P.Count -= 1;
+                _view.ShowAssembly(_view.Assembly_P);
+                _view.Bait_P.Count -= 1;
                 break;
                 case "Hooks": 
                     _view.Assembly_P.Hook = _view.Hook_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _player.HooksInv.Remove(_view.Hook_P);
+                _view.ShowAssembly(_view.Assembly_P);
+                _player.HooksInv.Remove(_view.Hook_P);
                 break;
                 default:
                     MessageBox.Show(Messages.NO_CURRENTTAG_FOUND);
-                    break;
+                break;
+                }
+            }
+            else {
+                MessageBox.Show(Messages.FIRST_UNEQUIP_ROAD);
             }
         }
 

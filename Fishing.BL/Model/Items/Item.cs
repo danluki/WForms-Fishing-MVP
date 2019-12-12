@@ -22,7 +22,7 @@ namespace Fishing.BL.Model.Items {
         public static BindingList<Basic> Basics = new BindingList<Basic>();
         public string Name { get; }
         public int Price { get; }
-        public Bitmap Picture { get; }
+        public Bitmap Picture { get;}
 
         protected Item(string name, int price, Bitmap picture) {
             Name = name;

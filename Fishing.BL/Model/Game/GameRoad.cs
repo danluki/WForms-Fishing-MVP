@@ -118,5 +118,11 @@ namespace Fishing.BL.Model.Game {
                 baitTimer.Start();
             }
         }
+        public void RemoveFromLocation() {
+             this.Assembly.IsEquiped = false;
+             this.IsBaitInWater = false;
+             this.IsBaitMoving = false;
+             this.IsFishAttack = false;
+        }
     }
 }

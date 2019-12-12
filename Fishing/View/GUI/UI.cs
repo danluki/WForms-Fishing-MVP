@@ -47,6 +47,13 @@ namespace Fishing {
             Player.GetPlayer().UpdateBucketImage += UI_UpdateBucketImage;
         }
 
+        private void UI_Gathering()
+        {
+            ReelBar.Value = 0;
+            FLineBar.Value = 0;
+            fBaitCountsLabel.Text = "";
+        }
+
         private void UI_UpdateBucketImage() {
             FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_fu_d");
         }
@@ -68,13 +75,6 @@ namespace Fishing {
 
         public event PaintEventHandler SounderPaint;
 
-        private void UI_Gathering()
-        {
-            ReelBar.Value = 0;
-            FLineBar.Value = 0;
-            fBaitCountsLabel.Text = "";
-            BaitPicture = null;
-        }
 
         private void SatietyUpdated(int obj) {
             eatingBar.Increment(obj);

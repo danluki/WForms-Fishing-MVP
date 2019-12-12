@@ -149,6 +149,7 @@ namespace Fishing.Presenter {
                     break;
 
                     case Keys.U:
+                        _player.GiveUp(_player.EquipedRoad);
                         _drawer.DrawFeedUpBall();
                         break;
 
@@ -209,7 +210,18 @@ namespace Fishing.Presenter {
             }
             if (e.Button != MouseButtons.Right) return;
             if (isIntersect) {
-                _player.EquipedRoad = null;
+                if (_player.FirstRoad == _player.EquipedRoad) {
+                    _player.FirstRoad?.RemoveFromLocation();
+                    _player.FirstRoad = null;
+                }
+                if (_player.SecondRoad == _player.EquipedRoad) {
+                    _player.SecondRoad?.RemoveFromLocation();
+                    _player.SecondRoad = null;
+                }
+                if (_player.ThirdRoad == _player.EquipedRoad) {
+                    _player.ThirdRoad?.RemoveFromLocation();
+                    _player.ThirdRoad = null;
+                }
             }
         }
 
@@ -333,13 +345,13 @@ namespace Fishing.Presenter {
                 }
                 return (true, _player.SecondRoad);
             }
-
-            if (!_drawer.ThirdNormalRoad.IntersectsWith(new Rectangle(p, size)) &&
-                !_drawer.ThirdBrokenRoad.IntersectsWith(new Rectangle(p, size))) return (false, null);
-            if (_player.EquipedRoad != _player.ThirdRoad) {
-                gui.AddRoadToGUI(_player.EquipedRoad);
+            if (_drawer.ThirdNormalRoad.IntersectsWith(new Rectangle(p, size)) || _drawer.ThirdBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
+                if (_player.EquipedRoad != _player.ThirdRoad) {
+                    gui.AddRoadToGUI(_player.EquipedRoad);
+                }
+                return (true, _player.ThirdRoad);
             }
-            return (true, _player.ThirdRoad);
+            return(false, null);
 
         }
 

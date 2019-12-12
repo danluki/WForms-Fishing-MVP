@@ -115,6 +115,15 @@ namespace Fishing.BL.Resources.Messages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сначала уберите удочку в рюкзак!.
+        /// </summary>
+        internal static string FIRST_UNEQUIP_ROAD {
+            get {
+                return ResourceManager.GetString("FIRST_UNEQUIP_ROAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Хищник. Предпочитает мелкие и средние приманки. Обитает на любой глубине..
         /// </summary>
         internal static string GRAYLING_DESCRIPTION {
