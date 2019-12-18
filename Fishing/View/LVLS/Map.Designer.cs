@@ -32,6 +32,7 @@ namespace Fishing
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
+            this.closeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -44,6 +45,16 @@ namespace Fishing
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // closeButton
+            // 
+            this.closeButton.Location = new System.Drawing.Point(722, 675);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 4;
+            this.closeButton.Text = "Закрыть";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -51,6 +62,7 @@ namespace Fishing
             this.BackgroundImage = global::Fishing.Properties.Resources.ozero1f;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 700);
+            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Map";
@@ -62,5 +74,6 @@ namespace Fishing
 
         #endregion
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button closeButton;
     }
 }

@@ -257,7 +257,7 @@ namespace Fishing.BL.Model.Game {
                 ((Bait)road.Assembly.FishBait).Count -= 1;
                 if(((Bait)road.Assembly.FishBait)?.Count == 0)
                 {
-                    road.Assembly.FishBait = null;
+                    player.BaitInv.Remove((Bait)road.Assembly.FishBait);
                 }
                 road.Assembly.FishBait = null;
             }

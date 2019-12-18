@@ -17,7 +17,7 @@ namespace Fishing {
 
         public string NickNameL { get => label2.Text; set => label2.Text = value; }
         public string LowerLValue { get => label2.Text; set => label2.Text = value; }
-        public BasePresenter Presenter { private get; set; }
+        public BasePresenter Presenter { get; set; }
 
         public event EventHandler ExitButtonClick;
 

@@ -8,6 +8,6 @@ namespace Fishing.BL.View {
 
         void Down();
 
-        BasePresenter Presenter { set; }
+        BasePresenter Presenter { get; set; }
     }
 }

@@ -66,5 +66,9 @@ namespace Fishing {
             UI.Gui.Show();
             this.Close();
         }
+
+        private void closeButton_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

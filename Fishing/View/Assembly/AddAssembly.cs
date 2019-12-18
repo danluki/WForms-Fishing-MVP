@@ -10,7 +10,7 @@ namespace Fishing.View.Assembly {
         }
 
         public string AssemblyName { get => nameBox.Text; set => nameBox.Text = value; }
-        public BasePresenter Presenter { private get; set; }
+        public BasePresenter Presenter { get; set; }
 
         public event EventHandler AddAssemblyClick;
 

@@ -70,7 +70,7 @@ namespace Fishing.View.Inventory {
         public string ReelText { get => reelTextBox.Text; set => reelTextBox.Text = value; }
         public string FLineText { get => flineTextBox.Text; set => flineTextBox.Text = value; }
         public string LureText { get => lureTextBox.Text; set => lureTextBox.Text = value; }
-        public BasePresenter Presenter { private get; set; }
+        public BasePresenter Presenter { get; set; }
         public string AssNumbText { get => assNumberLabel.Text; set => assNumberLabel.Text = value; }
         public int RoadWearValue { get => roadWearBar.Value; set => roadWearBar.Value = value; }
         public int ReelWearMax { get => reelWearBar.Maximum; set => reelWearBar.Maximum = value; }
@@ -176,6 +176,7 @@ namespace Fishing.View.Inventory {
                 if (Assembly_P.Road.Type == RoadType.Spinning)
                 {
                     baitsView.Enabled = false;
+                    luresView.Enabled = true;
                 }
 
                 if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float)

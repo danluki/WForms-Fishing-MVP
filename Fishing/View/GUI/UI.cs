@@ -71,7 +71,7 @@ namespace Fishing {
         public Image ReelPicture { get => reelBox.BackgroundImage; set => reelBox.BackgroundImage = value; }
         public Image FLinePicture { get => flineBox.BackgroundImage; set => flineBox.BackgroundImage = value; }
         public Image HookPicture { get => hookBox.BackgroundImage; set => hookBox.BackgroundImage = value; }
-        public BasePresenter Presenter { private get; set; }
+        public BasePresenter Presenter { get; set; }
 
         public event PaintEventHandler SounderPaint;
 
@@ -97,7 +97,7 @@ namespace Fishing {
         }
 
         private void MenuLabel_Click(object sender, EventArgs e) {
-            Game.GetGame().View.Down();
+            Game.GetGame().View.Presenter.End();
         }
 
         private void SettingLabel_Click(object sender, EventArgs e) {
@@ -129,7 +129,7 @@ namespace Fishing {
         }
 
         private void InventoryBox_Click(object sender, EventArgs e) {
-            var pres = new InventoryPresenter(new Inventory(), Gui);
+            var pres = new InventoryPresenter(new Inventory(), this);
             pres.Run();
         }
 
@@ -214,8 +214,6 @@ namespace Fishing {
 
         public void AddRoadToGUI(GameRoad road) {
             if(road == null) return;
-            if (road.Assembly.IsAssemblyFull())
-            {
 
                 BaitPicture = road.Assembly.FishBait?.Picture;
                 FLinePicture = road.Assembly.FLine?.Picture;
@@ -234,8 +232,7 @@ namespace Fishing {
                     {
                         fBaitCountsLabel.Text = "1";
                     }
-                }
-            }
+                }   
         }
 
         public void Open() {

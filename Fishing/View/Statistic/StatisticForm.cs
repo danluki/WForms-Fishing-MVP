@@ -17,7 +17,7 @@ namespace Fishing.View.Statistic {
         public string BrokenRoadsLText { get => BrokenRoadsLabel.Text; set => BrokenRoadsLabel.Text += value; }
         public string TornFLineLText { get => TornsFLineLabel.Text; set => TornsFLineLabel.Text += value; }
         public string TakeFishesLText { get => TakenFishes.Text; set => TakenFishes.Text += value; }
-        public BasePresenter Presenter { private get; set; }
+        public BasePresenter Presenter { get; set; }
 
         public event EventHandler LoadForm;
 

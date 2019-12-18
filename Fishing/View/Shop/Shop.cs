@@ -41,7 +41,7 @@ namespace Fishing.View.Shop {
         public BaseHook Hook_P { get => (BaseHook)Item.GetItemByName(hookList.SelectedItem.ToString()); set => throw new ArgumentException(); }
         public string MoneyL { get => moneyBox.Text; set => moneyBox.Text = value; }
         public string LowerL { get => label1.Text; set => label1.Text = value; }
-        public BasePresenter Presenter { private get; set; }
+        public BasePresenter Presenter { get; set; }
         public Basic Basic_P { get => (Basic)Item.GetItemByName(basicsBox.SelectedItem.ToString()); set => throw new NotImplementedException(); }
         public Aroma Aroma_P { get => (Aroma)Item.GetItemByName(aromasBox.SelectedItem.ToString()); set => throw new NotImplementedException(); }
 
