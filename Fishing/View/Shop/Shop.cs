@@ -126,85 +126,76 @@ namespace Fishing.View.Shop {
             this.Close();
         }
 
-        public void AddItemToRightView(Item i) {
+        public void AddItemToRightView(Item item) {
             try {
-                if (Item.SelectItemType(i) is Basic) {
-                    var r = (Basic)i;
+                if (Item.SelectItemType(item) is Basic) {
+                    var r = (Basic)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = " ";
-                    priceBox.Text = r.Price.ToString();
                     label1.Text = " ";
                 }
-                if (Item.SelectItemType(i) is Aroma) {
-                    var r = (Aroma)i;
+                if (Item.SelectItemType(item) is Aroma) {
+                    var r = (Aroma)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = " ";
-                    priceBox.Text = r.Price.ToString();
                     label1.Text = " ";
                 }
-                if (Item.SelectItemType(i) is Road) {
-                    var r = (Road)i;
+                if (Item.SelectItemType(item) is Road) {
+                    var r = (Road)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Power.ToString();
-                    priceBox.Text = r.Price.ToString();
                     label1.Text = " ";
                 }
-                if (Item.SelectItemType(i) is Reel) {
-                    var r = (Reel)i;
+                if (Item.SelectItemType(item) is Reel) {
+                    var r = (Reel)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Power.ToString();
-                    priceBox.Text = r.Price.ToString();
                     typeBox.Text = " ";
                     label1.Text = " ";
                 }
-                if (Item.SelectItemType(i) is FLine) {
-                    var r = (FLine)i;
+                if (Item.SelectItemType(item) is FLine) {
+                    var r = (FLine)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Power.ToString();
-                    priceBox.Text = r.Price.ToString();
                     typeBox.Text = " ";
                     label1.Text = " ";
                 }
-                if (Item.SelectItemType(i) is Food) {
-                    var r = (Food)i;
+                if (Item.SelectItemType(item) is Food) {
+                    var r = (Food)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.Productivity.ToString();
-                    priceBox.Text = r.Price.ToString();
                     typeBox.Text = " ";
                     label1.Text = " ";
                 }
-                if (Item.SelectItemType(i) is Lure) {
-                    var r = (Lure)i;
+                if (Item.SelectItemType(item) is Lure) {
+                    var r = (Lure)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.DeepType.ToString();
-                    priceBox.Text = r.Price.ToString();
                     typeBox.Text = r.Size.ToString();
                     label1.Text = " ";
                 }
-                if (Item.SelectItemType(i) is Bait) {
-                    var r = (Bait)i;
+                if (Item.SelectItemType(item) is Bait) {
+                    var r = (Bait)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = "Кол-во: 30";
-                    priceBox.Text = r.Price.ToString();
                     typeBox.Text = " ";
                     label1.Text = " ";
                 }
 
-                if (!(Item.SelectItemType(i) is BaseHook)) return;
+                if (!(Item.SelectItemType(item) is BaseHook)) return;
                 {
-                    var r = (BaseHook)i;
+                    var r = (BaseHook)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.GatheringChance.ToString();
-                    priceBox.Text = r.Price.ToString();
                     typeBox.Text = " ";
                     label1.Text = " ";
                 }

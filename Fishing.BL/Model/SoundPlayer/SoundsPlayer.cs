@@ -42,5 +42,9 @@ namespace Fishing.BL.Model.SoundPlayer {
             _sp.Stream = SoundsRes.zabr;
             _sp.Play();
         }
+        public static void PlayFeedUpSound() {
+            _sp.Stream = SoundsRes.prik;
+            _sp.Play();
+        }
     }
 }

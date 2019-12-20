@@ -15,9 +15,13 @@ namespace Fishing.BL.Model.FeedingUp {
         }
         public void AddAromaToFeedUp(FeedUp feedup)
         {
-            foreach (var w in WorkingFishes.Where(w => feedup.WorkingFishes.ContainsKey(w.Key)))
-            {
-                feedup.WorkingFishes.Add(w.Key, w.Value);
+            foreach (var w in WorkingFishes) {
+                if (feedup.WorkingFishes.ContainsKey(w.Key)) {
+                    feedup.WorkingFishes[w.Key] += w.Value;
+                }
+                else {
+                    feedup.WorkingFishes.Add(w.Key, w.Value);
+                }
             }
         }
 

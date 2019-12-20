@@ -181,6 +181,7 @@ namespace Fishing.View.Inventory {
 
                 if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float)
                 {
+                    baitsView.Enabled = true;
                     luresView.Enabled = false;
                 }
             }

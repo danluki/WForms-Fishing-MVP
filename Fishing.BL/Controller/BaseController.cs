@@ -88,22 +88,22 @@ namespace Fishing.BL.Controller {
             }));
             Item.Basics.Add(new Basic("Горох", 800, FeedUps.goroh, new Dictionary<Type, int>()
             {
+                {typeof(Bream), 8},
                 {typeof(Roach), 3},
                 {typeof(Rybets), 6},
                 {typeof(SilverCarp), 3},
                 {typeof(Tench), 1},
                 {typeof(WildCarp), 1},
-                {typeof(Bream), 8},
                 {typeof(GoldCarp), 2},
             }));
             Item.Basics.Add(new Basic("Карп Карась", 1000, FeedUps.karpkaras, new Dictionary<Type, int>()
             {
+                {typeof(WildCarp), 8},
+                {typeof(GoldCarp), 9},
                 {typeof(Roach), 1},
                 {typeof(Rybets), 1},
                 {typeof(SilverCarp), 9},
                 {typeof(Tench), 8},
-                {typeof(WildCarp), 8},
-                {typeof(GoldCarp), 9},
             }));
             Item.Basics.Add(new Basic("Плотва", 200, FeedUps.plotva, new Dictionary<Type, int>()
             {
@@ -125,10 +125,10 @@ namespace Fishing.BL.Controller {
             }));
             Item.Basics.Add(new Basic("Лещ", 1500, FeedUps.leshp, new Dictionary<Type, int>()
             {
+                {typeof(Bream), 10},
                 {typeof(SilverCarp), 1},
                 {typeof(Tench), 1},
                 {typeof(WildCarp), 3},
-                {typeof(Bream), 10},
                 {typeof(GoldCarp), 2},
             }));
         }

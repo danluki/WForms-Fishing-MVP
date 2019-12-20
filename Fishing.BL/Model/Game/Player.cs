@@ -48,16 +48,16 @@ namespace Fishing.BL.Model.Game {
 
         public event Action UpdateBucketImage;
 
-        public event Action GiveUped;
+        public event Action<Point> GiveUped;
+        public bool IsFeedingUp;
+        public int Satiety { get; set; }
 
-        public int Satiety { get; set; } = 100;
-
-        public event Action<int> SatietyUpdated;
+        public event Action SatietyUpdated;
 
         public event Action Gathering;
 
         public Statistic Statistic { get; set; } = new Statistic();
-        public int Money { get; set; } = 99999999;
+        public int Money { get; set; }
         public int WindingSpeed { get; set; }
         public string NickName { get; set; } = "Рыболов";
 
@@ -68,7 +68,8 @@ namespace Fishing.BL.Model.Game {
         {
             road.CurrentFeedUp = player.EquipedFeedUp;
             //Count -= 1
-            GiveUped?.Invoke();
+            IsFeedingUp = true;
+            GiveUped?.Invoke(road.CurPoint);
         }
         public static Player GetPlayer()
         {
@@ -245,7 +246,6 @@ namespace Fishing.BL.Model.Game {
 
         public void DoGathering(GameRoad road)
         {
-            //Do reaction in UI for Gathering TODO
             road.IsFishAttack = false;
             player.Statistic.GatheringCount++;
             player.AddEventToHistory(new GatheringEvent());
@@ -288,10 +288,11 @@ namespace Fishing.BL.Model.Game {
 
         public void DecSatiety(int value) {
             if (value >= 0) {
-                if (Satiety - value <= SATIETY_MIN_VALUE) {
+                if (Satiety - value >= SATIETY_MIN_VALUE) {
                     Satiety -= value;
                 }
             }
+            SatietyUpdated?.Invoke();
         }
 
         public void AddFishToPond()
@@ -319,7 +320,7 @@ namespace Fishing.BL.Model.Game {
                     Satiety += food.Productivity;
                     FoodInv.Remove(food);
                     AddEventToHistory(new FoodEvent(food));
-                    SatietyUpdated?.Invoke(food.Productivity);
+                    SatietyUpdated?.Invoke();
                     return true;
                 }
                 else {

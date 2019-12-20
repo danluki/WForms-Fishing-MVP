@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.Remoting.Channels;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fishing.BL.Model.Game;
+using Fishing.BL.Model.SoundPlayer;
 using WMPLib;
 
 namespace Fishing.BL.Model.Drawer {
@@ -12,6 +14,8 @@ namespace Fishing.BL.Model.Drawer {
 
         private readonly Player player = Player.GetPlayer();
         private readonly SolidBrush sbrush = new SolidBrush(Color.White);
+
+        public Action FeedUpEnded;
 
         public Rectangle FirstNormalRoad;
         public Rectangle FirstBrokenRoad;
@@ -24,19 +28,35 @@ namespace Fishing.BL.Model.Drawer {
 
         private Rectangle Netting;
         public Rectangle RTrigon;
-
+        public Rectangle FeedUpBallRectangle = new Rectangle(0, Game.Game.GameHeight, 4, 4);
+        private Point FeedUpPoint;
         public Drawer()
         {
             player.GiveUped += Player_GiveUped;
         }
 
-        private void Player_GiveUped() {
-            throw new NotImplementedException();
+        private void Player_GiveUped(Point point) {
+            _animationTimer.Start();
+            _animationTimer.Tick += _animationTimer_Tick;
+            FeedUpPoint = point;
         }
 
-        private Timer _animationTimer = new Timer()
-        {
-            Interval = 100
+        private async void _animationTimer_Tick(object sender, EventArgs e) {
+            await Task.Run(() => {
+                FeedUpBallRectangle.X = FeedUpPoint.X;
+                if (FeedUpBallRectangle.Y > FeedUpPoint.Y) {
+                    FeedUpBallRectangle.Y -= 5;
+                }
+                else if (FeedUpBallRectangle.Y <= FeedUpPoint.Y) {
+                    FeedUpBallRectangle.Y = Game.Game.GameHeight;
+                    FeedUpEnded?.Invoke();
+                    _animationTimer.Stop();
+                }
+            });
+        }
+
+        private Timer _animationTimer = new Timer() {
+            Interval = 10
         };
 
         public void DrawFeedUpBall()
@@ -44,9 +64,10 @@ namespace Fishing.BL.Model.Drawer {
             if (player.EquipedRoad != null)
             {
                 sbrush.Color = Color.DarkOliveGreen;
-                Graphics.DrawEllipse(new Pen(Color.DarkOliveGreen), player.EquipedRoad.CurPoint.X, 5, 4, 4);
-                    Graphics.FillEllipse(sbrush, player.FirstRoad.CurPoint.X, 5, 4, 4);
-                }
+                Graphics.DrawEllipse(new Pen(Color.White), player.FirstRoad.CurPoint.X, player.FirstRoad.CurPoint.Y, 4, 4);
+                Graphics.DrawEllipse(new Pen(Color.DarkOliveGreen), FeedUpBallRectangle);
+                Graphics.FillEllipse(sbrush, FeedUpBallRectangle);
+            }
         }
         public void DrawPoints() {
             if (player.FirstRoad != null) {

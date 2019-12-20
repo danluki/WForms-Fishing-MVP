@@ -76,8 +76,8 @@ namespace Fishing {
         public event PaintEventHandler SounderPaint;
 
 
-        private void SatietyUpdated(int obj) {
-            eatingBar.Increment(obj);
+        private void SatietyUpdated() {
+            eatingBar.Value = Player.GetPlayer().Satiety;
         }
 
         private void ShowLastEvent() {

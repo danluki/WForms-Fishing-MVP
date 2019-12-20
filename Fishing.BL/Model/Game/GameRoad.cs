@@ -80,7 +80,7 @@ namespace Fishing.BL.Model.Game {
         }
 
         public Timer baitTimer = new Timer() {
-            Interval = 500,
+            Interval = 5000,
         };
 
         public Timer countFishMovesTimer = new Timer() {

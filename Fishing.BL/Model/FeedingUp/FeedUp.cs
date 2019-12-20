@@ -28,9 +28,9 @@ namespace Fishing.BL.Model.FeedingUp {
         {
             if (Basic == null) return false;
             if (Aroma == null) return false;
-            
-            Aroma.AddAromaToFeedUp(this);
+
             Basic.AddBasicToFeedUp(this);
+            Aroma.AddAromaToFeedUp(this);
 
             Name = this.ToString();
 

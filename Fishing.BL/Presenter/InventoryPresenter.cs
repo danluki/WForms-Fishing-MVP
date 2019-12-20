@@ -5,10 +5,9 @@ using System.Windows.Forms;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Presenter;
 using Fishing.BL.Resources.Messages;
-using BrightIdeasSoftware;
-using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.View;
+using BrightIdeasSoftware;
 
 namespace Fishing.Presenter {
 
@@ -107,28 +106,29 @@ namespace Fishing.Presenter {
                 switch (s) {
                 case "Reels":
                     _view.Assembly_P.Reel = _view.Reel_P;
-                _view.ShowAssembly(_view.Assembly_P);
-                _player.ReelInv.Remove(_view.Reel_P);
+                    _view.ShowAssembly(_view.Assembly_P);
+                    _player.ReelInv.Remove(_view.Reel_P);
                 break;
                 case "Flines":
                     _view.Assembly_P.FLine = _view.FLine_P;
-                _view.ShowAssembly(_view.Assembly_P);
-                _player.FLineInv.Remove(_view.FLine_P);
+                    _view.ShowAssembly(_view.Assembly_P);
+                    _player.FLineInv.Remove(_view.FLine_P);
                 break;
                 case "Lures":
                     _view.Assembly_P.FishBait = _view.Lure_P;
-                _view.ShowAssembly(_view.Assembly_P);
-                _player.LureInv.Remove(_view.Lure_P);
+                    _view.ShowAssembly(_view.Assembly_P);
+                    _player.LureInv.Remove(_view.Lure_P);
                 break;
                 case "Baits":
                     _view.Assembly_P.FishBait = _view.Bait_P;
-                _view.ShowAssembly(_view.Assembly_P);
-                _view.Bait_P.Count -= 1;
+                    _view.ShowAssembly(_view.Assembly_P);
+                    _view.Bait_P.Count -= 1;
                 break;
-                case "Hooks": 
+                case "Hooks":
+                if (_view.Assembly_P.Road.Type == RoadType.Spinning) return;
                     _view.Assembly_P.Hook = _view.Hook_P;
-                _view.ShowAssembly(_view.Assembly_P);
-                _player.HooksInv.Remove(_view.Hook_P);
+                    _view.ShowAssembly(_view.Assembly_P);
+                    _player.HooksInv.Remove(_view.Hook_P);
                 break;
                 default:
                     MessageBox.Show(Messages.NO_CURRENTTAG_FOUND);

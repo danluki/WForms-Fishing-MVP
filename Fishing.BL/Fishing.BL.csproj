@@ -350,6 +350,7 @@
     <Content Include="Resources\podsak.dds" />
     <Content Include="Resources\podsak.png" />
     <None Include="Resources\podsolnuh.jpg" />
+    <None Include="Resources\prik.wav" />
     <Content Include="Resources\Quest Fishers.png" />
     <Content Include="Resources\Quest Reel.png" />
     <Content Include="Resources\rak.jpg" />
@@ -483,7 +484,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ObjectListViewDemo\ObjectListView\ObjectListView2012.csproj">
-      <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
+      <Project>{18feda0c-d147-4286-b39a-01204808106a}</Project>
       <Name>ObjectListView2012</Name>
     </ProjectReference>
   </ItemGroup>

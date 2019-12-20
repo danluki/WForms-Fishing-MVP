@@ -216,6 +216,15 @@ namespace Fishing.BL.Resources.Sounds {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
         /// </summary>
+        public static System.IO.UnmanagedMemoryStream prik {
+            get {
+                return ResourceManager.GetStream("prik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
+        /// </summary>
         public static System.IO.UnmanagedMemoryStream sellfish {
             get {
                 return ResourceManager.GetStream("sellfish", resourceCulture);

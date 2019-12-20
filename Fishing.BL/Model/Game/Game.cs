@@ -15,6 +15,8 @@ namespace Fishing.BL.Model.Game {
 
     [Serializable]
     public class Game {
+        public const int GameWidth = 1024;
+        public const int GameHeight = 600;
         private static Game game;
         public BindingList<string> Waters = new BindingList<string>();
 

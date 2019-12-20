@@ -44,8 +44,7 @@ namespace Fishing.BL.Model.LVLS {
                             index = randomFish.Next(1, road.FishesPossibleToAttack.Count);
                             fi = road.FishesPossibleToAttack[index];
                         }
-                        if (IsFishAttackPossible(fi, road))
-                        {
+                        if (IsFishAttackPossible(fi, road)) {
                             road.Fish = fi;
                             road.IsFishAttack = true;
 
@@ -64,34 +63,34 @@ namespace Fishing.BL.Model.LVLS {
                             if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
                             return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
                         }
-                        foreach (var feedup in road.CurrentFeedUp.WorkingFishes)
-                        {
-                            for (var fu = 0; fu < feedup.Value; fu++)
-                            {
-                                fi = road.FishesPossibleToAttack[index + fu];
+                        else {
+                            foreach (var feedup in road.CurrentFeedUp.WorkingFishes) {
+                                for (var fu = 0; fu < feedup.Value; fu++) {
+                                    fi = road.FishesPossibleToAttack[index + fu];
+                                    if (feedup.Key.ToString().Equals(fi.GetType().ToString())) {
+                                        if (IsFishAttackPossible(fi, road)) {
+                                            road.Fish = fi;
+                                            road.IsFishAttack = true;
 
-                                if (feedup.Key == fi.GetType() && fi.IsFishAttackPossible(road))
-                                {
-                                    road.Fish = fi;
-                                    road.IsFishAttack = true;
+                                            var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
+                                            var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
 
-                                    var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
-                                    var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
+                                            road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
+                                            road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
+                                            var gathering = randomGathering.Next(1, 100);
 
-                                    road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
-                                    road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
-                                    var gathering = randomGathering.Next(1, 100);
+                                            if (road.Assembly.Road.Type == RoadType.Spinning) {
+                                                if (gathering <= 5) {
+                                                    return (true, true);
+                                                }
+                                            }
 
-                                    if (road.Assembly.Road.Type == RoadType.Spinning) {
-                                        if (gathering <= 5) {
-                                            return (true, true);
+                                            if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
+                                            return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
                                         }
                                     }
 
-                                    if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
-                                    return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
                                 }
-
                             }
                         }
                     }
