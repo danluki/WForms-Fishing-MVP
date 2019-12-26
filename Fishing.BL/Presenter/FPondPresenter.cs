@@ -1,7 +1,7 @@
-﻿using Fishing.View.GUI;
-using System;
-using Fishing.BL.Model.Game;
+﻿using Fishing.BL.Model.Game;
 using Fishing.BL.View;
+using Fishing.View.GUI;
+using System;
 
 namespace Fishing.BL.Presenter {
 
@@ -36,13 +36,11 @@ namespace Fishing.BL.Presenter {
             view.RightImage = null;
         }
 
-        public override void Run()
-        {
+        public override void Run() {
             view.Open();
         }
 
-        public override void End()
-        {
+        public override void End() {
             view.Down();
         }
     }

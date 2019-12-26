@@ -1,10 +1,9 @@
 ﻿using Fishing.BL.Model.Game;
+using Fishing.BL.Model.LVLS;
 using Fishing.BL.View;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.BL.Model.LVLS;
-using Fishing.Presenter;
 
 namespace Fishing.BL.Presenter {
 
@@ -22,13 +21,24 @@ namespace Fishing.BL.Presenter {
         private void SounderPanel_Paint(object sender, PaintEventArgs e) {
             var g = e.Graphics;
             try {
-                float drawX = 0;
+                var player = Player.GetPlayer();
+                var height = Game.GameHeight - CurLVL.DeepTiesStartY;
+                var beforeDeep = Game.GameHeight - (Game.GameHeight - CurLVL.DeepTiesStartY);
+                float coef = 0f;
+                if (height > Sounderwidth) {
+                    coef = Sounderwidth / height;
+                }
+                if (height < Sounderwidth) {
+                    coef = Sounderwidth / height;
+                }
+                var drawX = 0f;
                 for (var i = 0; i < CurLVL.Height - 1; i++) {
-                    var drawX2 = drawX + (Sounderwidth / (CurLVL.Height - 1));
+                    var drawX2 = (CurLVL.DeepArray[Sounder.GetSounder().Row, i].Bottom - beforeDeep) * coef;
                     g.DrawLine(new Pen(Color.White, 2), drawX, Convert.ToSingle(CurLVL.DeepArray[Sounder.GetSounder().Row, i].Text) / 10, drawX2,
                         Convert.ToSingle(CurLVL.DeepArray[Sounder.GetSounder().Row, i + 1].Text) / 10);
                     drawX = drawX2;
                 }
+                g.DrawLine(new Pen(Color.White, 2), drawX, Convert.ToSingle(CurLVL.DeepArray[Sounder.GetSounder().Row, CurLVL.Height - 1].Text) / 10, Sounderwidth, 0);
                 DrawPoint(g);
             }
             catch (NullReferenceException) { }
@@ -36,23 +46,23 @@ namespace Fishing.BL.Presenter {
 
         private void DrawPoint(Graphics g) {
             var player = Player.GetPlayer();
-            var height = 23 * CurLVL.Height;
-            if (height >= Sounderwidth) {
+            var height = Game.GameHeight - CurLVL.DeepTiesStartY;
+            var beforeDeep = Game.GameHeight - (Game.GameHeight - CurLVL.DeepTiesStartY);
+            float coef = 0f;
+            if (height > Sounderwidth) {
+                coef = Sounderwidth / height;
             }
             if (height < Sounderwidth) {
+                coef = Sounderwidth / height;
             }
-            var x = Sounder.GetSounder().Column * (Sounderwidth / CurLVL.Height);
+            var x = (player.EquipedRoad.CurPoint.Y - beforeDeep) * coef;
             g.DrawEllipse(new Pen(Color.Black), x, player.EquipedRoad.CurrentDeep / 10 - 4, 4, 4);
         }
 
-        public override void Run()
-        {
-            
+        public override void Run() {
         }
 
-        public override void End()
-        {
-            
+        public override void End() {
         }
     }
 }

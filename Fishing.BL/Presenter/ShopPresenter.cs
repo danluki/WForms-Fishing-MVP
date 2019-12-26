@@ -1,7 +1,7 @@
-﻿using Fishing.View.Shop;
-using System;
-using Fishing.BL.Model.Game;
+﻿using Fishing.BL.Model.Game;
 using Fishing.BL.Presenter;
+using Fishing.View.Shop;
+using System;
 
 namespace Fishing.Presenter {
 

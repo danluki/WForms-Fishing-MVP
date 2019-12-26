@@ -2,14 +2,12 @@
 using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
-using Fishing.BL.Model.Lures;
 using Fishing.BL.Presenter;
-using Fishing.Presenter;
+using Fishing.BL.View;
 using Fishing.View.Assembly;
 using Fishing.View.LureSelector;
 using System;
 using System.Windows.Forms;
-using Fishing.BL.View;
 
 namespace Fishing.View.Inventory {
 
@@ -47,10 +45,10 @@ namespace Fishing.View.Inventory {
         public FLine FLine_P { get; set; }
 
         public Lure Lure_P { get; set; }
-            
+
         public Item Item_P { get; set; }
 
-            public BL.Model.Game.Assembly Assembly_P {
+        public BL.Model.Game.Assembly Assembly_P {
             get {
                 try {
                     return Player.GetPlayer().Assemblies[assembliesBox.SelectedIndex];
@@ -60,7 +58,7 @@ namespace Fishing.View.Inventory {
                 return null;
             }
             set { }
-            }
+        }
 
         public Bait Bait_P { get; set; }
 
@@ -121,7 +119,9 @@ namespace Fishing.View.Inventory {
                 presenter.Run();
             }
         }
+
         #region ViewsClick
+
         private void reelsView_MouseDoubleClick(object sender, MouseEventArgs e) {
             ViewsDoubleClick?.Invoke(reelsView, EventArgs.Empty);
         }
@@ -153,6 +153,7 @@ namespace Fishing.View.Inventory {
         private void hooksView_SelectedIndexChanged(object sender, EventArgs e) {
             ViewsSelectedIndexChanged?.Invoke(hooksView, EventArgs.Empty);
         }
+
         private void FlinesView_SelectedIndexChanged(object sender, EventArgs e) {
             ViewsSelectedIndexChanged?.Invoke(flinesView, EventArgs.Empty);
         }
@@ -168,24 +169,23 @@ namespace Fishing.View.Inventory {
         private void assembliesBox_SelectedIndexChanged_2(object sender, EventArgs e) {
             AssemblyBoxSelectedIndexChanged?.Invoke(this, EventArgs.Empty);
         }
-        #endregion
+
+        #endregion ViewsClick
 
         private void ItemsTab_Click(object sender, EventArgs e) {
-            if (Assembly_P != null)
-            {
-                if (Assembly_P.Road.Type == RoadType.Spinning)
-                {
+            if (Assembly_P != null) {
+                if (Assembly_P.Road.Type == RoadType.Spinning) {
                     baitsView.Enabled = false;
                     luresView.Enabled = true;
                 }
 
-                if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float)
-                {
+                if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float) {
                     baitsView.Enabled = true;
                     luresView.Enabled = false;
                 }
             }
         }
+
         public void AddItemToRightView(Item item) {
             switch (Item.SelectItemType(item)) {
                 case Road r:
@@ -252,6 +252,7 @@ namespace Fishing.View.Inventory {
             if (assembly.Reel != null)
                 ReelWearValue = assembly.Reel.Wear;
         }
+
         public void Open() {
             Show();
         }
@@ -259,6 +260,5 @@ namespace Fishing.View.Inventory {
         public void Down() {
             Close();
         }
-
     }
 }

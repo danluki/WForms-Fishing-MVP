@@ -1,7 +1,7 @@
-﻿using System;
-using Fishing.BL.Model.Baits;
+﻿using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
+using System;
 
 namespace Fishing.BL.View {
 
@@ -20,6 +20,7 @@ namespace Fishing.BL.View {
         event EventHandler RoadButtonsClick;
 
         event EventHandler AssemblyBoxSelectedIndexChanged;
+
         Road Road_P { get; set; }
         Reel Reel_P { get; set; }
         FLine FLine_P { get; set; }
@@ -49,6 +50,5 @@ namespace Fishing.BL.View {
         void AddItemToRightView(Item item);
 
         void ShowAssembly(BL.Model.Game.Assembly assembly);
-
     }
 }

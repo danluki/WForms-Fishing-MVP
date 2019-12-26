@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MapEditor.View {
-    public partial class WaterForm : Form
-    {
+
+    public partial class WaterForm : Form {
         private bool _isLeftButtonPressed;
         protected internal string name;
         protected internal int housePrice;
         protected internal int dayPrice;
         protected internal int minLvl;
         protected internal PictureBox SelectedBox;
+
         public WaterForm(string waterName, int housePr, int perDayPrice, int minLevel) {
             InitializeComponent();
             name = waterName;
@@ -30,15 +24,13 @@ namespace MapEditor.View {
             minLevelLabel.Text += minLevel;
             pricePerDayLabel.Text += perDayPrice;
             housePriceLabel.Text += housePr;
-
         }
 
         private void CreateNewLocation_Click(object sender, EventArgs e) {
             var dia = new OpenFileDialog {
                 Filter = "Joint Photographic Experts Group .jpg|*.jpg;|Portable Network Graphics .png| *.png |Bitmap Picture .bmp| *.bmp"
             };
-            if (dia.ShowDialog() == DialogResult.OK)
-            {
+            if (dia.ShowDialog() == DialogResult.OK) {
                 mapPictureBox.Image = Image.FromFile(dia.FileName);
             }
         }
@@ -76,8 +68,6 @@ namespace MapEditor.View {
             if (SelectedBox == null) return;
             var changeLocForm = new ChangeLocationForm(SelectedBox);
             changeLocForm.Show();
-
         }
-
     }
 }

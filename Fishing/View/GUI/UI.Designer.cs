@@ -36,6 +36,7 @@ namespace Fishing
             this.eventsList = new System.Windows.Forms.ImageList(this.components);
             this.eventsView = new System.Windows.Forms.ListView();
             this.LowerPanel = new System.Windows.Forms.Panel();
+            this.fBaitCountsLabel = new System.Windows.Forms.Label();
             this.FeedUpButton = new System.Windows.Forms.PictureBox();
             this.hookBox = new System.Windows.Forms.PictureBox();
             this.SounderPanel = new System.Windows.Forms.Panel();
@@ -46,6 +47,7 @@ namespace Fishing
             this.reelBox = new System.Windows.Forms.PictureBox();
             this.ReelBar = new System.Windows.Forms.ProgressBar();
             this.roadBox = new System.Windows.Forms.PictureBox();
+            this.eatingBar = new VerticalProgressBar.VerticalProgressBar();
             this.WiringTypeLabel = new System.Windows.Forms.Label();
             this.StatsBox = new System.Windows.Forms.PictureBox();
             this.InventoryBox = new System.Windows.Forms.PictureBox();
@@ -59,8 +61,6 @@ namespace Fishing
             this.MoneyLabel = new System.Windows.Forms.Label();
             this.SettingLabel = new System.Windows.Forms.Label();
             this.MapLabel = new System.Windows.Forms.Label();
-            this.eatingBar = new VerticalProgressBar.VerticalProgressBar();
-            this.fBaitCountsLabel = new System.Windows.Forms.Label();
             this.LowerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FeedUpButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hookBox)).BeginInit();
@@ -137,6 +137,15 @@ namespace Fishing
             this.LowerPanel.Name = "LowerPanel";
             this.LowerPanel.Size = new System.Drawing.Size(1023, 213);
             this.LowerPanel.TabIndex = 20;
+            // 
+            // fBaitCountsLabel
+            // 
+            this.fBaitCountsLabel.AutoSize = true;
+            this.fBaitCountsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.fBaitCountsLabel.Location = new System.Drawing.Point(601, 192);
+            this.fBaitCountsLabel.Name = "fBaitCountsLabel";
+            this.fBaitCountsLabel.Size = new System.Drawing.Size(0, 13);
+            this.fBaitCountsLabel.TabIndex = 33;
             // 
             // FeedUpButton
             // 
@@ -250,6 +259,22 @@ namespace Fishing
             this.roadBox.Size = new System.Drawing.Size(94, 154);
             this.roadBox.TabIndex = 28;
             this.roadBox.TabStop = false;
+            // 
+            // eatingBar
+            // 
+            this.eatingBar.BackColor = System.Drawing.Color.Transparent;
+            this.eatingBar.BorderStyle = VerticalProgressBar.BorderStyles.Classic;
+            this.eatingBar.Color = System.Drawing.Color.Gold;
+            this.eatingBar.Location = new System.Drawing.Point(19, 17);
+            this.eatingBar.Maximum = 100;
+            this.eatingBar.Minimum = 0;
+            this.eatingBar.Name = "eatingBar";
+            this.eatingBar.Size = new System.Drawing.Size(19, 88);
+            this.eatingBar.Step = 10;
+            this.eatingBar.Style = VerticalProgressBar.Styles.Solid;
+            this.eatingBar.TabIndex = 27;
+            this.eatingBar.Value = 0;
+            this.eatingBar.Click += new System.EventHandler(this.EatingBar_Click);
             // 
             // WiringTypeLabel
             // 
@@ -381,7 +406,7 @@ namespace Fishing
             this.MoneyLabel.AutoSize = true;
             this.MoneyLabel.BackColor = System.Drawing.Color.Transparent;
             this.MoneyLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MoneyLabel.Location = new System.Drawing.Point(345, 18);
+            this.MoneyLabel.Location = new System.Drawing.Point(320, 15);
             this.MoneyLabel.Name = "MoneyLabel";
             this.MoneyLabel.Size = new System.Drawing.Size(0, 15);
             this.MoneyLabel.TabIndex = 13;
@@ -409,31 +434,6 @@ namespace Fishing
             this.MapLabel.TabIndex = 11;
             this.MapLabel.Text = "Карта";
             this.MapLabel.Click += new System.EventHandler(this.MapLabel_Click);
-            // 
-            // eatingBar
-            // 
-            this.eatingBar.BackColor = System.Drawing.Color.Transparent;
-            this.eatingBar.BorderStyle = VerticalProgressBar.BorderStyles.Classic;
-            this.eatingBar.Color = System.Drawing.Color.Gold;
-            this.eatingBar.Location = new System.Drawing.Point(19, 17);
-            this.eatingBar.Maximum = 100;
-            this.eatingBar.Minimum = 0;
-            this.eatingBar.Name = "eatingBar";
-            this.eatingBar.Size = new System.Drawing.Size(19, 88);
-            this.eatingBar.Step = 10;
-            this.eatingBar.Style = VerticalProgressBar.Styles.Solid;
-            this.eatingBar.TabIndex = 27;
-            this.eatingBar.Value = 0;
-            this.eatingBar.Click += new System.EventHandler(this.EatingBar_Click);
-            // 
-            // fBaitCountsLabel
-            // 
-            this.fBaitCountsLabel.AutoSize = true;
-            this.fBaitCountsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.fBaitCountsLabel.Location = new System.Drawing.Point(601, 192);
-            this.fBaitCountsLabel.Name = "fBaitCountsLabel";
-            this.fBaitCountsLabel.Size = new System.Drawing.Size(0, 13);
-            this.fBaitCountsLabel.TabIndex = 33;
             // 
             // UI
             // 

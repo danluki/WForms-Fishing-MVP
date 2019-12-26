@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Fishing.BL;
-using Fishing.BL.Model.Waters;
+﻿using Fishing.BL;
 using MapEditor.BL;
 using MapEditor.View.View;
 using Saver.BL.Controller;
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Forms;
 
 namespace MapEditor.View {
-    public partial class ChangeLocationForm : Form
-    {
+
+    public partial class ChangeLocationForm : Form {
         private bool _isSetsDeepMode;
         private bool _isLeftButtonPressed;
         private int _labelsStartX;
@@ -28,13 +21,13 @@ namespace MapEditor.View {
         private int _labelYCount;
         private Label[,] _deepArray;
         private readonly PictureBox box;
+
         public ChangeLocationForm(PictureBox locationBox) {
             InitializeComponent();
             Text += locationBox.Tag.ToString();
             box = locationBox;
             nameTextBox.Text = locationBox.Tag.ToString();
             nibbleComboBox.ValueMember = locationBox.Tag.ToString();
-
         }
 
         private void UploadImageButton_Click(object sender, EventArgs e) {
@@ -47,12 +40,10 @@ namespace MapEditor.View {
             CurrentWater.MInfo.BackImg = locationImageBox.BackgroundImage;
         }
 
-        private void SetDeepsButton_Click(object sender, EventArgs e)
-        {
+        private void SetDeepsButton_Click(object sender, EventArgs e) {
             locationImageBox.Cursor = Cursors.Cross;
             _isSetsDeepMode = true;
         }
-
 
         private void LocationImageBox_MouseMove(object sender, MouseEventArgs e) {
             locationImageBox.Refresh();
@@ -67,10 +58,8 @@ namespace MapEditor.View {
             _labelXCount = (_labelsEndX - _labelsStartX) / LabelInfo.Width;
             _labelYCount = (_labelsEndY - _labelsStartY) / LabelInfo.Height;
             _deepArray = new Label[_labelXCount, _labelYCount];
-            for (var y = 0; y < _labelYCount; y++)
-            {
-                for (var x = 0; x < _labelXCount; x++)
-                {
+            for (var y = 0; y < _labelYCount; y++) {
+                for (var x = 0; x < _labelXCount; x++) {
                     _deepArray[x, y] = new Label() {
                         Left = _labelsStartX + 5 + x * LabelInfo.Width,
                         Top = _labelsStartY + y * LabelInfo.Height,
@@ -83,12 +72,10 @@ namespace MapEditor.View {
                         BorderStyle = BorderStyle.FixedSingle,
                         BackColor = Color.Transparent
                     };
-                    _deepArray[x, y].Click += (o, args) =>
-                    {
-                        var r = new Rectangle(((Label) o).Location, new Size(LabelInfo.Width, LabelInfo.Height));
+                    _deepArray[x, y].Click += (o, args) => {
+                        var r = new Rectangle(((Label)o).Location, new Size(LabelInfo.Width, LabelInfo.Height));
                         if (!r.IntersectsWith(new Rectangle(PointToClient(Cursor.Position), new Size(1, 1)))) return;
-                        if (setDeepButton.Checked)
-                        {
+                        if (setDeepButton.Checked) {
                             int.TryParse(deepTextBox.Text, out var res);
                             ((Label)o).Text = res.ToString();
                         }
@@ -100,7 +87,6 @@ namespace MapEditor.View {
                     locationImageBox.Controls.Add(_deepArray[x, y]);
                 }
             }
-
         }
 
         private void LocationImageBox_MouseDown(object sender, MouseEventArgs e) {
@@ -111,42 +97,35 @@ namespace MapEditor.View {
             _labelsStartY = PointToClient(Cursor.Position).Y;
         }
 
-        private void LocationImageBox_Paint(object sender, PaintEventArgs e)
-        {
+        private void LocationImageBox_Paint(object sender, PaintEventArgs e) {
             var g = e.Graphics;
-            if(!_isSetsDeepMode) return;
+            if (!_isSetsDeepMode) return;
             if (!_isLeftButtonPressed) return;
             g.DrawRectangle(
-                new Pen(Color.Yellow), 
-                x: _labelsStartX, y: _labelsStartY, 
+                new Pen(Color.Yellow),
+                x: _labelsStartX, y: _labelsStartY,
                 PointToClient(Cursor.Position).X - _labelsStartX,
-                PointToClient(Cursor.Position).Y - _labelsStartY 
+                PointToClient(Cursor.Position).Y - _labelsStartY
                 );
         }
 
-        private void AddFishesButton_Click(object sender, EventArgs e)
-        {
+        private void AddFishesButton_Click(object sender, EventArgs e) {
             var form = new AddFishesForm(nameTextBox.Text);
             form.Show();
         }
 
-        private void GenerateButtonClick_Click(object sender, EventArgs e)
-        {
+        private void GenerateButtonClick_Click(object sender, EventArgs e) {
             var rand = new Random();
             if (!int.TryParse(minDeepTextBox.Text, out var minDeep)) return;
             if (!int.TryParse(maxDeepTextBox.Text, out var maxDeep)) return;
             if (!int.TryParse(filterComboBox.SelectedItem.ToString(), out var filter)) return;
-            if(_deepArray == null) return;
-            for (var y = 0; y < _labelYCount; y++)
-            {
-                for (var x = 0; x < _labelXCount; x++)
-                {
+            if (_deepArray == null) return;
+            for (var y = 0; y < _labelYCount; y++) {
+                for (var x = 0; x < _labelXCount; x++) {
                     _deepArray[x, y].Text = y <= _labelYCount / 2 ? rand.Next(maxDeep - filter, maxDeep).ToString() : rand.Next(minDeep, minDeep + filter).ToString();
                     _deepArray[x, y].Tag = "0";
                 }
             }
-
-            
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {
@@ -155,10 +134,8 @@ namespace MapEditor.View {
             var lInfos = new LabelInfo[_labelXCount, _labelYCount];
             if (_deepArray == null) return;
             saveButton.Enabled = false;
-            for (var y = 0; y < _labelYCount; y++)
-            {
-                for (var x = 0; x < _labelXCount; x++)
-                {
+            for (var y = 0; y < _labelYCount; y++) {
+                for (var x = 0; x < _labelXCount; x++) {
                     lInfos[x, y] = (LabelInfo)_deepArray[x, y];
                 }
             }

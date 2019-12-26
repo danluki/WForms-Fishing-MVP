@@ -1,16 +1,18 @@
-﻿using Fishing.BL.Resources.Images;
+﻿using Fishing.BL.Presenter;
+using Fishing.BL.Resources.Images;
 using Fishing.Presenter;
 using Fishing.View.FoodShop;
 using Fishing.View.Menu;
+using Fishing.View.Shop;
 using Fishing.View.Trip;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.BL.Presenter;
-using Fishing.View.Shop;
 
 namespace Fishing {
+
     public partial class Menu : Form, IMenu {
+
         public Menu() {
             InitializeComponent();
         }

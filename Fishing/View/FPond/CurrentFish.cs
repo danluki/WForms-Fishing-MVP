@@ -1,9 +1,7 @@
-﻿using Fishing.BL.Presenter;
-using Fishing.BL.View;
-using System;
-using System.Windows.Forms;
-using Fishing.AbstractFish;
+﻿using Fishing.AbstractFish;
 using Fishing.BL.Model.Game;
+using Fishing.BL.View;
+using System.Windows.Forms;
 
 namespace Fishing {
 

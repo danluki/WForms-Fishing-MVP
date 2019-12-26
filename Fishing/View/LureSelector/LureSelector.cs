@@ -1,11 +1,10 @@
 ﻿using Fishing.BL.Model.Baits;
-using Fishing.Presenter;
+using Fishing.BL.Presenter;
 using Fishing.View.LureSelector.View;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.BL.Presenter;
 
 namespace Fishing.View.LureSelector {
 
@@ -26,6 +25,7 @@ namespace Fishing.View.LureSelector {
         public T FishBait { get => List[lureList.SelectedIndex]; set => throw new NotImplementedException(); }
 
         public event EventHandler LureListIndexChanged;
+
         public event EventHandler LureListDoubleClick;
 
         private void LureList_SelectedIndexChanged(object sender, EventArgs e) {

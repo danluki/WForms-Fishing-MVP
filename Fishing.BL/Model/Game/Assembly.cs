@@ -1,7 +1,7 @@
-﻿using System;
-using Fishing.BL.Model.Baits;
+﻿using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
+using System;
 
 namespace Fishing.BL.Model.Game {
 
@@ -22,29 +22,29 @@ namespace Fishing.BL.Model.Game {
             FishBait = fb;
         }
 
-        public Assembly(Road road)
-        {
-            if(road == null) return;
+        public Assembly(Road road) {
+            if (road == null) return;
             Road = road;
             Reel = null;
             FLine = null;
             FishBait = null;
         }
+
         public bool IsAssemblyFull() {
             if (Road != null) {
                 if (Reel != null) {
                     if (FLine != null) {
-                        if (FishBait != null)
-                        {
-                            switch (Road.Type)
-                            {
+                        if (FishBait != null) {
+                            switch (Road.Type) {
                                 case RoadType.Feeder when Hook != null:
                                 case RoadType.Spinning:
-                                    return true;
+                                return true;
+
                                 case RoadType.Float when Hook != null:
-                                    return true;
+                                return true;
+
                                 default:
-                                    throw new ArgumentOutOfRangeException();
+                                throw new ArgumentOutOfRangeException();
                             }
                         }
                     }
@@ -53,24 +53,20 @@ namespace Fishing.BL.Model.Game {
             return false;
         }
 
-        public override bool Equals(object obj)
-        {
+        public override bool Equals(object obj) {
             if ((obj == null) || this.GetType() != obj.GetType()) {
                 return false;
             }
-            else
-            {
-                Assembly ass = (Assembly) obj;
+            else {
+                Assembly ass = (Assembly)obj;
                 return (Road == ass.Road) &&
                        (Reel == ass.Reel) &&
                        (FLine == ass.FLine);
             }
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
+        public override int GetHashCode() {
+            unchecked {
                 var hashCode = IsEquiped.GetHashCode();
                 hashCode = (hashCode * 397) ^ (Road != null ? Road.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Reel != null ? Reel.GetHashCode() : 0);

@@ -1,5 +1,4 @@
 ﻿using Fishing.BL.View;
-using Fishing.Presenter;
 using System;
 
 namespace Fishing.BL.Presenter {

@@ -1,9 +1,8 @@
 ﻿using Fishing.BL.Model.Baits;
-using Fishing.Presenter;
+using Fishing.BL.Model.Game;
 using Fishing.View.GUI;
 using Fishing.View.LureSelector.View;
 using System;
-using Fishing.BL.Model.Game;
 
 namespace Fishing.BL.Presenter {
 
@@ -21,16 +20,16 @@ namespace Fishing.BL.Presenter {
 
         private void View_LureListIndexChanged(object sender, EventArgs e) {
             _view.Picture = _view.FishBait.Picture;
-            switch (_view.FishBait)
-            {
+            switch (_view.FishBait) {
                 case Lure l:
-                    _view.DeepBoxText = l.DeepType.ToString();
-                    _view.SizeBoxText = l.Size.ToString();
-                    break;
+                _view.DeepBoxText = l.DeepType.ToString();
+                _view.SizeBoxText = l.Size.ToString();
+                break;
+
                 case Bait b:
-                    _view.SizeBoxText = b.Count.ToString();
-                    _view.DeepBoxText = b.Name;
-                    break;
+                _view.SizeBoxText = b.Count.ToString();
+                _view.DeepBoxText = b.Name;
+                break;
             }
         }
 

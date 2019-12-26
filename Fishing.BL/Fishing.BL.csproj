@@ -150,7 +150,6 @@
     <Compile Include="Model\Fishes\Salmon.cs" />
     <Compile Include="Model\Fishes\Trout.cs" />
     <Compile Include="Model\Game\Assembly.cs" />
-    <Compile Include="Model\Game\Pictures.cs" />
     <Compile Include="Model\Game\Sounder.cs" />
     <Compile Include="Model\Game\Player.cs" />
     <Compile Include="Model\Items\FLine.cs" />

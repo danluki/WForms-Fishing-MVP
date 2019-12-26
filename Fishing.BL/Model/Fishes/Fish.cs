@@ -3,7 +3,6 @@ using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Game;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 
@@ -37,7 +36,8 @@ namespace Fishing.AbstractFish {
             this.Bitmap = bit;
             this.ActivityParts = activeParts;
         }
-        public bool IsFishAttackPossible(GameRoad road) {
+
+        private bool IsFishAttackPossible(GameRoad road) {
             try {
                 if (MinDeep > road.CurrentDeep || MaxDeep < road.CurrentDeep) return false;
                 var part = ActivityParts.First(p => p == Game.GetGame().Time.Part);
@@ -50,16 +50,16 @@ namespace Fishing.AbstractFish {
                 return false;
             }
         }
-        public bool IsFishInNeededToAttackDeep(int deep)
-        {
+
+        public bool IsFishInNeededToAttackDeep(int deep) {
             return MinDeep <= deep && MaxDeep >= deep;
         }
+
         public bool IsTrophy() {
             return Weight >= TrophyWeight;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             if (Weight / 1000 > 0) {
                 return Name + " " + Weight / 1000 + "кг " + Weight % 1000 + "г";
             }
@@ -71,5 +71,12 @@ namespace Fishing.AbstractFish {
             return fs.GetFishByStr();
         }
 
+        public bool Attack(GameRoad road) {
+            if (IsFishAttackPossible(road)) {
+                road.Fish = this;
+                return true;
+            }
+            return false;
+        }
     }
 }

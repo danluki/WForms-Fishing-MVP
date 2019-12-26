@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Fishing.BL.Model.Items;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using Fishing.BL.Model.Items;
 
 namespace Fishing.BL.Model.Eating {
 

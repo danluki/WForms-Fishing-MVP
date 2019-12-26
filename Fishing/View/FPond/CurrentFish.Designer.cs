@@ -39,7 +39,7 @@
             // 
             this.NameLabel.AutoSize = true;
             this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NameLabel.Location = new System.Drawing.Point(9, 452);
+            this.NameLabel.Location = new System.Drawing.Point(68, 452);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(66, 24);
             this.NameLabel.TabIndex = 1;
@@ -49,7 +49,7 @@
             // 
             this.WeightLabel.AutoSize = true;
             this.WeightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WeightLabel.Location = new System.Drawing.Point(619, 452);
+            this.WeightLabel.Location = new System.Drawing.Point(538, 452);
             this.WeightLabel.Name = "WeightLabel";
             this.WeightLabel.Size = new System.Drawing.Size(66, 24);
             this.WeightLabel.TabIndex = 2;

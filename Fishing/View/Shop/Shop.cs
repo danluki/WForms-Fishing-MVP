@@ -1,30 +1,31 @@
-﻿using System;
-using System.Windows.Forms;
-using Fishing.BL.Model.Baits;
+﻿using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Eating;
 using Fishing.BL.Model.FeedingUp;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
 using Fishing.BL.Presenter;
+using System;
+using System.Windows.Forms;
 
 namespace Fishing.View.Shop {
+
     public partial class Shop : Form, IShop {
+
         public Shop() {
             InitializeComponent();
             RoadsList.DataSource = Item.Roads;
             ReelsList.DataSource = Item.Reels;
             FLineList.DataSource = Item.FLines;
-            foreach (var fb in FishBait.FishBaits)
-            {
-                switch (fb)
-                {
+            foreach (var fb in FishBait.FishBaits) {
+                switch (fb) {
                     case Lure _:
-                        lureBox.Items.Add(fb);
-                        break;
+                    lureBox.Items.Add(fb);
+                    break;
+
                     case Bait _:
-                        baitsList.Items.Add(fb);
-                        break;
+                    baitsList.Items.Add(fb);
+                    break;
                 }
             }
             hookList.DataSource = Item.Hooks;
@@ -60,7 +61,9 @@ namespace Fishing.View.Shop {
         public event EventHandler BaitDoubleClick;
 
         public event EventHandler HookDoubleClick;
+
         public event EventHandler AromaDoubleClick;
+
         public event EventHandler BasicDoubleClick;
 
         private void RoadsList_SelectedIndexChanged_1(object sender, EventArgs e) {
@@ -90,6 +93,7 @@ namespace Fishing.View.Shop {
         private void RoadsList_MouseDoubleClick_1(object sender, MouseEventArgs e) {
             RoadDoubleClick?.Invoke(this, EventArgs.Empty);
         }
+
         private void LureBox_SelectedIndexChanged(object sender, EventArgs e) {
             AddItemToRightView(Lure_P);
         }

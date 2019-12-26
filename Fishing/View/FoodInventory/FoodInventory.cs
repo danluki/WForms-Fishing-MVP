@@ -1,10 +1,9 @@
 ﻿using Fishing.BL.Model.Eating;
-using Fishing.BL.View;
-using Fishing.Presenter;
-using System;
-using System.Windows.Forms;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Presenter;
+using Fishing.BL.View;
+using System;
+using System.Windows.Forms;
 
 namespace Fishing.View.FoodInventory {
 

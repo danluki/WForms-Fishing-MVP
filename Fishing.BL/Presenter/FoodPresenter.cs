@@ -1,12 +1,9 @@
 ﻿using Fishing.BL.Model.Eating;
-using Fishing.BL.Resources.Sounds;
-using Fishing.BL.View;
-using Fishing.Presenter;
-using System;
-using System.Linq;
-using System.Media;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Model.SoundPlayer;
+using Fishing.BL.View;
+using System;
+using System.Linq;
 
 namespace Fishing.BL.Presenter {
 

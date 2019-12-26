@@ -1,16 +1,12 @@
-﻿using Fishing.BL.Model.Baits;
-using Fishing.BL.Model.Eating;
+﻿using Fishing.BL.Controller;
+using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
-using Fishing.BL.Model.Lures;
+using Fishing.BL.Presenter;
 using Fishing.BL.Resources.Images;
 using Fishing.View.Menu;
-using Saver.BL.Controller;
 using System;
 using System.Windows.Forms;
-using Fishing.BL.Controller;
-using Fishing.BL.Model.Game;
-using Fishing.BL.Presenter;
 
 namespace Fishing.Presenter {
 

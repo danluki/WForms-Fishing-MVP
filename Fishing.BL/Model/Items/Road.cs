@@ -3,7 +3,6 @@ using System.Drawing;
 
 namespace Fishing.BL.Model.Items {
 
-
     [Serializable]
     public class Road : Item {
         public int Power { get; set; }
@@ -16,8 +15,7 @@ namespace Fishing.BL.Model.Items {
             Type = type;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return Name;
         }
     }

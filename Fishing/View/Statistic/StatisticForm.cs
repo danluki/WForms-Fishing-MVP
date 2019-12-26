@@ -1,12 +1,14 @@
-﻿using Fishing.BL.Model.UserEvent;
+﻿using Fishing.BL.Model.Game;
+using Fishing.BL.Model.UserEvent;
+using Fishing.BL.Presenter;
 using Fishing.BL.View;
 using System;
 using System.Windows.Forms;
-using Fishing.BL.Model.Game;
-using Fishing.BL.Presenter;
 
 namespace Fishing.View.Statistic {
+
     public partial class StatisticForm : Form, IStatistic {
+
         public StatisticForm() {
             InitializeComponent();
         }

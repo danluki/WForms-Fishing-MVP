@@ -1,9 +1,9 @@
 ﻿using Fishing.BL.Model.Baits;
+using Fishing.BL.Model.FeedingUp;
 using Fishing.BL.Model.Hooks;
+using Fishing.BL.Model.Items;
 using Fishing.BL.View;
 using System;
-using Fishing.BL.Model.FeedingUp;
-using Fishing.BL.Model.Items;
 
 namespace Fishing.View.Shop {
 

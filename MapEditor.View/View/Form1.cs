@@ -1,21 +1,15 @@
 ﻿using MapEditor.BL;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using MapEditor.View.View;
 using Saver.BL.Controller;
+using System;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Forms;
 
 namespace MapEditor.View {
-    public partial class Form1 : Form
-    {
+
+    public partial class Form1 : Form {
+
         public Form1() {
             InitializeComponent();
         }
@@ -28,14 +22,12 @@ namespace MapEditor.View {
             mapForm.Show();
         }
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e) {
             var saver = new SerializeDataSaver();
             File.WriteAllText(CurrentWater.MInfo.WaterName + "\\WaterInfo", CurrentWater.MInfo.WaterInfoString);
             CurrentWater.MInfo.BackImg.Save(CurrentWater.MInfo.WaterName + "\\MapImg.png", ImageFormat.Png);
             saver.Save(CurrentWater.MInfo.WaterName + "\\Map.dat", CurrentWater.MInfo.Locations);
-            foreach (var loc in CurrentWater.MInfo.Locations)
-            {
+            foreach (var loc in CurrentWater.MInfo.Locations) {
                 Directory.CreateDirectory(CurrentWater.MInfo.WaterName + "\\" + loc.LocName);
             }
         }

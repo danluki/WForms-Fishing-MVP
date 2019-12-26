@@ -1,15 +1,11 @@
-﻿using Fishing.BL.Model.UserEvent;
+﻿using Fishing.AbstractFish;
+using Fishing.BL.Model.FeedingUp;
+using Fishing.BL.Model.LVLS;
 using Fishing.BL.Resources.Images;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.AbstractFish;
-using Fishing.BL.Model.Baits;
-using Fishing.BL.Model.FeedingUp;
-using Fishing.BL.Model.Items;
-using Fishing.BL.Model.LVLS;
-using Fishing.BL.Model.SoundPlayer;
 
 namespace Fishing.BL.Model.Game {
 
@@ -90,6 +86,7 @@ namespace Fishing.BL.Model.Game {
         public Timer gatheringTimer = new Timer() {
             Interval = 1500,
         };
+
         public List<Fish> FishesPossibleToAttack { get; set; }
         public Lvl CurLVL { get; set; }
         public Image Image { get; set; }
@@ -118,11 +115,12 @@ namespace Fishing.BL.Model.Game {
                 baitTimer.Start();
             }
         }
+
         public void RemoveFromLocation() {
-             this.Assembly.IsEquiped = false;
-             this.IsBaitInWater = false;
-             this.IsBaitMoving = false;
-             this.IsFishAttack = false;
+            this.Assembly.IsEquiped = false;
+            this.IsBaitInWater = false;
+            this.IsBaitMoving = false;
+            this.IsFishAttack = false;
         }
     }
 }

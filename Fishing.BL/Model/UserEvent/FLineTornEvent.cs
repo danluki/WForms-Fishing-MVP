@@ -1,5 +1,5 @@
-﻿using System;
-using Fishing.BL.Model.Game;
+﻿using Fishing.BL.Model.Game;
+using System;
 
 namespace Fishing.BL.Model.UserEvent {
 

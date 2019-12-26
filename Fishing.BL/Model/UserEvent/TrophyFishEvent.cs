@@ -1,8 +1,8 @@
-﻿using Fishing.BL.Model.Baits;
+﻿using Fishing.AbstractFish;
+using Fishing.BL.Model.Baits;
+using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Lures;
 using System;
-using Fishing.AbstractFish;
-using Fishing.BL.Model.Game;
 
 namespace Fishing.BL.Model.UserEvent {
 

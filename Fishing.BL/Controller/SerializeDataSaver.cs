@@ -7,8 +7,7 @@ namespace Saver.BL.Controller {
 
         public T Load<T>(string fileName) {
             var formatter = new BinaryFormatter();
-            using (var fs = new FileStream(fileName, FileMode.OpenOrCreate))
-            {
+            using (var fs = new FileStream(fileName, FileMode.OpenOrCreate)) {
                 if (fs.Length > 0 && formatter.Deserialize(fs) is T items) {
                     return items;
                 }

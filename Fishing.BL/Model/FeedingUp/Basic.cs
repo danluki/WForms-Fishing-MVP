@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Fishing.BL.Model.Items;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fishing.BL.Model.Items;
 
 namespace Fishing.BL.Model.FeedingUp {
-    public class Basic : Item{
+
+    [Serializable]
+    public class Basic : Item {
         public Dictionary<Type, int> WorkingFishes { get; set; }
 
         public Basic(string name, int price, Bitmap picture, Dictionary<Type, int> workingFishes) : base(name, price, picture) {
@@ -25,8 +24,7 @@ namespace Fishing.BL.Model.FeedingUp {
             }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return Name;
         }
     }

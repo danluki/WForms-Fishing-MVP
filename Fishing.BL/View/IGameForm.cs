@@ -1,9 +1,8 @@
-﻿using Fishing.BL.View;
+﻿using Fishing.AbstractFish;
 using Fishing.Presenter;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.AbstractFish;
 
 namespace Fishing.BL.View {
 

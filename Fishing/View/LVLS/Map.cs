@@ -4,10 +4,10 @@ using Fishing.BL.Resources.Images;
 using Fishing.BL.View;
 using Fishing.Presenter;
 using Fishing.View.DeepField;
+using Fishing.View.LVLS;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.View.LVLS;
 
 namespace Fishing {
 
@@ -18,8 +18,7 @@ namespace Fishing {
             InitializeComponent();
             BackgroundImage = Game.GetGame().CurrentWater.MapImage;
             MessageBox.Show(Game.GetGame().CurrentWater.Locations.Count.ToString());
-            foreach (var p in Game.GetGame().CurrentWater.Locations)
-            {
+            foreach (var p in Game.GetGame().CurrentWater.Locations) {
                 MessageBox.Show(p.LocName);
                 PictureBox box = new PictureBox() {
                     Left = p.Left,

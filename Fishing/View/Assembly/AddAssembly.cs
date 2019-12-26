@@ -1,10 +1,11 @@
-﻿using Fishing.Presenter;
+﻿using Fishing.BL.Presenter;
 using System;
 using System.Windows.Forms;
-using Fishing.BL.Presenter;
 
 namespace Fishing.View.Assembly {
+
     public partial class AddAssembly : Form, IAddAssembly {
+
         public AddAssembly() {
             InitializeComponent();
         }

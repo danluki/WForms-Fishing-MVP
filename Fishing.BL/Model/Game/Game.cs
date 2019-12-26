@@ -1,8 +1,8 @@
 ﻿using Fishing.BL.Model.Waters;
+using Fishing.BL.View;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Fishing.BL.View;
 
 namespace Fishing.BL.Model.Game {
 
@@ -36,8 +36,7 @@ namespace Fishing.BL.Model.Game {
             HoursTimer.Start();
         }
 
-        public static Game GetGame()
-        {
+        public static Game GetGame() {
             return game ?? (game = new Game());
         }
 

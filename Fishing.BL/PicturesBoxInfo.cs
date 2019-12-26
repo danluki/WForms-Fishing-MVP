@@ -23,8 +23,7 @@ namespace Fishing.BL {
         public int Left { get; set; }
         public string LocName { get; set; }
 
-        public static explicit operator PicturesBoxInfo(PictureBox box)
-        {
+        public static explicit operator PicturesBoxInfo(PictureBox box) {
             return new PicturesBoxInfo(box.Width, box.Height, box.BackgroundImage, box.Top, box.Left, box.Tag.ToString());
         }
     }

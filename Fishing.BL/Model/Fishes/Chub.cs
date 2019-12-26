@@ -1,11 +1,11 @@
-﻿using Fishing.BL.Model.Baits;
+﻿using Fishing.AbstractFish;
+using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Resources.Images;
 using Fishing.BL.Resources.Messages;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Fishing.AbstractFish;
 
 namespace Fishing.BL.Model.Fishes {
 

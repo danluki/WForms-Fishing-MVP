@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Fishing.BL.Model.Game;
+using System;
 using System.Windows.Forms;
-using Fishing.BL.Model.Game;
 
 namespace Fishing {
 

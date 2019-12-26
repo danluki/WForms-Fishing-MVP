@@ -1,10 +1,9 @@
-﻿using Fishing.Presenter;
+﻿using Fishing.BL.Model.Game;
+using Fishing.BL.Presenter;
+using Fishing.BL.View;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.BL.Model.Game;
-using Fishing.BL.Presenter;
-using Fishing.BL.View;
 
 namespace Fishing {
 
@@ -30,8 +29,7 @@ namespace Fishing {
         }
 
         private void FishesForm_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Space)
-            {
+            if (e.KeyCode == Keys.Space) {
                 this.Close();
             }
         }

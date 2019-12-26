@@ -1,7 +1,6 @@
-﻿using Fishing.View.Assembly;
+﻿using Fishing.BL.Presenter;
+using Fishing.View.Assembly;
 using System;
-using Fishing.BL.Model.Game;
-using Fishing.BL.Presenter;
 
 namespace Fishing.Presenter {
 

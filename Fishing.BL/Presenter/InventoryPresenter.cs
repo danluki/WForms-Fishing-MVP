@@ -1,18 +1,17 @@
-﻿using Fishing.BL.Model.Items;
+﻿using BrightIdeasSoftware;
+using Fishing.BL.Model.Game;
+using Fishing.BL.Model.Hooks;
+using Fishing.BL.Model.Items;
+using Fishing.BL.Presenter;
+using Fishing.BL.Resources.Messages;
+using Fishing.BL.View;
 using Fishing.View.GUI;
 using System;
 using System.Windows.Forms;
-using Fishing.BL.Model.Game;
-using Fishing.BL.Presenter;
-using Fishing.BL.Resources.Messages;
-using Fishing.BL.Model.Hooks;
-using Fishing.BL.View;
-using BrightIdeasSoftware;
 
 namespace Fishing.Presenter {
 
     public class InventoryPresenter : BasePresenter {
-
         private readonly Player _player = Player.GetPlayer();
 
         private readonly IInventory _view;
@@ -36,30 +35,30 @@ namespace Fishing.Presenter {
         }
 
         #region RoadIndexClicks
+
         private void View_RoadButtonsClick(object sender, EventArgs e) {
             _index = int.Parse((sender as Button)?.Text ?? throw new InvalidOperationException());
         }
 
-        #endregion
+        #endregion RoadIndexClicks
 
         #region AssemblyClicks
+
         private void View_AssemblyBoxSelectedIndexChanged(object sender, EventArgs e) {
             _view.ShowAssembly(_view.Assembly_P);
         }
 
         private void View_AssemblyDoubleClick(object sender, EventArgs e) {
-            if(_view.Assembly_P == null) return;
+            if (_view.Assembly_P == null) return;
             if (!_view.Assembly_P.IsEquiped) {
-                if (_view.Assembly_P.IsAssemblyFull())
-                {
+                if (_view.Assembly_P.IsAssemblyFull()) {
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.SetGameRoad(_view.Assembly_P, _index);
                     _player.SetEquipedRoad(_index);
                     _gui.AddRoadToGUI(_player.EquipedRoad);
                     _view.Assembly_P.IsEquiped = true;
                 }
-                else
-                {
+                else {
                     MessageBox.Show(Messages.ASSEMBLY_NOT_FULL);
                 }
             }
@@ -67,34 +66,39 @@ namespace Fishing.Presenter {
                 MessageBox.Show(Messages.ROAD_ALREADY_EQUIPED);
             }
         }
-        #endregion
+
+        #endregion AssemblyClicks
 
         #region HooksClicks
-        private void View_ViewsSelectedIndexChanged(object sender, EventArgs e)
-        {
+
+        private void View_ViewsSelectedIndexChanged(object sender, EventArgs e) {
             var senderTag = (sender as ObjectListView)?.Tag.ToString();
-            switch (senderTag)
-            {
+            switch (senderTag) {
                 case "Reels":
-                    _view.Reel_P= (Reel)_player.GetItemByName(_view.ReelsViewSelectedItemText);
-                    _view.AddItemToRightView(_view.Reel_P);
+                _view.Reel_P = (Reel)_player.GetItemByName(_view.ReelsViewSelectedItemText);
+                _view.AddItemToRightView(_view.Reel_P);
                 break;
+
                 case "Flines":
-                    _view.FLine_P = (FLine)_player.GetItemByName(_view.FlinesViewSelectedItemText);
-                    _view.AddItemToRightView(_view.FLine_P);
+                _view.FLine_P = (FLine)_player.GetItemByName(_view.FlinesViewSelectedItemText);
+                _view.AddItemToRightView(_view.FLine_P);
                 break;
+
                 case "Lures":
-                    _view.Lure_P = (Lure)_player.GetItemByName(_view.LuresViewSelectedItemText);
+                _view.Lure_P = (Lure)_player.GetItemByName(_view.LuresViewSelectedItemText);
                 break;
+
                 case "Baits":
-                    _view.Bait_P = _player.GetBaitByName(_view.BaitsViewSelectedItemText);
+                _view.Bait_P = _player.GetBaitByName(_view.BaitsViewSelectedItemText);
                 break;
+
                 case "Hooks":
-                    _view.Hook_P = (BaseHook)_player.GetItemByName(_view.HooksViewSelectedItemText);
+                _view.Hook_P = (BaseHook)_player.GetItemByName(_view.HooksViewSelectedItemText);
                 break;
+
                 default:
-                    MessageBox.Show(Messages.NO_CURRENTTAG_FOUND);
-                    break;
+                MessageBox.Show(Messages.NO_CURRENTTAG_FOUND);
+                break;
             }
             _view.AddItemToRightView(_view.Item_P);
         }
@@ -104,35 +108,40 @@ namespace Fishing.Presenter {
             var s = (sender as ObjectListView)?.Tag.ToString();
             if (!_view.Assembly_P.IsEquiped) {
                 switch (s) {
-                case "Reels":
+                    case "Reels":
                     _view.Assembly_P.Reel = _view.Reel_P;
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.ReelInv.Remove(_view.Reel_P);
-                break;
-                case "Flines":
+                    break;
+
+                    case "Flines":
                     _view.Assembly_P.FLine = _view.FLine_P;
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.FLineInv.Remove(_view.FLine_P);
-                break;
-                case "Lures":
+                    break;
+
+                    case "Lures":
                     _view.Assembly_P.FishBait = _view.Lure_P;
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.LureInv.Remove(_view.Lure_P);
-                break;
-                case "Baits":
+                    break;
+
+                    case "Baits":
                     _view.Assembly_P.FishBait = _view.Bait_P;
                     _view.ShowAssembly(_view.Assembly_P);
                     _view.Bait_P.Count -= 1;
-                break;
-                case "Hooks":
-                if (_view.Assembly_P.Road.Type == RoadType.Spinning) return;
+                    break;
+
+                    case "Hooks":
+                    if (_view.Assembly_P.Road.Type == RoadType.Spinning) return;
                     _view.Assembly_P.Hook = _view.Hook_P;
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.HooksInv.Remove(_view.Hook_P);
-                break;
-                default:
+                    break;
+
+                    default:
                     MessageBox.Show(Messages.NO_CURRENTTAG_FOUND);
-                break;
+                    break;
                 }
             }
             else {
@@ -140,8 +149,8 @@ namespace Fishing.Presenter {
             }
         }
 
+        #endregion HooksClicks
 
-        #endregion
         private void View_MakeOutClick(object sender, EventArgs e) {
             try {
                 if (_player.EquipedRoad.Assembly.FLine != null)

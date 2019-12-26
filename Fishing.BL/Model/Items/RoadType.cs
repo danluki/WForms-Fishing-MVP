@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace Fishing.BL.Model.Items
-{
+namespace Fishing.BL.Model.Items {
+
     [Serializable]
-    public enum RoadType
-    {
+    public enum RoadType {
         Float,
         Spinning,
         Feeder

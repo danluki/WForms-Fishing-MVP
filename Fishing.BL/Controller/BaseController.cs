@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Forms;
-using Fishing.AbstractFish;
+﻿using Fishing.AbstractFish;
 using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Eating;
 using Fishing.BL.Model.FeedingUp;
@@ -19,9 +12,15 @@ using Fishing.BL.Model.Waters;
 using Fishing.BL.Resources.Images;
 using Fishing.BL.Resources.Paths;
 using Saver.BL.Controller;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using Assembly = Fishing.BL.Model.Game.Assembly;
 
 namespace Fishing.BL.Controller {
+
     public class BaseController {
         private static BaseController _controller;
         private readonly IDataSaver _saver = new SerializeDataSaver();
@@ -29,13 +28,11 @@ namespace Fishing.BL.Controller {
         private BaseController() {
         }
 
-        public static BaseController GetController()
-        {
+        public static BaseController GetController() {
             return _controller ?? (_controller = new BaseController());
         }
 
-        public void SetAllFishesName()
-        {
+        public void SetAllFishesName() {
             var typelist = System.Reflection.Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == "Fishing.BL.Model.Fishes").ToArray();
             foreach (var type in typelist) {
                 var targetObject = Activator.CreateInstance(Type.GetType(type.FullName), 5, 100, 1, null);
@@ -44,8 +41,7 @@ namespace Fishing.BL.Controller {
             }
         }
 
-        public void SetFeedUps()
-        {
+        public void SetFeedUps() {
             Item.Aromas.Add(new Aroma("Чеснок", 100, FeedUps.chesnok, new Dictionary<Type, int>()
             {
                 {typeof(Roach), 10},
@@ -132,8 +128,8 @@ namespace Fishing.BL.Controller {
                 {typeof(GoldCarp), 2},
             }));
         }
-        public void IntializeLures()
-        {
+
+        public void IntializeLures() {
             FishBait.FishBaits.Add(new Bait("Сыр", 30, 500, Images.cheeze));
             FishBait.FishBaits.Add(new Bait("Червь", 30, 50, Images.worm));
             FishBait.FishBaits.Add(new Bait("Опарыш", 30, 150, Images.oparysh));
@@ -166,6 +162,7 @@ namespace Fishing.BL.Controller {
             Food.Foods.Add(new Food("Бананы", 250, 5, Images.banany));
             Food.Foods.Add(new Food("Апельсины", 500, 20, Images.apelsin));
         }
+
         public void Initiallize() {
             SetAllFishesName();
             Player.GetPlayer().LureInv = _saver.Load<BindingList<Lure>>(ConfigPaths.LURES_DIR) ?? new BindingList<Lure>();
@@ -184,7 +181,7 @@ namespace Fishing.BL.Controller {
             Player.GetPlayer().HooksInv = _saver.Load<BindingList<BaseHook>>(ConfigPaths.HOOKS_DIR) ?? new BindingList<BaseHook>();
             Player.GetPlayer().AromaInventory = _saver.Load<BindingList<Aroma>>(ConfigPaths.AROMA_DIR) ?? new BindingList<Aroma>();
             Player.GetPlayer().BasicInventory = _saver.Load<BindingList<Basic>>(ConfigPaths.BASIC_DIR) ?? new BindingList<Basic>();
-            Player.GetPlayer().FeedUpInventory = _saver.Load<BindingList<FeedUp>>(ConfigPaths.BASIC_DIR) ?? new BindingList<FeedUp>();
+            Player.GetPlayer().FeedUpInventory = _saver.Load<BindingList<FeedUp>>(ConfigPaths.FEEDUPS_DIR) ?? new BindingList<FeedUp>();
             Game.GetGame().Time = _saver.Load<Time>(ConfigPaths.TIME_DIR);
             var dir = new DirectoryInfo(@"C:\Users\Programmer\Desktop\MVPFishing-master\Fishing.BL\Model\Waters");
             foreach (var item in dir.GetDirectories()) {
@@ -213,6 +210,9 @@ namespace Fishing.BL.Controller {
             _saver.Save(ConfigPaths.WATER_DIR, Game.GetGame().CurrentWater.Name);
             _saver.Save(ConfigPaths.BAIT_DIR, Player.GetPlayer().BaitInv);
             _saver.Save(ConfigPaths.HOOKS_DIR, Player.GetPlayer().HooksInv);
+            _saver.Save(ConfigPaths.BASIC_DIR, Player.GetPlayer().BasicInventory);
+            _saver.Save(ConfigPaths.AROMA_DIR, Player.GetPlayer().AromaInventory);
+            _saver.Save(ConfigPaths.FEEDUPS_DIR, Player.GetPlayer().FeedUpInventory);
         }
     }
 }

@@ -1,22 +1,21 @@
 ﻿using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Game;
 using Fishing.BL.Model.Items;
+using Fishing.BL.Model.LVLS;
 using Fishing.BL.Model.UserEvent;
 using Fishing.BL.Presenter;
 using Fishing.BL.View;
 using Fishing.Presenter;
+using Fishing.Resources;
+using Fishing.View.FeedUpView;
 using Fishing.View.FoodInventory;
 using Fishing.View.GUI;
+using Fishing.View.Inventory;
 using Fishing.View.LureSelector;
 using Fishing.View.Statistic;
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using Fishing.BL.Model.LVLS;
-using Fishing.Resources;
-using Fishing.View.FeedUpView;
-using Fishing.View.Inventory;
 
 namespace Fishing {
 
@@ -47,8 +46,7 @@ namespace Fishing {
             Player.GetPlayer().UpdateBucketImage += UI_UpdateBucketImage;
         }
 
-        private void UI_Gathering()
-        {
+        private void UI_Gathering() {
             ReelBar.Value = 0;
             FLineBar.Value = 0;
             fBaitCountsLabel.Text = "";
@@ -63,8 +61,8 @@ namespace Fishing {
         public int RoadBarValue { get => ReelBar.Value; set => ReelBar.Value = value; }
         public int FLineBarValue { get => FLineBar.Value; set => FLineBar.Value = value; }
         public int EventBoxItemsCount { get => eventsView.Items.Count; set => throw new NotImplementedException(); }
-        public int MoneyLValue { get => Convert.ToInt32(MoneyLabel.Text); set => MoneyLabel.Text = value.ToString(); }
-        public int LureDeepValue { get => Convert.ToInt32(LureDeep.Text); set => LureDeep.Text = value.ToString(); }
+        public int MoneyLValue { get=> Player.GetPlayer().Money; set => MoneyLabel.Text = "Деньги:" + value.ToString(); }
+        public int LureDeepValue { get => int.Parse(LureDeep.Text); set => LureDeep.Text = value.ToString(); }
         public string WiringType { get => WiringTypeLabel.Text; set => WiringTypeLabel.Text = value; }
         public int EatingBarValue { get => eatingBar.Value; set => eatingBar.Value = value; }
         public Image RoadPicture { get => roadBox.BackgroundImage; set => roadBox.BackgroundImage = value; }
@@ -74,7 +72,6 @@ namespace Fishing {
         public BasePresenter Presenter { get; set; }
 
         public event PaintEventHandler SounderPaint;
-
 
         private void SatietyUpdated() {
             eatingBar.Value = Player.GetPlayer().Satiety;
@@ -87,7 +84,6 @@ namespace Fishing {
         private void GUI_HoursInc(object sender, EventArgs e) {
             timeLabel.Text = Game.GetGame().Time.ToString();
         }
-
 
         private void MapLabel_Click(object sender, EventArgs e) {
             Gui.Close();
@@ -147,12 +143,10 @@ namespace Fishing {
         }
 
         private void FeedUpButton_MouseEnter(object sender, EventArgs e) {
-            if (Player.GetPlayer().EquipedFeedUp == null)
-            {
+            if (Player.GetPlayer().EquipedFeedUp == null) {
                 FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_em_a");
             }
-            else
-            {
+            else {
                 FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_fu_a");
             }
         }
@@ -171,17 +165,16 @@ namespace Fishing {
                 picturebox.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject(picturebox.Tag + "_a");
         }
 
-        private void Buttons_MouseLeave(object sender, EventArgs e)
-        {
+        private void Buttons_MouseLeave(object sender, EventArgs e) {
             if (sender is PictureBox picturebox)
-                picturebox.BackgroundImage = (Image) GuiButtons.ResourceManager.GetObject(picturebox.Tag + "_d");
+                picturebox.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject(picturebox.Tag + "_d");
         }
 
-        private void FeedUpButton_Click(object sender, EventArgs e)
-        {
+        private void FeedUpButton_Click(object sender, EventArgs e) {
             var feedUpForm = new FeedUpF();
             feedUpForm.Show();
         }
+
         public void AddEventToBox(BaseEvent ev) {
             var lvi = new ListViewItem {
                 Text = ev.Text,
@@ -213,26 +206,23 @@ namespace Fishing {
         }
 
         public void AddRoadToGUI(GameRoad road) {
-            if(road == null) return;
+            if (road == null) return;
 
-                BaitPicture = road.Assembly.FishBait?.Picture;
-                FLinePicture = road.Assembly.FLine?.Picture;
-                FLinePicture = road.Assembly.FLine?.Picture;
-                RoadPicture = road.Assembly.Road?.Picture;
-                ReelPicture = road.Assembly.Reel?.Picture;
+            BaitPicture = road.Assembly.FishBait?.Picture;
+            FLinePicture = road.Assembly.FLine?.Picture;
+            FLinePicture = road.Assembly.FLine?.Picture;
+            RoadPicture = road.Assembly.Road?.Picture;
+            ReelPicture = road.Assembly.Reel?.Picture;
 
-                if (road.Assembly.Road?.Type == RoadType.Feeder)
-                {
-                    HookPicture = road.Assembly.Hook?.Picture;
-                    fBaitCountsLabel.Text = ((Bait) road.Assembly.FishBait)?.Count.ToString();
+            if (road.Assembly.Road?.Type == RoadType.Feeder) {
+                HookPicture = road.Assembly.Hook?.Picture;
+                fBaitCountsLabel.Text = ((Bait)road.Assembly.FishBait)?.Count.ToString();
+            }
+            else {
+                if (road.Assembly.FishBait != null) {
+                    fBaitCountsLabel.Text = "1";
                 }
-                else
-                {
-                    if (road.Assembly.FishBait != null)
-                    {
-                        fBaitCountsLabel.Text = "1";
-                    }
-                }   
+            }
         }
 
         public void Open() {

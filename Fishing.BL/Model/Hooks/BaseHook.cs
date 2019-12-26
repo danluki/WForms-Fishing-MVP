@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Fishing.BL.Model.Items;
+using System;
 using System.Drawing;
-using Fishing.BL.Model.Items;
 
 namespace Fishing.BL.Model.Hooks {
 

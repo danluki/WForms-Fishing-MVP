@@ -1,22 +1,20 @@
-﻿using Fishing.BL.Model.Baits;
-using Fishing.BL.Model.Fishes;
+﻿using Fishing.AbstractFish;
+using Fishing.BL.Model.Baits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Fishing.AbstractFish;
 
 namespace Fishing.BL.Model {
+
     /// <summary>
     /// Name:Size% MinDeep-MaxDeep [Lurei, Lurei+1, i+2]
     /// </summary>
-    /// 
-    public class FishString
-    {
+    ///
+    public class FishString {
         private readonly string _loadStr;
 
-        public FishString(string loadStr)
-        {
+        public FishString(string loadStr) {
             var pattern = @".+:\d+\s\d+-\d+\s\[.+\]";
             if (Regex.IsMatch(loadStr, pattern)) {
                 _loadStr = loadStr;
@@ -52,7 +50,7 @@ namespace Fishing.BL.Model {
                 baits.Add(FishBait.GetFishBaitByName(s));
             }
 
-            return (from f in Fish.AllFishes where f.Key.Equals(name) select Activator.CreateInstance(f.Value, minDeep, maxDeep, sizeCf, baits) into targetObject select (Fish) targetObject).FirstOrDefault();
+            return (from f in Fish.AllFishes where f.Key.Equals(name) select Activator.CreateInstance(f.Value, minDeep, maxDeep, sizeCf, baits) into targetObject select (Fish)targetObject).FirstOrDefault();
         }
     }
 }
