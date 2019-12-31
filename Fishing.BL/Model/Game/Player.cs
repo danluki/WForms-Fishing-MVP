@@ -24,7 +24,7 @@ namespace Fishing.BL.Model.Game {
 
         private static Player player;
 
-        public FeedUp EquipedFeedUp { get; set; }
+        public FeedUp EquipedFeedUp {get; set; }
         public GameRoad FirstRoad { get; set; }
         public GameRoad SecondRoad { get; set; }
         public GameRoad ThirdRoad { get; set; }

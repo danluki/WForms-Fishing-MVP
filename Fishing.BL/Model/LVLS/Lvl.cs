@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace Fishing.BL.Model.LVLS {
 
     public class Lvl {
-        public Image Image { get; set; }
+        public Image BackgroundImage { get; set; }
         public int Widgth;
         public int Height;
         public int DeepTiesStartY;
@@ -22,72 +22,48 @@ namespace Fishing.BL.Model.LVLS {
 
         public Label[,] DeepArray;
         protected List<Fish> Fishes = new List<Fish>(1000);
+        private Random randomGathering = new Random();
+        private Random randomFish = new Random();
 
         [SuppressMessage("ReSharper", "IdentifierTypo")]
         public (bool isFish, bool gathering) GetFish(GameRoad road) {
             try {
-                Shuffle(Fishes);
-                var randomGathering = new Random();
-                var randomFish = new Random();
-                if (road.Assembly.FishBait != null) {
-                    if (!road.IsFishAttack) {
-                        road.FishesPossibleToAttack = new List<Fish>();
-                        foreach (var f in Fishes.Where(f => f.IsFishInNeededToAttackDeep(road.CurrentDeep))) {
-                            road.FishesPossibleToAttack.Add(f);
-                        }
-                        Shuffle(road.FishesPossibleToAttack);
-                        Fish fi = null;
-                        int index = 0;
-                        if (road.FishesPossibleToAttack.Count > 0) {
-                            index = randomFish.Next(1, road.FishesPossibleToAttack.Count);
-                            fi = road.FishesPossibleToAttack[index];
-                        }
-                        var res = fi.Attack(road);
-                        if (res) {
-                            road.IsFishAttack = true;
+                //Проверяем есть ли приманка, и проверяем, что рыбы ещё нет на крючке
 
-                            var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
-                            var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
+                if (road.Assembly.FishBait != null && !road.IsFishAttack) {
+                    //Получаем список рыб плавающих на необходимой глубине, шафлим его.
 
-                            road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
-                            road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
+                    road.FishesPossibleToAttack = new List<Fish>();
+                    foreach (var f in Fishes.Where(f => f.IsFishInNeededToAttackDeep(road.CurrentDeep))) {
+                        road.FishesPossibleToAttack.Add(f);
+                    }
+                    Shuffle(road.FishesPossibleToAttack);
 
-                            var gathering = randomGathering.Next(1, 100);
-                            if (road.Assembly.Road.Type == RoadType.Spinning) {
-                                if (gathering <= 5) {
-                                    return (true, true);
-                                }
-                            }
-                            if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
-                            return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
-                        }
-                        else {
-                            foreach (var feedup in road.CurrentFeedUp.WorkingFishes) {
-                                for (var fu = 0; fu < feedup.Value; fu++) {
-                                    if (index + fu < 1000) {
-                                        fi = road.FishesPossibleToAttack[index + fu];
-                                        if (feedup.Key.ToString().Equals(fi.GetType().ToString())) {
-                                            var r = fi.Attack(road);
-                                            if (r) {
-                                                road.IsFishAttack = true;
+                    //Если список рыб > 0 выбираем случайную. Производим аттаку, 
+                    //если она возможна вычисляем коэффиценты нагрузки, и сход. 
 
-                                                var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
-                                                var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
+                    Fish fish = null;
+                    int index = 0;
+                    if (road.FishesPossibleToAttack.Count > 0) {
+                        index = randomFish.Next(1, road.FishesPossibleToAttack.Count);
+                        fish = road.FishesPossibleToAttack[index];
+                    }
+                    var fishAttacked = fish.Attack(road);
+                    if (fishAttacked) {
+                        return DoAttack(fish, road);
+                    }
 
-                                                road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
-                                                road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
-                                                var gathering = randomGathering.Next(1, 100);
+                    //Если атака не происходит в работу включается прикормка,
+                    //среди списка рыб мы к нашему индексу прибавляем Текущий индекс действия прикормки,
+                    //Проверяем, является ли рыба той, на которую действует прикормка.
 
-                                                if (road.Assembly.Road.Type == RoadType.Spinning) {
-                                                    if (gathering <= 5) {
-                                                        return (true, true);
-                                                    }
-                                                }
-
-                                                if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
-                                                return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
-                                            }
-                                        }
+                    else {
+                        foreach (var feedup in road.CurrentFeedUp.WorkingFishes) {
+                            for (var FeedUpPowerToFishIndex = 0; FeedUpPowerToFishIndex < feedup.Value; FeedUpPowerToFishIndex++) {
+                                if (index + FeedUpPowerToFishIndex < 1000) {
+                                    fish = road.FishesPossibleToAttack[index + FeedUpPowerToFishIndex];
+                                    if (feedup.Key.ToString().Equals(fish.GetType().ToString())) {
+                                        return DoAttack(fish, road);
                                     }
                                 }
                             }
@@ -100,7 +76,30 @@ namespace Fishing.BL.Model.LVLS {
             return (false, false);
         }
 
-        public void Shuffle<T>(IList<T> list) {
+        private (bool isFish, bool gathering) DoAttack(Fish fish, GameRoad road) {
+            var resultOfAttack = fish.Attack(road);
+            if (resultOfAttack) {
+                road.IsFishAttack = true;
+
+                var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
+                var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
+
+                road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
+                road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
+                var gathering = randomGathering.Next(1, 100);
+
+                if (road.Assembly.Road.Type == RoadType.Spinning) {
+                    if (gathering <= 5) {
+                        return (true, true);
+                    }
+                }
+                if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
+                return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
+            }
+            return (false, false);
+        }
+
+        private void Shuffle<T>(IList<T> list) {
             var rng = new Random();
             var n = list.Count;
             while (n > 1) {
@@ -120,7 +119,7 @@ namespace Fishing.BL.Model.LVLS {
                     new StreamReader(_pathToLvl + "\\" + "FishesList");
             while ((line = file.ReadLine()) != null) {
                 var fs = new FishString(line);
-                Fishes.Add((Fish)fs);               
+                Fishes.Add((Fish)fs);
             }
             file.Close();
         }
@@ -155,7 +154,7 @@ namespace Fishing.BL.Model.LVLS {
                          + Path.DirectorySeparatorChar
                          + Game.Game.GetGame().CurrentWater.Name
                          + Path.DirectorySeparatorChar + Name;
-            Image = Image.FromFile(_pathToLvl + "\\BackImg.jpg");
+            BackgroundImage = Image.FromFile(_pathToLvl + "\\BackImg.jpg");
 
             var sb = File.ReadAllText(_pathToLvl + "\\" + "LVLInfo");
             var ar = sb.Split(' ');

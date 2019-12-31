@@ -47,7 +47,7 @@ namespace Fishing
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(722, 675);
+            this.closeButton.Location = new System.Drawing.Point(725, 674);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 4;

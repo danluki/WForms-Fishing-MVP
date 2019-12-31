@@ -48,10 +48,6 @@ namespace Fishing {
             Close();
         }
 
-        private void CloseButton_Click(object sender, EventArgs e) {
-            Close();
-        }
-
         public void Create(Lvl lvl) {
             UI.Gui = new UI(lvl);
             Game.GetGame().View = new GameForm();

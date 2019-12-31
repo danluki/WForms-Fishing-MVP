@@ -38,7 +38,7 @@ namespace Fishing.Presenter {
             this.view = view;
             this.gui = v;
             view.LVLPresenter = this;
-            view.BackImage = CurLvl.Image;
+            view.BackImage = CurLvl.BackgroundImage;
             _drawer = new Drawer();
 
             _drawer.FeedUpEnded += Drawer_FeedUpEnded;
