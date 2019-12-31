@@ -43,14 +43,14 @@ namespace Fishing.BL.Model.Drawer {
             Netting.X = player.EquipedRoad.RoadX;
             Netting.Y = 540;
             _animationTimer.Tick += (sender, e) => {
-                    if (Netting.Y > 300) {
-                        Netting.Y -= 5;
-                    }
-                    else {
-                        Netting.Y = 540;
-                        DoNettingEnded?.Invoke();
-                        _animationTimer.Stop();
-                    }
+                if (Netting.Y > 300) {
+                    Netting.Y -= 5;
+                }
+                else {
+                    Netting.Y = 540;
+                    DoNettingEnded?.Invoke();
+                    _animationTimer.Stop();
+                }
             };
         }
 
@@ -61,20 +61,19 @@ namespace Fishing.BL.Model.Drawer {
             _animationTimer.Start();
             _animationTimer.Tick += async (sender, e) => {
                 await Task.Run(() => {
-                        FeedUpBallRectangle.X = FeedUpPoint.X;
-                        if (FeedUpBallRectangle.Y > FeedUpPoint.Y) {
-                            FeedUpBallRectangle.Y -= 5;
-                        }
-                        else if (FeedUpBallRectangle.Y <= FeedUpPoint.Y) {
-                            FeedUpBallRectangle.Y = Game.Game.GameHeight;
-                            FeedUpEnded?.Invoke();
-                            _animationTimer.Stop();
-                        }
+                    FeedUpBallRectangle.X = FeedUpPoint.X;
+                    if (FeedUpBallRectangle.Y > FeedUpPoint.Y) {
+                        FeedUpBallRectangle.Y -= 5;
+                    }
+                    else if (FeedUpBallRectangle.Y <= FeedUpPoint.Y) {
+                        FeedUpBallRectangle.Y = Game.Game.GameHeight;
+                        FeedUpEnded?.Invoke();
+                        _animationTimer.Stop();
+                    }
                 });
             };
             FeedUpPoint = point;
         }
-
 
         public void DrawFeedUpBall() {
             if (player.EquipedRoad != null) {

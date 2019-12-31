@@ -107,11 +107,15 @@ namespace Fishing.BL.Model.Game {
             var b = BaitInv.First(i => name.Equals(i.Name));
             return b;
         }
+        public Reel GetReelByName(string name) {
+            if (name == null) return null;
+            var b = ReelInv.First(i => name.Equals(i.Name));
+            return b;
+        }
 
         public Item GetItemByName(string name) {
             var items = new List<Item>();
             items.AddRange(RoadInv);
-            items.AddRange(ReelInv);
             items.AddRange(FLineInv);
             items.AddRange(LureInv);
             items.AddRange(BaitInv);

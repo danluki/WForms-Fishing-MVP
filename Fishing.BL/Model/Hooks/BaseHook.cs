@@ -8,8 +8,8 @@ namespace Fishing.BL.Model.Hooks {
     public abstract class BaseHook : Item {
         public int GatheringChance { get; }
 
-        public BaseHook(string name, int gathch, int price, Bitmap bit) : base(name, price, bit) {
-            GatheringChance = gathch;
+        public BaseHook(string name, int gatch, int price, Bitmap bit) : base(name, price, bit) {
+            GatheringChance = gatch;
         }
 
         public override string ToString() {

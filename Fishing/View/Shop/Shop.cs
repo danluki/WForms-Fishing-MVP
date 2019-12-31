@@ -87,7 +87,7 @@ namespace Fishing.View.Shop {
         }
 
         private void CloseButton_Click(object sender, EventArgs e) {
-            this.Close();
+            Close();
         }
 
         private void RoadsList_MouseDoubleClick_1(object sender, MouseEventArgs e) {
@@ -122,14 +122,22 @@ namespace Fishing.View.Shop {
             ProductDoubleClick?.Invoke(this, EventArgs.Empty);
         }
 
-        public void Open() {
-            this.Show();
+
+        private void BasicsBox_SelectedIndexChanged(object sender, EventArgs e) {
+            AddItemToRightView(Basic_P);
         }
 
-        public void Down() {
-            this.Close();
+        private void BasicsBox_MouseDoubleClick(object sender, MouseEventArgs e) {
+            BasicDoubleClick?.Invoke(this, EventArgs.Empty);
         }
 
+        private void AromasBox_SelectedIndexChanged(object sender, EventArgs e) {
+            AddItemToRightView(Aroma_P);
+        }
+
+        private void AromasBox_MouseDoubleClick(object sender, MouseEventArgs e) {
+            AromaDoubleClick?.Invoke(this, EventArgs.Empty);
+        }
         public void AddItemToRightView(Item item) {
             try {
                 if (Item.SelectItemType(item) is Basic) {
@@ -138,6 +146,7 @@ namespace Fishing.View.Shop {
                     nameBox.Text = r.Name;
                     powerBox.Text = " ";
                     label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
                 if (Item.SelectItemType(item) is Aroma) {
                     var r = (Aroma)item;
@@ -145,13 +154,16 @@ namespace Fishing.View.Shop {
                     nameBox.Text = r.Name;
                     powerBox.Text = " ";
                     label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
                 if (Item.SelectItemType(item) is Road) {
                     var r = (Road)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
-                    powerBox.Text = r.Power.ToString();
+                    powerBox.Text = (r.Power / 1000) + " кг.";
+                    typeBox.Text = r.Type.ToString();
                     label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
                 if (Item.SelectItemType(item) is Reel) {
                     var r = (Reel)item;
@@ -160,22 +172,16 @@ namespace Fishing.View.Shop {
                     powerBox.Text = r.Power.ToString();
                     typeBox.Text = " ";
                     label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
                 if (Item.SelectItemType(item) is FLine) {
                     var r = (FLine)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
-                    powerBox.Text = r.Power.ToString();
+                    powerBox.Text = (r.Power / 1000) + " кг.";
                     typeBox.Text = " ";
                     label1.Text = " ";
-                }
-                if (Item.SelectItemType(item) is Food) {
-                    var r = (Food)item;
-                    itemBox.BackgroundImage = r.Picture;
-                    nameBox.Text = r.Name;
-                    powerBox.Text = r.Productivity.ToString();
-                    typeBox.Text = " ";
-                    label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
                 if (Item.SelectItemType(item) is Lure) {
                     var r = (Lure)item;
@@ -184,6 +190,7 @@ namespace Fishing.View.Shop {
                     powerBox.Text = r.DeepType.ToString();
                     typeBox.Text = r.Size.ToString();
                     label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
                 if (Item.SelectItemType(item) is Bait) {
                     var r = (Bait)item;
@@ -192,35 +199,26 @@ namespace Fishing.View.Shop {
                     powerBox.Text = "Кол-во: 30";
                     typeBox.Text = " ";
                     label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
-
-                if (!(Item.SelectItemType(item) is BaseHook)) return;
-                {
+                if (Item.SelectItemType(item) is BaseHook) {
                     var r = (BaseHook)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = r.GatheringChance.ToString();
                     typeBox.Text = " ";
                     label1.Text = " ";
+                    priceBox.Text = r.Price + " рублей";
                 }
             }
             catch (ArgumentOutOfRangeException) { }
         }
-
-        private void basicsBox_SelectedIndexChanged(object sender, EventArgs e) {
-            AddItemToRightView(Basic_P);
+        public void Open() {
+            Show();
         }
 
-        private void basicsBox_MouseDoubleClick(object sender, MouseEventArgs e) {
-            BasicDoubleClick?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void aromasBox_SelectedIndexChanged(object sender, EventArgs e) {
-            AddItemToRightView(Aroma_P);
-        }
-
-        private void aromasBox_MouseDoubleClick(object sender, MouseEventArgs e) {
-            AromaDoubleClick?.Invoke(this, EventArgs.Empty);
+        public void Down() {
+            Close();
         }
     }
 }

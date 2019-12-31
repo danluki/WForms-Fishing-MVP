@@ -319,8 +319,8 @@
             this.basicsBox.Name = "basicsBox";
             this.basicsBox.Size = new System.Drawing.Size(461, 422);
             this.basicsBox.TabIndex = 1;
-            this.basicsBox.SelectedIndexChanged += new System.EventHandler(this.basicsBox_SelectedIndexChanged);
-            this.basicsBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.basicsBox_MouseDoubleClick);
+            this.basicsBox.SelectedIndexChanged += new System.EventHandler(this.BasicsBox_SelectedIndexChanged);
+            this.basicsBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BasicsBox_MouseDoubleClick);
             // 
             // aromasBox
             // 
@@ -331,8 +331,8 @@
             this.aromasBox.Name = "aromasBox";
             this.aromasBox.Size = new System.Drawing.Size(461, 422);
             this.aromasBox.TabIndex = 2;
-            this.aromasBox.SelectedIndexChanged += new System.EventHandler(this.aromasBox_SelectedIndexChanged);
-            this.aromasBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.aromasBox_MouseDoubleClick);
+            this.aromasBox.SelectedIndexChanged += new System.EventHandler(this.AromasBox_SelectedIndexChanged);
+            this.aromasBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AromasBox_MouseDoubleClick);
             // 
             // Shop
             // 

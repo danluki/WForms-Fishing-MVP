@@ -16,10 +16,10 @@ namespace Fishing.BL.Model.Game {
         public bool IsEquiped;
 
         public Assembly(Road road, Reel reel, FLine fLine, FishBait fb) {
-            Road = road;
-            Reel = reel;
-            FLine = fLine;
-            FishBait = fb;
+            Road = road ?? throw new ArgumentNullException(nameof(fLine));
+            Reel = reel ?? throw new ArgumentNullException(nameof(fLine));
+            FLine = fLine ?? throw new ArgumentNullException(nameof(fLine));
+            FishBait = fb ?? throw new ArgumentNullException(nameof(fLine));
         }
 
         public Assembly(Road road) {
@@ -54,7 +54,7 @@ namespace Fishing.BL.Model.Game {
         }
 
         public override bool Equals(object obj) {
-            if ((obj == null) || this.GetType() != obj.GetType()) {
+            if ((obj == null) || GetType() != obj.GetType()) {
                 return false;
             }
             else {

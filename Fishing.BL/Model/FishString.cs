@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace Fishing.BL.Model {
 
     /// <summary>
-    /// Name:Size% MinDeep-MaxDeep [Lurei, Lurei+1, i+2]
+    /// Name:Size% MinDeep-MaxDeep [Lure[i], Lure[i+1]...Lure[i+8]
     /// </summary>
     ///
     public class FishString {
@@ -50,7 +50,9 @@ namespace Fishing.BL.Model {
                 baits.Add(FishBait.GetFishBaitByName(s));
             }
 
-            return (from f in Fish.AllFishes where f.Key.Equals(name) select Activator.CreateInstance(f.Value, minDeep, maxDeep, sizeCf, baits) into targetObject select (Fish)targetObject).FirstOrDefault();
+            return (from f in Fish.AllFishes where f.Key.Equals(name)
+                    select Activator.CreateInstance(f.Value, minDeep, maxDeep, sizeCf, baits)
+                    into targetObject select (Fish)targetObject).FirstOrDefault();
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Fishing.BL.Model.Game {
         };
 
         public Timer countFishMovesTimer = new Timer() {
-            Interval = 1500,
+            Interval = 2500,
         };
 
         public Timer gatheringTimer = new Timer() {
@@ -96,8 +96,8 @@ namespace Fishing.BL.Model.Game {
         public Fish Fish { get; set; }
         public FeedUp CurrentFeedUp { get; set; }
 
-        public int RoadX = 100;
-        public int RoadY = 350;
+        public int RoadX;
+        public int RoadY;
 
         public bool IsBaitMoving;
         public bool IsBaitInWater;

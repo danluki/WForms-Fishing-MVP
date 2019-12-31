@@ -6,7 +6,7 @@ namespace Fishing.BL.Model.Hooks {
     [Serializable]
     public class FeederHook : BaseHook {
 
-        public FeederHook(string name, int gathch, int price, Bitmap bit) : base(name, gathch, price, bit) {
+        public FeederHook(string name, int gatch, int price, Bitmap bit) : base(name, gatch, price, bit) {
         }
     }
 }

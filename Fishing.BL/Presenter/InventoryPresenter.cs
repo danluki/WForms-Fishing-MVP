@@ -75,7 +75,7 @@ namespace Fishing.Presenter {
             var senderTag = (sender as ObjectListView)?.Tag.ToString();
             switch (senderTag) {
                 case "Reels":
-                _view.Reel_P = (Reel)_player.GetItemByName(_view.ReelsViewSelectedItemText);
+                _view.Reel_P = _player.GetReelByName(_view.ReelsViewSelectedItemText);
                 _view.AddItemToRightView(_view.Reel_P);
                 break;
 

@@ -158,7 +158,6 @@
     <Compile Include="Model\Baits\Lures\Shaker.cs" />
     <Compile Include="Model\Baits\Lures\Lure.cs" />
     <Compile Include="Model\Baits\Lures\Wobbler.cs" />
-    <Compile Include="Presenter\AssemblyPresenter.cs" />
     <Compile Include="Presenter\CurrentFishPresenter.cs" />
     <Compile Include="Presenter\FPondPresenter.cs" />
     <Compile Include="Presenter\GUIPresenter.cs" />

@@ -5,9 +5,9 @@ using System.Drawing;
 namespace Fishing.BL.Model.Hooks {
 
     [Serializable]
-    internal class FloatsHook : BaseHook {
+    internal sealed class FloatsHook : BaseHook {
 
-        public FloatsHook(string name, int gathch, int price, Bitmap bit) : base(name, gathch, price, bit) {
+        public FloatsHook(string name, int gatch, int price, Bitmap bit) : base(name, gatch, price, bit) {
         }
 
         public static FloatsHook baitHolder = new FloatsHook("Bait Holder", 25, 800, HooksImg.BaitHolder);

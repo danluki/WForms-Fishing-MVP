@@ -9,7 +9,5 @@ namespace Fishing.BL.Model.Game {
         public int TornsFLinesCount { get; set; }
         public int TakenFishesCount { get; set; }
 
-        public Statistic() {
-        }
     }
 }
