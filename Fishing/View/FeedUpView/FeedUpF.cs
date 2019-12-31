@@ -25,7 +25,7 @@ namespace Fishing.View.FeedUpView {
             closeButton.BackgroundImage = FeedUpRes.exit_a;
         }
 
-        private void createButton_Click(object sender, EventArgs e) {
+        private void CreateButton_Click(object sender, EventArgs e) {
             if (curFeedUpAromasBox.Items.Count == curFeedUpBasic.Items.Count) {
                 var basic = _player.GetBasicByName(curFeedUpBasic.Items[0]?.ToString());
                 var aroma = _player.GetAromaByName(curFeedUpAromasBox.Items[0]?.ToString());

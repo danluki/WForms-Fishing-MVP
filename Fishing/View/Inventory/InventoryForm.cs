@@ -16,10 +16,6 @@ namespace Fishing.View.Inventory {
 
         public Inventory() {
             InitializeComponent();
-            if (_player.Assemblies.Count == 0) {
-                var add = new AddAssembly();
-                add.Show();
-            }
             if (_player.FirstRoad != null) {
                 fRoadButton.Enabled = true;
             }

@@ -21,15 +21,15 @@ using Assembly = Fishing.BL.Model.Game.Assembly;
 
 namespace Fishing.BL.Controller {
 
-    public class BaseController {
-        private static BaseController _controller;
+    public class GameLoader {
+        private static GameLoader _loader;
         private readonly IDataSaver _saver = new SerializeDataSaver();
 
-        private BaseController() {
+        private GameLoader() {
         }
 
-        public static BaseController GetController() {
-            return _controller ?? (_controller = new BaseController());
+        public static GameLoader GetLoader() {
+            return _loader ?? (_loader = new GameLoader());
         }
 
         public void SetAllFishesName() {
@@ -187,7 +187,7 @@ namespace Fishing.BL.Controller {
             foreach (var item in dir.GetDirectories()) {
                 Game.GetGame().Waters.Add(item.ToString());
             }
-            string wName = _saver.Load<string>(ConfigPaths.WATER_DIR) ?? "dhd";
+            string wName = _saver.Load<string>(ConfigPaths.WATER_DIR) ?? "Озеро";
             WaterImplementation wr = new WaterImplementation();
             wr.GetLVL(wName);
             Game.GetGame().CurrentWater = wr;

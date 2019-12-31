@@ -20,6 +20,7 @@ using System.Windows.Forms;
 namespace Fishing {
 
     public partial class UI : Form, IGUIPresenter, ISounder {
+        Player _player = Player.GetPlayer();
         public static UI Gui;
         private readonly GUIPresenter _presenter;
         private readonly SounderPresenter _sound;
@@ -28,7 +29,7 @@ namespace Fishing {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint |
                                                                             ControlStyles.UserPaint, true);
-            eatingBar.Value = Player.GetPlayer().Satiety;
+            eatingBar.Value = _player.Satiety;
 
             _presenter = new GUIPresenter(this);
             _presenter.Run();
@@ -36,14 +37,14 @@ namespace Fishing {
             _sound = new SounderPresenter(this, lvl);
             _sound.Run();
 
-            MoneyLValue = Player.GetPlayer().Money;
+            MoneyLValue = _player.Money;
             timeLabel.Text = Game.GetGame().Time.ToString();
 
             Game.GetGame().HoursInc += GUI_HoursInc;
-            Player.GetPlayer().EventHistoryUpdated += ShowLastEvent;
-            Player.GetPlayer().SatietyUpdated += SatietyUpdated;
-            Player.GetPlayer().Gathering += UI_Gathering;
-            Player.GetPlayer().UpdateBucketImage += UI_UpdateBucketImage;
+            _player.EventHistoryUpdated += ShowLastEvent;
+            _player.SatietyUpdated += SatietyUpdated;
+            _player.Gathering += UI_Gathering;
+            _player.UpdateBucketImage += UI_UpdateBucketImage;
         }
 
         private void UI_Gathering() {
@@ -61,7 +62,7 @@ namespace Fishing {
         public int RoadBarValue { get => ReelBar.Value; set => ReelBar.Value = value; }
         public int FLineBarValue { get => FLineBar.Value; set => FLineBar.Value = value; }
         public int EventBoxItemsCount { get => eventsView.Items.Count; set => throw new NotImplementedException(); }
-        public int MoneyLValue { get=> Player.GetPlayer().Money; set => MoneyLabel.Text = "Деньги:" + value.ToString(); }
+        public int MoneyLValue { get=> _player.Money; set => MoneyLabel.Text = "Деньги:" + value.ToString(); }
         public int LureDeepValue { get => int.Parse(LureDeep.Text); set => LureDeep.Text = value.ToString(); }
         public string WiringType { get => WiringTypeLabel.Text; set => WiringTypeLabel.Text = value; }
         public int EatingBarValue { get => eatingBar.Value; set => eatingBar.Value = value; }
@@ -74,11 +75,11 @@ namespace Fishing {
         public event PaintEventHandler SounderPaint;
 
         private void SatietyUpdated() {
-            eatingBar.Value = Player.GetPlayer().Satiety;
+            eatingBar.Value = _player.Satiety;
         }
 
         private void ShowLastEvent() {
-            AddEventToBox(Player.GetPlayer().EventHistory.Peek());
+            AddEventToBox(_player.EventHistory.Peek());
         }
 
         private void GUI_HoursInc(object sender, EventArgs e) {
@@ -107,14 +108,14 @@ namespace Fishing {
         }
 
         private void BaitsPicture_Click(object sender, EventArgs e) {
-            if (Player.GetPlayer().EquipedRoad.Assembly == null || Player.GetPlayer().EquipedRoad.IsBaitInWater) return;
-            if (Player.GetPlayer().EquipedRoad.Assembly.FishBait is Lure) {
-                var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(Player.GetPlayer().LureInv), this);
+            if (_player.EquipedRoad.Assembly == null || _player.EquipedRoad.IsBaitInWater) return;
+            if (_player.EquipedRoad.Assembly.FishBait is Lure) {
+                var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(_player.LureInv), this);
                 pres.Run();
             }
-            if (!(Player.GetPlayer().EquipedRoad.Assembly.FishBait is Bait)) return;
+            if (!(_player.EquipedRoad.Assembly.FishBait is Bait)) return;
             {
-                var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(Player.GetPlayer().BaitInv), this);
+                var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(_player.BaitInv), this);
                 pres.Run();
             }
         }
@@ -143,7 +144,7 @@ namespace Fishing {
         }
 
         private void FeedUpButton_MouseEnter(object sender, EventArgs e) {
-            if (Player.GetPlayer().EquipedFeedUp == null) {
+            if (_player.EquipedFeedUp == null) {
                 FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_em_a");
             }
             else {
@@ -152,7 +153,7 @@ namespace Fishing {
         }
 
         private void FeedUpButton_MouseLeave(object sender, EventArgs e) {
-            if (Player.GetPlayer().EquipedFeedUp == null) {
+            if (_player.EquipedFeedUp == null) {
                 FeedUpButton.BackgroundImage = (Image)GuiButtons.ResourceManager.GetObject("bucket_em_d");
             }
             else {

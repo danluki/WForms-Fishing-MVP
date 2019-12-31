@@ -18,7 +18,7 @@ namespace Fishing {
             switch (e.KeyCode) {
                 case Keys.Space:
                 Player.GetPlayer().AddFish(fish);
-                this.Close();
+                Close();
                 break;
 
                 case Keys.F:

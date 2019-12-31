@@ -61,15 +61,15 @@ namespace Fishing.BL.Model.Drawer {
             _animationTimer.Start();
             _animationTimer.Tick += async (sender, e) => {
                 await Task.Run(() => {
-                    FeedUpBallRectangle.X = FeedUpPoint.X;
-                    if (FeedUpBallRectangle.Y > FeedUpPoint.Y) {
-                        FeedUpBallRectangle.Y -= 5;
-                    }
-                    else if (FeedUpBallRectangle.Y <= FeedUpPoint.Y) {
-                        FeedUpBallRectangle.Y = Game.Game.GameHeight;
-                        FeedUpEnded?.Invoke();
-                        _animationTimer.Stop();
-                    }
+                        FeedUpBallRectangle.X = FeedUpPoint.X;
+                        if (FeedUpBallRectangle.Y > FeedUpPoint.Y) {
+                            FeedUpBallRectangle.Y -= 5;
+                        }
+                        else if (FeedUpBallRectangle.Y <= FeedUpPoint.Y) {
+                            FeedUpBallRectangle.Y = Game.Game.GameHeight;
+                            FeedUpEnded?.Invoke();
+                            _animationTimer.Stop();
+                        }
                 });
             };
             FeedUpPoint = point;
@@ -105,13 +105,7 @@ namespace Fishing.BL.Model.Drawer {
         }
 
         public void DrawNetting() {
-            var timer = new Timer() {
-                Interval = 25
-            };
-            timer.Tick += (sender, e) => {
-                Netting.Y -= 10;
-                Graphics.DrawImage(Images.podsak1, Netting);
-            };
+            Graphics.DrawImage(Images.podsak1, Netting);
         }
 
         public void DrawTrigon() {

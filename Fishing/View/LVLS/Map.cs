@@ -13,13 +13,11 @@ namespace Fishing {
 
     public partial class Map : Form, IMap {
         public static GameForm ozero;
-
+        public Image BackImage { get => BackgroundImage; set => BackgroundImage = value; }
         public Map() {
             InitializeComponent();
             BackgroundImage = Game.GetGame().CurrentWater.MapImage;
-            MessageBox.Show(Game.GetGame().CurrentWater.Locations.Count.ToString());
             foreach (var p in Game.GetGame().CurrentWater.Locations) {
-                MessageBox.Show(p.LocName);
                 PictureBox box = new PictureBox() {
                     Left = p.Left,
                     Top = p.Top,
@@ -42,18 +40,16 @@ namespace Fishing {
             Create(lvlrealisation);
         }
 
-        public Image BackImage { get => BackgroundImage; set => BackgroundImage = value; }
-
         public void Open() {
-            this.Show();
+            Show();
         }
 
         public void Down() {
-            this.Close();
+            Close();
         }
 
-        private void Button1_Click(object sender, EventArgs e) {
-            this.Close();
+        private void CloseButton_Click(object sender, EventArgs e) {
+            Close();
         }
 
         public void Create(Lvl lvl) {
@@ -63,11 +59,11 @@ namespace Fishing {
             presenter.Run();
             new DeepField(lvl);
             UI.Gui.Show();
-            this.Close();
+            Close();
         }
 
-        private void closeButton_Click(object sender, EventArgs e) {
-            this.Close();
+        private void CloseButton_Click(object sender, EventArgs e) {
+            Close();
         }
     }
 }

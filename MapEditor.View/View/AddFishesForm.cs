@@ -16,8 +16,8 @@ namespace MapEditor.View.View {
 
         public AddFishesForm(string locName) {
             InitializeComponent();
-            BaseController.GetController().IntializeLures();
-            BaseController.GetController().SetAllFishesName();
+            GameLoader.GetLoader().IntializeLures();
+            GameLoader.GetLoader().SetAllFishesName();
             baitsBox.DataSource = FishBait.FishBaits;
             foreach (var str in Fish.AllFishes.Keys) {
                 fishesBox.Items.Add(str);

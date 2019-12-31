@@ -74,7 +74,6 @@ namespace MapEditor.View {
                     };
                     _deepArray[x, y].Click += (o, args) => {
                         var r = new Rectangle(((Label)o).Location, new Size(LabelInfo.Width, LabelInfo.Height));
-                        if (!r.IntersectsWith(new Rectangle(PointToClient(Cursor.Position), new Size(1, 1)))) return;
                         if (setDeepButton.Checked) {
                             int.TryParse(deepTextBox.Text, out var res);
                             ((Label)o).Text = res.ToString();

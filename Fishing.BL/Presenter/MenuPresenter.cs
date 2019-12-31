@@ -18,11 +18,11 @@ namespace Fishing.Presenter {
             view.Presenter = this;
             view.ExitButtonClick += View_ExitButtonClick;
             view.MenuLoad += Menu_Load;
-            BaseController.GetController().Initiallize();
+            GameLoader.GetLoader().Initiallize();
         }
 
         private void View_ExitButtonClick(object sender, EventArgs e) {
-            BaseController.GetController().SavePlayer();
+            GameLoader.GetLoader().SavePlayer();
             Application.Exit();
         }
 
@@ -56,8 +56,8 @@ namespace Fishing.Presenter {
             Item.Hooks.Add(new FloatsHook("Takara 2002", 12, 2500, HooksImg.Takara_2002));
             Item.Hooks.Add(new FloatsHook("Worm_X_Strong", 7, 5000, HooksImg.Worm_X_Strong));
 
-            BaseController.GetController().IntializeLures();
-            BaseController.GetController().SetFeedUps();
+            GameLoader.GetLoader().IntializeLures();
+            GameLoader.GetLoader().SetFeedUps();
         }
 
         public override void Run() {

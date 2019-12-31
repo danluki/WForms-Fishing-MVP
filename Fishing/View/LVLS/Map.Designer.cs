@@ -43,7 +43,7 @@ namespace Fishing
             this.button1.TabIndex = 3;
             this.button1.Text = "Назад";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.button1.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // closeButton
             // 
@@ -53,7 +53,7 @@ namespace Fishing
             this.closeButton.TabIndex = 4;
             this.closeButton.Text = "Закрыть";
             this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // Map
             // 

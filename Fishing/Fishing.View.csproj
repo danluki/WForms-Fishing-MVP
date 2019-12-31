@@ -66,12 +66,6 @@
     <Compile Include="VerticalProgressBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\Assembly\AddAssembly.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Assembly\AddAssembly.Designer.cs">
-      <DependentUpon>AddAssembly.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\DeepField\DeepField.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,12 +112,6 @@
     </Compile>
     <Compile Include="View\FPond\FPondForm.Designer.cs">
       <DependentUpon>FPondForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ItemShower\ItemShower.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ItemShower\ItemShower.Designer.cs">
-      <DependentUpon>ItemShower.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LureSelector\LureSelector.cs">
       <SubType>Form</SubType>
@@ -189,9 +177,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GuiButtons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Assembly\AddAssembly.resx">
-      <DependentUpon>AddAssembly.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\DeepField\DeepField.resx">
       <DependentUpon>DeepField.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,9 +201,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FPond\FPondForm.resx">
       <DependentUpon>FPondForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ItemShower\ItemShower.resx">
-      <DependentUpon>ItemShower.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LureSelector\LureSelector.resx">
       <DependentUpon>LureSelector.cs</DependentUpon>

@@ -133,7 +133,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Controller\GameLoader.cs" />
     <Compile Include="Controller\IDataSaver.cs" />
     <Compile Include="Controller\SerializeDataSaver.cs" />
     <Compile Include="Resources\Messages\Messages.Designer.cs">

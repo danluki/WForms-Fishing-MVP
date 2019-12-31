@@ -121,7 +121,7 @@
             this.createButton.TabIndex = 12;
             this.createButton.Text = "Собрать";
             this.createButton.UseVisualStyleBackColor = true;
-            this.createButton.Click += new System.EventHandler(this.createButton_Click);
+            this.createButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // feedsUpBox
             // 

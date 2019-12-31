@@ -120,7 +120,7 @@ namespace Fishing.BL.Model.LVLS {
                     new StreamReader(_pathToLvl + "\\" + "FishesList");
             while ((line = file.ReadLine()) != null) {
                 var fs = new FishString(line);
-                Fishes.Add((Fish)fs);
+                Fishes.Add((Fish)fs);               
             }
             file.Close();
         }

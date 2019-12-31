@@ -21,7 +21,9 @@ namespace Fishing.Presenter {
     //</summary>
     public class LvlPresenter : BasePresenter {
         private const int NoWaterArea = 560;
-
+        private const int MaxBarValue = 1000;
+        private const int RoadDefaultY = 350;
+        private const int RoadMaxY = 357;
         private readonly IGameForm view;
         private readonly IGUIPresenter gui;
         private readonly Drawer _drawer;
@@ -76,8 +78,8 @@ namespace Fishing.Presenter {
         }
 
         private void View_FormClose(object sender, EventArgs e) {
-            BaseController.GetController().SavePlayer();
-            this.End();
+            GameLoader.GetLoader().SavePlayer();
+            End();
         }
 
         private void View_MainTimerTick(object sender, EventArgs e) {
@@ -86,7 +88,7 @@ namespace Fishing.Presenter {
                 if (_player.EquipedRoad.IsFishAttack) {
                     gui.LureDeepValue = _player.EquipedRoad.CurrentDeep;
                     AutoDecBarValues();
-                    if (gui.FLineBarValue > 995) {
+                    if (gui.FLineBarValue > MaxBarValue - 5) {
                         _player.AddEventToHistory(new FLineTornEvent());
                         _player.TornFLine();
 
@@ -95,7 +97,7 @@ namespace Fishing.Presenter {
 
                         SoundsPlayer.PlayTornSound();
                     }
-                    if (gui.RoadBarValue > 995) {
+                    if (gui.RoadBarValue > MaxBarValue - 5) {
                         _player.BrokeRoad();
                         _player.AddEventToHistory(new RoadBrokenEvent());
 
@@ -276,7 +278,8 @@ namespace Fishing.Presenter {
                 }
 
                 if (_player.EquipedRoad.IsFishAttack) return;
-                _player.EquipedRoad.RoadY = 350;
+                _player.EquipedRoad.RoadY = RoadDefaultY;
+
                 try {
                     if (_player.EquipedRoad.Assembly.FishBait != null) return;
                     _player.EquipedRoad.CurPoint.Y = 0;
@@ -294,7 +297,7 @@ namespace Fishing.Presenter {
         #endregion Cast
 
         private void DoWiring() {
-            if (_player.EquipedRoad.RoadY != 357) {
+            if (_player.EquipedRoad.RoadY != RoadMaxY) {
                 _player.EquipedRoad.RoadY += 7;
             }
             _player.WindingSpeed = _player.EquipedRoad.IsFishAttack ? _player.EquipedRoad.Assembly.Reel.Power : 1;
@@ -330,13 +333,13 @@ namespace Fishing.Presenter {
             if (gui.RoadBarValue > 0) {
                 gui.IncrementRoadBarValue(-(_player.EquipedRoad.RoadIncValue));
             }
-            if (gui.FLineBarValue < 1000) {
+            if (gui.FLineBarValue < MaxBarValue) {
                 gui.IncrementFLineBarValue(_player.EquipedRoad.FLineIncValue);
             }
         }
 
         private void IncRoadBarValues() {
-            if (gui.RoadBarValue < 1000) {
+            if (gui.RoadBarValue < MaxBarValue) {
                 gui.IncrementRoadBarValue(_player.EquipedRoad.RoadIncValue);
             }
             if (gui.FLineBarValue > 0) {
@@ -350,22 +353,22 @@ namespace Fishing.Presenter {
 
         private (bool IsIntersec, GameRoad Road) IsPointIntersectWithRoadRect(Point p) {
             var size = new System.Drawing.Size(1, 1);
-            if (_drawer.FirstNormalRoad.IntersectsWith(new Rectangle(p, size))
-                || _drawer.FirstBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
+            if (_drawer.FirstNormalRoad.IntersectsWith(new Rectangle(p, size)) ||
+                _drawer.FirstBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
                 if (_player.EquipedRoad != _player.FirstRoad) {
                     gui.AddRoadToGUI(_player.EquipedRoad);
                 }
                 return (true, _player.FirstRoad);
             }
-            if (_drawer.SecondNormalRoad.IntersectsWith(new Rectangle(p, size))
-                || _drawer.SecondBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
+            if (_drawer.SecondNormalRoad.IntersectsWith(new Rectangle(p, size)) ||
+                _drawer.SecondBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
                 if (_player.EquipedRoad != _player.SecondRoad) {
                     gui.AddRoadToGUI(_player.EquipedRoad);
                 }
                 return (true, _player.SecondRoad);
             }
-            if (_drawer.ThirdNormalRoad.IntersectsWith(new Rectangle(p, size))
-                || _drawer.ThirdBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
+            if (_drawer.ThirdNormalRoad.IntersectsWith(new Rectangle(p, size)) ||
+                _drawer.ThirdBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
                 if (_player.EquipedRoad != _player.ThirdRoad) {
                     gui.AddRoadToGUI(_player.EquipedRoad);
                 }
@@ -392,8 +395,8 @@ namespace Fishing.Presenter {
         }
 
         private bool IsFishAbleToGoIntoFpond() {
-            return _player.EquipedRoad.IsFishAttack
-                   && _player.EquipedRoad.CurPoint.Y >= NoWaterArea;
+            return _player.EquipedRoad.IsFishAttack &&
+                   _player.EquipedRoad.CurPoint.Y >= NoWaterArea;
         }
 
         public override void Run() {

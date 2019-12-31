@@ -49,7 +49,7 @@ namespace Fishing.BL.Model.Game {
 
         public event Action<Point> GiveUped;
 
-        public bool IsFeedingUp;
+        public bool IsFeedingUp = false;
         public bool IsNettingFish;
         public int Satiety { get; set; }
 
@@ -235,7 +235,7 @@ namespace Fishing.BL.Model.Game {
                     player.Money += (int)f.Price * 3 * f.Weight;
                 }
                 Fishlist.Remove(f);
-                BaseController.GetController().SavePlayer();
+                GameLoader.GetLoader().SavePlayer();
             }
         }
 
