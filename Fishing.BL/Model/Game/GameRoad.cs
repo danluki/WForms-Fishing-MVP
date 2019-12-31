@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Fishing.BL.Model.Game {
 
+    [Serializable]
     public class GameRoad {
 
         public GameRoad(Assembly ass) {
@@ -20,7 +21,7 @@ namespace Fishing.BL.Model.Game {
 
         private void GatheringTimer_Tick(object sender, EventArgs e) {
             if (IsFishAttack) {
-                Player.GetPlayer().DoGathering(this);
+                Game.GetGame().Player.DoGathering(this);
             }
             gatheringTimer.Stop();
         }

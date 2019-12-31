@@ -23,13 +23,15 @@ namespace Fishing.BL.Model.Game {
         private const int SATIETY_MAX_VALUE = 100;
         private const int SATIETY_MIN_VALUE = 0;
 
-        private static Player player;
-
-        public FeedUp EquipedFeedUp {get; set; }
-        public GameRoad FirstRoad { get; set; }
-        public GameRoad SecondRoad { get; set; }
-        public GameRoad ThirdRoad { get; set; }
-        public GameRoad EquipedRoad { get; set; }
+        public FeedUp EquipedFeedUp { get; set; }
+        [NonSerialized]
+        public GameRoad FirstRoad;
+        [NonSerialized]
+        public GameRoad SecondRoad;
+        [NonSerialized]
+        public GameRoad ThirdRoad;
+        [NonSerialized]
+        public GameRoad EquipedRoad;
         public BindingList<Fish> Fishlist { get; set; }
         public BindingList<Assembly> Assemblies { get; set; }
         public BindingList<Road> RoadInv { get; set; }
@@ -42,42 +44,53 @@ namespace Fishing.BL.Model.Game {
         public BindingList<FeedUp> FeedUpInventory { get; set; }
         public BindingList<Aroma> AromaInventory { get; set; }
         public BindingList<Basic> BasicInventory { get; set; }
-        public Stack<BaseEvent> EventHistory { get; set; }
-        public Lvl CurrentLvl { get; set; }
-
+        [NonSerialized]
+        public Stack<BaseEvent> EventHistory;
+        [NonSerialized]
+        public Lvl CurrentLvl;
         public event Action EventHistoryUpdated;
-
         public event Action UpdateBucketImage;
-
         public event Action<Point> GiveUped;
 
         public bool IsFeedingUp = false;
         public bool IsNettingFish;
-        public int Satiety { get; set; }
+        public int Satiety { get; set; } = 100;
 
         public event Action SatietyUpdated;
-
         public event Action Gathering;
         public event Action DoNetting;
 
-        public Statistic Statistic { get; set; } = new Statistic();
+        public Statistic Statistic { get; set; }
         public int Money { get; set; }
         public int WindingSpeed { get; set; }
-        public int HoursRemain = 99999999;
-        public string NickName { get; set; } = "Рыболов";
+        public int HoursRemain;
+        public string NickName { get; set; }
 
-        private Player() {
+        public Player() {
+            Fishlist = new BindingList<Fish>();
+            Assemblies = new BindingList<Assembly>();
+            RoadInv = new BindingList<Road>();
+            ReelInv = new BindingList<Reel>();
+            FLineInv = new BindingList<FLine>();
+            LureInv = new BindingList<Lure>();
+            FoodInv = new BindingList<Food>();
+            BaitInv = new BindingList<Bait>();
+            HooksInv = new BindingList<BaseHook>();
+            FeedUpInventory = new BindingList<FeedUp>();
+            AromaInventory = new BindingList<Aroma>();
+            BasicInventory = new BindingList<Basic>();
+            EventHistory = new Stack<BaseEvent>();
+            Statistic = new Statistic();
+            HoursRemain = 999999;
+            Money = 999999;
+            NickName = "Рыболов";
         }
 
         public void GiveUp(GameRoad road) {
-            road.CurrentFeedUp = player.EquipedFeedUp;
+            road.CurrentFeedUp = EquipedFeedUp;
             road.CurrentFeedUp.Count -= 1;
             IsFeedingUp = true;
             GiveUped?.Invoke(road.CurPoint);
-        }
-
-        public static Player GetPlayer() {
-            return player ?? (player = new Player());
         }
 
         public FeedUp GetFeedUpByName(string name) {
@@ -236,10 +249,10 @@ namespace Fishing.BL.Model.Game {
         public void SellFish(Fish f) {
             if (f != null) {
                 if (!f.IsTrophy()) {
-                    player.Money += (int)f.Price * f.Weight;
+                    Money += (int)f.Price * f.Weight;
                 }
                 else {
-                    player.Money += (int)f.Price * 3 * f.Weight;
+                    Money += (int)f.Price * 3 * f.Weight;
                 }
                 Fishlist.Remove(f);
                 GameLoader.GetLoader().SavePlayer();
@@ -259,8 +272,8 @@ namespace Fishing.BL.Model.Game {
 
         public void DoGathering(GameRoad road) {
             road.IsFishAttack = false;
-            player.Statistic.GatheringCount++;
-            player.AddEventToHistory(new GatheringEvent());
+            Statistic.GatheringCount++;
+            AddEventToHistory(new GatheringEvent());
             SoundsPlayer.PlayGatheringSound();
             road.Image = Roads.road;
             road.FLineIncValue = 0;
@@ -268,7 +281,7 @@ namespace Fishing.BL.Model.Game {
             if (road.Assembly.Road.Type == RoadType.Feeder || road.Assembly.Road.Type == RoadType.Float) {
                 ((Bait)road.Assembly.FishBait).Count -= 1;
                 if (((Bait)road.Assembly.FishBait)?.Count <= 0) {
-                    player.BaitInv.Remove((Bait)road.Assembly.FishBait);
+                    BaitInv.Remove((Bait)road.Assembly.FishBait);
                 }
                 road.Assembly.FishBait = null;
             }
@@ -276,26 +289,26 @@ namespace Fishing.BL.Model.Game {
         }
 
         public void BrokeRoad() {
-            player.EquipedRoad.Image = Roads.broken;
-            player.EquipedRoad.IsBaitInWater = false;
-            player.EquipedRoad.IsFishAttack = false;
-            player.EquipedRoad.Assembly.Road = null;
-            player.EquipedRoad.CurPoint = Point.Empty;
-            player.EquipedRoad.FLineIncValue = 0;
-            player.EquipedRoad.RoadIncValue = 0;
-            player.Statistic.BrokensRoadsCount++;
+            EquipedRoad.Image = Roads.broken;
+            EquipedRoad.IsBaitInWater = false;
+            EquipedRoad.IsFishAttack = false;
+            EquipedRoad.Assembly.Road = null;
+            EquipedRoad.CurPoint = Point.Empty;
+            EquipedRoad.FLineIncValue = 0;
+            EquipedRoad.RoadIncValue = 0;
+            Statistic.BrokensRoadsCount++;
         }
 
         public void TornFLine() {
-            player.EquipedRoad.Image = Roads.road;
-            player.EquipedRoad.IsFishAttack = false;
-            player.EquipedRoad.Assembly.FishBait = null;
-            player.EquipedRoad.IsBaitMoving = false;
-            player.EquipedRoad.CurPoint = Point.Empty;
-            player.EquipedRoad.FLineIncValue = 0;
-            player.EquipedRoad.RoadIncValue = 0;
-            player.Statistic.TornsFLinesCount++;
-            player.Statistic.GatheringCount++;
+            EquipedRoad.Image = Roads.road;
+            EquipedRoad.IsFishAttack = false;
+            EquipedRoad.Assembly.FishBait = null;
+            EquipedRoad.IsBaitMoving = false;
+            EquipedRoad.CurPoint = Point.Empty;
+            EquipedRoad.FLineIncValue = 0;
+            EquipedRoad.RoadIncValue = 0;
+            Statistic.TornsFLinesCount++;
+            Statistic.GatheringCount++;
         }
 
         public void DecSatiety(int value) {
@@ -308,19 +321,19 @@ namespace Fishing.BL.Model.Game {
         }
 
         public void AddFishToPond() {
-            player.Statistic.TakenFishesCount++;
-            if (!player.EquipedRoad.Fish.IsTrophy()) {
-                player.AddEventToHistory(new FishEvent(player.EquipedRoad.Fish,
-                    player.EquipedRoad.Assembly.FishBait));
+            Statistic.TakenFishesCount++;
+            if (!EquipedRoad.Fish.IsTrophy()) {
+                AddEventToHistory(new FishEvent(EquipedRoad.Fish,
+                    EquipedRoad.Assembly.FishBait));
             }
             else {
-                player.AddEventToHistory(new TrophyFishEvent(player.EquipedRoad.Fish,
-                    player.EquipedRoad.Assembly.FishBait));
+               AddEventToHistory(new TrophyFishEvent(EquipedRoad.Fish,
+                    EquipedRoad.Assembly.FishBait));
             }
-            if (player.EquipedRoad.Assembly.Road.Type == RoadType.Feeder || player.EquipedRoad.Assembly.Road.Type == RoadType.Float) {
-                ((Bait)player.EquipedRoad.Assembly.FishBait).Count -= 1;
-                if (((Bait)player.EquipedRoad.Assembly.FishBait).Count <= 0) {
-                    player.EquipedRoad.Assembly.FishBait = null;
+            if (EquipedRoad.Assembly.Road.Type == RoadType.Feeder || EquipedRoad.Assembly.Road.Type == RoadType.Float) {
+                ((Bait)EquipedRoad.Assembly.FishBait).Count -= 1;
+                if (((Bait)EquipedRoad.Assembly.FishBait).Count <= 0) {
+                    EquipedRoad.Assembly.FishBait = null;
                 }
             }
         }

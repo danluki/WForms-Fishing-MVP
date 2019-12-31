@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace Fishing.Presenter {
 
     public class InventoryPresenter : BasePresenter {
-        private readonly Player _player = Player.GetPlayer();
+        private readonly Player _player = Game.GetGame().Player;
 
         private readonly IInventory _view;
         private readonly IGUIPresenter _gui;

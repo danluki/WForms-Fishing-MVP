@@ -31,7 +31,7 @@ namespace Fishing.View.Shop {
             hookList.DataSource = Item.Hooks;
             basicsBox.DataSource = Item.Basics;
             aromasBox.DataSource = Item.Aromas;
-            moneyBox.Text = Player.GetPlayer().Money.ToString();
+            moneyBox.Text = Game.GetGame().Player.Money.ToString();
         }
 
         public Road Road_P { get => (Road)Item.GetItemByName(RoadsList.SelectedItem.ToString()); set => throw new ArgumentException(); }

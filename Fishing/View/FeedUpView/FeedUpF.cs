@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Fishing.View.FeedUpView {
 
     public partial class FeedUpF : Form {
-        private Player _player = Player.GetPlayer();
+        private Player _player = Game.GetGame().Player;
 
         public FeedUpF() {
             InitializeComponent();

@@ -12,7 +12,7 @@ namespace Fishing.View.FoodShop {
 
         public FoodShopForm() {
             InitializeComponent();
-            moneyLabel.Text = "Деньги: " + Player.GetPlayer().Money;
+            moneyLabel.Text = "Деньги: " + Game.GetGame().Player.Money;
         }
 
         private void Button_MouseEnter(object sender, EventArgs e) {
@@ -31,10 +31,10 @@ namespace Fishing.View.FoodShop {
 
         private void Button_Click(object sender, EventArgs e) {
             var food = Food.GetFoodByName((sender as PictureBox)?.Tag.ToString());
-            if (Player.GetPlayer().Money >= food.Price) {
-                Player.GetPlayer().Money -= food.Price;
-                moneyLabel.Text = "Деньги: " + Player.GetPlayer().Money;
-                Player.GetPlayer().FoodInv.Add(food);
+            if (Game.GetGame().Player.Money >= food.Price) {
+                Game.GetGame().Player.Money -= food.Price;
+                moneyLabel.Text = "Деньги: " + Game.GetGame().Player.Money;
+                Game.GetGame().Player.FoodInv.Add(food);
                 SoundsPlayer.PlayBuyingSound();
             }
         }

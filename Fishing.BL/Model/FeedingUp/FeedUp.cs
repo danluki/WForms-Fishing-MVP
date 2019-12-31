@@ -20,6 +20,9 @@ namespace Fishing.BL.Model.FeedingUp {
             Basic = basic ?? throw new ArgumentException();
             Bait = bait ?? throw new ArgumentException();
         }
+        public FeedUp() {
+
+        }
 
         public bool Create() {
             if (Basic == null) return false;

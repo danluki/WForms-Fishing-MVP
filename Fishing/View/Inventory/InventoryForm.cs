@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace Fishing.View.Inventory {
 
     public partial class Inventory : Form, IInventory {
-        private readonly Player _player = Player.GetPlayer();
+        private readonly Player _player = Game.GetGame().Player;
 
         public Inventory() {
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace Fishing.View.Inventory {
         public BL.Model.Game.Assembly Assembly_P {
             get {
                 try {
-                    return Player.GetPlayer().Assemblies[assembliesBox.SelectedIndex];
+                    return Game.GetGame().Player.Assemblies[assembliesBox.SelectedIndex];
                 }
                 catch (ArgumentOutOfRangeException) { }
 
@@ -104,14 +104,14 @@ namespace Fishing.View.Inventory {
         }
 
         private void BaitBox_Click(object sender, EventArgs e) {
-            if (Player.GetPlayer().EquipedRoad.Assembly == null || Player.GetPlayer().EquipedRoad.IsBaitInWater) return;
-            if (Player.GetPlayer().EquipedRoad.Assembly.FishBait is Lure) {
-                var presenter = new SelectorPresenter<Lure>(new LureSelector<Lure>(Player.GetPlayer().LureInv), UI.Gui);
+            if (Game.GetGame().Player.EquipedRoad.Assembly == null || Game.GetGame().Player.EquipedRoad.IsBaitInWater) return;
+            if (Game.GetGame().Player.EquipedRoad.Assembly.FishBait is Lure) {
+                var presenter = new SelectorPresenter<Lure>(new LureSelector<Lure>(Game.GetGame().Player.LureInv), UI.Gui);
                 presenter.Run();
             }
-            if (!(Player.GetPlayer().EquipedRoad.Assembly.FishBait is Bait)) return;
+            if (!(Game.GetGame().Player.EquipedRoad.Assembly.FishBait is Bait)) return;
             {
-                var presenter = new SelectorPresenter<Bait>(new LureSelector<Bait>(Player.GetPlayer().BaitInv), UI.Gui);
+                var presenter = new SelectorPresenter<Bait>(new LureSelector<Bait>(Game.GetGame().Player.BaitInv), UI.Gui);
                 presenter.Run();
             }
         }

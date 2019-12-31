@@ -15,7 +15,7 @@ namespace Fishing {
 
         public FishPondForm() {
             InitializeComponent();
-            FishList.DataSource = Player.GetPlayer().Fishlist;
+            FishList.DataSource = Game.GetGame().Player.Fishlist;
             var pres = new FPondPresenter(this, UI.Gui);
             pres.Run();
         }

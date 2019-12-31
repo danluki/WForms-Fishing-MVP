@@ -16,7 +16,7 @@ namespace Fishing.View.Trip {
             timeLabel.Text = Game.GetGame().Time.ToString();
             watersBox.DataSource = Game.GetGame().Waters;
             trip.DaysCount = 1;
-            moneyLabel.Text = "Деньги: " + Player.GetPlayer().Money;
+            moneyLabel.Text = "Деньги: " + Game.GetGame().Player.Money;
         }
 
         private void CloseButton_Click(object sender, EventArgs e) {
@@ -71,18 +71,18 @@ namespace Fishing.View.Trip {
 
         private void GoButton_Click(object sender, EventArgs e) {
             if (Game.GetGame().CurrentWater.Name != trip.TripWater.Name) {
-                if (Player.GetPlayer().Money >= trip.Price) {
+                if (Game.GetGame().Player.Money >= trip.Price) {
                     Game.GetGame().CurrentWater = trip.TripWater;
                     Game.GetGame().Time.IncHours(trip.HoursInTrip);
                     int.TryParse(daysUpDown.Items[daysUpDown.SelectedIndex].ToString(), out var res);
-                    Player.GetPlayer().Money -= trip.Price;
+                    Game.GetGame().Player.Money -= trip.Price;
                     timeLabel.Text = Game.GetGame().Time.ToString();
-                    moneyLabel.Text = Player.GetPlayer().Money.ToString();
+                    moneyLabel.Text = Game.GetGame().Player.Money.ToString();
                     if (trip.TripWater.Name != "Озеро") {
-                        Player.GetPlayer().HoursRemain = res * 24;
+                        Game.GetGame().Player.HoursRemain = res * 24;
                     }
                     else {
-                        Player.GetPlayer().HoursRemain = 99999999;
+                        Game.GetGame().Player.HoursRemain = 99999999;
                     }
                 }
             }

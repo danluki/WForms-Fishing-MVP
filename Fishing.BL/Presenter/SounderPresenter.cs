@@ -21,7 +21,7 @@ namespace Fishing.BL.Presenter {
         private void SounderPanel_Paint(object sender, PaintEventArgs e) {
             var g = e.Graphics;
             try {
-                var player = Player.GetPlayer();
+                var player = Game.GetGame().Player;
                 var height = Game.GameHeight - CurLVL.DeepTiesStartY;
                 var beforeDeep = Game.GameHeight - (Game.GameHeight - CurLVL.DeepTiesStartY);
                 float coef = 0f;
@@ -45,7 +45,7 @@ namespace Fishing.BL.Presenter {
         }
 
         private void DrawPoint(Graphics g) {
-            var player = Player.GetPlayer();
+            var player = Game.GetGame().Player;
             var height = Game.GameHeight - CurLVL.DeepTiesStartY;
             var beforeDeep = Game.GameHeight - (Game.GameHeight - CurLVL.DeepTiesStartY);
             float coef = 0f;

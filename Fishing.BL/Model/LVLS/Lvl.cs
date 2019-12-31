@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace Fishing.BL.Model.LVLS {
 
+    [Serializable]
     public class Lvl {
         public Image BackgroundImage { get; set; }
         public int Widgth;

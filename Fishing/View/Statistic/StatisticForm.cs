@@ -40,14 +40,14 @@ namespace Fishing.View.Statistic {
         }
 
         private void StatisticForm_Load(object sender, EventArgs e) {
-            NameLText = Player.GetPlayer().NickName;
-            MoneyLText = Player.GetPlayer().Money.ToString();
-            GatheringLText = Player.GetPlayer().Statistic.GatheringCount.ToString();
-            TakeFishesLText = Player.GetPlayer().Statistic.TakenFishesCount.ToString();
-            TornFLineLText = Player.GetPlayer().Statistic.TornsFLinesCount.ToString();
-            BrokenRoadsLText = Player.GetPlayer().Statistic.BrokensRoadsCount.ToString();
+            NameLText = Game.GetGame().Player.NickName;
+            MoneyLText = Game.GetGame().Player.Money.ToString();
+            GatheringLText = Game.GetGame().Player.Statistic.GatheringCount.ToString();
+            TakeFishesLText = Game.GetGame().Player.Statistic.TakenFishesCount.ToString();
+            TornFLineLText = Game.GetGame().Player.Statistic.TornsFLinesCount.ToString();
+            BrokenRoadsLText = Game.GetGame().Player.Statistic.BrokensRoadsCount.ToString();
 
-            foreach (BaseEvent ev in Player.GetPlayer().EventHistory) {
+            foreach (BaseEvent ev in Game.GetGame().Player.EventHistory) {
                 ListViewItem lvi = new ListViewItem {
                     Text = ev.Text,
                     ImageIndex = ev.Index

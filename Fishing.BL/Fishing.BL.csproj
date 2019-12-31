@@ -31,12 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Json.Net, Version=1.0.18.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Json.Net.1.0.18\lib\netstandard2.0\Json.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO" />
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -133,9 +140,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Controller\GameLoader.cs" />
-    <Compile Include="Controller\IDataSaver.cs" />
-    <Compile Include="Controller\SerializeDataSaver.cs" />
+    <Compile Include="Saver\GameLoader.cs" />
+    <Compile Include="Saver\IDataSaver.cs" />
+    <Compile Include="Saver\SerializeDataSaver.cs" />
     <Compile Include="Resources\Messages\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +207,7 @@
     <Content Include="Resources\2030.png" />
     <Content Include="Resources\85.wav" />
     <Content Include="Resources\Achilles 233.jpg" />
+    <None Include="packages.config" />
     <None Include="Resources\apelsin.png" />
     <None Include="Resources\apelsin_a.png" />
     <None Include="Resources\apelsin_d.png" />

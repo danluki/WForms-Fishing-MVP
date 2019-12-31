@@ -27,7 +27,7 @@ namespace Fishing.Presenter {
         private readonly IGameForm view;
         private readonly IGUIPresenter gui;
         private readonly Drawer _drawer;
-        private readonly Player _player = Player.GetPlayer();
+        private readonly Player _player = Game.GetGame().Player;
 
         public Lvl CurLvl { get; set; }
 
@@ -141,7 +141,7 @@ namespace Fishing.Presenter {
                         _player.WindingSpeed = _player.EquipedRoad.Assembly.Reel.Power;
                     }
                     else {
-                        Player.GetPlayer().WindingSpeed = 1;
+                        _player.WindingSpeed = 1;
                     }
                     DoWiring();
                     IncFLineBarValues();
@@ -303,7 +303,7 @@ namespace Fishing.Presenter {
                 _player.EquipedRoad.RoadY += 7;
             }
             _player.WindingSpeed = _player.EquipedRoad.IsFishAttack ? _player.EquipedRoad.Assembly.Reel.Power : 1;
-            _player.EquipedRoad.CurPoint.Y += Player.GetPlayer().WindingSpeed;
+            _player.EquipedRoad.CurPoint.Y += Game.GetGame().Player.WindingSpeed;
         }
 
         private void AutoDecBarValues() {

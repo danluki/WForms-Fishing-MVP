@@ -10,7 +10,7 @@ namespace Fishing.BL.Model.Drawer {
     internal class Drawer {
         public Graphics Graphics { get; set; }
 
-        private readonly Player player = Player.GetPlayer();
+        private readonly Player player = Game.Game.GetGame().Player;
         private readonly SolidBrush sbrush = new SolidBrush(Color.White);
 
         public Action FeedUpEnded;

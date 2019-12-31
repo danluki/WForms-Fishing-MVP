@@ -11,7 +11,7 @@ namespace Fishing.View.FoodInventory {
 
         public FoodInventory() {
             InitializeComponent();
-            foodsBox.DataSource = Player.GetPlayer().FoodInv;
+            foodsBox.DataSource = Game.GetGame().Player.FoodInv;
         }
 
         public string FoodProductivityTextBox { get => foodProductBox.Text; set => foodProductBox.Text = "Восполняет: %" + value; }

@@ -19,9 +19,9 @@ namespace Fishing.BL.Presenter {
 
         private void View_SelectedIndexChanged(object sender, EventArgs e) {
             try {
-                view.RightImage = Player.GetPlayer().GetFishByIndex(view.SelectedIndex).Bitmap;
+                view.RightImage = Game.GetGame().Player.GetFishByIndex(view.SelectedIndex).Bitmap;
 
-                view.DescriptionText = Player.GetPlayer().GetFishByIndex(view.SelectedIndex).Description;
+                view.DescriptionText = Game.GetGame().Player.GetFishByIndex(view.SelectedIndex).Description;
             }
             catch (ArgumentOutOfRangeException) {
             }
@@ -30,8 +30,8 @@ namespace Fishing.BL.Presenter {
         }
 
         private void View_SellButtonClick(object sender, EventArgs e) {
-            Player.GetPlayer().SellFish(Player.GetPlayer().GetFishByIndex(view.SelectedIndex));
-            gui.MoneyLValue = Player.GetPlayer().Money;
+            Game.GetGame().Player.SellFish(Game.GetGame().Player.GetFishByIndex(view.SelectedIndex));
+            gui.MoneyLValue = Game.GetGame().Player.Money;
             view.DescriptionText = " ";
             view.RightImage = null;
         }

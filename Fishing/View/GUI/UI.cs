@@ -20,7 +20,7 @@ using System.Windows.Forms;
 namespace Fishing {
 
     public partial class UI : Form, IGUIPresenter, ISounder {
-        Player _player = Player.GetPlayer();
+        Player _player = Game.GetGame().Player;
         public static UI Gui;
         private readonly GUIPresenter _presenter;
         private readonly SounderPresenter _sound;

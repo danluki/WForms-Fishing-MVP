@@ -17,7 +17,7 @@ namespace Fishing.BL.Presenter {
             view.Presenter = this;
             view.ListDoubleClick += View_ListDoubleClick;
             view.ListSelectedIndexChanged += View_ListSelectedIndexChanged;
-            player = Player.GetPlayer();
+            player = Game.GetGame().Player;
         }
 
         private void View_ListSelectedIndexChanged(object sender, EventArgs e) {

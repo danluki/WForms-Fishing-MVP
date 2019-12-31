@@ -17,14 +17,14 @@ namespace Fishing {
         private void CurrentFish_KeyDown(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
                 case Keys.Space:
-                Player.GetPlayer().AddFish(fish);
+                Game.GetGame().Player.AddFish(fish);
                 Close();
                 break;
 
                 case Keys.F:
                 if (PriceButton.Text.Length > 0) {
-                    Player.GetPlayer().SellFish(fish);
-                    UI.Gui.MoneyLabel.Text = Player.GetPlayer().Money.ToString();
+                    Game.GetGame().Player.SellFish(fish);
+                    UI.Gui.MoneyLabel.Text = Game.GetGame().Player.Money.ToString();
                     MessageBox.Show(@"Продано");
                     Close();
                 }
@@ -38,7 +38,7 @@ namespace Fishing {
             WeightLabel.Text = f.Weight.ToString();
             PriceButton.Text = (f.Price * f.Weight).ToString();
             Show();
-            Player.GetPlayer().EquipedRoad.IsFishAttack = false;
+            Game.GetGame().Player.EquipedRoad.IsFishAttack = false;
         }
     }
 }

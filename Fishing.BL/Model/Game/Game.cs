@@ -17,13 +17,15 @@ namespace Fishing.BL.Model.Game {
     [Serializable]
     public class Game {
         public const int GameWidth = 1024;
+        [NonSerialized]
+        public Player Player;
         public const int GameHeight = 600;
         private static Game game;
         public BindingList<string> Waters = new BindingList<string>();
 
         public event EventHandler HoursInc;
-
-        public IGameForm View { get; set; }
+        [NonSerialized]
+        public IGameForm View;
         public Timer HoursTimer { get; set; }
         public Water CurrentWater { get; set; }
 
@@ -43,7 +45,7 @@ namespace Fishing.BL.Model.Game {
 
         private void HoursTimer_Tick(object sender, EventArgs e) {
             Time.IncHours(1);
-            Player.GetPlayer().HoursRemain -= 1;
+            Player.HoursRemain -= 1;
             HoursInc?.Invoke(this, EventArgs.Empty);
         }
     }
