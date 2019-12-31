@@ -27,8 +27,9 @@ namespace Fishing {
 
         public UI(Lvl lvl) {
             InitializeComponent();
-            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint |
-                                                                            ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | 
+                     ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.UserPaint, true);
             eatingBar.Value = _player.Satiety;
 
             _presenter = new GUIPresenter(this);
@@ -45,6 +46,10 @@ namespace Fishing {
             _player.SatietyUpdated += SatietyUpdated;
             _player.Gathering += UI_Gathering;
             _player.UpdateBucketImage += UI_UpdateBucketImage;
+
+            waterInfoBox.Text += Game.GetGame().CurrentWater.ToString();
+            playersCountLabel.Text += "1"; //TODO Players Count
+            daysRemainLabel.Text += _player.HoursRemain;
         }
 
         private void UI_Gathering() {
@@ -71,6 +76,7 @@ namespace Fishing {
         public Image FLinePicture { get => flineBox.BackgroundImage; set => flineBox.BackgroundImage = value; }
         public Image HookPicture { get => hookBox.BackgroundImage; set => hookBox.BackgroundImage = value; }
         public BasePresenter Presenter { get; set; }
+        public string LocationNameLabelText { get => locationLabel.Text; set => locationLabel.Text += value; }
 
         public event PaintEventHandler SounderPaint;
 
@@ -84,6 +90,7 @@ namespace Fishing {
 
         private void GUI_HoursInc(object sender, EventArgs e) {
             timeLabel.Text = Game.GetGame().Time.ToString();
+            daysRemainLabel.Text = "Часов осталось:" + _player.HoursRemain;
         }
 
         private void MapLabel_Click(object sender, EventArgs e) {
@@ -94,7 +101,8 @@ namespace Fishing {
         }
 
         private void MenuLabel_Click(object sender, EventArgs e) {
-            Game.GetGame().View.Presenter.End();
+            Gui.Close();
+            Game.GetGame().View.Down();
         }
 
         private void SettingLabel_Click(object sender, EventArgs e) {

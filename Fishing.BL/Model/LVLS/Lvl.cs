@@ -167,5 +167,9 @@ namespace Fishing.BL.Model.LVLS {
 
             return this;
         }
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }

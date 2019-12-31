@@ -147,6 +147,9 @@
   <data name="HOOKS_DIR" xml:space="preserve">
     <value>config/hooks.dat</value>
   </data>
+  <data name="HOURSREMAIN_DIR" xml:space="preserve">
+    <value>config/hoursremain.dat</value>
+  </data>
   <data name="LURES_DIR" xml:space="preserve">
     <value>config/lures.dat</value>
   </data>

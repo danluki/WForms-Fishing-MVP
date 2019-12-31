@@ -19,6 +19,7 @@ namespace Fishing.View.GUI {
         int LureDeepValue { get; set; }
         string WiringType { get; set; }
         int EatingBarValue { get; set; }
+        string LocationNameLabelText { get; set; }
 
         void AddEventToBox(BaseEvent ev);
 

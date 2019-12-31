@@ -173,6 +173,7 @@ namespace Fishing.View.Inventory {
                 if (Assembly_P.Road.Type == RoadType.Spinning) {
                     baitsView.Enabled = false;
                     luresView.Enabled = true;
+                    Hook_P = null;
                 }
 
                 if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float) {

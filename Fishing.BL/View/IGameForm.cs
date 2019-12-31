@@ -24,7 +24,7 @@ namespace Fishing.BL.View {
 
         event EventHandler DecSacietyTimerTick;
 
-        LvlPresenter LVLPresenter { set; }
+        LvlPresenter LVLPresenter { get; set; }
 
         void UpdateForm();
 

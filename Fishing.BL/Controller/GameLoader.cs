@@ -155,9 +155,9 @@ namespace Fishing.BL.Controller {
             Food.Foods.Add(new Food("Хлеб", 50, 10, Images.hleb));
             Food.Foods.Add(new Food("Икра", 1500, 30, Images.ikra));
             Food.Foods.Add(new Food("Икра Чёрная", 5000, 70, Images.black));
-            Food.Foods.Add(new Food("Сыр", 1000, 50, Images.black));
-            Food.Foods.Add(new Food("Печенье", 500, 25, Images.black));
-            Food.Foods.Add(new Food("Скумбрия", 700, 35, Images.black));
+            Food.Foods.Add(new Food("Сыр", 1000, 50, Images.cheeze));
+            Food.Foods.Add(new Food("Печенье", 500, 25, Images.pech));
+            Food.Foods.Add(new Food("Скумбрия", 700, 35, Images.skumb));
             Food.Foods.Add(new Food("Рыбные консервы", 700, 35, Images.fishkonc));
             Food.Foods.Add(new Food("Бананы", 250, 5, Images.banany));
             Food.Foods.Add(new Food("Апельсины", 500, 20, Images.apelsin));

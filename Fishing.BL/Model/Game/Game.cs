@@ -1,4 +1,5 @@
-﻿using Fishing.BL.Model.Waters;
+﻿using Fishing.BL.Model.LVLS;
+using Fishing.BL.Model.Waters;
 using Fishing.BL.View;
 using System;
 using System.ComponentModel;
@@ -42,6 +43,7 @@ namespace Fishing.BL.Model.Game {
 
         private void HoursTimer_Tick(object sender, EventArgs e) {
             Time.IncHours(1);
+            Player.GetPlayer().HoursRemain -= 1;
             HoursInc?.Invoke(this, EventArgs.Empty);
         }
     }

@@ -47,7 +47,6 @@ namespace Fishing
             this.reelBox = new System.Windows.Forms.PictureBox();
             this.ReelBar = new System.Windows.Forms.ProgressBar();
             this.roadBox = new System.Windows.Forms.PictureBox();
-            this.eatingBar = new VerticalProgressBar.VerticalProgressBar();
             this.WiringTypeLabel = new System.Windows.Forms.Label();
             this.StatsBox = new System.Windows.Forms.PictureBox();
             this.InventoryBox = new System.Windows.Forms.PictureBox();
@@ -61,6 +60,12 @@ namespace Fishing
             this.MoneyLabel = new System.Windows.Forms.Label();
             this.SettingLabel = new System.Windows.Forms.Label();
             this.MapLabel = new System.Windows.Forms.Label();
+            this.waterInfoPanel = new System.Windows.Forms.Panel();
+            this.waterInfoBox = new System.Windows.Forms.GroupBox();
+            this.daysRemainLabel = new System.Windows.Forms.Label();
+            this.locationLabel = new System.Windows.Forms.Label();
+            this.playersCountLabel = new System.Windows.Forms.Label();
+            this.eatingBar = new VerticalProgressBar.VerticalProgressBar();
             this.LowerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FeedUpButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hookBox)).BeginInit();
@@ -73,6 +78,8 @@ namespace Fishing
             ((System.ComponentModel.ISupportInitialize)(this.BaitsPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FpondBox)).BeginInit();
             this.UpperPanel.SuspendLayout();
+            this.waterInfoPanel.SuspendLayout();
+            this.waterInfoBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // SounderUpdater
@@ -260,22 +267,6 @@ namespace Fishing
             this.roadBox.TabIndex = 28;
             this.roadBox.TabStop = false;
             // 
-            // eatingBar
-            // 
-            this.eatingBar.BackColor = System.Drawing.Color.Transparent;
-            this.eatingBar.BorderStyle = VerticalProgressBar.BorderStyles.Classic;
-            this.eatingBar.Color = System.Drawing.Color.Gold;
-            this.eatingBar.Location = new System.Drawing.Point(19, 17);
-            this.eatingBar.Maximum = 100;
-            this.eatingBar.Minimum = 0;
-            this.eatingBar.Name = "eatingBar";
-            this.eatingBar.Size = new System.Drawing.Size(19, 88);
-            this.eatingBar.Step = 10;
-            this.eatingBar.Style = VerticalProgressBar.Styles.Solid;
-            this.eatingBar.TabIndex = 27;
-            this.eatingBar.Value = 0;
-            this.eatingBar.Click += new System.EventHandler(this.EatingBar_Click);
-            // 
             // WiringTypeLabel
             // 
             this.WiringTypeLabel.AutoSize = true;
@@ -435,6 +426,73 @@ namespace Fishing
             this.MapLabel.Text = "Карта";
             this.MapLabel.Click += new System.EventHandler(this.MapLabel_Click);
             // 
+            // waterInfoPanel
+            // 
+            this.waterInfoPanel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.waterInfoPanel.BackColor = System.Drawing.Color.Transparent;
+            this.waterInfoPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("waterInfoPanel.BackgroundImage")));
+            this.waterInfoPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.waterInfoPanel.Controls.Add(this.waterInfoBox);
+            this.waterInfoPanel.Location = new System.Drawing.Point(812, 330);
+            this.waterInfoPanel.Name = "waterInfoPanel";
+            this.waterInfoPanel.Size = new System.Drawing.Size(213, 120);
+            this.waterInfoPanel.TabIndex = 24;
+            // 
+            // waterInfoBox
+            // 
+            this.waterInfoBox.Controls.Add(this.playersCountLabel);
+            this.waterInfoBox.Controls.Add(this.locationLabel);
+            this.waterInfoBox.Controls.Add(this.daysRemainLabel);
+            this.waterInfoBox.Location = new System.Drawing.Point(4, 10);
+            this.waterInfoBox.Name = "waterInfoBox";
+            this.waterInfoBox.Size = new System.Drawing.Size(206, 95);
+            this.waterInfoBox.TabIndex = 0;
+            this.waterInfoBox.TabStop = false;
+            this.waterInfoBox.Text = "Водоем:";
+            // 
+            // daysRemainLabel
+            // 
+            this.daysRemainLabel.AutoSize = true;
+            this.daysRemainLabel.Location = new System.Drawing.Point(7, 20);
+            this.daysRemainLabel.Name = "daysRemainLabel";
+            this.daysRemainLabel.Size = new System.Drawing.Size(92, 13);
+            this.daysRemainLabel.TabIndex = 0;
+            this.daysRemainLabel.Text = "Часов осталось:";
+            // 
+            // locationLabel
+            // 
+            this.locationLabel.AutoSize = true;
+            this.locationLabel.Location = new System.Drawing.Point(7, 43);
+            this.locationLabel.Name = "locationLabel";
+            this.locationLabel.Size = new System.Drawing.Size(54, 13);
+            this.locationLabel.TabIndex = 1;
+            this.locationLabel.Text = "Локация:";
+            // 
+            // playersCountLabel
+            // 
+            this.playersCountLabel.AutoSize = true;
+            this.playersCountLabel.Location = new System.Drawing.Point(7, 66);
+            this.playersCountLabel.Name = "playersCountLabel";
+            this.playersCountLabel.Size = new System.Drawing.Size(47, 13);
+            this.playersCountLabel.TabIndex = 2;
+            this.playersCountLabel.Text = "Игроки:";
+            // 
+            // eatingBar
+            // 
+            this.eatingBar.BackColor = System.Drawing.Color.Transparent;
+            this.eatingBar.BorderStyle = VerticalProgressBar.BorderStyles.Classic;
+            this.eatingBar.Color = System.Drawing.Color.Gold;
+            this.eatingBar.Location = new System.Drawing.Point(19, 17);
+            this.eatingBar.Maximum = 100;
+            this.eatingBar.Minimum = 0;
+            this.eatingBar.Name = "eatingBar";
+            this.eatingBar.Size = new System.Drawing.Size(19, 88);
+            this.eatingBar.Step = 10;
+            this.eatingBar.Style = VerticalProgressBar.Styles.Solid;
+            this.eatingBar.TabIndex = 27;
+            this.eatingBar.Value = 0;
+            this.eatingBar.Click += new System.EventHandler(this.EatingBar_Click);
+            // 
             // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,6 +500,7 @@ namespace Fishing
             this.BackColor = System.Drawing.Color.DimGray;
             this.ClientSize = new System.Drawing.Size(1024, 1027);
             this.ControlBox = false;
+            this.Controls.Add(this.waterInfoPanel);
             this.Controls.Add(this.eventsView);
             this.Controls.Add(this.LowerPanel);
             this.Controls.Add(this.UpperPanel);
@@ -469,6 +528,9 @@ namespace Fishing
             ((System.ComponentModel.ISupportInitialize)(this.FpondBox)).EndInit();
             this.UpperPanel.ResumeLayout(false);
             this.UpperPanel.PerformLayout();
+            this.waterInfoPanel.ResumeLayout(false);
+            this.waterInfoBox.ResumeLayout(false);
+            this.waterInfoBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -504,5 +566,10 @@ namespace Fishing
         private System.Windows.Forms.PictureBox hookBox;
         protected internal System.Windows.Forms.PictureBox FeedUpButton;
         private System.Windows.Forms.Label fBaitCountsLabel;
+        private System.Windows.Forms.Panel waterInfoPanel;
+        private System.Windows.Forms.GroupBox waterInfoBox;
+        private System.Windows.Forms.Label daysRemainLabel;
+        private System.Windows.Forms.Label playersCountLabel;
+        private System.Windows.Forms.Label locationLabel;
     }
 }

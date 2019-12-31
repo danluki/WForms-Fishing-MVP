@@ -5,6 +5,7 @@ using Fishing.BL.Model.Eating;
 using Fishing.BL.Model.FeedingUp;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
+using Fishing.BL.Model.LVLS;
 using Fishing.BL.Model.SoundPlayer;
 using Fishing.BL.Model.UserEvent;
 using Fishing.BL.Resources.Images;
@@ -42,6 +43,7 @@ namespace Fishing.BL.Model.Game {
         public BindingList<Aroma> AromaInventory { get; set; }
         public BindingList<Basic> BasicInventory { get; set; }
         public Stack<BaseEvent> EventHistory { get; set; }
+        public Lvl CurrentLvl { get; set; }
 
         public event Action EventHistoryUpdated;
 
@@ -61,6 +63,7 @@ namespace Fishing.BL.Model.Game {
         public Statistic Statistic { get; set; } = new Statistic();
         public int Money { get; set; }
         public int WindingSpeed { get; set; }
+        public int HoursRemain = 99999999;
         public string NickName { get; set; } = "Рыболов";
 
         private Player() {
@@ -264,7 +267,7 @@ namespace Fishing.BL.Model.Game {
             road.RoadIncValue = 0;
             if (road.Assembly.Road.Type == RoadType.Feeder || road.Assembly.Road.Type == RoadType.Float) {
                 ((Bait)road.Assembly.FishBait).Count -= 1;
-                if (((Bait)road.Assembly.FishBait)?.Count == 0) {
+                if (((Bait)road.Assembly.FishBait)?.Count <= 0) {
                     player.BaitInv.Remove((Bait)road.Assembly.FishBait);
                 }
                 road.Assembly.FishBait = null;
@@ -316,7 +319,7 @@ namespace Fishing.BL.Model.Game {
             }
             if (player.EquipedRoad.Assembly.Road.Type == RoadType.Feeder || player.EquipedRoad.Assembly.Road.Type == RoadType.Float) {
                 ((Bait)player.EquipedRoad.Assembly.FishBait).Count -= 1;
-                if (((Bait)player.EquipedRoad.Assembly.FishBait).Count == 0) {
+                if (((Bait)player.EquipedRoad.Assembly.FishBait).Count <= 0) {
                     player.EquipedRoad.Assembly.FishBait = null;
                 }
             }

@@ -151,6 +151,15 @@ namespace Fishing.BL.Resources.Paths {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на config/hoursremain.dat.
+        /// </summary>
+        internal static string HOURSREMAIN_DIR {
+            get {
+                return ResourceManager.GetString("HOURSREMAIN_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на config/lures.dat.
         /// </summary>
         internal static string LURES_DIR {

@@ -11,15 +11,15 @@ namespace Fishing {
         }
 
         private void Button1_Click(object sender, EventArgs e) {
-            if (nameBox.Text != null) {
+            if (nameBox.Text != null && nameBox.TextLength <= 15) {
                 Player.GetPlayer().NickName = nameBox.Text;
                 MessageBox.Show(@"Успешно");
-                this.Close();
+                Close();
             }
         }
 
         private void Button2_Click(object sender, EventArgs e) {
-            this.Close();
+            Close();
         }
     }
 }

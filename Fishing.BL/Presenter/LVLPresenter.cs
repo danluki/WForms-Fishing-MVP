@@ -40,6 +40,8 @@ namespace Fishing.Presenter {
             view.LVLPresenter = this;
             view.BackImage = CurLvl.BackgroundImage;
             _drawer = new Drawer();
+            _player.CurrentLvl = CurLvl;
+            v.LocationNameLabelText = curLVL.ToString();
 
             _drawer.FeedUpEnded += Drawer_FeedUpEnded;
             _drawer.DoNettingEnded += Drawer_DoNettingEnded;
