@@ -57,11 +57,6 @@ namespace Fishing.View.LVLS {
             FormMouseClick?.Invoke(this, e);
         }
 
-        private void GameForm_FormClosed(object sender, FormClosedEventArgs e) {
-            FormClose?.Invoke(this, EventArgs.Empty);
-            UI.Gui.Close();
-        }
-
         private void DecrementSatiety_Tick(object sender, EventArgs e) {
             DecSacietyTimerTick?.Invoke(this, EventArgs.Empty);
         }

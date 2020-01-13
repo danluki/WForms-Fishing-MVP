@@ -13,22 +13,25 @@ namespace Fishing.BL.Model.Game {
         Evening,
         Night
     }
-
     [Serializable]
     public class Game {
         public const int GameWidth = 1024;
         [NonSerialized]
         public Player Player;
         public const int GameHeight = 600;
+        [NonSerialized]
         private static Game game;
+        [NonSerialized]
         public BindingList<string> Waters = new BindingList<string>();
 
         public event EventHandler HoursInc;
         [NonSerialized]
         public IGameForm View;
-        public Timer HoursTimer { get; set; }
-        public Water CurrentWater { get; set; }
-
+        [NonSerialized]
+        public Timer HoursTimer;
+        [NonSerialized]
+        public Water CurrentWater;
+        [NonSerialized]
         public Time Time;
 
         private Game() {

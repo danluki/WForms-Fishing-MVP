@@ -111,19 +111,19 @@ namespace Fishing.Presenter {
                     case "Reels":
                     _view.Assembly_P.Reel = _view.Reel_P;
                     _view.ShowAssembly(_view.Assembly_P);
-                    _player.ReelInv.Remove(_view.Reel_P);
+                    _player.ReelInventory.Remove(_view.Reel_P);
                     break;
 
                     case "Flines":
                     _view.Assembly_P.FLine = _view.FLine_P;
                     _view.ShowAssembly(_view.Assembly_P);
-                    _player.FLineInv.Remove(_view.FLine_P);
+                    _player.FlineInventory.Remove(_view.FLine_P);
                     break;
 
                     case "Lures":
                     _view.Assembly_P.FishBait = _view.Lure_P;
                     _view.ShowAssembly(_view.Assembly_P);
-                    _player.LureInv.Remove(_view.Lure_P);
+                    _player.LureInventory.Remove(_view.Lure_P);
                     break;
 
                     case "Baits":
@@ -136,7 +136,7 @@ namespace Fishing.Presenter {
                     if (_view.Assembly_P.Road.Type == RoadType.Spinning) return;
                     _view.Assembly_P.Hook = _view.Hook_P;
                     _view.ShowAssembly(_view.Assembly_P);
-                    _player.HooksInv.Remove(_view.Hook_P);
+                    _player.HooksInventory.Remove(_view.Hook_P);
                     break;
 
                     default:
@@ -154,13 +154,13 @@ namespace Fishing.Presenter {
         private void View_MakeOutClick(object sender, EventArgs e) {
             try {
                 if (_player.EquipedRoad.Assembly.FLine != null)
-                    _player.FLineInv.Add(_view.Assembly_P.FLine);
+                    _player.FlineInventory.Add(_view.Assembly_P.FLine);
                 if (_player.EquipedRoad.Assembly.Road != null)
-                    _player.RoadInv.Add(_view.Assembly_P.Road);
+                    _player.RoadInventory.Add(_view.Assembly_P.Road);
                 if (_player.EquipedRoad.Assembly.FishBait != null)
-                    _player.LureInv.Add((Lure)_view.Assembly_P.FishBait);
+                    _player.LureInventory.Add((Lure)_view.Assembly_P.FishBait);
                 if (_player.EquipedRoad.Assembly.Reel != null)
-                    _player.ReelInv.Add(_view.Assembly_P.Reel);
+                    _player.ReelInventory.Add(_view.Assembly_P.Reel);
 
                 _player.Assemblies.Remove(_view.Assembly_P);
             }

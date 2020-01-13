@@ -22,7 +22,7 @@ namespace Fishing.BL.Presenter {
 
         private void View_ListSelectedIndexChanged(object sender, EventArgs e) {
             food = Food.GetFoodByName(view.FoodsSelectedItem);
-            food = player.FoodInv.First(f => f.Name.Equals(food.Name));
+            food = player.FoodInventory.First(f => f.Name.Equals(food.Name));
             view.ShowFood(food);
         }
 

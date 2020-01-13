@@ -13,7 +13,7 @@ namespace Fishing.View.FeedUpView {
             InitializeComponent();
             aromaListsBox.DataSource = _player.AromaInventory;
             feedsUpBox.DataSource = _player.BasicInventory;
-            baitsListBox.DataSource = _player.BaitInv;
+            baitsListBox.DataSource = _player.BaitInventory;
             feedUpsBox.DataSource = _player.FeedUpInventory;
         }
 

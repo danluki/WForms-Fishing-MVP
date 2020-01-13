@@ -2,7 +2,7 @@
 
     internal interface IDataSaver {
 
-        void Save(string fileName, object item);
+        void Save<T>(string fileName, T item);
 
         T Load<T>(string fileName);
     }

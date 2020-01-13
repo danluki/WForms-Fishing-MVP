@@ -75,21 +75,22 @@ namespace Fishing.BL.Model.Game {
             }
             Image = GImage;
         }
-
+        [NonSerialized]
         public Timer baitTimer = new Timer() {
             Interval = 5000,
         };
-
+        [NonSerialized]
         public Timer countFishMovesTimer = new Timer() {
             Interval = 2500,
         };
-
+        [NonSerialized]
         public Timer gatheringTimer = new Timer() {
             Interval = 1500,
         };
 
         public List<Fish> FishesPossibleToAttack { get; set; }
-        public Lvl CurLVL { get; set; }
+        [NonSerialized]
+        public Lvl CurLVL;
         public Image Image { get; set; }
         public Image HImage { get; set; }
         public Image GImage { get; set; }

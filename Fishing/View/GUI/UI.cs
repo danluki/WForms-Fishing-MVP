@@ -118,12 +118,12 @@ namespace Fishing {
         private void BaitsPicture_Click(object sender, EventArgs e) {
             if (_player.EquipedRoad.Assembly == null || _player.EquipedRoad.IsBaitInWater) return;
             if (_player.EquipedRoad.Assembly.FishBait is Lure) {
-                var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(_player.LureInv), this);
+                var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(_player.LureInventory), this);
                 pres.Run();
             }
             if (!(_player.EquipedRoad.Assembly.FishBait is Bait)) return;
             {
-                var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(_player.BaitInv), this);
+                var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(_player.BaitInventory), this);
                 pres.Run();
             }
         }

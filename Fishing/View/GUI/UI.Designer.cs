@@ -62,9 +62,9 @@ namespace Fishing
             this.MapLabel = new System.Windows.Forms.Label();
             this.waterInfoPanel = new System.Windows.Forms.Panel();
             this.waterInfoBox = new System.Windows.Forms.GroupBox();
-            this.daysRemainLabel = new System.Windows.Forms.Label();
-            this.locationLabel = new System.Windows.Forms.Label();
             this.playersCountLabel = new System.Windows.Forms.Label();
+            this.locationLabel = new System.Windows.Forms.Label();
+            this.daysRemainLabel = new System.Windows.Forms.Label();
             this.eatingBar = new VerticalProgressBar.VerticalProgressBar();
             this.LowerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FeedUpButton)).BeginInit();
@@ -450,14 +450,14 @@ namespace Fishing
             this.waterInfoBox.TabStop = false;
             this.waterInfoBox.Text = "Водоем:";
             // 
-            // daysRemainLabel
+            // playersCountLabel
             // 
-            this.daysRemainLabel.AutoSize = true;
-            this.daysRemainLabel.Location = new System.Drawing.Point(7, 20);
-            this.daysRemainLabel.Name = "daysRemainLabel";
-            this.daysRemainLabel.Size = new System.Drawing.Size(92, 13);
-            this.daysRemainLabel.TabIndex = 0;
-            this.daysRemainLabel.Text = "Часов осталось:";
+            this.playersCountLabel.AutoSize = true;
+            this.playersCountLabel.Location = new System.Drawing.Point(7, 66);
+            this.playersCountLabel.Name = "playersCountLabel";
+            this.playersCountLabel.Size = new System.Drawing.Size(47, 13);
+            this.playersCountLabel.TabIndex = 2;
+            this.playersCountLabel.Text = "Игроки:";
             // 
             // locationLabel
             // 
@@ -468,14 +468,14 @@ namespace Fishing
             this.locationLabel.TabIndex = 1;
             this.locationLabel.Text = "Локация:";
             // 
-            // playersCountLabel
+            // daysRemainLabel
             // 
-            this.playersCountLabel.AutoSize = true;
-            this.playersCountLabel.Location = new System.Drawing.Point(7, 66);
-            this.playersCountLabel.Name = "playersCountLabel";
-            this.playersCountLabel.Size = new System.Drawing.Size(47, 13);
-            this.playersCountLabel.TabIndex = 2;
-            this.playersCountLabel.Text = "Игроки:";
+            this.daysRemainLabel.AutoSize = true;
+            this.daysRemainLabel.Location = new System.Drawing.Point(7, 20);
+            this.daysRemainLabel.Name = "daysRemainLabel";
+            this.daysRemainLabel.Size = new System.Drawing.Size(92, 13);
+            this.daysRemainLabel.TabIndex = 0;
+            this.daysRemainLabel.Text = "Часов осталось:";
             // 
             // eatingBar
             // 
@@ -508,7 +508,6 @@ namespace Fishing
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UI";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.TopMost = true;

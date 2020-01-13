@@ -27,11 +27,11 @@ namespace Fishing.View.Inventory {
             }
 
             assembliesBox.SetObjects(_player.Assemblies);
-            flinesView.SetObjects(_player.FLineInv);
-            reelsView.SetObjects(_player.ReelInv);
-            luresView.SetObjects(_player.LureInv);
-            baitsView.SetObjects(_player.BaitInv);
-            hooksView.SetObjects(_player.HooksInv);
+            flinesView.SetObjects(_player.FlineInventory);
+            reelsView.SetObjects(_player.ReelInventory);
+            luresView.SetObjects(_player.LureInventory);
+            baitsView.SetObjects(_player.BaitInventory);
+            hooksView.SetObjects(_player.HooksInventory);
         }
 
         public Road Road_P { get; set; }
@@ -106,12 +106,12 @@ namespace Fishing.View.Inventory {
         private void BaitBox_Click(object sender, EventArgs e) {
             if (Game.GetGame().Player.EquipedRoad.Assembly == null || Game.GetGame().Player.EquipedRoad.IsBaitInWater) return;
             if (Game.GetGame().Player.EquipedRoad.Assembly.FishBait is Lure) {
-                var presenter = new SelectorPresenter<Lure>(new LureSelector<Lure>(Game.GetGame().Player.LureInv), UI.Gui);
+                var presenter = new SelectorPresenter<Lure>(new LureSelector<Lure>(Game.GetGame().Player.LureInventory), UI.Gui);
                 presenter.Run();
             }
             if (!(Game.GetGame().Player.EquipedRoad.Assembly.FishBait is Bait)) return;
             {
-                var presenter = new SelectorPresenter<Bait>(new LureSelector<Bait>(Game.GetGame().Player.BaitInv), UI.Gui);
+                var presenter = new SelectorPresenter<Bait>(new LureSelector<Bait>(Game.GetGame().Player.BaitInventory), UI.Gui);
                 presenter.Run();
             }
         }

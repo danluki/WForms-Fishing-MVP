@@ -40,7 +40,7 @@ namespace Fishing.Presenter {
 
         private void View_HookDoubleClick(object sender, EventArgs e) {
             if (!player.IsAbleToBuyItem(view.Hook_P)) return;
-            player.HooksInv.Add(view.Hook_P);
+            player.HooksInventory.Add(view.Hook_P);
             player.Money -= view.Hook_P.Price;
             view.MoneyL = player.Money.ToString();
             view.LowerL = "Куплено...";
@@ -56,7 +56,7 @@ namespace Fishing.Presenter {
 
         private void View_LureDoubleClick(object sender, EventArgs e) {
             if (!player.IsAbleToBuyItem(view.Lure_P)) return;
-            player.LureInv.Add(view.Lure_P);
+            player.LureInventory.Add(view.Lure_P);
             player.Money -= view.Lure_P.Price;
             view.MoneyL = player.Money.ToString();
             view.LowerL = "Куплено...";
@@ -72,7 +72,7 @@ namespace Fishing.Presenter {
 
         private void View_ReelDoubleClick(object sender, EventArgs e) {
             if (!player.IsAbleToBuyItem(view.Reel_P)) return;
-            player.ReelInv.Add(view.Reel_P);
+            player.ReelInventory.Add(view.Reel_P);
             player.Money -= view.Reel_P.Price;
             view.MoneyL = player.Money.ToString();
             view.LowerL = "Куплено...";
@@ -80,7 +80,7 @@ namespace Fishing.Presenter {
 
         private void View_FLineDoubleClick(object sender, EventArgs e) {
             if (!player.IsAbleToBuyItem(view.FLine_P)) return;
-            player.FLineInv.Add(view.FLine_P);
+            player.FlineInventory.Add(view.FLine_P);
             player.Money -= view.FLine_P.Price;
             view.MoneyL = Game.GetGame().Player.Money.ToString();
             view.LowerL = "Куплено...";

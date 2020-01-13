@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using Fishing.BL.Model.Game;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 
 namespace Saver.BL.Controller {
 
@@ -15,11 +17,10 @@ namespace Saver.BL.Controller {
             }
         }
 
-        public void Save(string fileName, object item) {
+        public void Save<T>(string fileName, T item) {
             var formatter = new BinaryFormatter();
-
             using (var fs = new FileStream(fileName, FileMode.OpenOrCreate)) {
-                formatter.Serialize(fs, item);
+                formatter.Serialize(fs, item);               
             }
         }
     }

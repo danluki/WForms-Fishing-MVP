@@ -20,62 +20,292 @@ namespace Fishing.BL.Model.Game {
 
     [Serializable]
     public sealed class Player {
+
         private const int SATIETY_MAX_VALUE = 100;
         private const int SATIETY_MIN_VALUE = 0;
 
-        public FeedUp EquipedFeedUp { get; set; }
         [NonSerialized]
-        public GameRoad FirstRoad;
+        private FeedUp _equipedFeedUp;
+        private GameRoad _firstRoad;
+        private GameRoad _secondRoad;
+        private GameRoad _thirdRoad;
+        private GameRoad _equipedRoad;
         [NonSerialized]
-        public GameRoad SecondRoad;
+        private bool _isFeedingUp;
         [NonSerialized]
-        public GameRoad ThirdRoad;
+        private bool _isNettingFish;
+        private int _satiety;
         [NonSerialized]
-        public GameRoad EquipedRoad;
-        public BindingList<Fish> Fishlist { get; set; }
-        public BindingList<Assembly> Assemblies { get; set; }
-        public BindingList<Road> RoadInv { get; set; }
-        public BindingList<Reel> ReelInv { get; set; }
-        public BindingList<FLine> FLineInv { get; set; }
-        public BindingList<Lure> LureInv { get; set; }
-        public BindingList<Food> FoodInv { get; set; }
-        public BindingList<Bait> BaitInv { get; set; }
-        public BindingList<BaseHook> HooksInv { get; set; }
-        public BindingList<FeedUp> FeedUpInventory { get; set; }
-        public BindingList<Aroma> AromaInventory { get; set; }
-        public BindingList<Basic> BasicInventory { get; set; }
-        [NonSerialized]
-        public Stack<BaseEvent> EventHistory;
-        [NonSerialized]
-        public Lvl CurrentLvl;
+        private Lvl _currentLvl;
+        private Statistic _statistic;
+        private string _name;
+        private int _money;
+        private int _windingSpeed;
+        private int _hoursRemain;
+        private BindingList<Fish> _fishlist;
+        private BindingList<Assembly> _assemblies;
+        private BindingList<Road> _roadInventory;
+        private BindingList<Reel> _reelInventory;
+        private BindingList<FLine> _flineInventory;
+        private BindingList<Bait> _baitsInventory;
+        private BindingList<Lure> _luresInventory;
+        private BindingList<Aroma> _aromasInventory;
+        private BindingList<Basic> _basicsInventory;
+        private BindingList<FeedUp> _feedUpsInventory;
+        private BindingList<Food> _foodsInventory;
+        private BindingList<BaseHook> _hooksInventory;
+        private Stack<BaseEvent> _eventHistory;
+
+
+
+        #region Properties
+        public FeedUp EquipedFeedUp {
+            get {
+                return _equipedFeedUp;
+            } 
+            set {
+                _equipedFeedUp = value;
+            } 
+        }
+        public GameRoad FirstRoad {
+            get {
+                return _firstRoad;
+            }
+            set {
+                _firstRoad = value;
+            }
+        }
+        public GameRoad SecondRoad {
+            get {
+                return _secondRoad;
+            }
+            set {
+                _secondRoad = value;
+            }
+        }
+        public GameRoad ThirdRoad {
+            get {
+                return _thirdRoad;
+            }
+            set {
+                _thirdRoad = value;
+            }
+        }
+        public GameRoad EquipedRoad {
+            get {
+                return _equipedRoad;
+            }
+            set {
+                _equipedRoad = value;
+            }
+        }
+        public Lvl CurrentLvl {
+            get {
+                return _currentLvl;
+            }
+            set {
+                _currentLvl = value;
+            }
+        }
+        public BindingList<Fish> Fishlist {
+            get {
+                return _fishlist;
+            }
+            set {
+                _fishlist = value;
+            }
+        }
+        public BindingList<FeedUp> FeedUpInventory {
+            get {
+                return _feedUpsInventory;
+            }
+            set {
+                _feedUpsInventory = value;
+            }
+        }
+        public BindingList<Aroma> AromaInventory {
+            get {
+                return _aromasInventory;
+            }
+            set {
+                _aromasInventory = value;
+            }
+        }
+        public BindingList<BaseHook> HooksInventory {
+            get {
+                return _hooksInventory;
+            }
+            set {
+                _hooksInventory = value;
+            }
+        }
+        public BindingList<Food> FoodInventory {
+            get {
+                return _foodsInventory;
+            }
+            set {
+                _foodsInventory = value;
+            }
+        }
+        public BindingList<Basic> BasicInventory {
+            get {
+                return _basicsInventory;
+            }
+            set {
+                _basicsInventory = value;
+            }
+        }
+        public BindingList<Assembly> Assemblies {
+            get {
+                return _assemblies;
+            }
+            set {
+                _assemblies = value;
+            }
+        }
+        public BindingList<Road> RoadInventory {
+            get {
+                return _roadInventory;
+            }
+            set {
+                _roadInventory = value;
+            }
+        }
+        public BindingList<Reel> ReelInventory {
+            get {
+                return _reelInventory;
+            }
+            set {
+                _reelInventory = value;
+            }
+        }
+        public BindingList<FLine> FlineInventory {
+            get {
+                return _flineInventory;
+            }
+            set {
+                _flineInventory = value;
+            }
+        }
+        public BindingList<Bait> BaitInventory {
+            get {
+                return _baitsInventory;
+            }
+            set {
+                _baitsInventory = value;
+            }
+        }
+        public BindingList<Lure> LureInventory {
+            get {
+                return _luresInventory;
+            }
+            set {
+                _luresInventory = value;
+            }
+        }
+        public Stack<BaseEvent> EventHistory {
+            get {
+                return _eventHistory;
+            }
+            set {
+                _eventHistory = value;
+            }
+        }
+
+        public bool IsFeedingUp {
+            get {
+                return _isFeedingUp;
+            }
+            set {
+                _isFeedingUp = value;
+            }
+        }
+        public bool IsNettingFish {
+            get {
+                return _isNettingFish;
+            }
+            set {
+                _isNettingFish = value;
+            }
+        }
+        public int Satiety {
+            get {
+                return _satiety;
+            }
+            set {
+                _satiety = value;
+            }
+        }
+        public Statistic Statistic {
+            get {
+                return _statistic;
+            }
+            set {
+                _statistic = value;
+            }
+        }
+        public string NickName {
+            get {
+                return _name;
+            }
+            set {
+                _name = value;
+            }
+        }
+        public int Money {
+            get {
+                return _money;
+            }
+            set {
+                _money = value;
+            }
+        }
+        public int WindingSpeed {
+            get {
+                return _windingSpeed;
+            }
+            set {
+                _windingSpeed = value;
+            }
+        }
+        public int HoursRemain {
+            get {
+                return _hoursRemain;
+            }
+            set {
+                _hoursRemain = value;
+            }
+        }
+
+        #endregion
+
+        #region Events
+        [field: NonSerialized]
+        public event Action SatietyUpdated;
+        [field: NonSerialized]
+        public event Action Gathering;
+        [field: NonSerialized]
+        public event Action DoNetting;
+        [field: NonSerialized]
         public event Action EventHistoryUpdated;
+        [field: NonSerialized]
         public event Action UpdateBucketImage;
+        [field: NonSerialized]
         public event Action<Point> GiveUped;
 
-        public bool IsFeedingUp = false;
-        public bool IsNettingFish;
-        public int Satiety { get; set; } = 100;
+        #endregion
 
-        public event Action SatietyUpdated;
-        public event Action Gathering;
-        public event Action DoNetting;
-
-        public Statistic Statistic { get; set; }
-        public int Money { get; set; }
-        public int WindingSpeed { get; set; }
-        public int HoursRemain;
-        public string NickName { get; set; }
 
         public Player() {
             Fishlist = new BindingList<Fish>();
             Assemblies = new BindingList<Assembly>();
-            RoadInv = new BindingList<Road>();
-            ReelInv = new BindingList<Reel>();
-            FLineInv = new BindingList<FLine>();
-            LureInv = new BindingList<Lure>();
-            FoodInv = new BindingList<Food>();
-            BaitInv = new BindingList<Bait>();
-            HooksInv = new BindingList<BaseHook>();
+            RoadInventory = new BindingList<Road>();
+            ReelInventory = new BindingList<Reel>();
+            FlineInventory = new BindingList<FLine>();
+            LureInventory = new BindingList<Lure>();
+            FoodInventory = new BindingList<Food>();
+            BaitInventory = new BindingList<Bait>();
+            HooksInventory = new BindingList<BaseHook>();
             FeedUpInventory = new BindingList<FeedUp>();
             AromaInventory = new BindingList<Aroma>();
             BasicInventory = new BindingList<Basic>();
@@ -83,6 +313,7 @@ namespace Fishing.BL.Model.Game {
             Statistic = new Statistic();
             HoursRemain = 999999;
             Money = 999999;
+            Satiety = 100;
             NickName = "Рыболов";
         }
 
@@ -120,22 +351,22 @@ namespace Fishing.BL.Model.Game {
 
         public Bait GetBaitByName(string name) {
             if (name == null) return null;
-            var b = BaitInv.First(i => name.Equals(i.Name));
+            var b = BaitInventory.First(i => name.Equals(i.Name));
             return b;
         }
         public Reel GetReelByName(string name) {
             if (name == null) return null;
-            var b = ReelInv.First(i => name.Equals(i.Name));
+            var b = ReelInventory.First(i => name.Equals(i.Name));
             return b;
         }
 
         public Item GetItemByName(string name) {
             var items = new List<Item>();
-            items.AddRange(RoadInv);
-            items.AddRange(FLineInv);
-            items.AddRange(LureInv);
-            items.AddRange(BaitInv);
-            items.AddRange(HooksInv);
+            items.AddRange(RoadInventory);
+            items.AddRange(FlineInventory);
+            items.AddRange(LureInventory);
+            items.AddRange(BaitInventory);
+            items.AddRange(HooksInventory);
             return items.Find(i => i.Name.Equals(name));
         }
 
@@ -255,18 +486,17 @@ namespace Fishing.BL.Model.Game {
                     Money += (int)f.Price * 3 * f.Weight;
                 }
                 Fishlist.Remove(f);
-                GameLoader.GetLoader().SavePlayer();
+                //GameLoader.GetLoader().SavePlayer();
             }
         }
 
         public void AddBait(Bait bait) {
-            MessageBox.Show(bait.Count.ToString());
-            var b = BaitInv.FirstOrDefault(fb => bait.Name.Equals(fb.Name));
+            var b = BaitInventory.FirstOrDefault(fb => bait.Name.Equals(fb.Name));
             if (b != default) {
-                BaitInv[BaitInv.IndexOf(b)].Count += bait.Count;
+                BaitInventory[BaitInventory.IndexOf(b)].Count += bait.Count;
             }
             else {
-                BaitInv.Add(bait);
+                BaitInventory.Add(bait);
             }
         }
 
@@ -281,7 +511,7 @@ namespace Fishing.BL.Model.Game {
             if (road.Assembly.Road.Type == RoadType.Feeder || road.Assembly.Road.Type == RoadType.Float) {
                 ((Bait)road.Assembly.FishBait).Count -= 1;
                 if (((Bait)road.Assembly.FishBait)?.Count <= 0) {
-                    BaitInv.Remove((Bait)road.Assembly.FishBait);
+                    BaitInventory.Remove((Bait)road.Assembly.FishBait);
                 }
                 road.Assembly.FishBait = null;
             }
@@ -342,7 +572,7 @@ namespace Fishing.BL.Model.Game {
             if (food != null) {
                 if (Satiety + food.Productivity <= SATIETY_MAX_VALUE) {
                     Satiety += food.Productivity;
-                    FoodInv.Remove(food);
+                    FoodInventory.Remove(food);
                     AddEventToHistory(new FoodEvent(food));
                     SatietyUpdated?.Invoke();
                     return true;
