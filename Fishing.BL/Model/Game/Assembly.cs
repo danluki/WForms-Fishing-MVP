@@ -7,22 +7,25 @@ namespace Fishing.BL.Model.Game {
 
     [Serializable]
     public class Assembly {
-        public Road Road { get; set; }
+        public Rod Road { get; set; }
         public Reel Reel { get; set; }
         public FLine FLine { get; set; }
         public FishBait FishBait { get; set; }
         public BaseHook Hook { get; set; }
+        public Guid UniqueIdentifer { get; set; }
 
         public bool IsEquiped;
 
-        public Assembly(Road road, Reel reel, FLine fLine, FishBait fb) {
+        public Assembly(Rod road, Reel reel, FLine fLine, FishBait fb) {
             Road = road ?? throw new ArgumentNullException(nameof(fLine));
             Reel = reel ?? throw new ArgumentNullException(nameof(fLine));
             FLine = fLine ?? throw new ArgumentNullException(nameof(fLine));
             FishBait = fb ?? throw new ArgumentNullException(nameof(fLine));
+
+            UniqueIdentifer = Guid.NewGuid();
         }
 
-        public Assembly(Road road) {
+        public Assembly(Rod road) {
             if (road == null) return;
             Road = road;
             Reel = null;
@@ -35,12 +38,12 @@ namespace Fishing.BL.Model.Game {
                 if (Reel != null) {
                     if (FLine != null) {
                         if (FishBait != null) {
-                            switch (Road.Type) {
-                                case RoadType.Feeder when Hook != null:
-                                case RoadType.Spinning:
+                            switch (Road.RodType) {
+                                case RodType.Feeder when Hook != null:
+                                case RodType.Spinning:
                                 return true;
 
-                                case RoadType.Float when Hook != null:
+                                case RodType.Float when Hook != null:
                                 return true;
 
                                 default:

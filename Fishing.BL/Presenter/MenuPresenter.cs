@@ -42,11 +42,11 @@ namespace Fishing.Presenter {
             Item.FLines.Add(new FLine("Colorado 30000", 30000, 100000, Images.Colorado));
             Item.FLines.Add(new FLine("Atlantic", 1000000, 1000000, Images.Atlantic));
 
-            Item.Roads.Add(new Road("Titanium", RoadType.Spinning, 100, 40000, 300000, Images.Titanium));
-            Item.Roads.Add(new Road("Achilles", RoadType.Spinning, 100, 5000, 3000, Images.Achilles_233));
-            Item.Roads.Add(new Road("Yellow super Carp", RoadType.Feeder, 100, 100000, 600000, Images.Yellow_SuperCarp));
-            Item.Roads.Add(new Road("Hearty Rose Jigging", RoadType.Spinning, 100, 95000, 700000, Images.SuperFisher_950));
-            Item.Roads.Add(new Road("Vesta 276", RoadType.Feeder, 100, 7000, 15000, Images.Vesta_276));
+            Item.Roads.Add(new Rod("Titanium", RodType.Spinning, 0, 40000, 300000, Images.Titanium));
+            Item.Roads.Add(new Rod("Achilles", RodType.Spinning, 0, 5000, 3000, Images.Achilles_233));
+            Item.Roads.Add(new Rod("Yellow super Carp", RodType.Feeder, 0, 100000, 600000, Images.Yellow_SuperCarp));
+            Item.Roads.Add(new Rod("Hearty Rose Jigging", RodType.Spinning, 0, 95000, 700000, Images.SuperFisher_950));
+            Item.Roads.Add(new Rod("Vesta 276", RodType.Feeder, 0, 7000, 15000, Images.Vesta_276));
 
             Item.Hooks.Add(new FeederHook("Фидер 1", 20, 800, HooksImg.Fider));
             Item.Hooks.Add(new FeederHook("Фидер 2", 10, 1800, HooksImg.Fider_2));

@@ -25,7 +25,7 @@ namespace Fishing.View.GUI {
 
         void ClearEvents();
 
-        void AddRoadToGUI(GameRoad road);
+        void AddRoadToGUI(GameRod road);
 
         void IncrementRoadBarValue(int value);
 

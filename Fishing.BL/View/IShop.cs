@@ -29,7 +29,7 @@ namespace Fishing.View.Shop {
 
         event EventHandler BasicDoubleClick;
 
-        Road Road_P { get; set; }
+        Rod Rod_P { get; set; }
         Reel Reel_P { get; set; }
         FLine FLine_P { get; set; }
         Lure Lure_P { get; set; }

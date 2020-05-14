@@ -27,7 +27,7 @@ namespace Fishing.BL.Model.LVLS {
         private Random randomFish = new Random();
 
         [SuppressMessage("ReSharper", "IdentifierTypo")]
-        public (bool isFish, bool gathering) GetFish(GameRoad road) {
+        public (bool isFish, bool gathering) GetFish(GameRod road) {
             try {
                 //Проверяем есть ли приманка, и проверяем, что рыбы ещё нет на крючке
 
@@ -77,7 +77,7 @@ namespace Fishing.BL.Model.LVLS {
             return (false, false);
         }
 
-        private (bool isFish, bool gathering) DoAttack(Fish fish, GameRoad road) {
+        private (bool isFish, bool gathering) DoAttack(Fish fish, GameRod road) {
             var resultOfAttack = fish.Attack(road);
             if (resultOfAttack) {
                 road.IsFishAttack = true;
@@ -89,12 +89,12 @@ namespace Fishing.BL.Model.LVLS {
                 road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
                 var gathering = randomGathering.Next(1, 100);
 
-                if (road.Assembly.Road.Type == RoadType.Spinning) {
+                if (road.Assembly.Road.RodType == RodType.Spinning) {
                     if (gathering <= 5) {
                         return (true, true);
                     }
                 }
-                if (road.Assembly.Road.Type != RoadType.Feeder) return (true, false);
+                if (road.Assembly.Road.RodType != RodType.Feeder) return (true, false);
                 return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
             }
             return (false, false);

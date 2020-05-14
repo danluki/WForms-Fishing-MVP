@@ -214,7 +214,7 @@ namespace Fishing {
             }
         }
 
-        public void AddRoadToGUI(GameRoad road) {
+        public void AddRoadToGUI(GameRod road) {
             if (road == null) return;
 
             BaitPicture = road.Assembly.FishBait?.Picture;
@@ -223,7 +223,7 @@ namespace Fishing {
             RoadPicture = road.Assembly.Road?.Picture;
             ReelPicture = road.Assembly.Reel?.Picture;
 
-            if (road.Assembly.Road?.Type == RoadType.Feeder) {
+            if (road.Assembly.Road?.RodType == RodType.Feeder) {
                 HookPicture = road.Assembly.Hook?.Picture;
                 fBaitCountsLabel.Text = ((Bait)road.Assembly.FishBait)?.Count.ToString();
             }

@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-
+using Fishing.BL.Model.Items;
 namespace Fishing.BL.Model.Items {
 
     [Serializable]
     public abstract class Item {
-        public static BindingList<Road> Roads = new BindingList<Road>();
+        public static BindingList<Rod> Roads = new BindingList<Rod>();
         public static BindingList<Reel> Reels = new BindingList<Reel>();
         public static BindingList<FLine> FLines = new BindingList<FLine>();
         public static BindingList<Lure> Lures = new BindingList<Lure>();
@@ -20,9 +20,11 @@ namespace Fishing.BL.Model.Items {
         public static BindingList<FeedUp> FeedUps = new BindingList<FeedUp>();
         public static BindingList<Aroma> Aromas = new BindingList<Aroma>();
         public static BindingList<Basic> Basics = new BindingList<Basic>();
-        public string Name { get; }
-        public int Price { get; }
+        public virtual string Name { get; protected internal set; }
+        public virtual int Price { get; protected internal set; }
         public Bitmap Picture { get; }
+
+        public virtual Guid UniqueIdentifer { get; set; }
 
         protected Item(string name, int price, Bitmap picture) {
             Name = name;
@@ -45,7 +47,7 @@ namespace Fishing.BL.Model.Items {
 
         public static Item SelectItemType(Item item) {
             switch (item) {
-                case Road road:
+                case Rod road:
                 return road;
 
                 case Reel reel:

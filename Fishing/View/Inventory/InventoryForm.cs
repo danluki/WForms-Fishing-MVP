@@ -7,11 +7,13 @@ using Fishing.BL.View;
 using Fishing.View.Assembly;
 using Fishing.View.LureSelector;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Fishing.View.Inventory {
 
     public partial class Inventory : Form, IInventory {
+        private Panel panel;
         private readonly Player _player = Game.GetGame().Player;
 
         public Inventory() {
@@ -25,6 +27,14 @@ namespace Fishing.View.Inventory {
             if (_player.ThirdRoad != null) {
                 tRoadButton.Enabled = true;
             }
+            panel = new Panel {
+                Width = 100,
+                Height = 100,
+                Left = PointToClient(Cursor.Position).X,
+                Top = PointToClient(Cursor.Position).Y,
+                BackColor = Color.Black
+            };     
+            //roadsListView.SetObjects(Inventory.RodInventory.Values);
 
             assembliesBox.SetObjects(_player.Assemblies);
             flinesView.SetObjects(_player.FlineInventory);
@@ -34,7 +44,7 @@ namespace Fishing.View.Inventory {
             hooksView.SetObjects(_player.HooksInventory);
         }
 
-        public Road Road_P { get; set; }
+        public Rod Road_P { get; set; }
 
         public Reel Reel_P { get; set; }
 
@@ -170,13 +180,13 @@ namespace Fishing.View.Inventory {
 
         private void ItemsTab_Click(object sender, EventArgs e) {
             if (Assembly_P != null) {
-                if (Assembly_P.Road.Type == RoadType.Spinning) {
+                if (Assembly_P.Road.RodType == RodType.Spinning) {
                     baitsView.Enabled = false;
                     luresView.Enabled = true;
                     Hook_P = null;
                 }
 
-                if (Assembly_P.Road.Type == RoadType.Feeder || Assembly_P.Road.Type == RoadType.Float) {
+                if (Assembly_P.Road.RodType == RodType.Feeder || Assembly_P.Road.RodType == RodType.Float) {
                     baitsView.Enabled = true;
                     luresView.Enabled = false;
                 }
@@ -185,7 +195,7 @@ namespace Fishing.View.Inventory {
 
         public void AddItemToRightView(Item item) {
             switch (Item.SelectItemType(item)) {
-                case Road r:
+                case Rod r:
                 itemImageBox.BackgroundImage = r.Picture;
                 nameBox.Text = r.Name;
                 powerBox.Text = r.Power.ToString();
@@ -231,7 +241,7 @@ namespace Fishing.View.Inventory {
 
         public void ShowAssembly(BL.Model.Game.Assembly assembly) {
             if (assembly == null) return;
-            assemblyType.Text = assembly.Road?.Type.ToString();
+            assemblyType.Text = assembly.Road?.RodType.ToString();
             RoadText = assembly.Road?.Name;
             ReelText = assembly.Reel?.Name;
             LureText = assembly.FishBait?.Name;

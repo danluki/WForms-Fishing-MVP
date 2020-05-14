@@ -21,7 +21,7 @@ namespace Fishing.BL.View {
 
         event EventHandler AssemblyBoxSelectedIndexChanged;
 
-        Road Road_P { get; set; }
+        Rod Road_P { get; set; }
         Reel Reel_P { get; set; }
         FLine FLine_P { get; set; }
         Lure Lure_P { get; set; }

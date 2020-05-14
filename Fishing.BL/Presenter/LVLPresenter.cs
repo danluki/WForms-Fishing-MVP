@@ -353,7 +353,7 @@ namespace Fishing.Presenter {
 
         #region CheckRoadsIntersect
 
-        private (bool IsIntersec, GameRoad Road) IsPointIntersectWithRoadRect(Point p) {
+        private (bool IsIntersec, GameRod Road) IsPointIntersectWithRoadRect(Point p) {
             var size = new System.Drawing.Size(1, 1);
             if (_drawer.FirstNormalRoad.IntersectsWith(new Rectangle(p, size)) ||
                 _drawer.FirstBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
@@ -381,7 +381,7 @@ namespace Fishing.Presenter {
 
         #endregion CheckRoadsIntersect
 
-        private void CheckBorders(Point point, GameRoad road) {
+        private void CheckBorders(Point point, GameRod road) {
             if (point.Y >= CurLvl.DeepArray[0, 0].Location.Y) {
                 road.CurPoint.Y = point.Y;
             }

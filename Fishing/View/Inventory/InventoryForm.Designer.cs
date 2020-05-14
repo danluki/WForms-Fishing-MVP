@@ -66,7 +66,7 @@
             this.countColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.assembliesBox = new BrightIdeasSoftware.ObjectListView();
-            this.roadNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.rodNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.powerColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.typeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.isEquipedColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -86,6 +86,8 @@
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ItemsTab = new System.Windows.Forms.TabControl();
+            this.imageColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.wearColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.BaitBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FLineBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReelBox)).BeginInit();
@@ -155,7 +157,7 @@
             // nameBox
             // 
             this.nameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameBox.Location = new System.Drawing.Point(377, 611);
+            this.nameBox.Location = new System.Drawing.Point(645, 608);
             this.nameBox.Name = "nameBox";
             this.nameBox.ReadOnly = true;
             this.nameBox.Size = new System.Drawing.Size(110, 20);
@@ -164,7 +166,7 @@
             // powerBox
             // 
             this.powerBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.powerBox.Location = new System.Drawing.Point(377, 559);
+            this.powerBox.Location = new System.Drawing.Point(645, 557);
             this.powerBox.Name = "powerBox";
             this.powerBox.ReadOnly = true;
             this.powerBox.Size = new System.Drawing.Size(110, 20);
@@ -173,7 +175,7 @@
             // typeBox
             // 
             this.typeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.typeBox.Location = new System.Drawing.Point(377, 585);
+            this.typeBox.Location = new System.Drawing.Point(645, 583);
             this.typeBox.Name = "typeBox";
             this.typeBox.ReadOnly = true;
             this.typeBox.Size = new System.Drawing.Size(110, 20);
@@ -182,7 +184,7 @@
             // CloseButton
             // 
             this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseButton.Location = new System.Drawing.Point(637, 608);
+            this.CloseButton.Location = new System.Drawing.Point(792, 608);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(33, 23);
             this.CloseButton.TabIndex = 24;
@@ -240,7 +242,7 @@
             // makeOutButton
             // 
             this.makeOutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.makeOutButton.Location = new System.Drawing.Point(280, 556);
+            this.makeOutButton.Location = new System.Drawing.Point(416, 608);
             this.makeOutButton.Name = "makeOutButton";
             this.makeOutButton.Size = new System.Drawing.Size(91, 23);
             this.makeOutButton.TabIndex = 33;
@@ -299,7 +301,7 @@
             this.assemblyPanel.Controls.Add(this.reelTextBox);
             this.assemblyPanel.Controls.Add(this.lureTextBox);
             this.assemblyPanel.Controls.Add(this.flineTextBox);
-            this.assemblyPanel.Location = new System.Drawing.Point(393, 55);
+            this.assemblyPanel.Location = new System.Drawing.Point(559, 55);
             this.assemblyPanel.Name = "assemblyPanel";
             this.assemblyPanel.Size = new System.Drawing.Size(266, 415);
             this.assemblyPanel.TabIndex = 37;
@@ -372,7 +374,7 @@
             this.itemImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.itemImageBox.BackColor = System.Drawing.Color.Transparent;
             this.itemImageBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.itemImageBox.Location = new System.Drawing.Point(396, 476);
+            this.itemImageBox.Location = new System.Drawing.Point(645, 476);
             this.itemImageBox.Name = "itemImageBox";
             this.itemImageBox.Size = new System.Drawing.Size(80, 77);
             this.itemImageBox.TabIndex = 12;
@@ -481,27 +483,31 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 20);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(338, 506);
+            this.tabPage6.Size = new System.Drawing.Size(496, 506);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Удочки";
             // 
             // assembliesBox
             // 
-            this.assembliesBox.AllColumns.Add(this.roadNameColumn);
+            this.assembliesBox.AllColumns.Add(this.imageColumn);
+            this.assembliesBox.AllColumns.Add(this.rodNameColumn);
             this.assembliesBox.AllColumns.Add(this.powerColumn);
             this.assembliesBox.AllColumns.Add(this.typeColumn);
+            this.assembliesBox.AllColumns.Add(this.wearColumn);
             this.assembliesBox.AllColumns.Add(this.isEquipedColumn);
             this.assembliesBox.CellEditUseWholeCell = false;
             this.assembliesBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.roadNameColumn,
+            this.imageColumn,
+            this.rodNameColumn,
             this.powerColumn,
             this.typeColumn,
+            this.wearColumn,
             this.isEquipedColumn});
             this.assembliesBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.assembliesBox.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.assembliesBox.Location = new System.Drawing.Point(15, 11);
             this.assembliesBox.Name = "assembliesBox";
-            this.assembliesBox.Size = new System.Drawing.Size(308, 480);
+            this.assembliesBox.Size = new System.Drawing.Size(458, 489);
             this.assembliesBox.SmallImageList = this.roadsList;
             this.assembliesBox.TabIndex = 38;
             this.assembliesBox.Tag = "Assemblies";
@@ -510,14 +516,15 @@
             this.assembliesBox.SelectedIndexChanged += new System.EventHandler(this.assembliesBox_SelectedIndexChanged_2);
             this.assembliesBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.assembliesBox_MouseDoubleClick_2);
             // 
-            // roadNameColumn
+            // rodNameColumn
             // 
-            this.roadNameColumn.AspectName = "Road";
-            this.roadNameColumn.Groupable = false;
-            this.roadNameColumn.IsEditable = false;
-            this.roadNameColumn.Sortable = false;
-            this.roadNameColumn.Text = "Название";
-            this.roadNameColumn.Width = 76;
+            this.rodNameColumn.AspectName = "Road";
+            this.rodNameColumn.DisplayIndex = 0;
+            this.rodNameColumn.Groupable = false;
+            this.rodNameColumn.IsEditable = false;
+            this.rodNameColumn.Sortable = false;
+            this.rodNameColumn.Text = "Название";
+            this.rodNameColumn.Width = 76;
             // 
             // powerColumn
             // 
@@ -532,12 +539,13 @@
             this.typeColumn.FillsFreeSpace = true;
             this.typeColumn.Groupable = false;
             this.typeColumn.Text = "Тип";
-            this.typeColumn.Width = 137;
+            this.typeColumn.Width = 70;
             // 
             // isEquipedColumn
             // 
             this.isEquipedColumn.AspectName = "IsEquiped";
             this.isEquipedColumn.CheckBoxes = true;
+            this.isEquipedColumn.Text = "";
             // 
             // countBox
             // 
@@ -725,10 +733,21 @@
             this.ItemsTab.Location = new System.Drawing.Point(41, 27);
             this.ItemsTab.Name = "ItemsTab";
             this.ItemsTab.SelectedIndex = 0;
-            this.ItemsTab.Size = new System.Drawing.Size(346, 530);
+            this.ItemsTab.Size = new System.Drawing.Size(504, 530);
             this.ItemsTab.TabIndex = 23;
             this.ItemsTab.Tag = "Reels";
             this.ItemsTab.Click += new System.EventHandler(this.ItemsTab_Click);
+            // 
+            // imageColumn
+            // 
+            this.imageColumn.DisplayIndex = 1;
+            this.imageColumn.Text = "";
+            this.imageColumn.Width = 39;
+            // 
+            // wearColumn
+            // 
+            this.wearColumn.Text = "Износ %";
+            this.wearColumn.Width = 70;
             // 
             // Inventory
             // 
@@ -736,7 +755,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(715, 650);
+            this.ClientSize = new System.Drawing.Size(870, 650);
             this.Controls.Add(this.typeBox);
             this.Controls.Add(this.itemImageBox);
             this.Controls.Add(this.powerBox);
@@ -815,7 +834,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         protected internal System.Windows.Forms.TabControl ItemsTab;
         private BrightIdeasSoftware.ObjectListView assembliesBox;
-        private BrightIdeasSoftware.OLVColumn roadNameColumn;
+        private BrightIdeasSoftware.OLVColumn rodNameColumn;
         private BrightIdeasSoftware.OLVColumn powerColumn;
         private BrightIdeasSoftware.OLVColumn typeColumn;
         private System.Windows.Forms.TextBox hookNameBox;
@@ -838,5 +857,7 @@
         private BrightIdeasSoftware.OLVColumn hNameColumn;
         private BrightIdeasSoftware.OLVColumn gatheringPercentColumn;
         private BrightIdeasSoftware.OLVColumn isEquipedColumn;
+        private BrightIdeasSoftware.OLVColumn imageColumn;
+        private BrightIdeasSoftware.OLVColumn wearColumn;
     }
 }

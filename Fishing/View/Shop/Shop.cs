@@ -34,7 +34,7 @@ namespace Fishing.View.Shop {
             moneyBox.Text = Game.GetGame().Player.Money.ToString();
         }
 
-        public Road Road_P { get => (Road)Item.GetItemByName(RoadsList.SelectedItem.ToString()); set => throw new ArgumentException(); }
+        public Rod Rod_P { get => (Rod)Item.GetItemByName(RoadsList.SelectedItem.ToString()); set => throw new ArgumentException(); }
         public Reel Reel_P { get => (Reel)Item.GetItemByName(ReelsList.SelectedItem.ToString()); set => throw new ArgumentException(); }
         public FLine FLine_P { get => (FLine)Item.GetItemByName(FLineList.SelectedItem.ToString()); set => throw new ArgumentException(); }
         public Lure Lure_P { get => (Lure)FishBait.GetFishBaitByName(lureBox.SelectedItem.ToString()); set => throw new ArgumentException(); }
@@ -67,7 +67,7 @@ namespace Fishing.View.Shop {
         public event EventHandler BasicDoubleClick;
 
         private void RoadsList_SelectedIndexChanged_1(object sender, EventArgs e) {
-            AddItemToRightView(Road_P);
+            AddItemToRightView(Rod_P);
         }
 
         private void FLineList_SelectedIndexChanged(object sender, EventArgs e) {
@@ -156,12 +156,12 @@ namespace Fishing.View.Shop {
                     label1.Text = " ";
                     priceBox.Text = r.Price + " рублей";
                 }
-                if (Item.SelectItemType(item) is Road) {
-                    var r = (Road)item;
+                if (Item.SelectItemType(item) is Rod) {
+                    var r = (Rod)item;
                     itemBox.BackgroundImage = r.Picture;
                     nameBox.Text = r.Name;
                     powerBox.Text = (r.Power / 1000) + " кг.";
-                    typeBox.Text = r.Type.ToString();
+                    typeBox.Text = r.RodType.ToString();
                     label1.Text = " ";
                     priceBox.Text = r.Price + " рублей";
                 }

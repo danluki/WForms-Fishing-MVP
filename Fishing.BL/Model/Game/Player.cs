@@ -26,10 +26,10 @@ namespace Fishing.BL.Model.Game {
 
         [NonSerialized]
         private FeedUp _equipedFeedUp;
-        private GameRoad _firstRoad;
-        private GameRoad _secondRoad;
-        private GameRoad _thirdRoad;
-        private GameRoad _equipedRoad;
+        private GameRod _firstRoad;
+        private GameRod _secondRoad;
+        private GameRod _thirdRoad;
+        private GameRod _equipedRoad;
         [NonSerialized]
         private bool _isFeedingUp;
         [NonSerialized]
@@ -44,7 +44,7 @@ namespace Fishing.BL.Model.Game {
         private int _hoursRemain;
         private BindingList<Fish> _fishlist;
         private BindingList<Assembly> _assemblies;
-        private BindingList<Road> _roadInventory;
+        private BindingList<Rod> _roadInventory;
         private BindingList<Reel> _reelInventory;
         private BindingList<FLine> _flineInventory;
         private BindingList<Bait> _baitsInventory;
@@ -67,7 +67,7 @@ namespace Fishing.BL.Model.Game {
                 _equipedFeedUp = value;
             } 
         }
-        public GameRoad FirstRoad {
+        public GameRod FirstRoad {
             get {
                 return _firstRoad;
             }
@@ -75,7 +75,7 @@ namespace Fishing.BL.Model.Game {
                 _firstRoad = value;
             }
         }
-        public GameRoad SecondRoad {
+        public GameRod SecondRoad {
             get {
                 return _secondRoad;
             }
@@ -83,7 +83,7 @@ namespace Fishing.BL.Model.Game {
                 _secondRoad = value;
             }
         }
-        public GameRoad ThirdRoad {
+        public GameRod ThirdRoad {
             get {
                 return _thirdRoad;
             }
@@ -91,7 +91,7 @@ namespace Fishing.BL.Model.Game {
                 _thirdRoad = value;
             }
         }
-        public GameRoad EquipedRoad {
+        public GameRod EquipedRoad {
             get {
                 return _equipedRoad;
             }
@@ -163,7 +163,7 @@ namespace Fishing.BL.Model.Game {
                 _assemblies = value;
             }
         }
-        public BindingList<Road> RoadInventory {
+        public BindingList<Rod> RoadInventory {
             get {
                 return _roadInventory;
             }
@@ -299,7 +299,7 @@ namespace Fishing.BL.Model.Game {
         public Player() {
             Fishlist = new BindingList<Fish>();
             Assemblies = new BindingList<Assembly>();
-            RoadInventory = new BindingList<Road>();
+            RoadInventory = new BindingList<Rod>();
             ReelInventory = new BindingList<Reel>();
             FlineInventory = new BindingList<FLine>();
             LureInventory = new BindingList<Lure>();
@@ -317,7 +317,7 @@ namespace Fishing.BL.Model.Game {
             NickName = "Рыболов";
         }
 
-        public void GiveUp(GameRoad road) {
+        public void GiveUp(GameRod road) {
             road.CurrentFeedUp = EquipedFeedUp;
             road.CurrentFeedUp.Count -= 1;
             IsFeedingUp = true;
@@ -399,7 +399,7 @@ namespace Fishing.BL.Model.Game {
             if (ass.IsAssemblyFull()) {
                 switch (index) {
                     case 1:
-                    FirstRoad = new GameRoad(ass) {
+                    FirstRoad = new GameRod(ass) {
                         RoadX = 100,
                         RoadY = 350,
                         Image = Roads.road
@@ -407,7 +407,7 @@ namespace Fishing.BL.Model.Game {
                     break;
 
                     case 2:
-                    SecondRoad = new GameRoad(ass) {
+                    SecondRoad = new GameRod(ass) {
                         RoadX = 200,
                         RoadY = 350,
                         Image = Roads.road
@@ -415,7 +415,7 @@ namespace Fishing.BL.Model.Game {
                     break;
 
                     case 3:
-                    ThirdRoad = new GameRoad(ass) {
+                    ThirdRoad = new GameRod(ass) {
                         RoadX = 300,
                         RoadY = 350,
                         Image = Roads.road
@@ -428,7 +428,7 @@ namespace Fishing.BL.Model.Game {
             }
         }
 
-        public GameRoad GetRoadByIndex(int index) {
+        public GameRod GetRoadByIndex(int index) {
             switch (index) {
                 case 1:
                 return FirstRoad;
@@ -458,7 +458,7 @@ namespace Fishing.BL.Model.Game {
             }
         }
 
-        public void SetEquipedRoad(GameRoad r) {
+        public void SetEquipedRoad(GameRod r) {
             EquipedRoad = r;
         }
 
@@ -500,7 +500,7 @@ namespace Fishing.BL.Model.Game {
             }
         }
 
-        public void DoGathering(GameRoad road) {
+        public void DoGathering(GameRod road) {
             road.IsFishAttack = false;
             Statistic.GatheringCount++;
             AddEventToHistory(new GatheringEvent());
@@ -508,7 +508,7 @@ namespace Fishing.BL.Model.Game {
             road.Image = Roads.road;
             road.FLineIncValue = 0;
             road.RoadIncValue = 0;
-            if (road.Assembly.Road.Type == RoadType.Feeder || road.Assembly.Road.Type == RoadType.Float) {
+            if (road.Assembly.Road.RodType == RodType.Feeder || road.Assembly.Road.RodType == RodType.Float) {
                 ((Bait)road.Assembly.FishBait).Count -= 1;
                 if (((Bait)road.Assembly.FishBait)?.Count <= 0) {
                     BaitInventory.Remove((Bait)road.Assembly.FishBait);
@@ -560,7 +560,7 @@ namespace Fishing.BL.Model.Game {
                AddEventToHistory(new TrophyFishEvent(EquipedRoad.Fish,
                     EquipedRoad.Assembly.FishBait));
             }
-            if (EquipedRoad.Assembly.Road.Type == RoadType.Feeder || EquipedRoad.Assembly.Road.Type == RoadType.Float) {
+            if (EquipedRoad.Assembly.Road.RodType == RodType.Feeder || EquipedRoad.Assembly.Road.RodType == RodType.Float) {
                 ((Bait)EquipedRoad.Assembly.FishBait).Count -= 1;
                 if (((Bait)EquipedRoad.Assembly.FishBait).Count <= 0) {
                     EquipedRoad.Assembly.FishBait = null;

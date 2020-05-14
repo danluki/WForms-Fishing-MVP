@@ -37,7 +37,7 @@ namespace Fishing.AbstractFish {
             this.ActivityParts = activeParts;
         }
 
-        private bool IsFishAttackPossible(GameRoad road) {
+        private bool IsFishAttackPossible(GameRod road) {
             try {
                 if (MinDeep > road.CurrentDeep || MaxDeep < road.CurrentDeep) return false;
                 var part = ActivityParts.First(p => p == Game.GetGame().Time.Part);
@@ -71,7 +71,7 @@ namespace Fishing.AbstractFish {
             return fs.GetFishByStr();
         }
 
-        public bool Attack(GameRoad road) {
+        public bool Attack(GameRod road) {
             if (IsFishAttackPossible(road)) {
                 road.Fish = this;
                 return true;

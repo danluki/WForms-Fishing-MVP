@@ -37,6 +37,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -77,7 +80,7 @@
     <Compile Include="Model\Fishes\WildCarp.cs" />
     <Compile Include="Model\Fishes\Zander.cs" />
     <Compile Include="Model\Game\Game.cs" />
-    <Compile Include="Model\Game\GameRoad.cs" />
+    <Compile Include="Model\Game\GameRod.cs" />
     <Compile Include="Model\Game\Power.cs" />
     <Compile Include="Model\Game\Statistic.cs" />
     <Compile Include="Model\Game\Time.cs" />
@@ -85,9 +88,10 @@
     <Compile Include="Model\Hooks\FeederHook.cs" />
     <Compile Include="Model\Hooks\FloatsHook.cs" />
     <Compile Include="Model\FishString.cs" />
+    <Compile Include="Model\Inventory\Inventory.cs" />
     <Compile Include="Model\Items\ItemsTypes.cs" />
     <Compile Include="Model\Items\Reel.cs" />
-    <Compile Include="Model\Items\RoadType.cs" />
+    <Compile Include="Model\Items\RodType.cs" />
     <Compile Include="Model\Baits\Lures\Jig.cs" />
     <Compile Include="Model\Baits\Lures\Pinwheel.cs" />
     <Compile Include="Model\LVLS\Lvl.cs" />
@@ -161,7 +165,7 @@
     <Compile Include="Model\Game\Player.cs" />
     <Compile Include="Model\Items\FLine.cs" />
     <Compile Include="Model\Items\Item.cs" />
-    <Compile Include="Model\Items\Road.cs" />
+    <Compile Include="Model\Items\Rod.cs" />
     <Compile Include="Model\Baits\Lures\Shaker.cs" />
     <Compile Include="Model\Baits\Lures\Lure.cs" />
     <Compile Include="Model\Baits\Lures\Wobbler.cs" />
@@ -487,12 +491,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ObjectListViewDemo\ObjectListView\ObjectListView2012.csproj">
-      <Project>{18feda0c-d147-4286-b39a-01204808106a}</Project>
-      <Name>ObjectListView2012</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

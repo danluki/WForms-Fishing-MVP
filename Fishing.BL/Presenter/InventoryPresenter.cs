@@ -133,7 +133,7 @@ namespace Fishing.Presenter {
                     break;
 
                     case "Hooks":
-                    if (_view.Assembly_P.Road.Type == RoadType.Spinning) return;
+                    if (_view.Assembly_P.Road.RodType == RodType.Spinning) return;
                     _view.Assembly_P.Hook = _view.Hook_P;
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.HooksInventory.Remove(_view.Hook_P);
