@@ -1,5 +1,4 @@
-﻿using Fishing.BL.Model.LVLS;
-using Fishing.BL.Model.Waters;
+﻿using Fishing.BL.Model.Waters;
 using Fishing.BL.View;
 using System;
 using System.ComponentModel;
@@ -28,7 +27,7 @@ namespace Fishing.BL.Model.Game {
         [NonSerialized]
         public IGameForm View;
         [NonSerialized]
-        public Timer HoursTimer;
+        private Timer HoursTimer;
         [NonSerialized]
         public Water CurrentWater;
         [NonSerialized]

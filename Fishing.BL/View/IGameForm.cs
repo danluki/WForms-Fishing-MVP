@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Fishing.BL.View {
 
-    public interface IGameForm : IView {
+    public interface IGameForm : IView<LvlPresenter>{
         Point CurPoint { get; set; }
         Image BackImage { get; set; }
 
@@ -23,8 +23,6 @@ namespace Fishing.BL.View {
         event EventHandler FormClose;
 
         event EventHandler DecSacietyTimerTick;
-
-        LvlPresenter LVLPresenter { get; set; }
 
         void UpdateForm();
 

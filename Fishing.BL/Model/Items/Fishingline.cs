@@ -1,11 +1,11 @@
-﻿using Fishing.BL.Model.Items;
-using System;
+﻿using System;
 using System.Drawing;
 
-namespace Fishing {
+namespace Fishing.BL.Model.Items {
 
     [Serializable]
-    public class Reel : Item {
+    public class Fishingline : Item {
+
         private string _name;
         private int _price;
         private int _wear;
@@ -63,31 +63,19 @@ namespace Fishing {
                 return _wearSpeed;
             }
             private set {
-                if(value > 0) {
+                if (value > 0) {
                     _wearSpeed = value;
                 }
 
             }
         }
-        public Reel(string name, int wear, int wearSpeed, int power, int price, Bitmap pic) : base(name, price, pic) {
+
+        public Fishingline(string name, int power, int price, Bitmap pic) : base(name, price, pic) {
             Power = power;
-            Wear = wear;
-            WearSpeed = wearSpeed;
         }
 
-        public override bool Equals(object obj) {
-            Reel reel = (Reel)obj;
-            return Name.Equals(reel.Name)
-                && reel.Wear == Wear
-                && reel.Power == Power
-                && reel.WearSpeed == WearSpeed
-                && reel.GetHashCode() == GetHashCode();
-        }
-        public override int GetHashCode() {
-            return (Power ^ Price ^ 15256) * Name.Length;
-        }
         public override string ToString() {
-            return Name;
+            return this.Name;
         }
     }
 }

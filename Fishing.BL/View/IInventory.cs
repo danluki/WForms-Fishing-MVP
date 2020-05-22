@@ -1,11 +1,12 @@
 ﻿using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
+using Fishing.Presenter;
 using System;
 
 namespace Fishing.BL.View {
 
-    public interface IInventory : IView {
+    public interface IInventory : IView<InventoryPresenter> {
 
         event EventHandler AssemblyDoubleClick;
 
@@ -23,7 +24,7 @@ namespace Fishing.BL.View {
 
         Rod Road_P { get; set; }
         Reel Reel_P { get; set; }
-        FLine FLine_P { get; set; }
+        Fishingline FLine_P { get; set; }
         Lure Lure_P { get; set; }
         Bait Bait_P { get; set; }
         BaseHook Hook_P { get; set; }

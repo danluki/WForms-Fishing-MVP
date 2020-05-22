@@ -9,14 +9,14 @@ namespace Fishing.BL.Model.Game {
     public class Assembly {
         public Rod Road { get; set; }
         public Reel Reel { get; set; }
-        public FLine FLine { get; set; }
+        public Fishingline FLine { get; set; }
         public FishBait FishBait { get; set; }
         public BaseHook Hook { get; set; }
         public Guid UniqueIdentifer { get; set; }
 
         public bool IsEquiped;
 
-        public Assembly(Rod road, Reel reel, FLine fLine, FishBait fb) {
+        public Assembly(Rod road, Reel reel, Fishingline fLine, FishBait fb) {
             Road = road ?? throw new ArgumentNullException(nameof(fLine));
             Reel = reel ?? throw new ArgumentNullException(nameof(fLine));
             FLine = fLine ?? throw new ArgumentNullException(nameof(fLine));

@@ -3,7 +3,7 @@ using Fishing.BL.Resources.Images;
 using Fishing.Presenter;
 using Fishing.View.FoodShop;
 using Fishing.View.Menu;
-using Fishing.View.Shop;
+using Fishing.View.ShopForm;
 using Fishing.View.Trip;
 using System;
 using System.Drawing;
@@ -19,7 +19,7 @@ namespace Fishing {
 
         public string NickNameL { get => label2.Text; set => label2.Text = value; }
         public string LowerLValue { get => label2.Text; set => label2.Text = value; }
-        public BasePresenter Presenter { get; set; }
+        public MenuPresenter Presenter { get; set; }
 
         public event EventHandler ExitButtonClick;
 
@@ -36,7 +36,7 @@ namespace Fishing {
         }
 
         private void ShopButton_Click(object sender, EventArgs e) {
-            var presenter = new ShopPresenter(new Shop());
+            var presenter = new ShopPresenter(new ShopForm());
             presenter.Run();
         }
 

@@ -9,7 +9,7 @@ namespace Fishing.BL.Model.Items {
         private int _price;
         private int _wear;
         private int _power;
-        public override Guid UniqueIdentifer { get; set; }
+        protected internal override Guid UniqueIdentifer { get; set; }
 
         public int Wear {
             get {
@@ -62,7 +62,16 @@ namespace Fishing.BL.Model.Items {
             Wear = wear;
             RodType = type;
         }
-
+        public override bool Equals(object obj) {
+            Rod rod = (Rod)obj;
+            return Name.Equals(rod.Name)
+                && rod.Wear == Wear
+                && rod.Power == Power
+                && rod.GetHashCode() == GetHashCode();
+        }
+        public override int GetHashCode() {
+            return (Power ^ Price ^ 15256) * Name.Length;
+        }
         public override string ToString() {
             return Name;
         }

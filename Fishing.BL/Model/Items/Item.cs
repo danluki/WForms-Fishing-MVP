@@ -11,9 +11,9 @@ namespace Fishing.BL.Model.Items {
 
     [Serializable]
     public abstract class Item {
-        public static BindingList<Rod> Roads = new BindingList<Rod>();
+        public static BindingList<Rod> Rods = new BindingList<Rod>();
         public static BindingList<Reel> Reels = new BindingList<Reel>();
-        public static BindingList<FLine> FLines = new BindingList<FLine>();
+        public static BindingList<Fishingline> Fishinglines = new BindingList<Fishingline>();
         public static BindingList<Lure> Lures = new BindingList<Lure>();
         public static BindingList<Bait> Baits = new BindingList<Bait>();
         public static BindingList<BaseHook> Hooks = new BindingList<BaseHook>();
@@ -24,7 +24,7 @@ namespace Fishing.BL.Model.Items {
         public virtual int Price { get; protected internal set; }
         public Bitmap Picture { get; }
 
-        public virtual Guid UniqueIdentifer { get; set; }
+        protected internal virtual Guid UniqueIdentifer { get; set; }
 
         protected Item(string name, int price, Bitmap picture) {
             Name = name;
@@ -34,9 +34,9 @@ namespace Fishing.BL.Model.Items {
 
         public static Item GetItemByName(string name) {
             var items = new List<Item>();
-            items.AddRange(Roads);
+            items.AddRange(Rods);
             items.AddRange(Reels);
-            items.AddRange(FLines);
+            items.AddRange(Fishinglines);
             items.AddRange(Lures);
             items.AddRange(Baits);
             items.AddRange(Hooks);
@@ -53,7 +53,7 @@ namespace Fishing.BL.Model.Items {
                 case Reel reel:
                 return reel;
 
-                case FLine line:
+                case Fishingline line:
                 return line;
 
                 case BaseHook bs:

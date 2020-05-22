@@ -1,5 +1,7 @@
-﻿namespace Fishing.BL.View {
+﻿using Fishing.BL.Presenter;
 
-    public interface IDeepField : IView {
+namespace Fishing.BL.View {
+
+    public interface IDeepField : IView<BasePresenter> {
     }
 }
