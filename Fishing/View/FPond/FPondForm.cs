@@ -11,7 +11,7 @@ namespace Fishing {
         public Image RightImage { get => FishImage.BackgroundImage; set => FishImage.BackgroundImage = value; }
         public int SelectedIndex { get => FishList.SelectedIndex; set => throw new NotImplementedException(); }
         public string DescriptionText { get => fishDescription.Text; set => fishDescription.Text = value; }
-        public BasePresenter Presenter { get; set; }
+        public FPondPresenter Presenter { get; set; }
 
         public FishPondForm() {
             InitializeComponent();

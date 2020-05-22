@@ -21,7 +21,7 @@ namespace Fishing.View.LureSelector {
         public Image Picture { get => lureImage.BackgroundImage; set => lureImage.BackgroundImage = FishBait.Picture; }
         public string DeepBoxText { get => deepBox.Text; set => deepBox.Text = value; }
         public string SizeBoxText { get => sizeBox.Text; set => sizeBox.Text = value; }
-        public BasePresenter Presenter { get; set; }
+        public SelectorPresenter<T> Presenter { get; set; }
         public T FishBait { get => List[lureList.SelectedIndex]; set => throw new NotImplementedException(); }
 
         public event EventHandler LureListIndexChanged;

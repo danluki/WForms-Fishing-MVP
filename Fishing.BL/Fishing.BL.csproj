@@ -95,6 +95,7 @@
     <Compile Include="Model\Baits\Lures\Jig.cs" />
     <Compile Include="Model\Baits\Lures\Pinwheel.cs" />
     <Compile Include="Model\LVLS\Lvl.cs" />
+    <Compile Include="Model\Shop\Shop.cs" />
     <Compile Include="Model\SoundPlayer\SoundsPlayer.cs" />
     <Compile Include="Model\Trip\TripToWater.cs" />
     <Compile Include="Model\UserEvent\FishEvent.cs" />
@@ -163,7 +164,7 @@
     <Compile Include="Model\Game\Assembly.cs" />
     <Compile Include="Model\Game\Sounder.cs" />
     <Compile Include="Model\Game\Player.cs" />
-    <Compile Include="Model\Items\FLine.cs" />
+    <Compile Include="Model\Items\Fishingline.cs" />
     <Compile Include="Model\Items\Item.cs" />
     <Compile Include="Model\Items\Rod.cs" />
     <Compile Include="Model\Baits\Lures\Shaker.cs" />

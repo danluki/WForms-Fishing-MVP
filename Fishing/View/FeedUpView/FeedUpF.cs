@@ -11,10 +11,10 @@ namespace Fishing.View.FeedUpView {
 
         public FeedUpF() {
             InitializeComponent();
-            aromaListsBox.DataSource = _player.AromaInventory;
-            feedsUpBox.DataSource = _player.BasicInventory;
-            baitsListBox.DataSource = _player.BaitInventory;
-            feedUpsBox.DataSource = _player.FeedUpInventory;
+            //aromaListsBox.DataSource = _player.AromaInventory;
+            //feedsUpBox.DataSource = _player.BasicInventory;
+           // baitsListBox.DataSource = _player.BaitInventory;
+            //feedUpsBox.DataSource = _player.FeedUpInventory;
         }
 
         private void CloseButton_MouseLeave(object sender, EventArgs e) {

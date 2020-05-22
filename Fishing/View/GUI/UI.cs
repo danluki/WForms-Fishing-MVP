@@ -75,7 +75,7 @@ namespace Fishing {
         public Image ReelPicture { get => reelBox.BackgroundImage; set => reelBox.BackgroundImage = value; }
         public Image FLinePicture { get => flineBox.BackgroundImage; set => flineBox.BackgroundImage = value; }
         public Image HookPicture { get => hookBox.BackgroundImage; set => hookBox.BackgroundImage = value; }
-        public BasePresenter Presenter { get; set; }
+        public GUIPresenter Presenter { get; set; }
         public string LocationNameLabelText { get => locationLabel.Text; set => locationLabel.Text += value; }
 
         public event PaintEventHandler SounderPaint;

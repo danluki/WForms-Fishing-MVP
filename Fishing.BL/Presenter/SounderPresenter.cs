@@ -55,8 +55,10 @@ namespace Fishing.BL.Presenter {
             if (height < Sounderwidth) {
                 coef = Sounderwidth / height;
             }
-            var x = (player.EquipedRoad.CurPoint.Y - beforeDeep) * coef;
-            g.DrawEllipse(new Pen(Color.Black), x, player.EquipedRoad.CurrentDeep / 10 - 4, 4, 4);
+            if (player.EquipedRoad != null) {
+                var x = (player.EquipedRoad.CurPoint.Y - beforeDeep) * coef;
+                g.DrawEllipse(new Pen(Color.Black), x, player.EquipedRoad.CurrentDeep / 10 - 4, 4, 4);
+            }
         }
 
         public override void Run() {

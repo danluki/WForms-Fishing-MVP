@@ -4,6 +4,7 @@ using Fishing.BL.Model.Hooks;
 using Fishing.BL.Model.Items;
 using Fishing.BL.Presenter;
 using Fishing.BL.View;
+using Fishing.Presenter;
 using Fishing.View.Assembly;
 using Fishing.View.LureSelector;
 using System;
@@ -48,7 +49,7 @@ namespace Fishing.View.Inventory {
 
         public Reel Reel_P { get; set; }
 
-        public FLine FLine_P { get; set; }
+        public Fishingline FLine_P { get; set; }
 
         public Lure Lure_P { get; set; }
 
@@ -74,7 +75,7 @@ namespace Fishing.View.Inventory {
         public string ReelText { get => reelTextBox.Text; set => reelTextBox.Text = value; }
         public string FLineText { get => flineTextBox.Text; set => flineTextBox.Text = value; }
         public string LureText { get => lureTextBox.Text; set => lureTextBox.Text = value; }
-        public BasePresenter Presenter { get; set; }
+        public InventoryPresenter Presenter { get; set; }
         public string AssNumbText { get => assNumberLabel.Text; set => assNumberLabel.Text = value; }
         public int RoadWearValue { get => roadWearBar.Value; set => roadWearBar.Value = value; }
         public int ReelWearMax { get => reelWearBar.Maximum; set => reelWearBar.Maximum = value; }
@@ -209,7 +210,7 @@ namespace Fishing.View.Inventory {
                 typeBox.Text = "";
                 break;
 
-                case FLine fl:
+                case Fishingline fl:
                 itemImageBox.BackgroundImage = fl.Picture;
                 nameBox.Text = fl.Name;
                 powerBox.Text = fl.Power.ToString();

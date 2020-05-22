@@ -1,93 +1,166 @@
-﻿using Fishing.BL.Model.Game;
+﻿using Fishing.BL.Model;
+using Fishing.BL.Model.Baits;
+using Fishing.BL.Model.FeedingUp;
+using Fishing.BL.Model.Game;
+using Fishing.BL.Model.Hooks;
+using Fishing.BL.Model.Items;
+using Fishing.BL.Model.SoundPlayer;
 using Fishing.BL.Presenter;
-using Fishing.View.Shop;
+using Fishing.View.ShopForm;
 using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Fishing.Presenter {
 
+    /// <summary>
+    /// Реализует презентер для класса ShopForm, через интерфейс IShop.
+    /// Работает с объектом модели Shop путем прямого вызова методов
+    /// </summary>
     public class ShopPresenter : BasePresenter {
+
+        #region private variables
+
         private readonly IShop view;
         private readonly Player player = Game.GetGame().Player;
+        private readonly Shop shop = new Shop();
 
+        #endregion private variables
+
+        #region public events
+
+        public Action<IEnumerable<Rod>> ProduceRods;
+        public Action<IEnumerable<Fishingline>> ProduceFishinglines;
+        public Action<IEnumerable<Reel>> ProduceReels;
+        public Action<IEnumerable<FishBait>> ProduceLures;
+        public Action<IEnumerable<Bait>> ProduceBaits;
+        public Action<IEnumerable<BaseHook>> ProduceHooks;
+        public Action<IEnumerable<Basic>> ProduceBasics;
+        public Action<IEnumerable<Aroma>> ProduceAromas;
+
+        public Action<int> ItemBought;
+
+        #endregion public events
+
+        #region ctor
+
+        /// <summary>
+        /// Конструктор ShopPresenter
+        /// </summary>
+        /// <param name="view">объект View</param>
         public ShopPresenter(IShop view) {
-            this.view = view;
+
+            #region Initialization
+
+            this.view = view ?? throw new ArgumentException("Представление не может отсутствовать.");
             view.Presenter = this;
-            view.FLineDoubleClick += View_FLineDoubleClick;
-            view.ReelDoubleClick += View_ReelDoubleClick;
-            view.RoadDoubleClick += View_RoadDoubleClick;
-            view.LureDoubleClick += View_LureDoubleClick;
-            view.BaitDoubleClick += View_BaitDoubleClick;
-            view.HookDoubleClick += View_HookDoubleClick;
-            view.AromaDoubleClick += View_AromaDoubleClick;
-            view.BasicDoubleClick += View_BasicDoubleClick;
+
+            #endregion Initialization
+
+            #region events add
+
+            view.ViewItemActivate += View_ViewItemActivate;
+            view.ViewItemDoubleClick += View_ViewItemDoubleClick;
+            view.ShopLoaded += View_ShopLoaded;
+            view.CloseButtonClick += View_CloseButtonClick;
+
+            #endregion events add
         }
 
-        private void View_BasicDoubleClick(object sender, EventArgs e) {
-            if (!player.IsAbleToBuyItem(view.Basic_P)) return;
-            player.BasicInventory.Add(view.Basic_P);
-            player.Money -= view.Basic_P.Price;
-            view.MoneyL = player.Money.ToString();
-            view.LowerL = "Куплено...";
+        #endregion ctor
+
+        #region viewslogic
+
+        /// <summary>
+        /// Событие возникает, когда пользователь выбирает какой либо объект в ObjectListView
+        /// После чего устанавливает значение необходимому объекту
+        /// </summary>
+        /// <param name="type">Тип предмета который вызвал вызов события</param>
+        /// <param name="input">Имя предмета который вызвал срабатывания</param>
+        private void View_ViewItemActivate(ShopItemType type, string input) {
+            switch (type) {
+                case ShopItemType.Aroma:
+                view.Aroma_Prop = shop.GetAroma(input);
+                break;
+
+                case ShopItemType.Bait:
+                view.Bait_Prop = shop.GetBait(input);
+                break;
+
+                case ShopItemType.Basic:
+                view.Basic_Prop = shop.GetBasic(input);
+                break;
+
+                case ShopItemType.Fline:
+                view.FLine_Prop = shop.GetFishingline(input);
+                break;
+
+                case ShopItemType.Hook:
+                view.Hook_Prop = shop.GetHook(input);
+                break;
+
+                case ShopItemType.Lure:
+                view.Lure_Prop = shop.GetLure(input);
+                break;
+
+                case ShopItemType.Reel:
+                view.Reel_Prop = shop.GetReel(input);
+                break;
+
+                case ShopItemType.Rod:
+                view.Rod_Prop = shop.GetRod(input);
+                break;
+            }
         }
 
-        private void View_AromaDoubleClick(object sender, EventArgs e) {
-            if (!player.IsAbleToBuyItem(view.Aroma_P)) return;
-            player.AromaInventory.Add(view.Aroma_P);
-            player.Money -= view.Aroma_P.Price;
-            view.MoneyL = player.Money.ToString();
-            view.LowerL = "Куплено...";
+        /// <summary>
+        /// Срабатывает при двойном нажатии пользователя по предмету.
+        /// При возникновении покупает предмет и воспроизводит звук.
+        /// </summary>
+        /// <param name="item">Объект, который необходимо купить</param>
+        private void View_ViewItemDoubleClick(Item item) {
+            if (item == null) return;
+
+            if (player.BuyItem(item)) {
+                ItemBought.Invoke(player.Money);
+                SoundsPlayer.PlayBuyingSound();
+            }
+            else {
+                MessageBox.Show(string.Format("Недостаточно средств!. Не хватает {0} рублей",
+                                item.Price - player.Money));
+                //Need to play warning sound.
+            }
         }
 
-        private void View_HookDoubleClick(object sender, EventArgs e) {
-            if (!player.IsAbleToBuyItem(view.Hook_P)) return;
-            player.HooksInventory.Add(view.Hook_P);
-            player.Money -= view.Hook_P.Price;
-            view.MoneyL = player.Money.ToString();
-            view.LowerL = "Куплено...";
+        #endregion viewslogic
+
+        #region closebuttonclick event
+
+        private void View_CloseButtonClick(object sender, EventArgs e) {
+            view.Down();
         }
 
-        private void View_BaitDoubleClick(object sender, EventArgs e) {
-            if (!player.IsAbleToBuyItem(view.Bait_P)) return;
-            player.AddBait(view.Bait_P);
-            player.Money -= view.Bait_P.Price;
-            view.MoneyL = player.Money.ToString();
-            view.LowerL = "Куплено...";
+        #endregion closebuttonclick event
+
+        #region load event
+
+        private void View_ShopLoaded() {
+            //При загрузке отдает списки объектов View
+            ProduceRods?.Invoke(shop.Rods);
+            ProduceFishinglines?.Invoke(shop.Fishinglines);
+            ProduceReels?.Invoke(shop.Reels);
+            ProduceLures?.Invoke(shop.Lures);
+            ProduceBaits?.Invoke(shop.Baits);
+            ProduceHooks?.Invoke(shop.Hooks);
+            ProduceBasics?.Invoke(shop.Basics);
+            ProduceAromas?.Invoke(shop.Aromas);
+
+            view.MoneyText = string.Format($"Деньги: {player.Money} рублей.");
         }
 
-        private void View_LureDoubleClick(object sender, EventArgs e) {
-            if (!player.IsAbleToBuyItem(view.Lure_P)) return;
-            player.LureInventory.Add(view.Lure_P);
-            player.Money -= view.Lure_P.Price;
-            view.MoneyL = player.Money.ToString();
-            view.LowerL = "Куплено...";
-        }
+        #endregion load event
 
-        private void View_RoadDoubleClick(object sender, EventArgs e) {
-
-            if (!player.IsAbleToBuyItem(view.Rod_P)) return;
-
-            view.Rod_P.UniqueIdentifer = Guid.NewGuid();
-            player.Assemblies.Add(new Assembly(view.Rod_P));
-            player.Money -= view.Rod_P.Price;
-            view.MoneyL = player.Money.ToString();
-            view.LowerL = "Куплено...";
-        }
-
-        private void View_ReelDoubleClick(object sender, EventArgs e) {
-            if (!player.IsAbleToBuyItem(view.Reel_P)) return;
-            player.ReelInventory.Add(view.Reel_P);
-            player.Money -= view.Reel_P.Price;
-            view.MoneyL = player.Money.ToString();
-            view.LowerL = "Куплено...";
-        }
-
-        private void View_FLineDoubleClick(object sender, EventArgs e) {
-            if (!player.IsAbleToBuyItem(view.FLine_P)) return;
-            player.FlineInventory.Add(view.FLine_P);
-            player.Money -= view.FLine_P.Price;
-            view.MoneyL = Game.GetGame().Player.Money.ToString();
-            view.LowerL = "Куплено...";
-        }
+        #region public methods
 
         public override void Run() {
             view.Open();
@@ -96,5 +169,7 @@ namespace Fishing.Presenter {
         public override void End() {
             view.Down();
         }
+
+        #endregion public methods
     }
 }

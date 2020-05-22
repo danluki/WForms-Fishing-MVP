@@ -15,7 +15,7 @@ namespace Fishing.View.FoodInventory {
         }
 
         public string FoodProductivityTextBox { get => foodProductBox.Text; set => foodProductBox.Text = "Восполняет: %" + value; }
-        public BasePresenter Presenter { get; set; }
+        public FoodPresenter Presenter { get; set; }
         public string FoodsSelectedItem { get => foodsBox.SelectedItem.ToString(); set => throw new NotImplementedException(); }
 
         public event EventHandler ListSelectedIndexChanged;

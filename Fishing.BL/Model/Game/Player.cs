@@ -42,20 +42,19 @@ namespace Fishing.BL.Model.Game {
         private int _money;
         private int _windingSpeed;
         private int _hoursRemain;
-        private BindingList<Fish> _fishlist;
-        private BindingList<Assembly> _assemblies;
-        private BindingList<Rod> _roadInventory;
-        private BindingList<Reel> _reelInventory;
-        private BindingList<FLine> _flineInventory;
-        private BindingList<Bait> _baitsInventory;
-        private BindingList<Lure> _luresInventory;
-        private BindingList<Aroma> _aromasInventory;
-        private BindingList<Basic> _basicsInventory;
-        private BindingList<FeedUp> _feedUpsInventory;
-        private BindingList<Food> _foodsInventory;
-        private BindingList<BaseHook> _hooksInventory;
-        private Stack<BaseEvent> _eventHistory;
-
+        public BindingList<Fish> Fishlist = new BindingList<Fish>();
+        public BindingList<Assembly> Assemblies = new BindingList<Assembly>();
+        public BindingList<Rod> RodInventory = new BindingList<Rod>();
+        public BindingList<Reel> ReelInventory = new BindingList<Reel>();
+        public BindingList<Fishingline> FlineInventory = new BindingList<Fishingline>();
+        public BindingList<Bait> BaitInventory = new BindingList<Bait>();
+        public BindingList<Lure> LureInventory = new BindingList<Lure>();
+        public BindingList<Aroma> AromaInventory = new BindingList<Aroma>();
+        public BindingList<Basic> BasicInventory = new BindingList<Basic>();
+        public BindingList<FeedUp> FeedUpInventory = new BindingList<FeedUp>();
+        public BindingList<Food> FoodInventory = new BindingList<Food>();
+        public BindingList<BaseHook> HooksInventory = new BindingList<BaseHook>();
+        public Stack<BaseEvent> EventHistory = new Stack<BaseEvent>();
 
 
         #region Properties
@@ -107,111 +106,7 @@ namespace Fishing.BL.Model.Game {
                 _currentLvl = value;
             }
         }
-        public BindingList<Fish> Fishlist {
-            get {
-                return _fishlist;
-            }
-            set {
-                _fishlist = value;
-            }
-        }
-        public BindingList<FeedUp> FeedUpInventory {
-            get {
-                return _feedUpsInventory;
-            }
-            set {
-                _feedUpsInventory = value;
-            }
-        }
-        public BindingList<Aroma> AromaInventory {
-            get {
-                return _aromasInventory;
-            }
-            set {
-                _aromasInventory = value;
-            }
-        }
-        public BindingList<BaseHook> HooksInventory {
-            get {
-                return _hooksInventory;
-            }
-            set {
-                _hooksInventory = value;
-            }
-        }
-        public BindingList<Food> FoodInventory {
-            get {
-                return _foodsInventory;
-            }
-            set {
-                _foodsInventory = value;
-            }
-        }
-        public BindingList<Basic> BasicInventory {
-            get {
-                return _basicsInventory;
-            }
-            set {
-                _basicsInventory = value;
-            }
-        }
-        public BindingList<Assembly> Assemblies {
-            get {
-                return _assemblies;
-            }
-            set {
-                _assemblies = value;
-            }
-        }
-        public BindingList<Rod> RoadInventory {
-            get {
-                return _roadInventory;
-            }
-            set {
-                _roadInventory = value;
-            }
-        }
-        public BindingList<Reel> ReelInventory {
-            get {
-                return _reelInventory;
-            }
-            set {
-                _reelInventory = value;
-            }
-        }
-        public BindingList<FLine> FlineInventory {
-            get {
-                return _flineInventory;
-            }
-            set {
-                _flineInventory = value;
-            }
-        }
-        public BindingList<Bait> BaitInventory {
-            get {
-                return _baitsInventory;
-            }
-            set {
-                _baitsInventory = value;
-            }
-        }
-        public BindingList<Lure> LureInventory {
-            get {
-                return _luresInventory;
-            }
-            set {
-                _luresInventory = value;
-            }
-        }
-        public Stack<BaseEvent> EventHistory {
-            get {
-                return _eventHistory;
-            }
-            set {
-                _eventHistory = value;
-            }
-        }
-
+        
         public bool IsFeedingUp {
             get {
                 return _isFeedingUp;
@@ -297,24 +192,68 @@ namespace Fishing.BL.Model.Game {
 
 
         public Player() {
-            Fishlist = new BindingList<Fish>();
-            Assemblies = new BindingList<Assembly>();
-            RoadInventory = new BindingList<Rod>();
-            ReelInventory = new BindingList<Reel>();
-            FlineInventory = new BindingList<FLine>();
-            LureInventory = new BindingList<Lure>();
-            FoodInventory = new BindingList<Food>();
-            BaitInventory = new BindingList<Bait>();
-            HooksInventory = new BindingList<BaseHook>();
-            FeedUpInventory = new BindingList<FeedUp>();
-            AromaInventory = new BindingList<Aroma>();
-            BasicInventory = new BindingList<Basic>();
-            EventHistory = new Stack<BaseEvent>();
+
             Statistic = new Statistic();
             HoursRemain = 999999;
             Money = 999999;
             Satiety = 100;
             NickName = "Рыболов";
+        }
+
+        public bool BuyItem(Item item) {
+            if (IsAbleToBuyItem(item)) {
+                switch (item) {
+                    case Rod _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    Assemblies.Add(new Assembly(item as Rod));
+                    Money -= item.Price;
+                    return true;
+
+                    case Reel _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    ReelInventory.Add(item as Reel);
+                    Money -= item.Price;
+                    return true;
+
+                    case Fishingline _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    FlineInventory.Add(item as Fishingline);
+                    Money -= item.Price;
+                    return true;
+
+                    case Bait _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    BaitInventory.Add(item as Bait);
+                    Money -= item.Price;
+                    return true;
+
+                    case Lure _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    LureInventory.Add(item as Lure);
+                    Money -= item.Price;
+                    return true;
+
+                    case BaseHook _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    LureInventory.Add(item as Lure);
+                    Money -= item.Price;
+                    return true;
+
+                    case Basic _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    BasicInventory.Add(item as Basic);
+                    Money -= item.Price;
+                    return true;
+
+                    case Aroma _:
+                    item.UniqueIdentifer = Guid.NewGuid();
+                    AromaInventory.Add(item as Aroma);
+                    Money -= item.Price;
+                    return true;
+                }
+            }
+            return false;
+
         }
 
         public void GiveUp(GameRod road) {
@@ -354,6 +293,7 @@ namespace Fishing.BL.Model.Game {
             var b = BaitInventory.First(i => name.Equals(i.Name));
             return b;
         }
+
         public Reel GetReelByName(string name) {
             if (name == null) return null;
             var b = ReelInventory.First(i => name.Equals(i.Name));
@@ -362,7 +302,7 @@ namespace Fishing.BL.Model.Game {
 
         public Item GetItemByName(string name) {
             var items = new List<Item>();
-            items.AddRange(RoadInventory);
+            items.AddRange(RodInventory);
             items.AddRange(FlineInventory);
             items.AddRange(LureInventory);
             items.AddRange(BaitInventory);

@@ -80,7 +80,7 @@ namespace Fishing.Presenter {
                 break;
 
                 case "Flines":
-                _view.FLine_P = (FLine)_player.GetItemByName(_view.FlinesViewSelectedItemText);
+                _view.FLine_P = (Fishingline)_player.GetItemByName(_view.FlinesViewSelectedItemText);
                 _view.AddItemToRightView(_view.FLine_P);
                 break;
 
@@ -156,7 +156,7 @@ namespace Fishing.Presenter {
                 if (_player.EquipedRoad.Assembly.FLine != null)
                     _player.FlineInventory.Add(_view.Assembly_P.FLine);
                 if (_player.EquipedRoad.Assembly.Road != null)
-                    _player.RoadInventory.Add(_view.Assembly_P.Road);
+                    _player.RodInventory.Add(_view.Assembly_P.Road);
                 if (_player.EquipedRoad.Assembly.FishBait != null)
                     _player.LureInventory.Add((Lure)_view.Assembly_P.FishBait);
                 if (_player.EquipedRoad.Assembly.Reel != null)
