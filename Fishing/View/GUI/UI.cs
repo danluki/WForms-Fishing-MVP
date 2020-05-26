@@ -42,7 +42,7 @@ namespace Fishing {
             timeLabel.Text = Game.GetGame().Time.ToString();
 
             Game.GetGame().HoursInc += GUI_HoursInc;
-            _player.EventHistoryUpdated += ShowLastEvent;
+            _player.Statistic.EventHistoryUpdated += ShowLastEvent;
             _player.SatietyUpdated += SatietyUpdated;
             _player.Gathering += UI_Gathering;
             _player.UpdateBucketImage += UI_UpdateBucketImage;
@@ -85,7 +85,7 @@ namespace Fishing {
         }
 
         private void ShowLastEvent() {
-            AddEventToBox(_player.EventHistory.Peek());
+            AddEventToBox(_player.Statistic.Events.Peek());
         }
 
         private void GUI_HoursInc(object sender, EventArgs e) {
@@ -118,13 +118,13 @@ namespace Fishing {
         private void BaitsPicture_Click(object sender, EventArgs e) {
             if (_player.EquipedRoad.Assembly == null || _player.EquipedRoad.IsBaitInWater) return;
             if (_player.EquipedRoad.Assembly.FishBait is Lure) {
-                var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(_player.LureInventory), this);
-                pres.Run();
+                //var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(_player.LureInventory), this);
+                //pres.Run();
             }
             if (!(_player.EquipedRoad.Assembly.FishBait is Bait)) return;
             {
-                var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(_player.BaitInventory), this);
-                pres.Run();
+                //var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(_player.BaitInventory), this);
+                //pres.Run();
             }
         }
 
@@ -218,12 +218,12 @@ namespace Fishing {
             if (road == null) return;
 
             BaitPicture = road.Assembly.FishBait?.Picture;
-            FLinePicture = road.Assembly.FLine?.Picture;
-            FLinePicture = road.Assembly.FLine?.Picture;
-            RoadPicture = road.Assembly.Road?.Picture;
+            FLinePicture = road.Assembly.Fline?.Picture;
+            FLinePicture = road.Assembly.Fline?.Picture;
+            RoadPicture = road.Assembly.Rod?.Picture;
             ReelPicture = road.Assembly.Reel?.Picture;
 
-            if (road.Assembly.Road?.RodType == RodType.Feeder) {
+            if (road.Assembly.Rod?.RodType == RodType.Feeder) {
                 HookPicture = road.Assembly.Hook?.Picture;
                 fBaitCountsLabel.Text = ((Bait)road.Assembly.FishBait)?.Count.ToString();
             }

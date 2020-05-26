@@ -4,7 +4,7 @@ using System.Linq;
 using Fishing.BL.Model.Items;
 
 namespace Fishing.BL.Model.Inventory {
-    public static class Inventory {
+    public class Inventory {
         public static Dictionary<Guid, Rod> RodInventory { get; set; } = new Dictionary<Guid, Rod>();
 
         public static Rod GetRod(Guid identifer) {

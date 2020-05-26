@@ -17,7 +17,7 @@ namespace Fishing {
         private void CurrentFish_KeyDown(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
                 case Keys.Space:
-                Game.GetGame().Player.AddFish(fish);
+                Game.GetGame().Player.FishInventory.AddFish(fish);
                 Close();
                 break;
 

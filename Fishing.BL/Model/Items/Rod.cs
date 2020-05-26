@@ -9,7 +9,7 @@ namespace Fishing.BL.Model.Items {
         private int _price;
         private int _wear;
         private int _power;
-        protected internal override Guid UniqueIdentifer { get; set; }
+        public override Guid UniqueIdentifer { get; set; }
 
         public int Wear {
             get {
@@ -75,5 +75,11 @@ namespace Fishing.BL.Model.Items {
         public override string ToString() {
             return Name;
         }
+
+        public Guid GetGuid() {
+            return UniqueIdentifer;
+        }
+
+
     }
 }

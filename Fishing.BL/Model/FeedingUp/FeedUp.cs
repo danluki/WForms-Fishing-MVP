@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Fishing.BL.Model.FeedingUp {
     
     [Serializable]
-    public class FeedUp {
+    public class Feedup {
         private const int MaxFeedUpCount = 20;
         public Dictionary<Type, int> WorkingFishes { get; set; }
         public Basic Basic { get; set; }
@@ -13,14 +13,17 @@ namespace Fishing.BL.Model.FeedingUp {
         public Bait Bait { get; set; }
         public string Name { get; set; }
         public int Count { get; set; }
+        public Guid UniqueIdentifer { get; }
 
-        public FeedUp(Basic basic, Aroma aroma, Bait bait, Dictionary<Type, int> workingFishes) {
+        public Feedup(Basic basic, Aroma aroma, Bait bait, Dictionary<Type, int> workingFishes) {
             WorkingFishes = workingFishes ?? throw new ArgumentException("Список рыб должен содержать как миниум 1 рыбу.");
-            Aroma = aroma ?? throw new ArgumentException();
-            Basic = basic ?? throw new ArgumentException();
-            Bait = bait ?? throw new ArgumentException();
+            Aroma = aroma ?? throw new ArgumentException("Прикормка должна содержать ароматизатор.");
+            Basic = basic ?? throw new ArgumentException("Прикормка должна содержать основу.");
+            Bait = bait ?? throw new ArgumentException("Прикормка должна содержать наживки.");
+
+            UniqueIdentifer = Guid.NewGuid();
         }
-        public FeedUp() {
+        public Feedup() {
 
         }
 
@@ -31,13 +34,13 @@ namespace Fishing.BL.Model.FeedingUp {
             Basic.AddBasicToFeedUp(this);
             Aroma.AddAromaToFeedUp(this);
             Count = MaxFeedUpCount;
-            Name = this.ToString();
+            Name = ToString();
 
             return true;
         }
 
         public override string ToString() {
-            return Basic.Name + ", " + Aroma.Name + ", " + Bait.Name;
+            return string.Format($"{Basic.Name}, {Aroma.Name}, {Bait.Name}");
         }
     }
 }

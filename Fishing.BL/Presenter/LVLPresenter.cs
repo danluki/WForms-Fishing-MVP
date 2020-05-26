@@ -92,7 +92,7 @@ namespace Fishing.Presenter {
                         gui.LureDeepValue = _player.EquipedRoad.CurrentDeep;
                         AutoDecBarValues();
                         if (gui.FLineBarValue > MaxBarValue - 5) {
-                            _player.AddEventToHistory(new FLineTornEvent());
+                            _player.Statistic.AddEventToHistory(new FLineTornEvent());
                             _player.TornFLine();
 
                             gui.FLineBarValue = 0;
@@ -102,7 +102,7 @@ namespace Fishing.Presenter {
                         }
                         if (gui.RoadBarValue > MaxBarValue - 5) {
                             _player.BrokeRoad();
-                            _player.AddEventToHistory(new RoadBrokenEvent());
+                            _player.Statistic.AddEventToHistory(new RoadBrokenEvent());
 
                             gui.FLineBarValue = 0;
                             gui.RoadBarValue = 0;

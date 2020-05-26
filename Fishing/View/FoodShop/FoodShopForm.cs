@@ -34,7 +34,7 @@ namespace Fishing.View.FoodShop {
             if (Game.GetGame().Player.Money >= food.Price) {
                 Game.GetGame().Player.Money -= food.Price;
                 moneyLabel.Text = "Деньги: " + Game.GetGame().Player.Money;
-                Game.GetGame().Player.FoodInventory.Add(food);
+                //Game.GetGame().Player.Inventory.Foods.Add(food);
                 SoundsPlayer.PlayBuyingSound();
             }
         }

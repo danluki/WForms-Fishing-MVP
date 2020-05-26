@@ -33,9 +33,9 @@ namespace Fishing.BL.Model.Game {
                 if (IsFishAttack) {
                     Fish.Power.X = fishMovingX.Next(-Fish.Power.X, Math.Abs(Fish.Power.X) + 1);
                     Fish.Power.Y = fishMovingY.Next(-Math.Abs(Fish.Power.Y), 2);
-                    Assembly.Reel.Wear -= 1;
+                    Assembly.Reel.Wear += 1;
                     if (RoadIncValue >= 30) {
-                        Assembly.Road.Wear -= 1;
+                        Assembly.Rod.Wear += 1;
                     }
                 }
             }
@@ -46,23 +46,23 @@ namespace Fishing.BL.Model.Game {
             var (isFish, gathering) = CurLVL.GetFish(this);
             if (!isFish) return;
             baitTimer.Stop();
-            if (Fish.Weight <= Assembly.Road.Power * 0.2) {
+            if (Fish.Weight <= Assembly.Rod.Power * 0.2) {
                 GImage = Roads.izg1;
                 HImage = Roads.izg1H;
             }
-            else if (Fish.Weight <= Assembly.Road.Power * 0.25) {
+            else if (Fish.Weight <= Assembly.Rod.Power * 0.25) {
                 GImage = Roads.izg2;
                 HImage = Roads.izg2H;
             }
-            else if (Fish.Weight <= Assembly.Road.Power * 0.3) {
+            else if (Fish.Weight <= Assembly.Rod.Power * 0.3) {
                 GImage = Roads.izg3;
                 HImage = Roads.izg3H;
             }
-            else if (Fish.Weight <= Assembly.Road.Power * 0.4) {
+            else if (Fish.Weight <= Assembly.Rod.Power * 0.4) {
                 GImage = Roads.izg4;
                 HImage = Roads.izg4H;
             }
-            else if (Fish.Weight >= Assembly.Road.Power * 0.4) {
+            else if (Fish.Weight >= Assembly.Rod.Power * 0.4) {
                 GImage = Roads.izg5;
                 HImage = Roads.izg5H;
             }
@@ -96,7 +96,7 @@ namespace Fishing.BL.Model.Game {
         public Image GImage { get; set; }
         public Assembly Assembly { get; set; }
         public Fish Fish { get; set; }
-        public FeedUp CurrentFeedUp { get; set; }
+        public Feedup CurrentFeedUp { get; set; }
 
         public int RoadX;
         public int RoadY;

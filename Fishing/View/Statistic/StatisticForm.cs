@@ -47,7 +47,7 @@ namespace Fishing.View.Statistic {
             TornFLineLText = Game.GetGame().Player.Statistic.TornsFLinesCount.ToString();
             BrokenRoadsLText = Game.GetGame().Player.Statistic.BrokensRoadsCount.ToString();
 
-            foreach (BaseEvent ev in Game.GetGame().Player.EventHistory) {
+            foreach (BaseEvent ev in Game.GetGame().Player.Statistic.Events) {
                 ListViewItem lvi = new ListViewItem {
                     Text = ev.Text,
                     ImageIndex = ev.Index

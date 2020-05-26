@@ -13,7 +13,7 @@ namespace Fishing.BL.Model.FeedingUp {
             WorkingFishes = workingFishes ?? throw new ArgumentException("Список рыб должен содержать как миниум 1 рыбу.");
         }
 
-        public void AddBasicToFeedUp(FeedUp feedup) {
+        public void AddBasicToFeedUp(Feedup feedup) {
             foreach (var w in WorkingFishes) {
                 if (feedup.WorkingFishes.ContainsKey(w.Key)) {
                     feedup.WorkingFishes[w.Key] += w.Value;

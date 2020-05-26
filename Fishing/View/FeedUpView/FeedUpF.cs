@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Fishing.View.FeedUpView {
 
     public partial class FeedUpF : Form {
-        private Player _player = Game.GetGame().Player;
+        private readonly Player _player = Game.GetGame().Player;
 
         public FeedUpF() {
             InitializeComponent();
@@ -27,13 +27,13 @@ namespace Fishing.View.FeedUpView {
 
         private void CreateButton_Click(object sender, EventArgs e) {
             if (curFeedUpAromasBox.Items.Count == curFeedUpBasic.Items.Count) {
-                var basic = _player.GetBasicByName(curFeedUpBasic.Items[0]?.ToString());
-                var aroma = _player.GetAromaByName(curFeedUpAromasBox.Items[0]?.ToString());
-                var bait = _player.GetBaitByName(curFeedUpBaitBox.Items[0]?.ToString());
-                var feedUp = new FeedUp(basic, aroma, bait, new Dictionary<Type, int>());
-                if (feedUp.Create()) {
-                    _player.FeedUpInventory.Add(feedUp);
-                }
+                //var basic = _player.GetBasicByName(curFeedUpBasic.Items[0]?.ToString());
+                //var aroma = _player.GetAromaByName(curFeedUpAromasBox.Items[0]?.ToString());
+                //var bait = _player.GetBaitByName(curFeedUpBaitBox.Items[0]?.ToString());
+               // var feedUp = new Feedup(basic, aroma, bait, new Dictionary<Type, int>());
+                //if (feedUp.Create()) {
+                   // _player.FeedUpInventory.Add(feedUp);
+                //}
             }
         }
 
@@ -55,7 +55,7 @@ namespace Fishing.View.FeedUpView {
 
         private void feedUpsBox_MouseDoubleClick(object sender, MouseEventArgs e) {
             if (feedUpsBox.SelectedItem != null) {
-                _player.EquipedFeedUp = _player.GetFeedUpByName(feedUpsBox.SelectedItem.ToString());
+                //_player.EquipedFeedUp = _player.GetFeedUpByName(feedUpsBox.SelectedItem.ToString());
             }
         }
     }
