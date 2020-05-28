@@ -15,8 +15,8 @@ namespace Fishing.BL.Model.FeedingUp {
         public int Count { get; set; }
         public Guid UniqueIdentifer { get; }
 
-        public Feedup(Basic basic, Aroma aroma, Bait bait, Dictionary<Type, int> workingFishes) {
-            WorkingFishes = workingFishes ?? throw new ArgumentException("Список рыб должен содержать как миниум 1 рыбу.");
+        public Feedup(Basic basic, Aroma aroma, Bait bait) {
+            WorkingFishes = new Dictionary<Type, int>();
             Aroma = aroma ?? throw new ArgumentException("Прикормка должна содержать ароматизатор.");
             Basic = basic ?? throw new ArgumentException("Прикормка должна содержать основу.");
             Bait = bait ?? throw new ArgumentException("Прикормка должна содержать наживки.");
@@ -37,6 +37,24 @@ namespace Fishing.BL.Model.FeedingUp {
             Name = ToString();
 
             return true;
+        }
+
+        public override bool Equals(object obj) {
+            if (obj == null || GetType() != obj.GetType()) {
+                return false;
+            }
+            Feedup feedup = obj as Feedup;
+
+            return GetHashCode() == feedup.GetHashCode() &&
+                   Basic.Equals(feedup.Basic) &&
+                   Aroma.Equals(feedup.Aroma) &&
+                   Name.Equals(feedup.Name) &&
+                   UniqueIdentifer.Equals(feedup.UniqueIdentifer); 
+        }
+
+
+        public override int GetHashCode() {
+            return base.GetHashCode();
         }
 
         public override string ToString() {

@@ -110,7 +110,7 @@ namespace Fishing.BL.Model.Game {
 
         public int CurrentDeep;
         public int RoadIncValue;
-        public int FLineIncValue;
+        public int FlineIncValue;
 
         public void StartBaitTimer() {
             if (IsBaitInWater) {

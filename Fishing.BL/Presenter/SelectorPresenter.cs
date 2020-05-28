@@ -35,8 +35,8 @@ namespace Fishing.BL.Presenter {
 
         private void View_LureListDoubleClick(object sender, EventArgs e) {
             try {
-                Game.GetGame().Player.EquipedRoad.Assembly.FishBait = _view.FishBait;
-                _gui.BaitPicture = Game.GetGame().Player.EquipedRoad.Assembly.FishBait.Picture;
+                Game.GetGame().Player.EquipedRod.Assembly.FishBait = _view.FishBait;
+                _gui.BaitPicture = Game.GetGame().Player.EquipedRod.Assembly.FishBait.Picture;
                 _view.Down();
             }
             catch (NullReferenceException) {

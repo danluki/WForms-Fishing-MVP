@@ -22,13 +22,13 @@ namespace Fishing.View.Inventory {
 
         public Inventory() {
             InitializeComponent();
-            if (_player.FirstRoad != null) {
+            if (_player.FirstRod != null) {
                 fRoadButton.Enabled = true;
             }
-            if (_player.SecondRoad != null) {
+            if (_player.SecondRod != null) {
                 sRoadButton.Enabled = true;
             }
-            if (_player.ThirdRoad != null) {
+            if (_player.ThirdRod != null) {
                 tRoadButton.Enabled = true;
             }
             panel = new Panel {
@@ -123,12 +123,12 @@ namespace Fishing.View.Inventory {
         }
 
         private void BaitBox_Click(object sender, EventArgs e) {
-            if (Game.GetGame().Player.EquipedRoad.Assembly == null || Game.GetGame().Player.EquipedRoad.IsBaitInWater) return;
-            if (Game.GetGame().Player.EquipedRoad.Assembly.FishBait is Lure) {
+            if (Game.GetGame().Player.EquipedRod.Assembly == null || Game.GetGame().Player.EquipedRod.IsBaitInWater) return;
+            if (Game.GetGame().Player.EquipedRod.Assembly.FishBait is Lure) {
                 //var presenter = new SelectorPresenter<Lure>(new LureSelector<Lure>(Game.GetGame().Player.LureInventory), UI.Gui);
                 //presenter.Run();
             }
-            if (!(Game.GetGame().Player.EquipedRoad.Assembly.FishBait is Bait)) return;
+            if (!(Game.GetGame().Player.EquipedRod.Assembly.FishBait is Bait)) return;
             {
                 //var presenter = new SelectorPresenter<Bait>(new LureSelector<Bait>(Game.GetGame().Player.BaitInventory), UI.Gui);
                 //presenter.Run();

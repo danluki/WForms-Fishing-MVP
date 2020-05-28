@@ -159,7 +159,6 @@ namespace Fishing.BL.Controller {
 
         public void Initiallize(string name) {
             Directory.CreateDirectory(name + "/config");
-            SetAllFishesName();
             Game.GetGame().Player = _saver.Load<Player>(name + "/config/player.dat") ?? new Player();
             Game.GetGame().Time = _saver.Load<Time>(name + "/config/time.dat");
             var dir = new DirectoryInfo(@"C:\Users\Programmer\Desktop\MVPFishing-master\Fishing.BL\Model\Waters");
@@ -173,9 +172,9 @@ namespace Fishing.BL.Controller {
         }
 
         public void SavePlayer() {
-            _saver.Save(Game.GetGame().Player.NickName + "/config/time.dat", Game.GetGame().Time);
-            _saver.Save(Game.GetGame().Player.NickName + "/config/currwater.dat", Game.GetGame().CurrentWater.Name);
-            _saver.Save(Game.GetGame().Player.NickName + "/config/player.dat", Game.GetGame().Player);
+            _saver.Save(Game.GetGame().Player.Nickname + "/config/time.dat", Game.GetGame().Time);
+            _saver.Save(Game.GetGame().Player.Nickname + "/config/currwater.dat", Game.GetGame().CurrentWater.Name);
+            _saver.Save(Game.GetGame().Player.Nickname + "/config/player.dat", Game.GetGame().Player);
         }
     }
 }

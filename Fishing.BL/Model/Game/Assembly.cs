@@ -16,12 +16,27 @@ namespace Fishing.BL.Model.Game {
 
         public bool IsEquiped;
 
-        public Assembly(Rod road, Reel reel, Fishingline fLine, FishBait fb) {
+        public Assembly(Rod rod, Reel reel, Fishingline fLine, FishBait fb) {
 
-            Rod = road ?? throw new ArgumentNullException(nameof(fLine));
-            Reel = reel ?? throw new ArgumentNullException(nameof(fLine));
+            Rod = rod ?? throw new ArgumentNullException(nameof(rod));
+            Reel = reel ?? throw new ArgumentNullException(nameof(reel));
             Fline = fLine ?? throw new ArgumentNullException(nameof(fLine));
-            FishBait = fb ?? throw new ArgumentNullException(nameof(fLine));
+            if (Rod.RodType == RodType.Spinning) {
+                if (fb is Lure) {
+                    FishBait = fb ?? throw new ArgumentNullException(nameof(fb));
+                }
+                else {
+                    throw new ArgumentException("На спиннинг нельзя поставить наживку.");
+                }
+            }
+            else {
+                if (fb is Bait) {
+                    FishBait = fb ?? throw new ArgumentNullException(nameof(fb));
+                }
+                else {
+                    throw new ArgumentException("На удочку нельзя поставить приманку.");
+                }
+            }
 
             UniqueIdentifer = Guid.NewGuid();
 
@@ -37,7 +52,7 @@ namespace Fishing.BL.Model.Game {
             UniqueIdentifer = Guid.NewGuid();
         }
 
-        public bool IsAssemblyFull() {
+        public bool IsFull() {
             if (Rod == null || Reel == null || Fline == null || FishBait == null) {
                 return false;
             }
@@ -50,7 +65,7 @@ namespace Fishing.BL.Model.Game {
                 return true;
 
                 default:
-                throw new ArgumentOutOfRangeException();
+                return false;
             }
         }
 

@@ -40,11 +40,11 @@ namespace Fishing.View.Statistic {
         }
 
         private void StatisticForm_Load(object sender, EventArgs e) {
-            NameLText = Game.GetGame().Player.NickName;
+            NameLText = Game.GetGame().Player.Nickname;
             MoneyLText = Game.GetGame().Player.Money.ToString();
             GatheringLText = Game.GetGame().Player.Statistic.GatheringCount.ToString();
             TakeFishesLText = Game.GetGame().Player.Statistic.TakenFishesCount.ToString();
-            TornFLineLText = Game.GetGame().Player.Statistic.TornsFLinesCount.ToString();
+            TornFLineLText = Game.GetGame().Player.Statistic.TornsFlinesCount.ToString();
             BrokenRoadsLText = Game.GetGame().Player.Statistic.BrokensRoadsCount.ToString();
 
             foreach (BaseEvent ev in Game.GetGame().Player.Statistic.Events) {

@@ -18,7 +18,7 @@ namespace Fishing.BL.Model.Game {
         public Stack<BaseEvent> Events { get; set; } = new Stack<BaseEvent>();
         public int GatheringCount { get; set; }
         public int BrokensRoadsCount { get; set; }
-        public int TornsFLinesCount { get; set; }
+        public int TornsFlinesCount { get; set; }
         public int TakenFishesCount { get; set; }
 
         #endregion props

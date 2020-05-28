@@ -89,7 +89,7 @@ namespace Fishing.BL.Model.LVLS {
                 var flineCoef = road.Fish.Weight / (double)road.Assembly.Fline.Power;
 
                 road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
-                road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
+                road.FlineIncValue = Convert.ToInt32(flineCoef * 100);
                 var gathering = randomGathering.Next(1, 100);
 
                 if (road.Assembly.Rod.RodType == RodType.Spinning) {

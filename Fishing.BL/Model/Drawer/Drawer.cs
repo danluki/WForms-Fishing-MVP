@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Fishing.BL.Model.Drawer {
 
-    internal class Drawer {
+    public class Drawer {
         public Graphics Graphics { get; set; }
 
         private readonly Player player = Game.Game.GetGame().Player;
@@ -25,7 +25,7 @@ namespace Fishing.BL.Model.Drawer {
         public Rectangle ThirdNormalRoad;
         public Rectangle ThirdBrokenRoad;
 
-        private Rectangle Netting;
+        public Rectangle Netting;
         public Rectangle RTrigon;
         public Rectangle FeedUpBallRectangle = new Rectangle(0, Game.Game.GameHeight, 4, 4);
         private Point FeedUpPoint;
@@ -35,12 +35,12 @@ namespace Fishing.BL.Model.Drawer {
             player.DoNetting += Player_DoNetting;
         }
 
-        private void Player_DoNetting() {
+        private void Player_DoNetting(GameRod rod) {
             Timer _animationTimer = new Timer() {
                 Interval = 5
             };
             _animationTimer.Start();
-            Netting.X = player.EquipedRoad.RoadX;
+            Netting.X = rod.RoadX;
             Netting.Y = 540;
             _animationTimer.Tick += (sender, e) => {
                 if (Netting.Y > 300) {
@@ -76,31 +76,31 @@ namespace Fishing.BL.Model.Drawer {
         }
 
         public void DrawFeedUpBall() {
-            if (player.EquipedRoad != null) {
+            if (player.EquipedRod != null) {
                 sbrush.Color = Color.DarkOliveGreen;
-                Graphics.DrawEllipse(new Pen(Color.White), player.FirstRoad.CurPoint.X, player.FirstRoad.CurPoint.Y, 4, 4);
+                Graphics.DrawEllipse(new Pen(Color.White), player.FirstRod.CurPoint.X, player.FirstRod.CurPoint.Y, 4, 4);
                 Graphics.DrawEllipse(new Pen(Color.DarkOliveGreen), FeedUpBallRectangle);
                 Graphics.FillEllipse(sbrush, FeedUpBallRectangle);
             }
         }
 
         public void DrawPoints() {
-            if (player.FirstRoad != null) {
-                sbrush.Color = player.FirstRoad == player.EquipedRoad ? Color.Red : Color.White;
-                Graphics.DrawEllipse(new Pen(Color.White), player.FirstRoad.CurPoint.X, player.FirstRoad.CurPoint.Y, 4, 4);
-                Graphics.FillEllipse(sbrush, player.FirstRoad.CurPoint.X, player.FirstRoad.CurPoint.Y, 4, 4);
+            if (player.FirstRod != null) {
+                sbrush.Color = player.FirstRod == player.EquipedRod ? Color.Red : Color.White;
+                Graphics.DrawEllipse(new Pen(Color.White), player.FirstRod.CurPoint.X, player.FirstRod.CurPoint.Y, 4, 4);
+                Graphics.FillEllipse(sbrush, player.FirstRod.CurPoint.X, player.FirstRod.CurPoint.Y, 4, 4);
             }
 
-            if (player.SecondRoad != null) {
-                sbrush.Color = player.SecondRoad == player.EquipedRoad ? Color.Red : Color.White;
-                Graphics.DrawEllipse(new Pen(Color.White), player.SecondRoad.CurPoint.X, player.SecondRoad.CurPoint.Y, 4, 4);
-                Graphics.FillEllipse(sbrush, player.SecondRoad.CurPoint.X, player.SecondRoad.CurPoint.Y, 4, 4);
+            if (player.SecondRod != null) {
+                sbrush.Color = player.SecondRod == player.EquipedRod ? Color.Red : Color.White;
+                Graphics.DrawEllipse(new Pen(Color.White), player.SecondRod.CurPoint.X, player.SecondRod.CurPoint.Y, 4, 4);
+                Graphics.FillEllipse(sbrush, player.SecondRod.CurPoint.X, player.SecondRod.CurPoint.Y, 4, 4);
             }
 
-            if (player.ThirdRoad == null) return;
-            sbrush.Color = player.ThirdRoad == player.EquipedRoad ? Color.Red : Color.White;
-            Graphics.DrawEllipse(new Pen(Color.White), player.ThirdRoad.CurPoint.X, player.ThirdRoad.CurPoint.Y, 4, 4);
-            Graphics.FillEllipse(sbrush, player.ThirdRoad.CurPoint.X, player.ThirdRoad.CurPoint.Y, 4, 4);
+            if (player.ThirdRod == null) return;
+            sbrush.Color = player.ThirdRod == player.EquipedRod ? Color.Red : Color.White;
+            Graphics.DrawEllipse(new Pen(Color.White), player.ThirdRod.CurPoint.X, player.ThirdRod.CurPoint.Y, 4, 4);
+            Graphics.FillEllipse(sbrush, player.ThirdRod.CurPoint.X, player.ThirdRod.CurPoint.Y, 4, 4);
         }
 
         public void DrawNetting() {
@@ -108,30 +108,30 @@ namespace Fishing.BL.Model.Drawer {
         }
 
         public void DrawTrigon() {
-            if (player.EquipedRoad != null) {
+            if (player.EquipedRod != null) {
                 Graphics.DrawImage(Images.ssp, RTrigon);
             }
         }
 
         public void DrawRoads() {
             try {
-                if (player.FirstRoad != null && !player.FirstRoad.IsFishAttack) {
-                    Graphics.DrawImage(player.FirstRoad.Image, FirstNormalRoad);
+                if (player.FirstRod != null && !player.FirstRod.IsFishAttack) {
+                    Graphics.DrawImage(player.FirstRod.Image, FirstNormalRoad);
                 }
-                else if (player.FirstRoad != null && player.FirstRoad.IsFishAttack) {
-                    Graphics.DrawImage(player.FirstRoad.Image, FirstBrokenRoad);
+                else if (player.FirstRod != null && player.FirstRod.IsFishAttack) {
+                    Graphics.DrawImage(player.FirstRod.Image, FirstBrokenRoad);
                 }
-                if (player.SecondRoad != null && !player.SecondRoad.IsFishAttack) {
-                    Graphics.DrawImage(player.SecondRoad.Image, SecondNormalRoad);
+                if (player.SecondRod != null && !player.SecondRod.IsFishAttack) {
+                    Graphics.DrawImage(player.SecondRod.Image, SecondNormalRoad);
                 }
-                else if (player.SecondRoad != null && player.SecondRoad.IsFishAttack) {
-                    Graphics.DrawImage(player.SecondRoad.Image, SecondBrokenRoad);
+                else if (player.SecondRod != null && player.SecondRod.IsFishAttack) {
+                    Graphics.DrawImage(player.SecondRod.Image, SecondBrokenRoad);
                 }
-                if (player.ThirdRoad != null && !player.ThirdRoad.IsFishAttack) {
-                    Graphics.DrawImage(player.ThirdRoad.Image, ThirdNormalRoad);
+                if (player.ThirdRod != null && !player.ThirdRod.IsFishAttack) {
+                    Graphics.DrawImage(player.ThirdRod.Image, ThirdNormalRoad);
                 }
-                else if (player.ThirdRoad != null && player.ThirdRoad.IsFishAttack) {
-                    Graphics.DrawImage(player.ThirdRoad.Image, ThirdBrokenRoad);
+                else if (player.ThirdRod != null && player.ThirdRod.IsFishAttack) {
+                    Graphics.DrawImage(player.ThirdRod.Image, ThirdBrokenRoad);
                 }
             }
             catch (ArgumentNullException) { }
@@ -139,46 +139,46 @@ namespace Fishing.BL.Model.Drawer {
 
         public void UpdateRectangles() {
             try {
-                if (player.FirstRoad != null) {
-                    FirstNormalRoad = new Rectangle(player.FirstRoad.RoadX,
-                                                    player.FirstRoad.RoadY,
-                                                    player.FirstRoad.Image.Width,
+                if (player.FirstRod != null) {
+                    FirstNormalRoad = new Rectangle(player.FirstRod.RoadX,
+                                                    player.FirstRod.RoadY,
+                                                    player.FirstRod.Image.Width,
                                                     257);
 
-                    FirstBrokenRoad = new Rectangle(player.FirstRoad.RoadX - 10,
-                                                    player.FirstRoad.RoadY,
-                                                    player.FirstRoad.Image.Width,
+                    FirstBrokenRoad = new Rectangle(player.FirstRod.RoadX - 10,
+                                                    player.FirstRod.RoadY,
+                                                    player.FirstRod.Image.Width,
                                                     257);
                 }
 
-                if (player.SecondRoad != null) {
-                    SecondNormalRoad = new Rectangle(player.SecondRoad.RoadX,
-                                                     player.SecondRoad.RoadY,
-                                                     player.SecondRoad.Image.Width,
+                if (player.SecondRod != null) {
+                    SecondNormalRoad = new Rectangle(player.SecondRod.RoadX,
+                                                     player.SecondRod.RoadY,
+                                                     player.SecondRod.Image.Width,
                                                      257);
-                    SecondBrokenRoad = new Rectangle(player.SecondRoad.RoadX - 10,
-                                                     player.SecondRoad.RoadY,
-                                                     player.SecondRoad.Image.Width,
+                    SecondBrokenRoad = new Rectangle(player.SecondRod.RoadX - 10,
+                                                     player.SecondRod.RoadY,
+                                                     player.SecondRod.Image.Width,
                                                      257);
                 }
-                if (player.ThirdRoad != null) {
-                    ThirdNormalRoad = new Rectangle(player.ThirdRoad.RoadX,
-                                                    player.ThirdRoad.RoadY,
-                                                    player.ThirdRoad.Image.Width,
+                if (player.ThirdRod != null) {
+                    ThirdNormalRoad = new Rectangle(player.ThirdRod.RoadX,
+                                                    player.ThirdRod.RoadY,
+                                                    player.ThirdRod.Image.Width,
                                                     257);
-                    ThirdBrokenRoad = new Rectangle(player.ThirdRoad.RoadX - 10,
-                                                    player.ThirdRoad.RoadY,
-                                                    player.ThirdRoad.Image.Width,
+                    ThirdBrokenRoad = new Rectangle(player.ThirdRod.RoadX - 10,
+                                                    player.ThirdRod.RoadY,
+                                                    player.ThirdRod.Image.Width,
                                                     257);
                 }
-                if (player.EquipedRoad != null) {
-                    Netting = new Rectangle(player.EquipedRoad.CurPoint.X,
+                if (player.EquipedRod != null) {
+                    Netting = new Rectangle(player.EquipedRod.CurPoint.X,
                                             -300,
                                             60,
                                             200);
                 }
-                if (player.EquipedRoad != null) {
-                    RTrigon = new Rectangle(player.EquipedRoad.RoadX + 12,
+                if (player.EquipedRod != null) {
+                    RTrigon = new Rectangle(player.EquipedRod.RoadX + 12,
                                             585,
                                             18,
                                             18);

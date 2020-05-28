@@ -95,7 +95,7 @@ namespace Fishing.Presenter {
                         }
                     }
 
-                    if (_player.EquipedRoad.Assembly.Reel != null) {
+                    if (_player.EquipedRod.Assembly.Reel != null) {
                         _player.Inventory.Reels.Add(_view.Assembly_P.Reel.UniqueIdentifer, _view.Assembly_P.Reel);
                         _view.Assembly_P.Reel = null;
                         ProduceReels?.Invoke(_player.Inventory.Reels.Values);
@@ -147,11 +147,11 @@ namespace Fishing.Presenter {
         private void View_ViewAssemblyItemDoubleClick(Assembly ass) {
             if (_view.Assembly_P == null) return;
             if (!_view.Assembly_P.IsEquiped) {
-                if (_view.Assembly_P.IsAssemblyFull()) {
+                if (_view.Assembly_P.IsFull()) {
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.SetGameRoad(_view.Assembly_P, _index);
                     _player.SetEquipedRoad(_index);
-                    _gui.AddRoadToGUI(_player.EquipedRoad);
+                    _gui.AddRoadToGUI(_player.EquipedRod);
                     _view.Assembly_P.IsEquiped = true;
                     ProduceAssemblies?.Invoke(_player.Inventory.Assemblies.Values);
                 }

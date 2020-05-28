@@ -38,7 +38,7 @@ namespace Fishing {
             WeightLabel.Text = f.Weight.ToString();
             PriceButton.Text = (f.Price * f.Weight).ToString();
             Show();
-            Game.GetGame().Player.EquipedRoad.IsFishAttack = false;
+            Game.GetGame().Player.EquipedRod.IsFishAttack = false;
         }
     }
 }
