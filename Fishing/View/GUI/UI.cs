@@ -42,7 +42,7 @@ namespace Fishing {
             timeLabel.Text = Game.GetGame().Time.ToString();
 
             Game.GetGame().HoursInc += GUI_HoursInc;
-            _player.EventHistoryUpdated += ShowLastEvent;
+            _player.Statistic.EventHistoryUpdated += ShowLastEvent;
             _player.SatietyUpdated += SatietyUpdated;
             _player.Gathering += UI_Gathering;
             _player.UpdateBucketImage += UI_UpdateBucketImage;
@@ -53,9 +53,8 @@ namespace Fishing {
         }
 
         private void UI_Gathering() {
-            ReelBar.Value = 0;
-            FLineBar.Value = 0;
-            fBaitCountsLabel.Text = "";
+            ResetBarValues();
+            fBaitCountsLabel.Text = string.Empty;
         }
 
         private void UI_UpdateBucketImage() {
@@ -75,7 +74,7 @@ namespace Fishing {
         public Image ReelPicture { get => reelBox.BackgroundImage; set => reelBox.BackgroundImage = value; }
         public Image FLinePicture { get => flineBox.BackgroundImage; set => flineBox.BackgroundImage = value; }
         public Image HookPicture { get => hookBox.BackgroundImage; set => hookBox.BackgroundImage = value; }
-        public BasePresenter Presenter { get; set; }
+        public GUIPresenter Presenter { get; set; }
         public string LocationNameLabelText { get => locationLabel.Text; set => locationLabel.Text += value; }
 
         public event PaintEventHandler SounderPaint;
@@ -85,7 +84,7 @@ namespace Fishing {
         }
 
         private void ShowLastEvent() {
-            AddEventToBox(_player.EventHistory.Peek());
+            AddEventToBox(_player.Statistic.Events.Peek());
         }
 
         private void GUI_HoursInc(object sender, EventArgs e) {
@@ -116,15 +115,15 @@ namespace Fishing {
         }
 
         private void BaitsPicture_Click(object sender, EventArgs e) {
-            if (_player.EquipedRoad.Assembly == null || _player.EquipedRoad.IsBaitInWater) return;
-            if (_player.EquipedRoad.Assembly.FishBait is Lure) {
-                var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(_player.LureInventory), this);
-                pres.Run();
+            if (_player.EquipedRod.Assembly == null || _player.EquipedRod.IsBaitInWater) return;
+            if (_player.EquipedRod.Assembly.FishBait is Lure) {
+                //var pres = new SelectorPresenter<Lure>(new LureSelector<Lure>(_player.LureInventory), this);
+                //pres.Run();
             }
-            if (!(_player.EquipedRoad.Assembly.FishBait is Bait)) return;
+            if (!(_player.EquipedRod.Assembly.FishBait is Bait)) return;
             {
-                var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(_player.BaitInventory), this);
-                pres.Run();
+                //var pres = new SelectorPresenter<Bait>(new LureSelector<Bait>(_player.BaitInventory), this);
+                //pres.Run();
             }
         }
 
@@ -218,12 +217,12 @@ namespace Fishing {
             if (road == null) return;
 
             BaitPicture = road.Assembly.FishBait?.Picture;
-            FLinePicture = road.Assembly.FLine?.Picture;
-            FLinePicture = road.Assembly.FLine?.Picture;
-            RoadPicture = road.Assembly.Road?.Picture;
+            FLinePicture = road.Assembly.Fline?.Picture;
+            FLinePicture = road.Assembly.Fline?.Picture;
+            RoadPicture = road.Assembly.Rod?.Picture;
             ReelPicture = road.Assembly.Reel?.Picture;
 
-            if (road.Assembly.Road?.RodType == RodType.Feeder) {
+            if (road.Assembly.Rod?.RodType == RodType.Feeder) {
                 HookPicture = road.Assembly.Hook?.Picture;
                 fBaitCountsLabel.Text = ((Bait)road.Assembly.FishBait)?.Count.ToString();
             }
@@ -240,6 +239,11 @@ namespace Fishing {
 
         public void Down() {
             Show();
+        }
+
+        public void ResetBarValues() {
+            FLineBarValue = 0;
+            RoadBarValue = 0;
         }
     }
 }

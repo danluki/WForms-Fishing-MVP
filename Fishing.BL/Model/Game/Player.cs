@@ -1,19 +1,15 @@
 ﻿using Fishing.AbstractFish;
-using Fishing.BL.Controller;
 using Fishing.BL.Model.Baits;
 using Fishing.BL.Model.Eating;
 using Fishing.BL.Model.FeedingUp;
-using Fishing.BL.Model.Hooks;
+using Fishing.BL.Model.Game.Inventory;
 using Fishing.BL.Model.Items;
 using Fishing.BL.Model.LVLS;
 using Fishing.BL.Model.SoundPlayer;
 using Fishing.BL.Model.UserEvent;
 using Fishing.BL.Resources.Images;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Fishing.BL.Model.Game {
@@ -21,261 +17,32 @@ namespace Fishing.BL.Model.Game {
     [Serializable]
     public sealed class Player {
 
+        #region Constants
         private const int SATIETY_MAX_VALUE = 100;
         private const int SATIETY_MIN_VALUE = 0;
-
-        [NonSerialized]
-        private FeedUp _equipedFeedUp;
-        private GameRod _firstRoad;
-        private GameRod _secondRoad;
-        private GameRod _thirdRoad;
-        private GameRod _equipedRoad;
-        [NonSerialized]
-        private bool _isFeedingUp;
-        [NonSerialized]
-        private bool _isNettingFish;
-        private int _satiety;
-        [NonSerialized]
-        private Lvl _currentLvl;
-        private Statistic _statistic;
-        private string _name;
-        private int _money;
-        private int _windingSpeed;
-        private int _hoursRemain;
-        private BindingList<Fish> _fishlist;
-        private BindingList<Assembly> _assemblies;
-        private BindingList<Rod> _roadInventory;
-        private BindingList<Reel> _reelInventory;
-        private BindingList<FLine> _flineInventory;
-        private BindingList<Bait> _baitsInventory;
-        private BindingList<Lure> _luresInventory;
-        private BindingList<Aroma> _aromasInventory;
-        private BindingList<Basic> _basicsInventory;
-        private BindingList<FeedUp> _feedUpsInventory;
-        private BindingList<Food> _foodsInventory;
-        private BindingList<BaseHook> _hooksInventory;
-        private Stack<BaseEvent> _eventHistory;
-
-
+        #endregion
 
         #region Properties
-        public FeedUp EquipedFeedUp {
-            get {
-                return _equipedFeedUp;
-            } 
-            set {
-                _equipedFeedUp = value;
-            } 
-        }
-        public GameRod FirstRoad {
-            get {
-                return _firstRoad;
-            }
-            set {
-                _firstRoad = value;
-            }
-        }
-        public GameRod SecondRoad {
-            get {
-                return _secondRoad;
-            }
-            set {
-                _secondRoad = value;
-            }
-        }
-        public GameRod ThirdRoad {
-            get {
-                return _thirdRoad;
-            }
-            set {
-                _thirdRoad = value;
-            }
-        }
-        public GameRod EquipedRoad {
-            get {
-                return _equipedRoad;
-            }
-            set {
-                _equipedRoad = value;
-            }
-        }
-        public Lvl CurrentLvl {
-            get {
-                return _currentLvl;
-            }
-            set {
-                _currentLvl = value;
-            }
-        }
-        public BindingList<Fish> Fishlist {
-            get {
-                return _fishlist;
-            }
-            set {
-                _fishlist = value;
-            }
-        }
-        public BindingList<FeedUp> FeedUpInventory {
-            get {
-                return _feedUpsInventory;
-            }
-            set {
-                _feedUpsInventory = value;
-            }
-        }
-        public BindingList<Aroma> AromaInventory {
-            get {
-                return _aromasInventory;
-            }
-            set {
-                _aromasInventory = value;
-            }
-        }
-        public BindingList<BaseHook> HooksInventory {
-            get {
-                return _hooksInventory;
-            }
-            set {
-                _hooksInventory = value;
-            }
-        }
-        public BindingList<Food> FoodInventory {
-            get {
-                return _foodsInventory;
-            }
-            set {
-                _foodsInventory = value;
-            }
-        }
-        public BindingList<Basic> BasicInventory {
-            get {
-                return _basicsInventory;
-            }
-            set {
-                _basicsInventory = value;
-            }
-        }
-        public BindingList<Assembly> Assemblies {
-            get {
-                return _assemblies;
-            }
-            set {
-                _assemblies = value;
-            }
-        }
-        public BindingList<Rod> RoadInventory {
-            get {
-                return _roadInventory;
-            }
-            set {
-                _roadInventory = value;
-            }
-        }
-        public BindingList<Reel> ReelInventory {
-            get {
-                return _reelInventory;
-            }
-            set {
-                _reelInventory = value;
-            }
-        }
-        public BindingList<FLine> FlineInventory {
-            get {
-                return _flineInventory;
-            }
-            set {
-                _flineInventory = value;
-            }
-        }
-        public BindingList<Bait> BaitInventory {
-            get {
-                return _baitsInventory;
-            }
-            set {
-                _baitsInventory = value;
-            }
-        }
-        public BindingList<Lure> LureInventory {
-            get {
-                return _luresInventory;
-            }
-            set {
-                _luresInventory = value;
-            }
-        }
-        public Stack<BaseEvent> EventHistory {
-            get {
-                return _eventHistory;
-            }
-            set {
-                _eventHistory = value;
-            }
-        }
-
-        public bool IsFeedingUp {
-            get {
-                return _isFeedingUp;
-            }
-            set {
-                _isFeedingUp = value;
-            }
-        }
-        public bool IsNettingFish {
-            get {
-                return _isNettingFish;
-            }
-            set {
-                _isNettingFish = value;
-            }
-        }
-        public int Satiety {
-            get {
-                return _satiety;
-            }
-            set {
-                _satiety = value;
-            }
-        }
-        public Statistic Statistic {
-            get {
-                return _statistic;
-            }
-            set {
-                _statistic = value;
-            }
-        }
-        public string NickName {
-            get {
-                return _name;
-            }
-            set {
-                _name = value;
-            }
-        }
-        public int Money {
-            get {
-                return _money;
-            }
-            set {
-                _money = value;
-            }
-        }
-        public int WindingSpeed {
-            get {
-                return _windingSpeed;
-            }
-            set {
-                _windingSpeed = value;
-            }
-        }
-        public int HoursRemain {
-            get {
-                return _hoursRemain;
-            }
-            set {
-                _hoursRemain = value;
-            }
-        }
+        public PInventory Inventory { get; set; } = new PInventory();
+        public FishInventory FishInventory { get; set; } = new FishInventory();
+        [field: NonSerialized]
+        public Feedup EquipedFeedUp { get; set; }
+        public GameRod FirstRod { get; set; }
+        public GameRod SecondRod { get; set; }
+        public GameRod ThirdRod { get; set; }
+        public GameRod EquipedRod { get; set; }
+        [field: NonSerialized]
+        public Lvl CurrentLevel { get; set; }
+        [field: NonSerialized]
+        public bool IsFeedingUp { get; set; }
+        [field: NonSerialized]
+        public bool IsNettingFish { get; set; }
+        public int Satiety { get; set; } = 100;
+        public Statistic Statistic { get; set; } = new Statistic();
+        public string Nickname { get; set; } = "Рыболов";
+        public int Money { get; set; } = 999999;
+        public int WindingSpeed { get; set; }
+        public int HoursRemain { get; set; } = 999999;
 
         #endregion
 
@@ -285,9 +52,7 @@ namespace Fishing.BL.Model.Game {
         [field: NonSerialized]
         public event Action Gathering;
         [field: NonSerialized]
-        public event Action DoNetting;
-        [field: NonSerialized]
-        public event Action EventHistoryUpdated;
+        public event Action<GameRod> DoNetting;
         [field: NonSerialized]
         public event Action UpdateBucketImage;
         [field: NonSerialized]
@@ -295,96 +60,10 @@ namespace Fishing.BL.Model.Game {
 
         #endregion
 
+        #region ctor
+        public Player() { }
+        #endregion
 
-        public Player() {
-            Fishlist = new BindingList<Fish>();
-            Assemblies = new BindingList<Assembly>();
-            RoadInventory = new BindingList<Rod>();
-            ReelInventory = new BindingList<Reel>();
-            FlineInventory = new BindingList<FLine>();
-            LureInventory = new BindingList<Lure>();
-            FoodInventory = new BindingList<Food>();
-            BaitInventory = new BindingList<Bait>();
-            HooksInventory = new BindingList<BaseHook>();
-            FeedUpInventory = new BindingList<FeedUp>();
-            AromaInventory = new BindingList<Aroma>();
-            BasicInventory = new BindingList<Basic>();
-            EventHistory = new Stack<BaseEvent>();
-            Statistic = new Statistic();
-            HoursRemain = 999999;
-            Money = 999999;
-            Satiety = 100;
-            NickName = "Рыболов";
-        }
-
-        public void GiveUp(GameRod road) {
-            road.CurrentFeedUp = EquipedFeedUp;
-            road.CurrentFeedUp.Count -= 1;
-            IsFeedingUp = true;
-            GiveUped?.Invoke(road.CurPoint);
-        }
-
-        public FeedUp GetFeedUpByName(string name) {
-            if (name == null) return null;
-            var b = FeedUpInventory.First(i => name.Equals(i.Name));
-            if (b != null) {
-                UpdateBucketImage?.Invoke();
-            }
-            return b;
-        }
-
-        public void StartNetting() {
-            DoNetting?.Invoke();
-        }
-
-        public Basic GetBasicByName(string name) {
-            if (name == null) return null;
-            var b = BasicInventory.First(i => name.Equals(i.Name));
-            return b;
-        }
-
-        public Aroma GetAromaByName(string name) {
-            if (name == null) return null;
-            var b = AromaInventory.First(i => name.Equals(i.Name));
-            return b;
-        }
-
-        public Bait GetBaitByName(string name) {
-            if (name == null) return null;
-            var b = BaitInventory.First(i => name.Equals(i.Name));
-            return b;
-        }
-        public Reel GetReelByName(string name) {
-            if (name == null) return null;
-            var b = ReelInventory.First(i => name.Equals(i.Name));
-            return b;
-        }
-
-        public Item GetItemByName(string name) {
-            var items = new List<Item>();
-            items.AddRange(RoadInventory);
-            items.AddRange(FlineInventory);
-            items.AddRange(LureInventory);
-            items.AddRange(BaitInventory);
-            items.AddRange(HooksInventory);
-            return items.Find(i => i.Name.Equals(name));
-        }
-
-        public void AddEventToHistory(BaseEvent ev) {
-            if (ev != null) {
-                EventHistory.Push(ev);
-                EventHistoryUpdated?.Invoke();
-            }
-        }
-
-        public bool IsPlayerAbleToFishing() {
-            if (EquipedRoad.Assembly?.FishBait != null) {
-                if (Satiety > 0) {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         public bool IsAbleToBuyItem(Item item) {
             bool result = false;
@@ -394,12 +73,48 @@ namespace Fishing.BL.Model.Game {
             return result;
         }
 
-        public void SetGameRoad(Assembly ass, int index) {
-            if (ass == null) return;
-            if (ass.IsAssemblyFull()) {
+        public bool BuyItem(Item item) {
+            if (IsAbleToBuyItem(item)) {
+                item.UniqueIdentifer = Guid.NewGuid();
+                Inventory.AddItem(item);
+                Money -= item.Price;
+                return true;
+            }
+            return false;
+
+        }
+
+
+        public void GiveUp(GameRod road) {
+            if (EquipedFeedUp == null) return;
+            road.CurrentFeedUp = EquipedFeedUp;
+            road.CurrentFeedUp.Count -= 1;
+            IsFeedingUp = true;
+            GiveUped?.Invoke(road.CurPoint);
+        }
+
+        public void StartNetting(GameRod rod) {       
+            DoNetting?.Invoke(rod);
+        }
+
+
+        public bool IsPlayerAbleToFishing() {
+            if (EquipedRod == null || EquipedRod.Assembly == null) return false;
+            
+            if (EquipedRod.Assembly.IsFull()) {
+                if (Satiety > 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void SetGameRoad(Assembly assembly, int index) {
+            if (assembly == null) return;
+            if (assembly.IsFull()) {
                 switch (index) {
                     case 1:
-                    FirstRoad = new GameRod(ass) {
+                    FirstRod = new GameRod(assembly) {
                         RoadX = 100,
                         RoadY = 350,
                         Image = Roads.road
@@ -407,7 +122,7 @@ namespace Fishing.BL.Model.Game {
                     break;
 
                     case 2:
-                    SecondRoad = new GameRod(ass) {
+                    SecondRod = new GameRod(assembly) {
                         RoadX = 200,
                         RoadY = 350,
                         Image = Roads.road
@@ -415,7 +130,7 @@ namespace Fishing.BL.Model.Game {
                     break;
 
                     case 3:
-                    ThirdRoad = new GameRod(ass) {
+                    ThirdRod = new GameRod(assembly) {
                         RoadX = 300,
                         RoadY = 350,
                         Image = Roads.road
@@ -423,121 +138,85 @@ namespace Fishing.BL.Model.Game {
                     break;
                 }
             }
-            else {
-                MessageBox.Show(@"Сборка не собрана");
-            }
         }
 
-        public GameRod GetRoadByIndex(int index) {
+        private GameRod GetRoadByIndex(int index) {
             switch (index) {
                 case 1:
-                return FirstRoad;
+                return FirstRod;
 
                 case 2:
-                return SecondRoad;
+                return SecondRod;
 
                 case 3:
-                return ThirdRoad;
+                return ThirdRod;
             }
             return null;
         }
 
         public void SetEquipedRoad(int index) {
-            switch (index) {
-                case 1:
-                EquipedRoad = FirstRoad;
-                break;
-
-                case 2:
-                EquipedRoad = SecondRoad;
-                break;
-
-                case 3:
-                EquipedRoad = ThirdRoad;
-                break;
-            }
+            EquipedRod = GetRoadByIndex(index);
         }
 
-        public void SetEquipedRoad(GameRod r) {
-            EquipedRoad = r;
+        public void SetEquipedRoad(GameRod rod) {
+            EquipedRod = rod;
         }
 
-        public void AddFish(Fish f) {
-            if (f != null) {
-                Fishlist.Add(f);
-            }
+        public void LetGoFish(Fish fish) {
+            //Need to add Carma
+            FishInventory.RemoveFish(fish);
         }
 
-        public Fish GetFishByIndex(int index) {
-            try {
-                return Fishlist[index];
+        public void SellFish(Fish fish) {
+            if (fish != null) {
+                var fPrice = fish.CountPrice();
+                Money += fPrice;
+                FishInventory.RemoveFish(fish);
             }
-            catch (ArgumentOutOfRangeException) { }
+        }      
 
-            return null;
-        }
+        public void DoGathering(GameRod rod) {
 
-        public void SellFish(Fish f) {
-            if (f != null) {
-                if (!f.IsTrophy()) {
-                    Money += (int)f.Price * f.Weight;
-                }
-                else {
-                    Money += (int)f.Price * 3 * f.Weight;
-                }
-                Fishlist.Remove(f);
-                //GameLoader.GetLoader().SavePlayer();
-            }
-        }
+            rod.IsFishAttack = false;
 
-        public void AddBait(Bait bait) {
-            var b = BaitInventory.FirstOrDefault(fb => bait.Name.Equals(fb.Name));
-            if (b != default) {
-                BaitInventory[BaitInventory.IndexOf(b)].Count += bait.Count;
-            }
-            else {
-                BaitInventory.Add(bait);
-            }
-        }
-
-        public void DoGathering(GameRod road) {
-            road.IsFishAttack = false;
             Statistic.GatheringCount++;
-            AddEventToHistory(new GatheringEvent());
+            Statistic.AddEventToHistory(new GatheringEvent());
             SoundsPlayer.PlayGatheringSound();
-            road.Image = Roads.road;
-            road.FLineIncValue = 0;
-            road.RoadIncValue = 0;
-            if (road.Assembly.Road.RodType == RodType.Feeder || road.Assembly.Road.RodType == RodType.Float) {
-                ((Bait)road.Assembly.FishBait).Count -= 1;
-                if (((Bait)road.Assembly.FishBait)?.Count <= 0) {
-                    BaitInventory.Remove((Bait)road.Assembly.FishBait);
+
+            rod.Image = Roads.road;
+            rod.FlineIncValue = 0;
+            rod.RoadIncValue = 0;
+
+            if (rod.Assembly.Rod.RodType == RodType.Feeder || rod.Assembly.Rod.RodType == RodType.Float) {
+                ((Bait)rod.Assembly.FishBait).Count -= 1;
+                if (((Bait)rod.Assembly.FishBait)?.Count <= 0) {
+                    //BaitInventory.Remove((Bait)road.Assembly.FishBait);
                 }
-                road.Assembly.FishBait = null;
+                rod.Assembly.FishBait = null;
             }
             Gathering?.Invoke();
         }
 
         public void BrokeRoad() {
-            EquipedRoad.Image = Roads.broken;
-            EquipedRoad.IsBaitInWater = false;
-            EquipedRoad.IsFishAttack = false;
-            EquipedRoad.Assembly.Road = null;
-            EquipedRoad.CurPoint = Point.Empty;
-            EquipedRoad.FLineIncValue = 0;
-            EquipedRoad.RoadIncValue = 0;
+            EquipedRod.Image = Roads.broken;
+            EquipedRod.IsBaitInWater = false;
+            EquipedRod.IsFishAttack = false;
+            EquipedRod.Assembly.Rod = null;
+            EquipedRod.CurPoint = Point.Empty;
+            EquipedRod.FlineIncValue = 0;
+            EquipedRod.RoadIncValue = 0;
             Statistic.BrokensRoadsCount++;
         }
 
         public void TornFLine() {
-            EquipedRoad.Image = Roads.road;
-            EquipedRoad.IsFishAttack = false;
-            EquipedRoad.Assembly.FishBait = null;
-            EquipedRoad.IsBaitMoving = false;
-            EquipedRoad.CurPoint = Point.Empty;
-            EquipedRoad.FLineIncValue = 0;
-            EquipedRoad.RoadIncValue = 0;
-            Statistic.TornsFLinesCount++;
+            EquipedRod.Image = Roads.road;
+            EquipedRod.IsFishAttack = false;
+            EquipedRod.Assembly.FishBait = null;
+            EquipedRod.IsBaitMoving = false;
+            EquipedRod.CurPoint = Point.Empty;
+            EquipedRod.FlineIncValue = 0;
+            EquipedRod.RoadIncValue = 0;
+            Statistic.TornsFlinesCount++;
             Statistic.GatheringCount++;
         }
 
@@ -552,18 +231,19 @@ namespace Fishing.BL.Model.Game {
 
         public void AddFishToPond() {
             Statistic.TakenFishesCount++;
-            if (!EquipedRoad.Fish.IsTrophy()) {
-                AddEventToHistory(new FishEvent(EquipedRoad.Fish,
-                    EquipedRoad.Assembly.FishBait));
+            if (!EquipedRod.Fish.IsTrophy()) {
+                Statistic.AddEventToHistory(new FishEvent(EquipedRod.Fish,
+                                            EquipedRod.Assembly.FishBait));
             }
             else {
-               AddEventToHistory(new TrophyFishEvent(EquipedRoad.Fish,
-                    EquipedRoad.Assembly.FishBait));
+                Statistic.AddEventToHistory(new TrophyFishEvent(EquipedRod.Fish,
+                                            EquipedRod.Assembly.FishBait));
             }
-            if (EquipedRoad.Assembly.Road.RodType == RodType.Feeder || EquipedRoad.Assembly.Road.RodType == RodType.Float) {
-                ((Bait)EquipedRoad.Assembly.FishBait).Count -= 1;
-                if (((Bait)EquipedRoad.Assembly.FishBait).Count <= 0) {
-                    EquipedRoad.Assembly.FishBait = null;
+            if (EquipedRod.Assembly.Rod.RodType == RodType.Feeder 
+                || EquipedRod.Assembly.Rod.RodType == RodType.Float) {
+                ((Bait)EquipedRod.Assembly.FishBait).Count -= 1;
+                if (((Bait)EquipedRod.Assembly.FishBait).Count <= 0) {
+                    EquipedRod.Assembly.FishBait = null;
                 }
             }
         }
@@ -572,19 +252,21 @@ namespace Fishing.BL.Model.Game {
             if (food != null) {
                 if (Satiety + food.Productivity <= SATIETY_MAX_VALUE) {
                     Satiety += food.Productivity;
-                    FoodInventory.Remove(food);
-                    AddEventToHistory(new FoodEvent(food));
+                    Inventory.AddItem(food);
+                    Statistic.AddEventToHistory(new FoodEvent(food));
                     SatietyUpdated?.Invoke();
                     return true;
                 }
-                else {
-                    MessageBox.Show(@"Игрок не достаточно голоден, чтобы съесть это");
-                    return false;
-                }
-            }
-            else {
+                MessageBox.Show(@"Игрок не достаточно голоден, чтобы съесть это");
                 return false;
             }
+            return false;
+        }
+
+        public void ResetRod(GameRod rod) {
+            rod.Image = Roads.road;
+            rod.FlineIncValue = 0;
+            rod.RoadIncValue = 0;
         }
     }
 }

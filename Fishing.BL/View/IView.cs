@@ -2,12 +2,12 @@
 
 namespace Fishing.BL.View {
 
-    public interface IView {
+    public interface IView<T> where T : BasePresenter {
 
         void Open();
 
         void Down();
 
-        BasePresenter Presenter { get; set; }
+        T Presenter { get; set; }
     }
 }

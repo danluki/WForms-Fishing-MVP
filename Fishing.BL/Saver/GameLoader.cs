@@ -132,7 +132,6 @@ namespace Fishing.BL.Controller {
             FishBait.FishBaits.Add(new Bait("Икра", 30, 1000, Images.ikra));
             FishBait.FishBaits.Add(new Bait("Кукуруза", 30, 250, Images.corn));
             FishBait.FishBaits.Add(new Wobbler("Составник", Size.Large, DeepType.Flying, 3000, Images.Vob_3015));
-            FishBait.FishBaits.Add(new Wobbler("Составник", Size.Large, DeepType.Flying, 3000, Images.Vob_3015));
             FishBait.FishBaits.Add(new Wobbler("Воблер 2", Size.XL, DeepType.Flying, 3000, Images.Vob_3002));
             FishBait.FishBaits.Add(new Wobbler("Воблер 3", Size.Small, DeepType.Top, 3000, Images.Vob_3003));
             FishBait.FishBaits.Add(new Wobbler("Воблер 4", Size.Large, DeepType.Deep, 3000, Images.Vob_3001));
@@ -160,7 +159,6 @@ namespace Fishing.BL.Controller {
 
         public void Initiallize(string name) {
             Directory.CreateDirectory(name + "/config");
-            SetAllFishesName();
             Game.GetGame().Player = _saver.Load<Player>(name + "/config/player.dat") ?? new Player();
             Game.GetGame().Time = _saver.Load<Time>(name + "/config/time.dat");
             var dir = new DirectoryInfo(@"C:\Users\Programmer\Desktop\MVPFishing-master\Fishing.BL\Model\Waters");
@@ -174,9 +172,9 @@ namespace Fishing.BL.Controller {
         }
 
         public void SavePlayer() {
-            _saver.Save(Game.GetGame().Player.NickName + "/config/time.dat", Game.GetGame().Time);
-            _saver.Save(Game.GetGame().Player.NickName + "/config/currwater.dat", Game.GetGame().CurrentWater.Name);
-            _saver.Save(Game.GetGame().Player.NickName + "/config/player.dat", Game.GetGame().Player);
+            _saver.Save(Game.GetGame().Player.Nickname + "/config/time.dat", Game.GetGame().Time);
+            _saver.Save(Game.GetGame().Player.Nickname + "/config/currwater.dat", Game.GetGame().CurrentWater.Name);
+            _saver.Save(Game.GetGame().Player.Nickname + "/config/player.dat", Game.GetGame().Player);
         }
     }
 }

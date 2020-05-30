@@ -47,13 +47,29 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="PicturesBoxInfo.cs" />
+    <Compile Include="PlayerInventoryTests.cs" />
+    <Compile Include="PlayerTests.cs" />
+    <Compile Include="ShopPresenterTests.cs" />
+    <Compile Include="ShopTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fishing.BL\Fishing.BL.csproj">
+      <Project>{F16AB9B1-DEEB-451F-B962-9BFFC7B0A27B}</Project>
+      <Name>Fishing.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fishing\Fishing.View.csproj">
+      <Project>{238518C6-80BB-4F69-B39D-32CBA398B52D}</Project>
+      <Name>Fishing.View</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

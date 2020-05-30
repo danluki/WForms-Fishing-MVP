@@ -51,6 +51,15 @@ namespace Fishing.AbstractFish {
             }
         }
 
+        public int CountPrice() {
+            if (IsTrophy()) {
+                return (int)Price * Weight;
+            }
+            else {
+                return 3 * (int)Price * Weight;
+            }
+        }
+
         public bool IsFishInNeededToAttackDeep(int deep) {
             return MinDeep <= deep && MaxDeep >= deep;
         }

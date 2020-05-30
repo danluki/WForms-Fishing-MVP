@@ -1,11 +1,12 @@
 ﻿using Fishing.BL.Model.Game;
 using Fishing.BL.Model.UserEvent;
 using Fishing.BL.View;
+using Fishing.Presenter;
 using System.Drawing;
 
 namespace Fishing.View.GUI {
 
-    public interface IGUIPresenter : IView {
+    public interface IGUIPresenter : IView<GUIPresenter> {
         Bitmap BaitPicture { get; set; }
         Image RoadPicture { get; set; }
         Image ReelPicture { get; set; }
@@ -22,6 +23,8 @@ namespace Fishing.View.GUI {
         string LocationNameLabelText { get; set; }
 
         void AddEventToBox(BaseEvent ev);
+
+        void ResetBarValues();
 
         void ClearEvents();
 

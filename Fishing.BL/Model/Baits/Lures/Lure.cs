@@ -20,7 +20,7 @@ namespace Fishing {
     }
 
     [Serializable]
-    public class Lure : FishBait {
+    public abstract class Lure : FishBait {
         public Size Size { get; set; }
         public DeepType DeepType { get; set; }
 

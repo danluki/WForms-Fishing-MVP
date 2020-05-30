@@ -62,9 +62,24 @@ namespace Fishing.BL.Model.Items {
             Wear = wear;
             RodType = type;
         }
-
+        public override bool Equals(object obj) {
+            Rod rod = (Rod)obj;
+            return Name.Equals(rod.Name)
+                && rod.Wear == Wear
+                && rod.Power == Power
+                && rod.GetHashCode() == GetHashCode();
+        }
+        public override int GetHashCode() {
+            return (Power ^ Price ^ 15256) * Name.Length;
+        }
         public override string ToString() {
             return Name;
         }
+
+        public Guid GetGuid() {
+            return UniqueIdentifer;
+        }
+
+
     }
 }

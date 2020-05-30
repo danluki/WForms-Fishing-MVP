@@ -154,11 +154,11 @@
     <Compile Include="View\Settings\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Shop\Shop.cs">
+    <Compile Include="View\Shop\ShopForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Shop\Shop.Designer.cs">
-      <DependentUpon>Shop.cs</DependentUpon>
+    <Compile Include="View\Shop\ShopForm.Designer.cs">
+      <DependentUpon>ShopForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Statistic\StatisticForm.cs">
       <SubType>Form</SubType>
@@ -233,8 +233,8 @@
     <EmbeddedResource Include="View\Settings\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Shop\Shop.resx">
-      <DependentUpon>Shop.cs</DependentUpon>
+    <EmbeddedResource Include="View\Shop\ShopForm.resx">
+      <DependentUpon>ShopForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Statistic\StatisticForm.resx">
       <DependentUpon>StatisticForm.cs</DependentUpon>

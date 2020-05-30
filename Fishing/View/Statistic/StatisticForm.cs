@@ -19,7 +19,7 @@ namespace Fishing.View.Statistic {
         public string BrokenRoadsLText { get => BrokenRoadsLabel.Text; set => BrokenRoadsLabel.Text += value; }
         public string TornFLineLText { get => TornsFLineLabel.Text; set => TornsFLineLabel.Text += value; }
         public string TakeFishesLText { get => TakenFishes.Text; set => TakenFishes.Text += value; }
-        public BasePresenter Presenter { get; set; }
+        public StatisticPresenter Presenter { get; set; }
 
         public event EventHandler LoadForm;
 
@@ -40,14 +40,14 @@ namespace Fishing.View.Statistic {
         }
 
         private void StatisticForm_Load(object sender, EventArgs e) {
-            NameLText = Game.GetGame().Player.NickName;
+            NameLText = Game.GetGame().Player.Nickname;
             MoneyLText = Game.GetGame().Player.Money.ToString();
             GatheringLText = Game.GetGame().Player.Statistic.GatheringCount.ToString();
             TakeFishesLText = Game.GetGame().Player.Statistic.TakenFishesCount.ToString();
-            TornFLineLText = Game.GetGame().Player.Statistic.TornsFLinesCount.ToString();
+            TornFLineLText = Game.GetGame().Player.Statistic.TornsFlinesCount.ToString();
             BrokenRoadsLText = Game.GetGame().Player.Statistic.BrokensRoadsCount.ToString();
 
-            foreach (BaseEvent ev in Game.GetGame().Player.EventHistory) {
+            foreach (BaseEvent ev in Game.GetGame().Player.Statistic.Events) {
                 ListViewItem lvi = new ListViewItem {
                     Text = ev.Text,
                     ImageIndex = ev.Index

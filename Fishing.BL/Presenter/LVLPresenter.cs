@@ -37,10 +37,10 @@ namespace Fishing.Presenter {
             curLVL.SetDeep();
             this.view = view;
             this.gui = v;
-            view.LVLPresenter = this;
+            view.Presenter = this;
             view.BackImage = CurLvl.BackgroundImage;
             _drawer = new Drawer();
-            _player.CurrentLvl = CurLvl;
+            _player.CurrentLevel = CurLvl;
             v.LocationNameLabelText = curLVL.ToString();
 
             _drawer.FeedUpEnded += Drawer_FeedUpEnded;
@@ -61,17 +61,13 @@ namespace Fishing.Presenter {
         private void Drawer_DoNettingEnded() {
             _player.IsNettingFish = false;
             if (IsFishAbleToGoIntoFpond()) {
-                _player.EquipedRoad.Image = Roads.road;
-                _player.EquipedRoad.FLineIncValue = 0;
-                _player.EquipedRoad.RoadIncValue = 0;
-                _player.IsNettingFish = true;
-                gui.FLineBarValue = 0;
-                gui.RoadBarValue = 0;
+                _player.ResetRod(_player.EquipedRod);
+                gui.ResetBarValues();
 
                 gui.CheckNeedsAndClearEventBox();
                 _player.AddFishToPond();
-                view.CreateCurrentFish(_player.EquipedRoad.Fish);
-                gui.AddRoadToGUI(_player.EquipedRoad);
+                view.CreateCurrentFish(_player.EquipedRod.Fish);
+                gui.AddRoadToGUI(_player.EquipedRod);
             }
         }
 
@@ -86,46 +82,46 @@ namespace Fishing.Presenter {
 
         private void View_MainTimerTick(object sender, EventArgs e) {
             try {
-                SetSounderCord(_player.EquipedRoad.CurPoint);
-                if (_player.EquipedRoad.IsFishAttack) {
-                    gui.LureDeepValue = _player.EquipedRoad.CurrentDeep;
-                    AutoDecBarValues();
-                    if (gui.FLineBarValue > MaxBarValue - 5) {
-                        _player.AddEventToHistory(new FLineTornEvent());
-                        _player.TornFLine();
+                if (_player.EquipedRod != null) {
+                    SetSounderCord(_player.EquipedRod.CurPoint);
+                    if (_player.EquipedRod.IsFishAttack) {
+                        gui.LureDeepValue = _player.EquipedRod.CurrentDeep;
+                        AutoDecBarValues();
+                        if (gui.FLineBarValue > MaxBarValue - 5) {
+                            _player.Statistic.AddEventToHistory(new FLineTornEvent());
+                            _player.TornFLine();
 
-                        gui.FLineBarValue = 0;
-                        gui.RoadBarValue = 0;
+                            gui.ResetBarValues();
 
-                        SoundsPlayer.PlayTornSound();
+                            SoundsPlayer.PlayTornSound();
+                        }
+                        if (gui.RoadBarValue > MaxBarValue - 5) {
+                            _player.BrokeRoad();
+                            _player.Statistic.AddEventToHistory(new RoadBrokenEvent());
+
+                            gui.ResetBarValues();
+                        }
                     }
-                    if (gui.RoadBarValue > MaxBarValue - 5) {
-                        _player.BrokeRoad();
-                        _player.AddEventToHistory(new RoadBrokenEvent());
-
-                        gui.FLineBarValue = 0;
-                        gui.RoadBarValue = 0;
+                    if (_player.FirstRod != null && _player.FirstRod.IsFishAttack) {
+                        _player.FirstRod.CurPoint.Y += _player.FirstRod.Fish.Power.Y;
+                        _player.FirstRod.CurPoint.X += _player.FirstRod.Fish.Power.X;
+                        CheckBorders(_player.FirstRod.CurPoint, _player.FirstRod);
                     }
+                    if (_player.SecondRod != null && _player.SecondRod.IsFishAttack) {
+                        _player.SecondRod.CurPoint.Y += _player.SecondRod.Fish.Power.Y;
+                        _player.SecondRod.CurPoint.X += _player.SecondRod.Fish.Power.X;
+                        CheckBorders(_player.SecondRod.CurPoint, _player.SecondRod);
+                    }
+                    if (_player.ThirdRod != null && _player.ThirdRod.IsFishAttack) {
+                        _player.ThirdRod.CurPoint.Y += _player.ThirdRod.Fish.Power.Y;
+                        _player.ThirdRod.CurPoint.X += _player.ThirdRod.Fish.Power.X;
+                        CheckBorders(_player.ThirdRod.CurPoint, _player.ThirdRod);
+                    }
+                    if (_player.EquipedRod.CurPoint.Y >= NoWaterArea) {
+                        _player.EquipedRod.IsBaitInWater = false;
+                    }
+                    view.UpdateForm();
                 }
-                if (_player.FirstRoad != null && _player.FirstRoad.IsFishAttack) {
-                    _player.FirstRoad.CurPoint.Y += _player.FirstRoad.Fish.Power.Y;
-                    _player.FirstRoad.CurPoint.X += _player.FirstRoad.Fish.Power.X;
-                    CheckBorders(_player.FirstRoad.CurPoint, _player.FirstRoad);
-                }
-                if (_player.SecondRoad != null && _player.SecondRoad.IsFishAttack) {
-                    _player.SecondRoad.CurPoint.Y += _player.SecondRoad.Fish.Power.Y;
-                    _player.SecondRoad.CurPoint.X += _player.SecondRoad.Fish.Power.X;
-                    CheckBorders(_player.SecondRoad.CurPoint, _player.SecondRoad);
-                }
-                if (_player.ThirdRoad != null && _player.ThirdRoad.IsFishAttack) {
-                    _player.ThirdRoad.CurPoint.Y += _player.ThirdRoad.Fish.Power.Y;
-                    _player.ThirdRoad.CurPoint.X += _player.ThirdRoad.Fish.Power.X;
-                    CheckBorders(_player.ThirdRoad.CurPoint, _player.ThirdRoad);
-                }
-                if (_player.EquipedRoad.CurPoint.Y >= NoWaterArea) {
-                    _player.EquipedRoad.IsBaitInWater = false;
-                }
-                view.UpdateForm();
             }
             catch (NullReferenceException) { }
         }
@@ -134,11 +130,11 @@ namespace Fishing.Presenter {
             try {
                 switch (e.KeyCode) {
                     case Keys.G:
-                    SetSounderCord(_player.EquipedRoad.CurPoint);
-                    _player.EquipedRoad.IsBaitMoving = true;
-                    if (_player.EquipedRoad.IsFishAttack) {
-                        _player.EquipedRoad.Image = _player.EquipedRoad.GImage;
-                        _player.WindingSpeed = _player.EquipedRoad.Assembly.Reel.Power;
+                    SetSounderCord(_player.EquipedRod.CurPoint);
+                    _player.EquipedRod.IsBaitMoving = true;
+                    if (_player.EquipedRod.IsFishAttack) {
+                        _player.EquipedRod.Image = _player.EquipedRod.GImage;
+                        _player.WindingSpeed = _player.EquipedRod.Assembly.Reel.Power;
                     }
                     else {
                         _player.WindingSpeed = 1;
@@ -148,10 +144,10 @@ namespace Fishing.Presenter {
                     break;
 
                     case Keys.H:
-                    if (_player.EquipedRoad.IsFishAttack) {
-                        _player.EquipedRoad.Image = _player.EquipedRoad.HImage;
+                    if (_player.EquipedRod.IsFishAttack) {
+                        _player.EquipedRod.Image = _player.EquipedRod.HImage;
                         _player.WindingSpeed = 2;
-                        _player.EquipedRoad.CurPoint.Y += _player.WindingSpeed;
+                        _player.EquipedRod.CurPoint.Y += _player.WindingSpeed;
                         IncRoadBarValues();
                     }
                     break;
@@ -159,33 +155,33 @@ namespace Fishing.Presenter {
                     case Keys.Space:
                     if (IsFishAbleToGoIntoFpond()) {
                         _player.IsNettingFish = true;
-                        _player.StartNetting();
+                        _player.StartNetting(_player.EquipedRod);
                     }
                     break;
 
                     case Keys.U:
-                    _player.GiveUp(_player.EquipedRoad);
+                    _player.GiveUp(_player.EquipedRod);
                     break;
 
                     case Keys.T:
-                    if (_player.EquipedRoad.IsFishAttack == false) {
-                        MakeCast(_player.EquipedRoad.LastCastPoint);
+                    if (_player.EquipedRod.IsFishAttack == false) {
+                        MakeCast(_player.EquipedRod.LastCastPoint);
                     }
                     break;
 
                     case Keys.D1:
                     _player.SetEquipedRoad(1);
-                    gui.AddRoadToGUI(_player.EquipedRoad);
+                    gui.AddRoadToGUI(_player.EquipedRod);
                     break;
 
                     case Keys.D2:
                     _player.SetEquipedRoad(2);
-                    gui.AddRoadToGUI(_player.EquipedRoad);
+                    gui.AddRoadToGUI(_player.EquipedRod);
                     break;
 
                     case Keys.D3:
                     _player.SetEquipedRoad(3);
-                    gui.AddRoadToGUI(_player.EquipedRoad);
+                    gui.AddRoadToGUI(_player.EquipedRod);
                     break;
                 }
             }
@@ -196,16 +192,16 @@ namespace Fishing.Presenter {
             try {
                 switch (e.KeyCode) {
                     case Keys.G:
-                    if (_player.EquipedRoad.IsFishAttack) {
-                        _player.EquipedRoad.Image = _player.EquipedRoad.GImage;
+                    if (_player.EquipedRod.IsFishAttack) {
+                        _player.EquipedRod.Image = _player.EquipedRod.GImage;
                     }
-                    _player.EquipedRoad.IsBaitMoving = false;
-                    _player.EquipedRoad.RoadY -= 7;
+                    _player.EquipedRod.IsBaitMoving = false;
+                    _player.EquipedRod.RoadY -= 7;
                     break;
 
                     case Keys.H:
-                    if (_player.EquipedRoad.IsFishAttack) {
-                        _player.EquipedRoad.Image = _player.EquipedRoad.GImage;
+                    if (_player.EquipedRod.IsFishAttack) {
+                        _player.EquipedRod.Image = _player.EquipedRod.GImage;
                     }
                     break;
                 }
@@ -217,24 +213,24 @@ namespace Fishing.Presenter {
             var (isIntersect, road) = IsPointIntersectWithRoadRect(view.CurPoint);
             if (isIntersect) {
                 _player.SetEquipedRoad(road);
-                gui.AddRoadToGUI(_player.EquipedRoad);
+                gui.AddRoadToGUI(_player.EquipedRod);
             }
-            if (!isIntersect && !_player.EquipedRoad.IsFishAttack) {
+            if (!isIntersect && !_player.EquipedRod.IsFishAttack) {
                 MakeCast(view.CurPoint);
             }
             if (e.Button != MouseButtons.Right) return;
             if (isIntersect) {
-                if (_player.FirstRoad == _player.EquipedRoad) {
-                    _player.FirstRoad?.RemoveFromLocation();
-                    _player.FirstRoad = null;
+                if (_player.FirstRod == _player.EquipedRod) {
+                    _player.FirstRod?.RemoveFromLocation();
+                    _player.FirstRod = null;
                 }
-                if (_player.SecondRoad == _player.EquipedRoad) {
-                    _player.SecondRoad?.RemoveFromLocation();
-                    _player.SecondRoad = null;
+                if (_player.SecondRod == _player.EquipedRod) {
+                    _player.SecondRod?.RemoveFromLocation();
+                    _player.SecondRod = null;
                 }
-                if (_player.ThirdRoad == _player.EquipedRoad) {
-                    _player.ThirdRoad?.RemoveFromLocation();
-                    _player.ThirdRoad = null;
+                if (_player.ThirdRod == _player.EquipedRod) {
+                    _player.ThirdRod?.RemoveFromLocation();
+                    _player.ThirdRod = null;
                 }
             }
         }
@@ -253,7 +249,7 @@ namespace Fishing.Presenter {
                 if (_player.IsNettingFish) {
                     _drawer.DrawNetting();
                 }
-                if (_player.EquipedRoad != null) {
+                if (_player.EquipedRod != null) {
                     _drawer.DrawTrigon();
                 }
             }
@@ -267,28 +263,28 @@ namespace Fishing.Presenter {
         private void MakeCast(Point point) {
             if (_player.IsPlayerAbleToFishing()) {
                 SetSounderCord(point);
-                _player.EquipedRoad.CurLVL = CurLvl;
-                if (!_player.EquipedRoad.IsFishAttack) {
-                    CheckBorders(point, _player.EquipedRoad);
-                    _player.EquipedRoad.IsBaitInWater = true;
-                    _player.EquipedRoad.IsBaitMoving = false;
-                    _player.EquipedRoad.StartBaitTimer();
-                    _player.EquipedRoad.RoadX = _player.EquipedRoad.CurPoint.X;
-                    _player.EquipedRoad.LastCastPoint = point;
+                _player.EquipedRod.CurLVL = CurLvl;
+                if (!_player.EquipedRod.IsFishAttack) {
+                    CheckBorders(point, _player.EquipedRod);
+                    _player.EquipedRod.IsBaitInWater = true;
+                    _player.EquipedRod.IsBaitMoving = false;
+                    _player.EquipedRod.StartBaitTimer();
+                    _player.EquipedRod.RoadX = _player.EquipedRod.CurPoint.X;
+                    _player.EquipedRod.LastCastPoint = point;
 
                     SoundsPlayer.PlayCastSound();
                 }
 
-                if (_player.EquipedRoad.IsFishAttack) return;
-                _player.EquipedRoad.RoadY = RoadDefaultY;
+                if (_player.EquipedRod.IsFishAttack) return;
+                _player.EquipedRod.RoadY = RoadDefaultY;
 
                 try {
-                    if (_player.EquipedRoad.Assembly.FishBait != null) return;
-                    _player.EquipedRoad.CurPoint.Y = 0;
+                    if (_player.EquipedRod.Assembly.FishBait != null) return;
+                    _player.EquipedRod.CurPoint.Y = 0;
                     MessageBox.Show(Messages.NO_LURE_EQUIPED);
                 }
                 catch (NullReferenceException) {
-                    _player.EquipedRoad.CurPoint.Y = 0;
+                    _player.EquipedRod.CurPoint.Y = 0;
                 }
             }
             else {
@@ -299,11 +295,11 @@ namespace Fishing.Presenter {
         #endregion Cast
 
         private void DoWiring() {
-            if (_player.EquipedRoad.RoadY != RoadMaxY) {
-                _player.EquipedRoad.RoadY += 7;
+            if (_player.EquipedRod.RoadY != RoadMaxY) {
+                _player.EquipedRod.RoadY += 7;
             }
-            _player.WindingSpeed = _player.EquipedRoad.IsFishAttack ? _player.EquipedRoad.Assembly.Reel.Power : 1;
-            _player.EquipedRoad.CurPoint.Y += Game.GetGame().Player.WindingSpeed;
+            _player.WindingSpeed = _player.EquipedRod.IsFishAttack ? _player.EquipedRod.Assembly.Reel.Power : 1;
+            _player.EquipedRod.CurPoint.Y += Game.GetGame().Player.WindingSpeed;
         }
 
         private void AutoDecBarValues() {
@@ -318,12 +314,13 @@ namespace Fishing.Presenter {
         private void SetSounderCord(Point point) {
             for (var y = 0; y < CurLvl.Height; y++) {
                 for (var x = 0; x < CurLvl.Widgth; x++) {
-                    var r = new Rectangle(CurLvl.DeepArray[x, y].Location, new System.Drawing.Size(LabelInfo.Width, LabelInfo.Height));
+                    var r = new Rectangle(CurLvl.DeepArray[x, y].Location,
+                                          new System.Drawing.Size(LabelInfo.Width, LabelInfo.Height));
                     if (r.IntersectsWith(new Rectangle(point, new System.Drawing.Size(1, 1)))) {
                         Sounder.GetSounder().Column = y;
                         Sounder.GetSounder().Row = x;
-                        _player.EquipedRoad.CurrentDeep = Convert.ToInt32(CurLvl.DeepArray[x, y].Text);
-                        gui.LureDeepValue = _player.EquipedRoad.CurrentDeep;
+                        _player.EquipedRod.CurrentDeep = Convert.ToInt32(CurLvl.DeepArray[x, y].Text);
+                        gui.LureDeepValue = _player.EquipedRod.CurrentDeep;
                     }
                 }
             }
@@ -333,19 +330,19 @@ namespace Fishing.Presenter {
 
         private void IncFLineBarValues() {
             if (gui.RoadBarValue > 0) {
-                gui.IncrementRoadBarValue(-(_player.EquipedRoad.RoadIncValue));
+                gui.IncrementRoadBarValue(-(_player.EquipedRod.RoadIncValue));
             }
             if (gui.FLineBarValue < MaxBarValue) {
-                gui.IncrementFLineBarValue(_player.EquipedRoad.FLineIncValue);
+                gui.IncrementFLineBarValue(_player.EquipedRod.FlineIncValue);
             }
         }
 
         private void IncRoadBarValues() {
             if (gui.RoadBarValue < MaxBarValue) {
-                gui.IncrementRoadBarValue(_player.EquipedRoad.RoadIncValue);
+                gui.IncrementRoadBarValue(_player.EquipedRod.RoadIncValue);
             }
             if (gui.FLineBarValue > 0) {
-                gui.IncrementFLineBarValue(-(_player.EquipedRoad.FLineIncValue));
+                gui.IncrementFLineBarValue(-(_player.EquipedRod.FlineIncValue));
             }
         }
 
@@ -357,24 +354,24 @@ namespace Fishing.Presenter {
             var size = new System.Drawing.Size(1, 1);
             if (_drawer.FirstNormalRoad.IntersectsWith(new Rectangle(p, size)) ||
                 _drawer.FirstBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
-                if (_player.EquipedRoad != _player.FirstRoad) {
-                    gui.AddRoadToGUI(_player.EquipedRoad);
+                if (_player.EquipedRod != _player.FirstRod) {
+                    gui.AddRoadToGUI(_player.EquipedRod);
                 }
-                return (true, _player.FirstRoad);
+                return (true, _player.FirstRod);
             }
             if (_drawer.SecondNormalRoad.IntersectsWith(new Rectangle(p, size)) ||
                 _drawer.SecondBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
-                if (_player.EquipedRoad != _player.SecondRoad) {
-                    gui.AddRoadToGUI(_player.EquipedRoad);
+                if (_player.EquipedRod != _player.SecondRod) {
+                    gui.AddRoadToGUI(_player.EquipedRod);
                 }
-                return (true, _player.SecondRoad);
+                return (true, _player.SecondRod);
             }
             if (_drawer.ThirdNormalRoad.IntersectsWith(new Rectangle(p, size)) ||
                 _drawer.ThirdBrokenRoad.IntersectsWith(new Rectangle(p, size))) {
-                if (_player.EquipedRoad != _player.ThirdRoad) {
-                    gui.AddRoadToGUI(_player.EquipedRoad);
+                if (_player.EquipedRod != _player.ThirdRod) {
+                    gui.AddRoadToGUI(_player.EquipedRod);
                 }
-                return (true, _player.ThirdRoad);
+                return (true, _player.ThirdRod);
             }
             return (false, null);
         }
@@ -397,8 +394,8 @@ namespace Fishing.Presenter {
         }
 
         private bool IsFishAbleToGoIntoFpond() {
-            return _player.EquipedRoad.IsFishAttack &&
-                   _player.EquipedRoad.CurPoint.Y >= NoWaterArea;
+            return _player.EquipedRod.IsFishAttack &&
+                   _player.EquipedRod.CurPoint.Y >= NoWaterArea;
         }
 
         public override void Run() {

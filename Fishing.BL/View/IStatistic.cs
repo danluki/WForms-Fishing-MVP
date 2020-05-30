@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Fishing.BL.Presenter;
+using System;
 using System.Windows.Forms;
 
 namespace Fishing.BL.View {
 
-    public interface IStatistic : IView {
+    public interface IStatistic : IView<StatisticPresenter> {
 
         event EventHandler LoadForm;
 
