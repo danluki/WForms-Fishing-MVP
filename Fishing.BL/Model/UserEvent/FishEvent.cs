@@ -9,7 +9,7 @@ namespace Fishing.BL.Model.UserEvent {
     [Serializable]
     internal class FishEvent : BaseEvent {
 
-        public FishEvent(Fish f, FishBait l) : base(Game.Game.GetGame().Player.NickName + " поймал " + f.ToString(), SelectIndex(l)) {
+        public FishEvent(Fish f, FishBait l) : base(Game.Game.GetGame().Player.Nickname + " поймал " + f.ToString(), SelectIndex(l)) {
         }
 
         private static int SelectIndex(FishBait l) {

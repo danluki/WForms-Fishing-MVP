@@ -27,7 +27,7 @@ namespace Fishing.Presenter {
         }
 
         private void Menu_Load(object sender, EventArgs e) {
-            view.LowerLValue = Game.GetGame().Player.NickName;
+            view.LowerLValue = Game.GetGame().Player.Nickname;
 
             Item.Reels.Add(new Reel("Hydra", 0, 6, 3, 100000, Images.Hydra));
             Item.Reels.Add(new Reel("SYBERIA_LT_2", 0, 4, 6, 200000, Images.Syberia_LT_2));
@@ -58,6 +58,7 @@ namespace Fishing.Presenter {
 
             GameLoader.GetLoader().IntializeLures();
             GameLoader.GetLoader().SetFeedUps();
+            GameLoader.GetLoader().SetAllFishesName();
         }
 
         public override void Run() {

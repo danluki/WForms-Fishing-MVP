@@ -49,25 +49,28 @@ namespace Fishing.BL.Model.LVLS {
                         index = randomFish.Next(1, road.FishesPossibleToAttack.Count);
                         fish = road.FishesPossibleToAttack[index];
                     }
-                    var fishAttacked = fish.Attack(road);
-                    if (fishAttacked) {
-                        return DoAttack(fish, road);
-                    }
+                    if (fish != null) {
+                        var fishAttacked = fish.Attack(road);
+                        if (fishAttacked) {
+                            return DoAttack(fish, road);
+                        }
 
-                    //Если атака не происходит в работу включается прикормка,
-                    //среди списка рыб мы к нашему индексу прибавляем Текущий индекс действия прикормки,
-                    //Проверяем, является ли рыба той, на которую действует прикормка.
+                        //Если атака не происходит в работу включается прикормка,
+                        //среди списка рыб мы к нашему индексу прибавляем Текущий индекс действия прикормки,
+                        //Проверяем, является ли рыба той, на которую действует прикормка.
 
-                    else {
-                        foreach (var feedup in road.CurrentFeedUp.WorkingFishes) {
-                            for (var FeedUpPowerToFishIndex = 0; FeedUpPowerToFishIndex < feedup.Value; FeedUpPowerToFishIndex++) {
-                                if (index + FeedUpPowerToFishIndex < 1000) {
-                                    fish = road.FishesPossibleToAttack[index + FeedUpPowerToFishIndex];
-                                    if (feedup.Key.ToString().Equals(fish.GetType().ToString())) {
-                                        return DoAttack(fish, road);
+                        else {
+                            if (road.CurrentFeedUp != null && road.CurrentFeedUp.WorkingFishes != null)
+                                foreach (var feedup in road.CurrentFeedUp?.WorkingFishes) {
+                                    for (var FeedUpPowerToFishIndex = 0; FeedUpPowerToFishIndex < feedup.Value; FeedUpPowerToFishIndex++) {
+                                        if (index + FeedUpPowerToFishIndex < 1000) {
+                                            fish = road.FishesPossibleToAttack[index + FeedUpPowerToFishIndex];
+                                            if (feedup.Key.ToString().Equals(fish.GetType().ToString())) {
+                                                return DoAttack(fish, road);
+                                            }
+                                        }
                                     }
                                 }
-                            }
                         }
                     }
                 }
@@ -82,19 +85,19 @@ namespace Fishing.BL.Model.LVLS {
             if (resultOfAttack) {
                 road.IsFishAttack = true;
 
-                var roadCoef = road.Fish.Weight / (double)road.Assembly.Road.Power;
-                var flineCoef = road.Fish.Weight / (double)road.Assembly.FLine.Power;
+                var roadCoef = road.Fish.Weight / (double)road.Assembly.Rod.Power;
+                var flineCoef = road.Fish.Weight / (double)road.Assembly.Fline.Power;
 
                 road.RoadIncValue = Convert.ToInt32(roadCoef * 100);
-                road.FLineIncValue = Convert.ToInt32(flineCoef * 100);
+                road.FlineIncValue = Convert.ToInt32(flineCoef * 100);
                 var gathering = randomGathering.Next(1, 100);
 
-                if (road.Assembly.Road.RodType == RodType.Spinning) {
+                if (road.Assembly.Rod.RodType == RodType.Spinning) {
                     if (gathering <= 5) {
                         return (true, true);
                     }
                 }
-                if (road.Assembly.Road.RodType != RodType.Feeder) return (true, false);
+                if (road.Assembly.Rod.RodType != RodType.Feeder) return (true, false);
                 return gathering <= road.Assembly.Hook.GatheringChance ? (true, true) : (true, false);
             }
             return (false, false);

@@ -12,7 +12,7 @@ namespace Fishing.BL.Model.Items {
         private int _power;
         private int _wearSpeed;
 
-        protected internal override Guid UniqueIdentifer { get; set; }
+        public override Guid UniqueIdentifer { get; set; }
 
         public int Wear {
             get {

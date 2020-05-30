@@ -17,14 +17,14 @@ namespace Fishing.BL.Model.Items {
         public static BindingList<Lure> Lures = new BindingList<Lure>();
         public static BindingList<Bait> Baits = new BindingList<Bait>();
         public static BindingList<BaseHook> Hooks = new BindingList<BaseHook>();
-        public static BindingList<FeedUp> FeedUps = new BindingList<FeedUp>();
+        public static BindingList<Feedup> FeedUps = new BindingList<Feedup>();
         public static BindingList<Aroma> Aromas = new BindingList<Aroma>();
         public static BindingList<Basic> Basics = new BindingList<Basic>();
         public virtual string Name { get; protected internal set; }
         public virtual int Price { get; protected internal set; }
         public Bitmap Picture { get; }
 
-        protected internal virtual Guid UniqueIdentifer { get; set; }
+        public virtual Guid UniqueIdentifer { get; set; }
 
         protected Item(string name, int price, Bitmap picture) {
             Name = name;

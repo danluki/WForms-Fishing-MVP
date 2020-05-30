@@ -1,62 +1,159 @@
 ﻿using BrightIdeasSoftware;
+using Fishing.BL.Model.Baits;
+using Fishing.BL.Model.FeedingUp;
 using Fishing.BL.Model.Game;
+using Fishing.BL.Model.Game.Inventory;
 using Fishing.BL.Model.Hooks;
+using Fishing.BL.Model.Inventory;
 using Fishing.BL.Model.Items;
 using Fishing.BL.Presenter;
 using Fishing.BL.Resources.Messages;
 using Fishing.BL.View;
 using Fishing.View.GUI;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Fishing.Presenter {
 
-    public class InventoryPresenter : BasePresenter {
+    public sealed class InventoryPresenter : BasePresenter {
+
+        #region private field
+
         private readonly Player _player = Game.GetGame().Player;
+        private readonly Inventory _inventory = new Inventory();
 
         private readonly IInventory _view;
         private readonly IGUIPresenter _gui;
 
         private int _index = 1;
 
+        #endregion
+
+
+        #region public events
+
+        public Action<IEnumerable<Rod>> ProduceRods;
+        public Action<IEnumerable<Fishingline>> ProduceFishinglines;
+        public Action<IEnumerable<Reel>> ProduceReels;
+        public Action<IEnumerable<FishBait>> ProduceLures;
+        public Action<IEnumerable<Bait>> ProduceBaits;
+        public Action<IEnumerable<BaseHook>> ProduceHooks;
+        public Action<IEnumerable<Basic>> ProduceBasics;
+        public Action<IEnumerable<Aroma>> ProduceAromas;
+        public Action<IEnumerable<Assembly>> ProduceAssemblies;
+
+        public Action GetRods;
+
+        #endregion 
+
         public InventoryPresenter(IInventory view, IGUIPresenter gui) {
             _view = view;
             _gui = gui;
             view.Presenter = this;
 
+            
+            view.InventoryLoaded += View_InventoryLoaded;
+            view.ViewItemActivate += View_ViewItemActivate;
+            view.ViewItemDoubleClick += View_ViewItemDoubleClick;
+            view.ViewAssemblyItemDoubleClick += View_ViewAssemblyItemDoubleClick;
             view.CloseButtonClick += View_CloseButtonClick;
-            view.AssemblyDoubleClick += View_AssemblyDoubleClick;
             view.MakeOutClick += View_MakeOutClick;
-            view.ViewsDoubleClick += View_ViewsDoubleClick;
-            view.ViewsSelectedIndexChanged += View_ViewsSelectedIndexChanged;
-            view.AssemblyBoxSelectedIndexChanged += View_AssemblyBoxSelectedIndexChanged;
-            view.RoadButtonsClick += View_RoadButtonsClick;
+
             view.Open();
         }
 
-        #region RoadIndexClicks
+        private void View_MakeOutClick(object sender, EventArgs e) {
+            if (_view.Assembly_P != null) {
+                if (!_view.Assembly_P.IsEquiped) {
+                    if (_view.Assembly_P.Fline != null) {
+                        _player.Inventory.Fishinglines.Add(_view.Assembly_P.Fline.UniqueIdentifer,
+                                                           _view.Assembly_P.Fline);
+                        _view.Assembly_P.Fline = null;
+                        ProduceFishinglines?.Invoke(_player.Inventory.Fishinglines.Values);
+                    }
+                    if (_view.Hook_P != null) {
+                        _player.Inventory.Hooks.Add(_view.Assembly_P.Hook.UniqueIdentifer,
+                                                   _view.Assembly_P.Hook);
+                        _view.Assembly_P.Hook = null;
+                        ProduceHooks?.Invoke(_player.Inventory.Hooks.Values);
+                    }
+                    if (_view.Assembly_P.Rod?.RodType == RodType.Spinning) {
+                        if (_view.Assembly_P.FishBait != null) {
+                            _player.Inventory.Lures.Add(((Lure)_view.Assembly_P.FishBait).UniqueIdentifer,
+                                                        (Lure)_view.Assembly_P.FishBait);
+                            _view.Assembly_P.FishBait = null;
+                            ProduceLures?.Invoke(_player.Inventory.Lures.Values);
+                        }
+                    }
+                    else {
+                        if (_view.Assembly_P.FishBait != null) {
+                            _player.Inventory.Baits.Add(((Bait)_view.Assembly_P.FishBait).UniqueIdentifer,
+                                                        (Bait)_view.Assembly_P.FishBait);
+                            _view.Assembly_P.FishBait = null;
+                            ProduceBaits?.Invoke(_player.Inventory.Baits.Values);
+                        }
+                    }
 
-        private void View_RoadButtonsClick(object sender, EventArgs e) {
-            _index = int.Parse((sender as Button)?.Text ?? throw new InvalidOperationException());
+                    if (_player.EquipedRod.Assembly.Reel != null) {
+                        _player.Inventory.Reels.Add(_view.Assembly_P.Reel.UniqueIdentifer, _view.Assembly_P.Reel);
+                        _view.Assembly_P.Reel = null;
+                        ProduceReels?.Invoke(_player.Inventory.Reels.Values);
+                    }
+                    _view.ShowAssembly(_view.Assembly_P);
+                }
+            }
         }
 
-        #endregion RoadIndexClicks
-
-        #region AssemblyClicks
-
-        private void View_AssemblyBoxSelectedIndexChanged(object sender, EventArgs e) {
-            _view.ShowAssembly(_view.Assembly_P);
+        private void View_CloseButtonClick(object sender, EventArgs e) {
+            End();
         }
 
-        private void View_AssemblyDoubleClick(object sender, EventArgs e) {
+        private void View_ViewItemDoubleClick(Item item) {
+            if (_view.Assembly_P != null) {
+                if (!_view.Assembly_P.IsEquiped) {
+                    switch (item) {
+                        case Reel reel:
+                        _view.Assembly_P.Reel = reel;
+                        _player.Inventory.Reels.Remove(reel.UniqueIdentifer);
+                        break;
+
+                        case Fishingline fline:
+                        _view.Assembly_P.Fline = fline;
+                        _player.Inventory.Fishinglines.Remove(fline.UniqueIdentifer);
+                        break;
+
+                        case BaseHook hook:
+                        _view.Assembly_P.Hook = hook;
+                        _player.Inventory.Hooks.Remove(hook.UniqueIdentifer);
+                        break;
+
+                        case Bait bait:
+                        _view.Assembly_P.FishBait = bait;
+                        _view.Bait_P.Count -= 1;
+                        break;
+
+                        case Lure lure:
+                        _view.Assembly_P.FishBait = lure;
+                        _player.Inventory.Lures.Remove(lure.UniqueIdentifer);
+                        break;
+
+                    }
+                    _view.ShowAssembly(_view.Assembly_P);
+                }
+            } 
+        }
+
+        private void View_ViewAssemblyItemDoubleClick(Assembly ass) {
             if (_view.Assembly_P == null) return;
             if (!_view.Assembly_P.IsEquiped) {
-                if (_view.Assembly_P.IsAssemblyFull()) {
+                if (_view.Assembly_P.IsFull()) {
                     _view.ShowAssembly(_view.Assembly_P);
                     _player.SetGameRoad(_view.Assembly_P, _index);
                     _player.SetEquipedRoad(_index);
-                    _gui.AddRoadToGUI(_player.EquipedRoad);
+                    _gui.AddRoadToGUI(_player.EquipedRod);
                     _view.Assembly_P.IsEquiped = true;
+                    ProduceAssemblies?.Invoke(_player.Inventory.Assemblies.Values);
                 }
                 else {
                     MessageBox.Show(Messages.ASSEMBLY_NOT_FULL);
@@ -67,108 +164,52 @@ namespace Fishing.Presenter {
             }
         }
 
-        #endregion AssemblyClicks
+        private void View_ViewItemActivate(InventoryItemType type, Guid guid) {
+            switch (type) {
 
-        #region HooksClicks
-
-        private void View_ViewsSelectedIndexChanged(object sender, EventArgs e) {
-            var senderTag = (sender as ObjectListView)?.Tag.ToString();
-            switch (senderTag) {
-                case "Reels":
-                _view.Reel_P = _player.GetReelByName(_view.ReelsViewSelectedItemText);
-                _view.AddItemToRightView(_view.Reel_P);
+                case InventoryItemType.Bait:
+                    _view.Bait_P = _player.Inventory.GetBait(guid);
                 break;
 
-                case "Flines":
-                _view.FLine_P = (Fishingline)_player.GetItemByName(_view.FlinesViewSelectedItemText);
-                _view.AddItemToRightView(_view.FLine_P);
+
+                case InventoryItemType.Fishingline:
+                    _view.FLine_P = _player.Inventory.GetFishline(guid);
                 break;
 
-                case "Lures":
-                _view.Lure_P = (Lure)_player.GetItemByName(_view.LuresViewSelectedItemText);
+                case InventoryItemType.Hook:
+                    _view.Hook_P = _player.Inventory.GetHook(guid);
                 break;
 
-                case "Baits":
-                _view.Bait_P = _player.GetBaitByName(_view.BaitsViewSelectedItemText);
+                case InventoryItemType.Lure:
+                    _view.Lure_P = _player.Inventory.GetLure(guid);
                 break;
 
-                case "Hooks":
-                _view.Hook_P = (BaseHook)_player.GetItemByName(_view.HooksViewSelectedItemText);
+                case InventoryItemType.Reel:
+                    _view.Reel_P = _player.Inventory.GetReel(guid);
                 break;
 
-                default:
-                MessageBox.Show(Messages.NO_CURRENTTAG_FOUND);
+                case InventoryItemType.Rod:
+                    _view.Rod_P = _player.Inventory.GetRod(guid);
                 break;
-            }
-            _view.AddItemToRightView(_view.Item_P);
-        }
 
-        private void View_ViewsDoubleClick(object sender, EventArgs e) {
-            if (_view.Assembly_P == null) return;
-            var s = (sender as ObjectListView)?.Tag.ToString();
-            if (!_view.Assembly_P.IsEquiped) {
-                switch (s) {
-                    case "Reels":
-                    _view.Assembly_P.Reel = _view.Reel_P;
+                case InventoryItemType.Assembly:
+                    _view.Assembly_P = _player.Inventory.GetAssembly(guid);
                     _view.ShowAssembly(_view.Assembly_P);
-                    _player.ReelInventory.Remove(_view.Reel_P);
-                    break;
-
-                    case "Flines":
-                    _view.Assembly_P.FLine = _view.FLine_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _player.FlineInventory.Remove(_view.FLine_P);
-                    break;
-
-                    case "Lures":
-                    _view.Assembly_P.FishBait = _view.Lure_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _player.LureInventory.Remove(_view.Lure_P);
-                    break;
-
-                    case "Baits":
-                    _view.Assembly_P.FishBait = _view.Bait_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _view.Bait_P.Count -= 1;
-                    break;
-
-                    case "Hooks":
-                    if (_view.Assembly_P.Road.RodType == RodType.Spinning) return;
-                    _view.Assembly_P.Hook = _view.Hook_P;
-                    _view.ShowAssembly(_view.Assembly_P);
-                    _player.HooksInventory.Remove(_view.Hook_P);
-                    break;
-
-                    default:
-                    MessageBox.Show(Messages.NO_CURRENTTAG_FOUND);
-                    break;
-                }
-            }
-            else {
-                MessageBox.Show(Messages.FIRST_UNEQUIP_ROAD);
+                break;
             }
         }
 
-        #endregion HooksClicks
+        private void View_InventoryLoaded() {
+            //При загрузке отдает списки объектов View
 
-        private void View_MakeOutClick(object sender, EventArgs e) {
-            try {
-                if (_player.EquipedRoad.Assembly.FLine != null)
-                    _player.FlineInventory.Add(_view.Assembly_P.FLine);
-                if (_player.EquipedRoad.Assembly.Road != null)
-                    _player.RodInventory.Add(_view.Assembly_P.Road);
-                if (_player.EquipedRoad.Assembly.FishBait != null)
-                    _player.LureInventory.Add((Lure)_view.Assembly_P.FishBait);
-                if (_player.EquipedRoad.Assembly.Reel != null)
-                    _player.ReelInventory.Add(_view.Assembly_P.Reel);
-
-                _player.Assemblies.Remove(_view.Assembly_P);
-            }
-            catch (NullReferenceException) { }
-        }
-
-        private void View_CloseButtonClick(object sender, EventArgs e) {
-            End();
+            ProduceFishinglines?.Invoke(_player.Inventory.Fishinglines.Values);
+            ProduceReels?.Invoke(_player.Inventory.Reels.Values);
+            ProduceLures?.Invoke(_player.Inventory.Lures.Values);
+            ProduceBaits?.Invoke(_player.Inventory.Baits.Values);
+            ProduceHooks?.Invoke(_player.Inventory.Hooks.Values);
+            ProduceBasics?.Invoke(_player.Inventory.Basics.Values);
+            ProduceAromas?.Invoke(_player.Inventory.Aromas.Values);
+            ProduceAssemblies?.Invoke(_player.Inventory.Assemblies.Values);
         }
 
         public override void Run() {

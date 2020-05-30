@@ -65,7 +65,7 @@
     <Compile Include="Model\Eating\Food.cs" />
     <Compile Include="Model\FeedingUp\Aroma.cs" />
     <Compile Include="Model\FeedingUp\Basic.cs" />
-    <Compile Include="Model\FeedingUp\FeedUp.cs" />
+    <Compile Include="Model\FeedingUp\Feedup.cs" />
     <Compile Include="Model\Fishes\Asp.cs" />
     <Compile Include="Model\Fishes\Bream.cs" />
     <Compile Include="Model\Fishes\Burbot.cs" />
@@ -79,8 +79,10 @@
     <Compile Include="Model\Fishes\Tench.cs" />
     <Compile Include="Model\Fishes\WildCarp.cs" />
     <Compile Include="Model\Fishes\Zander.cs" />
+    <Compile Include="Model\Game\FishInventory.cs" />
     <Compile Include="Model\Game\Game.cs" />
     <Compile Include="Model\Game\GameRod.cs" />
+    <Compile Include="Model\Game\PInventory.cs" />
     <Compile Include="Model\Game\Power.cs" />
     <Compile Include="Model\Game\Statistic.cs" />
     <Compile Include="Model\Game\Time.cs" />

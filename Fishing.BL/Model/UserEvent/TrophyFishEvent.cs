@@ -10,7 +10,7 @@ namespace Fishing.BL.Model.UserEvent {
     public sealed class TrophyFishEvent : BaseEvent {
         private static FishBait lure;
 
-        public TrophyFishEvent(Fish f, FishBait l) : base("Трофей! " + Game.Game.GetGame().Player.NickName + " поймал " + f.ToString(), SelectIndex()) {
+        public TrophyFishEvent(Fish f, FishBait l) : base("Трофей! " + Game.Game.GetGame().Player.Nickname + " поймал " + f.ToString(), SelectIndex()) {
             lure = l;
         }
 
