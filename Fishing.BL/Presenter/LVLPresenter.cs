@@ -61,12 +61,8 @@ namespace Fishing.Presenter {
         private void Drawer_DoNettingEnded() {
             _player.IsNettingFish = false;
             if (IsFishAbleToGoIntoFpond()) {
-                _player.EquipedRod.Image = Roads.road;
-                _player.EquipedRod.FlineIncValue = 0;
-                _player.EquipedRod.RoadIncValue = 0;
-                _player.IsNettingFish = true;
-                gui.FLineBarValue = 0;
-                gui.RoadBarValue = 0;
+                _player.ResetRod(_player.EquipedRod);
+                gui.ResetBarValues();
 
                 gui.CheckNeedsAndClearEventBox();
                 _player.AddFishToPond();
@@ -95,8 +91,7 @@ namespace Fishing.Presenter {
                             _player.Statistic.AddEventToHistory(new FLineTornEvent());
                             _player.TornFLine();
 
-                            gui.FLineBarValue = 0;
-                            gui.RoadBarValue = 0;
+                            gui.ResetBarValues();
 
                             SoundsPlayer.PlayTornSound();
                         }
@@ -104,8 +99,7 @@ namespace Fishing.Presenter {
                             _player.BrokeRoad();
                             _player.Statistic.AddEventToHistory(new RoadBrokenEvent());
 
-                            gui.FLineBarValue = 0;
-                            gui.RoadBarValue = 0;
+                            gui.ResetBarValues();
                         }
                     }
                     if (_player.FirstRod != null && _player.FirstRod.IsFishAttack) {

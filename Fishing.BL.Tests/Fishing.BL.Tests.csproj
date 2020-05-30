@@ -51,6 +51,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PicturesBoxInfo.cs" />
     <Compile Include="PlayerInventoryTests.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="ShopPresenterTests.cs" />

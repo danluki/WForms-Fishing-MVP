@@ -53,9 +53,8 @@ namespace Fishing {
         }
 
         private void UI_Gathering() {
-            ReelBar.Value = 0;
-            FLineBar.Value = 0;
-            fBaitCountsLabel.Text = "";
+            ResetBarValues();
+            fBaitCountsLabel.Text = string.Empty;
         }
 
         private void UI_UpdateBucketImage() {
@@ -240,6 +239,11 @@ namespace Fishing {
 
         public void Down() {
             Show();
+        }
+
+        public void ResetBarValues() {
+            FLineBarValue = 0;
+            RoadBarValue = 0;
         }
     }
 }

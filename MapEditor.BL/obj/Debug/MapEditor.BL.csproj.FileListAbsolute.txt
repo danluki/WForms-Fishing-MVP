@@ -1,0 +1,11 @@
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\bin\Debug\MapEditor.BL.dll
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\bin\Debug\MapEditor.BL.pdb
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\bin\Debug\Fishing.BL.dll
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\bin\Debug\Fishing.BL.pdb
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\obj\Debug\MapEditor.BL.csprojAssemblyReference.cache
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\obj\Debug\MapEditor.BL.csproj.CopyComplete
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\obj\Debug\MapEditor.BL.dll
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\obj\Debug\MapEditor.BL.pdb
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\bin\Debug\ObjectListView.dll
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\bin\Debug\ObjectListView.xml
+C:\Users\Programmer\Desktop\MVPFishing-master\MapEditor.BL\obj\Debug\MapEditor.BL.csproj.CoreCompileInputs.cache

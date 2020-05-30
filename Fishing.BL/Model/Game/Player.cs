@@ -109,7 +109,6 @@ namespace Fishing.BL.Model.Game {
             return false;
         }
 
-        //Добавить сборка не собрана
         public void SetGameRoad(Assembly assembly, int index) {
             if (assembly == null) return;
             if (assembly.IsFull()) {
@@ -258,14 +257,16 @@ namespace Fishing.BL.Model.Game {
                     SatietyUpdated?.Invoke();
                     return true;
                 }
-                else {
-                    MessageBox.Show(@"Игрок не достаточно голоден, чтобы съесть это");
-                    return false;
-                }
-            }
-            else {
+                MessageBox.Show(@"Игрок не достаточно голоден, чтобы съесть это");
                 return false;
             }
+            return false;
+        }
+
+        public void ResetRod(GameRod rod) {
+            rod.Image = Roads.road;
+            rod.FlineIncValue = 0;
+            rod.RoadIncValue = 0;
         }
     }
 }

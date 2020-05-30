@@ -24,6 +24,8 @@ namespace Fishing.View.GUI {
 
         void AddEventToBox(BaseEvent ev);
 
+        void ResetBarValues();
+
         void ClearEvents();
 
         void AddRoadToGUI(GameRod road);
